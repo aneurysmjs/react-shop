@@ -1,6 +1,6 @@
 {
   "name": "react-movies",
-  "version": "0.0.0-development",
+  "version": "0.0.0-semantically-released",
   "description": "поиск фильмов с использованием React",
   "main": "src/Main.jsx",
   "scripts": {
