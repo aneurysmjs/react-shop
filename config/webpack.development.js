@@ -1,9 +1,9 @@
-let webpackMerge = require('webpack-merge'),
-  { setupCommonConfig, setupPath } = require('./helpers');
+const webpackMerge = require('webpack-merge');
+const { setupCommonConfig, setupPath } = require('./helpers');
 
-let AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-let DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
-//let webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
+//const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
 
 module.exports = (env) => {
 

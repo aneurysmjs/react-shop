@@ -1,13 +1,12 @@
-let webpack = require("webpack"),
-  { setupPath } = require(`./helpers`),
-  HtmlWebpackPlugin = require('html-webpack-plugin');
+const { setupPath } = require('./helpers');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
   entry: './src/Main.jsx',
 
   resolve: {
-    extensions: [`.js`, `.jsx`]
+    extensions: ['.js', '.jsx']
   },
 
   module: {
@@ -68,7 +67,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: setupPath(`../src/index.html`)
+      template: setupPath('../src/index.html')
     })
   ]
 };

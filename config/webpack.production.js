@@ -1,9 +1,9 @@
-let Webpack = require('webpack'),
-  webpackMerge = require('webpack-merge'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin'),
-  //ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'),
-  commonConfig = require('./webpack.common.js'),
-  { productionPath } = require('./helpers');
+const Webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const commonConfig = require('./webpack.common.js');
+const { productionPath } = require('./helpers');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -22,7 +22,7 @@ module.exports = (env) => {
     },
 
     performance: {
-      hints: "warning", // enum
+      hints: 'warning', // enum
       maxAssetSize: 200000, // int (in bytes),
       maxEntrypointSize: 400000, // int (in bytes)
       assetFilter: (assetFilename) => {

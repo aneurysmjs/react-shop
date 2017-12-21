@@ -1,3 +1,1 @@
-let { buildConfig } = require('./config/helpers');
-
-module.exports = buildConfig;
+module.exports = require('./config/webpack.development');

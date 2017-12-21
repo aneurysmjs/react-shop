@@ -5,8 +5,8 @@
   "main": "src/Main.jsx",
   "scripts": {
     "commit": "git-cz",
-    "dev": "node_modules/.bin/webpack-dev-server --env=development --config webpack.config.js",
-    "build": "rimraf dist && node_modules/.bin/webpack --env=production --progress --profile --colors",
+    "dev": "webpack-dev-server --inline --progress",
+    "build": "rimraf dist && webpack --config config/webpack.production.js --progress --profile --bail",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": "git+https://github.com/aneurysmjs/react-movies.git",
