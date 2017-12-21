@@ -7,7 +7,8 @@
     "commit": "git-cz",
     "dev": "webpack-dev-server --inline --progress",
     "build": "rimraf dist && webpack --config config/webpack.production.js --progress --profile --bail",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "NODE_ENV=test jest --no-cache"
   },
   "repository": "git+https://github.com/aneurysmjs/react-movies.git",
   "keywords": [
@@ -69,25 +70,29 @@
     "gulp-rename": "1.2.2",
     "gulp-template": "4.0.0",
     "html-webpack-plugin": "2.30.1",
+    "jest": "22.0.3",
+    "jest-cli": "22.0.3",
     "node-sass": "4.5.3",
+    "react-test-renderer": "16.2.0",
     "rimraf": "2.6.1",
     "run-sequence": "2.1.0",
     "sass-loader": "6.0.6",
+    "semantic-release": "8.0.0",
     "style-loader": "0.18.2",
     "url-loader": "0.5.9",
     "webpack": "3.5.6",
     "webpack-dev-server": "2.7.1",
     "webpack-dll-bundles-plugin": "1.0.0-beta.5",
     "webpack-merge": "4.1.0",
-    "yargs": "8.0.2",
-    "semantic-release": "8.0.0"
+    "yargs": "8.0.2"
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
     "firebase": "4.3.1",
     "flat-ui": "2.1.1",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
+    "global": "4.3.2",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
     "react-medium-editor": "1.8.1",
     "react-redux": "5.0.6",
     "react-router": "4.2.0",

@@ -3,6 +3,11 @@
     "react",
     ["env", {"modules": false}]
   ],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  },
   "plugins": [
     // es2015 preset, manual version:
     "transform-es2015-arrow-functions",
