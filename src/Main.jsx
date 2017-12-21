@@ -9,8 +9,8 @@ import {
 // import main CSS styles
 import './assets/scss/styles.scss';
 
-import Landing from './pages/Landing/Landing';
-import Movies from './pages/Movies/Movies';
+import Landing from './containers/Landing/Landing';
+import Movies from './containers/Movies/Movies';
 import Footer from './components/Footer/Footer';
 
 class MainComponent extends React.Component {

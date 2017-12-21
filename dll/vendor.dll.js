@@ -31953,7 +31953,7 @@ ReactDOMComponent.Mixin = {
       }
     }
 
-    // For static pages, no need to put React ID and checksum. Saves lots of
+    // For static containers, no need to put React ID and checksum. Saves lots of
     // bytes.
     if (transaction.renderToStaticMarkup) {
       return ret;
@@ -35750,7 +35750,7 @@ _assign(ReactDOMEmptyComponent.prototype, {
     } else {
       if (transaction.renderToStaticMarkup) {
         // Normally we'd insert a comment node, but since this is a situation
-        // where React won't take over (static pages), we can simply return
+        // where React won't take over (static containers), we can simply return
         // nothing.
         return '';
       }
@@ -36016,7 +36016,7 @@ _assign(ReactDOMTextComponent.prototype, {
       if (transaction.renderToStaticMarkup) {
         // Normally we'd wrap this between comment nodes for the reasons stated
         // above, but since this is a situation where React won't take over
-        // (static pages), we can simply return the text as it is.
+        // (static containers), we can simply return the text as it is.
         return escapedText;
       }
 
@@ -53650,7 +53650,7 @@ var SWController = function (_super) {
     /**
      * @private
      * @param {Object} msgPayload The data from the push event that should be sent
-     * to all available pages.
+     * to all available containers.
      * @returns {Promise} Returns a promise that resolves once the message
      * has been sent to all WindowClients.
      */
