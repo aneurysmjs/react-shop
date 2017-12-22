@@ -1,5 +1,4 @@
 import React from 'react';
-import './MovieCard.scss';
 
 export default class MovieCard extends React.Component {
 
