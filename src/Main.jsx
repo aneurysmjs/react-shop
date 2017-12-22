@@ -11,6 +11,7 @@ import './assets/scss/styles.scss';
 
 import Landing from './containers/Landing/Landing';
 import Movies from './containers/Movies/Movies';
+import MovieDetails from './containers/MovieDetails/MovieDetails';
 import Footer from './components/Footer/Footer';
 
 class MainComponent extends React.Component {
@@ -22,6 +23,7 @@ class MainComponent extends React.Component {
           <div>
             <Route exact path="/" component={Landing} />
             <Route path="/movies" component={Movies} />
+            <Route path="/details/:id" component={MovieDetails} />
           </div>
           <Footer />
         </main>
