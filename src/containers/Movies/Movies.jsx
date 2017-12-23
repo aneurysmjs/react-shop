@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { arrayOf, shape, string, number } from 'prop-types';
 
-import movies from '../../assets/json/movies.json';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import Searcher from '../../components/Searcher/Searcher';
 
-export default class Movies extends React.Component {
+export default class Movies extends Component {
 
   constructor() {
     super();
@@ -20,6 +20,9 @@ export default class Movies extends React.Component {
   }
 
   render() {
+
+    const { movies } = this.props;
+
     return (
       <section>
         <Searcher searchTerm={this.state.searchTerm} onSearch={this.searchTermHandler} />
@@ -38,6 +41,7 @@ export default class Movies extends React.Component {
         </div>
       </section>
     );
+
   }
 
   /**
@@ -51,3 +55,13 @@ export default class Movies extends React.Component {
   }
   
 }
+
+Movies.propTypes = {
+  movies: arrayOf(shape({
+    id: number,
+    movieTitle: string,
+    country: string,
+    description: string,
+    movieGenre: string
+  }))
+};
