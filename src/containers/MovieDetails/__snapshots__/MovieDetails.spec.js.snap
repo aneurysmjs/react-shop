@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieDetails snapshot test 1`] = `
+<div>
+  <h2>
+    Details
+  </h2>
+</div>
+`;

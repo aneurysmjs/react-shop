@@ -1,10 +1,9 @@
-/**
-  Main Variables
- */
-//$body-bg: #F2F2F2;
-
-//Global
+// Global
 //
 @import './global';
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+// Import all .scss
+@import '../../components/**/*.scss';
+@import '../../containers/**/*.scss';

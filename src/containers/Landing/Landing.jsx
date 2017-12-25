@@ -1,5 +1,4 @@
 import React from 'react';
-import './Landing.scss';
 import { Link } from 'react-router-dom';
 
 export default class Landing extends React.Component {

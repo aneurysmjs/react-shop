@@ -42,6 +42,11 @@ module.exports = {
         ]
       },
       {
+        test: /\.scss/,
+        enforce: 'pre',
+        loader: 'import-glob-loader'
+      },
+      {
         test: /\.scss$/,
         use: [
           {
