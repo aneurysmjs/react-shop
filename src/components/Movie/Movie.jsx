@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 
 const Movie = ({ movieTitle, description }) => (
   <div className="card" style={ {width: '20rem'} }>
@@ -9,5 +10,10 @@ const Movie = ({ movieTitle, description }) => (
     </div>
   </div>
 );
+
+Movie.propTypes = {
+  movieTitle: string,
+  description: string,
+};
 
 export default Movie;
