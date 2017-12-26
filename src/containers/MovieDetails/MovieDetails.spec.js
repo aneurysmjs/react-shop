@@ -5,8 +5,6 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-import moviesData from '../../assets/json/movies';
-import MovieCard from '../../components/MovieCard/MovieCard';
 import MovieDetails from './MovieDetails';
 
 test('MovieDetails snapshot test', () => {
@@ -15,12 +13,5 @@ test('MovieDetails snapshot test', () => {
   const tree = shallowToJson(component);
 
   expect(tree).toMatchSnapshot();
-
-});
-
-test('Render MovieCard for each movie', () => {
-
-  const component = shallow(<MovieDetails />);
-  expect(moviesData.length).toEqual(component.find(MovieCard).length);
 
 });
