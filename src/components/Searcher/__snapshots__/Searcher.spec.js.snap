@@ -5,13 +5,8 @@ exports[`Searcher snapshot test 1`] = `
   className="row justify-content-center"
 >
   <div
-    className="col-xs-12 col-sm-4 col-md-4"
+    className="col-xs-12 col-sm-12 col-md-12"
   >
-    <h5
-      className="text-center"
-    >
-      Search Movies
-    </h5>
     <form
       name="searcher"
       onSubmit={[Function]}

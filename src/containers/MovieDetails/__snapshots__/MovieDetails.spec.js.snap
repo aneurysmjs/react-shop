@@ -2,8 +2,11 @@
 
 exports[`MovieDetails snapshot test 1`] = `
 <div>
-  <h2>
-    Details
-  </h2>
+  <Header />
+  <div
+    className="movieDetails d-flex flex-column align-items-center justify-content-center"
+  >
+    <Movie />
+  </div>
 </div>
 `;
