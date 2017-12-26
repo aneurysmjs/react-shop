@@ -15584,7 +15584,7 @@ var WebSocketConnection = function () {
         //We can only fit a certain amount in each websocket frame, so we need to split this request
         //up into multiple pieces if it doesn't fit in one request.
         var dataSegs = (0, _util.splitStringBySize)(dataStr, WEBSOCKET_MAX_FRAME_SIZE);
-        //Send the length header
+        //Send the length Header
         if (dataSegs.length > 1) {
             this.sendString_(String(dataSegs.length));
         }
@@ -16874,7 +16874,7 @@ function continueResumableUpload(location, authWrapper, url, blob, chunkSize, ma
     }
     function handler(xhr, text) {
         // TODO(andysoto): Verify the MD5 of each uploaded range:
-        // the 'x-range-md5' header comes back with status code 308 responses.
+        // the 'x-range-md5' Header comes back with status code 308 responses.
         // We'll only be able to bail out though, because you can't re-upload a
         // range that you previously uploaded.
         var uploadStatus = checkResumeHeader_(xhr, ['active', 'final']);
@@ -45043,7 +45043,7 @@ var _json = __webpack_require__(11);
  * - Doesn't check if the token is actually valid.
  *
  * @param {?string} token
- * @return {{header: *, claims: *, data: *, signature: string}}
+ * @return {{Header: *, claims: *, data: *, signature: string}}
  */
 var decode = exports.decode = function decode(token) {
     var header = {},

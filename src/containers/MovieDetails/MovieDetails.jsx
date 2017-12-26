@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Header from '../../components/Header/Header';
 import Movie from '../../components/Movie/Movie';
 
 export default class MovieDetails extends Component {
@@ -11,8 +12,11 @@ export default class MovieDetails extends Component {
   render() {
     const { movie } = this.props;
     return (
-      <div className="movieDetails d-flex flex-column align-items-center justify-content-center">
-        <Movie {...movie} />
+      <div>
+        <Header />
+        <div className="movieDetails d-flex flex-column align-items-center justify-content-center">
+          <Movie {...movie} />
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { arrayOf, shape, string, number } from 'prop-types';
 
+import Header from '../../components/Header/Header';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import Searcher from '../../components/Searcher/Searcher';
 
@@ -25,6 +26,7 @@ export default class Movies extends Component {
 
     return (
       <section>
+        <Header />
         <Searcher searchTerm={this.state.searchTerm} onSearch={this.searchTermHandler} />
         <div className="d-flex align-items-start justify-content-between flex-wrap">
           {movies.filter(movie => {
