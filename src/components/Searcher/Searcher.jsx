@@ -12,8 +12,7 @@ export default class Searcher extends React.Component {
   render() {
     return (
       <div className='row justify-content-center'>
-        <div className='col-xs-12 col-sm-4 col-md-4'>
-          <h5 className='text-center'>Search Movies</h5>
+        <div className='col-xs-12 col-sm-12 col-md-12'>
           <form name='searcher' onSubmit={this.search}>
             <div className='form-group'>
               <label htmlFor='searcher' className='sr-only'>Just type</label>

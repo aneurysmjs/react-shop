@@ -3,12 +3,11 @@ import { arrayOf, shape, string, number } from 'prop-types';
 
 import Header from '../../components/Header/Header';
 import MovieCard from '../../components/MovieCard/MovieCard';
-import Searcher from '../../components/Searcher/Searcher';
 
 export default class Movies extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     /**
      * Movies's state, search term to filter the movies that match that criteria.
@@ -26,12 +25,15 @@ export default class Movies extends Component {
 
     return (
       <section>
-        <Header />
-        <Searcher searchTerm={this.state.searchTerm} onSearch={this.searchTermHandler} />
+        <Header
+          showSearch={true}
+          searchTerm={this.state.searchTerm}
+          onSearch={this.searchTermHandler}
+        />
         <div className="d-flex align-items-start justify-content-between flex-wrap">
-          {movies.filter(movie => {
-            return `${movie.movieTitle} ${movie.description}`.toUpperCase().indexOf(this.state.searchTerm.toUpperCase()) >= 0;
-          }).map(movie => (
+          {movies.filter(movie => (
+            `${movie.movieTitle} ${movie.description}`.toUpperCase().indexOf(this.state.searchTerm.toUpperCase()) >= 0
+          )).map(movie => (
             /*
               we can also `spread` the object, is like taking everything inside of `movie` and spread it out
               so is the exact same as movie-title={movie.movieTitle}, country={movie.country} for every single thing
