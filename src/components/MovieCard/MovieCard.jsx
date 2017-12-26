@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default class MovieCard extends React.Component {
 
@@ -9,7 +10,7 @@ export default class MovieCard extends React.Component {
   render() {
 
     // Destructure the individual props
-    let { movieTitle, movieGenre, country, description } = this.props;
+    let { movieTitle, movieGenre, country, description, id } = this.props;
 
     return (
       <article className="movieCard">
@@ -25,7 +26,12 @@ export default class MovieCard extends React.Component {
             <li className="list-group-item">{movieGenre}</li>
           </ul>
         </div>
+
+        <NavLink to={`details/${id}`}>
+          See Details
+        </NavLink>
       </article>
+
     );
 
   }

@@ -35,7 +35,7 @@ export default class Header extends Component {
     } else {
       space = (
         <NavLink
-          to='/'
+          to='/movies'
           className="navbar-brand">
           Back
         </NavLink>
