@@ -18,7 +18,7 @@ test('Movies snapshot test', () => {
 
 });
 
-test('Render MovieCard for each movie', () => {
+test('Render MovieCard for each Movie', () => {
 
   const component = shallow(<Movies />);
   expect(moviesData.length).toEqual(component.find(MovieCard).length);

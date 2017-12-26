@@ -27,7 +27,14 @@ class MainComponent extends React.Component {
               path="/movies"
               component={props => <Movies movies={movies} {...props} />}
             />
-            <Route path="/details/:id" component={MovieDetails} />
+            <Route
+              path="/details/:id"
+              component={props => {
+                const { match: { params } } = props;
+                const movie = movies.filter(({ id }) => +params.id === id)[0];
+                return <MovieDetails movie={movie} {...props} />;
+              }}
+            />
           </div>
           <Footer />
         </main>

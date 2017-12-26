@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class MovieDetails extends React.Component {
+import Movie from '../../components/Movie/Movie';
+
+export default class MovieDetails extends Component {
 
   constructor() {
     super();
   }
 
   render() {
+    const { movie } = this.props;
     return (
-      <div>
-        <h2>Details</h2>
+      <div className="movieDetails d-flex flex-column align-items-center justify-content-center">
+        <Movie {...movie} />
       </div>
     );
   }

@@ -3,7 +3,7 @@ let { join, resolve } = require('path');
 const { SRC } = require('../constants');
 
 // root of the project
-const ROOT = resolve(__dirname, '../..'); // movie-search
+const ROOT = resolve(__dirname, '../..'); // Movie-search
 
 // templates folder path
 const TEMPLATES_PATH = resolve(ROOT, 'scripts/templates') // filia/scripts/templates
