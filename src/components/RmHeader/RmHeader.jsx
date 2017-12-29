@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { func, string, bool } from 'prop-types';
 
-import Searcher from '../Searcher/Searcher';
+import RmSearcher from '../RmSearcher/RmSearcher';
 
-export default class Header extends Component {
+export default class RmHeader extends Component {
 
   constructor(props) {
     super(props);
@@ -31,7 +31,7 @@ export default class Header extends Component {
     let space;
 
     if (showSearch) {
-      space = <Searcher searchTerm={searchTerm} onSearch={onSearch} />;
+      space = <RmSearcher searchTerm={searchTerm} onSearch={onSearch} />;
     } else {
       space = (
         <NavLink
@@ -58,7 +58,7 @@ export default class Header extends Component {
 
 }
 
-Header.propTypes = {
+RmHeader.propTypes = {
   showSearch: bool,
   searchTerm: string,
   onSearch: func

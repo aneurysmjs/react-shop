@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default class MovieCard extends React.Component {
+export default class RmMovieCard extends React.Component {
 
   constructor(props) {
     super(props);

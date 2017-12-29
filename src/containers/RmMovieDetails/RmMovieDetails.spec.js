@@ -5,11 +5,11 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-import Searcher from './Searcher';
+import MovieDetails from './RmMovieDetails';
 
-test('Searcher snapshot test', () => {
+test('MovieDetails snapshot test', () => {
 
-  const component = shallow(<Searcher />);
+  const component = shallow(<MovieDetails />);
   const tree = shallowToJson(component);
 
   expect(tree).toMatchSnapshot();

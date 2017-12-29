@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default class Landing extends React.Component {
+export default class RmLanding extends React.Component {
 
   constructor() {
     super();
@@ -9,7 +9,7 @@ export default class Landing extends React.Component {
 
   render () {
     return (
-      <div className='Landing d-flex flex-column align-items-center justify-content-center'>
+      <div className='RmLanding d-flex flex-column align-items-center justify-content-center'>
         <h1>Movie Search</h1>
         <Link to="movies">
           <button type="button" className="btn btn-primary">

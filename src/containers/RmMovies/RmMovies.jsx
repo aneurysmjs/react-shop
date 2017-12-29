@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { arrayOf, shape, string, number } from 'prop-types';
 
-import Header from '../../components/Header/Header';
-import MovieCard from '../../components/MovieCard/MovieCard';
+import RmHeader from '../../components/RmHeader/RmHeader';
+import MovieCard from '../../components/RmMovieCard/RmMovieCard';
 
-export default class Movies extends Component {
+export default class RmMovies extends Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +25,7 @@ export default class Movies extends Component {
 
     return (
       <section>
-        <Header
+        <RmHeader
           showSearch={true}
           searchTerm={this.state.searchTerm}
           onSearch={this.searchTermHandler}
@@ -60,7 +60,7 @@ export default class Movies extends Component {
   
 }
 
-Movies.propTypes = {
+RmMovies.propTypes = {
   movies: arrayOf(shape({
     id: number,
     movieTitle: string,

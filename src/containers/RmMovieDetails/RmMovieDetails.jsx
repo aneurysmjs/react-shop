@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import Header from '../../components/Header/Header';
-import Movie from '../../components/Movie/Movie';
+import Header from '../../components/RmHeader/RmHeader';
+import RmMovie from '../../components/RmMovie/RmMovie';
 
-export default class MovieDetails extends Component {
+export default class RmMovieDetails extends Component {
 
   constructor() {
     super();
@@ -15,7 +15,7 @@ export default class MovieDetails extends Component {
       <div>
         <Header />
         <div className="movieDetails d-flex flex-column align-items-center justify-content-center">
-          <Movie {...movie} />
+          <RmMovie {...movie} />
         </div>
       </div>
     );

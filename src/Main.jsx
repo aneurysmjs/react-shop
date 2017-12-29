@@ -10,10 +10,10 @@ import {
 import './assets/scss/styles.scss';
 import movies from './assets/json/movies.json';
 
-import Landing from './containers/Landing/Landing';
-import Movies from './containers/Movies/Movies';
-import MovieDetails from './containers/MovieDetails/MovieDetails';
-import Footer from './components/Footer/Footer';
+import RmLanding from './containers/RmLanding/RmLanding';
+import RmMovies from './containers/RmMovies/RmMovies';
+import RmMovieDetails from './containers/RmMovieDetails/RmMovieDetails';
+import RmFooter from './components/RmFooter/RmFooter';
 
 class MainComponent extends React.Component {
 
@@ -22,21 +22,21 @@ class MainComponent extends React.Component {
       <Router>
         <main>
           <div>
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" component={RmLanding} />
             <Route
               path="/movies"
-              component={props => <Movies movies={movies} {...props} />}
+              component={props => <RmMovies movies={movies} {...props} />}
             />
             <Route
               path="/details/:id"
               component={props => {
                 const { match: { params } } = props;
                 const movie = movies.filter(({ id }) => +params.id === id)[0];
-                return <MovieDetails movie={movie} {...props} />;
+                return <RmMovieDetails movie={movie} {...props} />;
               }}
             />
           </div>
-          <Footer />
+          <RmFooter />
         </main>
       </Router>
     );
