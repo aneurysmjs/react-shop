@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
+import { setSearchTerm } from '../../actions';
 import RmHeader from '../../components/RmHeader/RmHeader';
 import MovieCard from '../../components/RmMovieCard/RmMovieCard';
 
@@ -11,13 +12,12 @@ class RmMovies extends Component {
     super(props);
 
     this.searchTermHandler = this.searchTermHandler.bind(this);
+
   }
 
   render() {
 
     const { movies, searchTerm } = this.props;
-
-    console.log('searchTerm', searchTerm);
 
     return (
       <section>
@@ -51,7 +51,7 @@ class RmMovies extends Component {
    * @return {void}
    */
   searchTermHandler(searchTerm) {
-    this.setState({searchTerm});
+    this.props.dispatch(setSearchTerm(searchTerm));
   }
   
 }
