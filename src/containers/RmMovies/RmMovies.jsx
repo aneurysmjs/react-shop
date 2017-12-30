@@ -1,38 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
 import RmHeader from '../../components/RmHeader/RmHeader';
 import MovieCard from '../../components/RmMovieCard/RmMovieCard';
 
-export default class RmMovies extends Component {
+class RmMovies extends Component {
 
   constructor(props) {
     super(props);
-
-    /**
-     * Movies's state, search term to filter the movies that match that criteria.
-     */
-    this.state = {
-      searchTerm: ''
-    };
 
     this.searchTermHandler = this.searchTermHandler.bind(this);
   }
 
   render() {
 
-    const { movies } = this.props;
+    const { movies, searchTerm } = this.props;
+
+    console.log('searchTerm', searchTerm);
 
     return (
       <section>
         <RmHeader
           showSearch={true}
-          searchTerm={this.state.searchTerm}
+          searchTerm={searchTerm}
           onSearch={this.searchTermHandler}
         />
         <div className="d-flex align-items-start justify-content-between flex-wrap">
           {movies.filter(movie => (
-            `${movie.movieTitle} ${movie.description}`.toUpperCase().indexOf(this.state.searchTerm.toUpperCase()) >= 0
+            `${movie.movieTitle} ${movie.description}`.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0
           )).map(movie => (
             /*
               we can also `spread` the object, is like taking everything inside of `movie` and spread it out
@@ -69,3 +65,11 @@ RmMovies.propTypes = {
     movieGenre: string
   }))
 };
+
+const mapStateToProps = (state) => {
+  return {
+    searchTerm: state.searchTerm
+  };
+};
+
+export default connect(mapStateToProps)(RmMovies);
