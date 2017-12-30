@@ -66,10 +66,8 @@ RmMovies.propTypes = {
   }))
 };
 
-const mapStateToProps = (state) => {
-  return {
-    searchTerm: state.searchTerm
-  };
-};
+const mapStateToProps = (state) => ({
+  searchTerm: state.searchTerm
+});
 
 export default connect(mapStateToProps)(RmMovies);
