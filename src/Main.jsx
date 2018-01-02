@@ -14,10 +14,10 @@ import store from './store';
 import './assets/scss/styles.scss';
 import movies from './assets/json/movies.json';
 
-import RmLanding from './containers/RmLanding/RmLanding';
-import RmMovies from './containers/RmMovies/RmMovies';
-import RmMovieDetails from './containers/RmMovieDetails/RmMovieDetails';
-import RmFooter from './components/RmFooter/RmFooter';
+import RmLanding from 'Containers/RmLanding/RmLanding';
+import RmMovies from 'Containers/RmMovies/RmMovies';
+import RmMovieDetails from 'Containers/RmMovieDetails/RmMovieDetails';
+import RmFooter from 'Components/RmFooter/RmFooter';
 
 class MainComponent extends React.Component {
 

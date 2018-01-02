@@ -6,7 +6,13 @@ module.exports = {
   entry: './src/Main.jsx',
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      // A trailing $ can also be added to the given object's keys to signify an exact match:
+      'api$': setupPath('../src/api/api.js'),
+      Components: setupPath('../src/components'),
+      Containers: setupPath('../src/containers'),
+    }
   },
 
   module: {
@@ -15,7 +21,6 @@ module.exports = {
       {
         test: /\.jsx?$/, // both .js and .jsx
         loader: 'eslint-loader',
-        //include: resolve(process.cwd(), 'demos/users/src'),
         enforce: 'pre',
         options: {
           fix: false
