@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { COUNTRIES } from '../../constants/Urls';
 import api from 'api';
+import { setSelectedCountry } from '../../actions';
 
-export default class RmLanding extends React.Component {
+class RmLanding extends Component {
 
   constructor() {
     super();
 
     this.state = {
-      selectedCountry: 'Colombia',
       countries: []
     };
 
@@ -31,7 +32,8 @@ export default class RmLanding extends React.Component {
   }
 
   render () {
-    const { countries, selectedCountry } = this.state;
+    const { countries } = this.state;
+    const { selectedCountry } = this.props;
 
     return (
       <div className='RmLanding d-flex flex-column align-items-center justify-content-center'>
@@ -70,7 +72,13 @@ export default class RmLanding extends React.Component {
    */
   handleChange(evt) {
     const selectedCountry = evt.target.value;
-    this.setState({selectedCountry});
+    this.props.dispatch(setSelectedCountry(selectedCountry));
   }
 
 }
+
+const mapStateToProps = (state) => ({
+  selectedCountry: state.selectedCountry
+});
+
+export default connect(mapStateToProps)(RmLanding);
