@@ -1,1 +1,1 @@
-export default COUNTRIES = 'https://restcountries.eu/rest/v2';
+export const COUNTRIES = 'https://restcountries.eu/rest/v2';
