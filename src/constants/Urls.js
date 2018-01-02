@@ -1,0 +1,1 @@
+export default COUNTRIES = 'https://restcountries.eu/rest/v2';
