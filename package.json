@@ -95,6 +95,7 @@
     "yargs": "8.0.2"
   },
   "dependencies": {
+    "axios": "0.17.1",
     "bootstrap": "4.0.0-alpha.6",
     "firebase": "4.3.1",
     "flat-ui": "2.1.1",
