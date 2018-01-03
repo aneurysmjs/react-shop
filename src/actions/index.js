@@ -3,6 +3,7 @@
  */
 
 import * as types from '../constants/ActionTypes';
+import api from 'api';
 
 /**
  *
@@ -25,5 +26,13 @@ export function setSelectedCountry(selectedCountry) {
   return {
     type: types.SET_SELECTED_COUNTRY,
     selectedCountry
+  };
+}
+
+
+export function setCountries(countries) {
+  return {
+    type: types.SET_COUNTRIES,
+    countries
   };
 }

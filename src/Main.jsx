@@ -12,7 +12,6 @@ import store from './store';
 
 // import main CSS styles
 import './assets/scss/styles.scss';
-import movies from './assets/json/movies.json';
 
 import RmLanding from 'Containers/RmLanding/RmLanding';
 import RmMovies from 'Containers/RmMovies/RmMovies';
@@ -30,7 +29,7 @@ class MainComponent extends React.Component {
               <Route exact path="/" component={RmLanding} />
               <Route
                 path="/movies"
-                component={props => <RmMovies movies={movies} {...props} />}
+                component={props => <RmMovies {...props} />}
               />
               <Route
                 path="/details/:id"

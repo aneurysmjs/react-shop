@@ -1,5 +1,6 @@
 const { setupPath } = require('./helpers');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
@@ -78,6 +79,16 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: setupPath('../src/index.html')
-    })
+    }),
+    // copy files and folders to specific paths.
+    new CopyWebpackPlugin([{
+      // Copy `assets` contents to {output}/assets/
+      from: 'src/assets',
+      to: 'assets',
+      ignore: [
+        // Doesn't copy any files with a scss extension
+        '*.scss'
+      ],
+    }])
   ]
 };

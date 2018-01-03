@@ -5,6 +5,7 @@ import { arrayOf, shape, string, number } from 'prop-types';
 import { setSearchTerm } from '../../actions';
 import RmHeader from 'Components/RmHeader/RmHeader';
 import MovieCard from 'Components/RmMovieCard/RmMovieCard';
+import api from 'api';
 
 class RmMovies extends Component {
 
@@ -13,11 +14,30 @@ class RmMovies extends Component {
 
     this.searchTermHandler = this.searchTermHandler.bind(this);
 
+    this.state = {
+      movies: []
+    };
+
+  }
+
+  /**
+   * @async
+   * @return {Promise<void>}
+   */
+  async componentWillMount() {
+    try {
+      const { data } = await api.get(`../../assets/json/movies.json`);
+      this.setState({movies: data});
+    } catch (err) {
+      throw new Error('ReactMovies: ', err);
+    }
   }
 
   render() {
 
-    const { movies, searchTerm } = this.props;
+    const { searchTerm } = this.props;
+
+    const { movies } = this.state;
 
     return (
       <section>
@@ -56,7 +76,7 @@ class RmMovies extends Component {
   
 }
 
-RmMovies.propTypes = {
+/*RmMovies.propTypes = {
   movies: arrayOf(shape({
     id: number,
     movieTitle: string,
@@ -64,7 +84,7 @@ RmMovies.propTypes = {
     description: string,
     movieGenre: string
   }))
-};
+};*/
 
 const mapStateToProps = (state) => ({
   searchTerm: state.searchTerm
