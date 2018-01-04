@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
-import { setSearchTerm } from '../../actions';
+import { setSearchTerm, getMovies } from '../../actions';
 import RmHeader from 'Components/RmHeader/RmHeader';
 import MovieCard from 'Components/RmMovieCard/RmMovieCard';
-import api from 'api';
 
 class RmMovies extends Component {
 
@@ -24,20 +23,17 @@ class RmMovies extends Component {
    * @async
    * @return {Promise<void>}
    */
-  async componentWillMount() {
-    try {
-      const { data } = await api.get(`../../assets/json/movies.json`);
-      this.setState({movies: data});
-    } catch (err) {
-      throw new Error('ReactMovies: ', err);
+  componentWillMount() {
+
+    if (!this.props.movies.length) {
+      this.props.dispatch(getMovies(`../../assets/json/movies.json`));
     }
+
   }
 
   render() {
 
-    const { searchTerm } = this.props;
-
-    const { movies } = this.state;
+    const { searchTerm, movies } = this.props;
 
     return (
       <section>
@@ -87,7 +83,8 @@ class RmMovies extends Component {
 };*/
 
 const mapStateToProps = (state) => ({
-  searchTerm: state.searchTerm
+  searchTerm: state.searchTerm,
+  movies: state.movies
 });
 
 export default connect(mapStateToProps)(RmMovies);

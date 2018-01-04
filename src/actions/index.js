@@ -30,9 +30,32 @@ export function setSelectedCountry(selectedCountry) {
 }
 
 
-export function setCountries(countries) {
+export function setMovies(movies) {
   return {
-    type: types.SET_COUNTRIES,
-    countries
+    type: types.SET_MOVIES,
+    movies
   };
+}
+
+/**
+ *
+ * @param {String} url
+ * @return {Object.<Action>} action
+ */
+export function getMovies(url) {
+  /**
+   * 'dispatch' is the same one that we use to dispatch actions to Redux
+   *
+   * 'getState' is a function that if you need to do something based on
+   * the Redux store's data, you can call it to get the current state.
+   */
+  return async function (dispatch, getState) {
+    try {
+      const { data } = await api.get(url);
+      dispatch(setMovies(data));
+    } catch (err) {
+      throw new Error('ReactMovies: ', err);
+    }
+  };
+
 }
