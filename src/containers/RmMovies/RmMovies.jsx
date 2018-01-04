@@ -13,16 +13,8 @@ class RmMovies extends Component {
 
     this.searchTermHandler = this.searchTermHandler.bind(this);
 
-    this.state = {
-      movies: []
-    };
-
   }
 
-  /**
-   * @async
-   * @return {Promise<void>}
-   */
   componentWillMount() {
 
     if (!this.props.movies.length) {
@@ -71,16 +63,6 @@ class RmMovies extends Component {
   }
   
 }
-
-/*RmMovies.propTypes = {
-  movies: arrayOf(shape({
-    id: number,
-    movieTitle: string,
-    country: string,
-    description: string,
-    movieGenre: string
-  }))
-};*/
 
 const mapStateToProps = (state) => ({
   searchTerm: state.searchTerm,
