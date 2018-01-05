@@ -11,6 +11,7 @@ import { SET_MOVIES }  from '../constants/ActionTypes';
  * @return {*}
  */
 export default function movies(state = [], action) {
+
   switch (action.type) {
 
     case SET_MOVIES:

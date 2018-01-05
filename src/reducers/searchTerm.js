@@ -15,6 +15,7 @@ export default function searchTerm(state = '', action) {
   switch (action.type) {
 
     case SET_SEARCH_TERM:
+
       return action.searchTerm;
 
     default:

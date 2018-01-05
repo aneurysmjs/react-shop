@@ -36,6 +36,7 @@
     "transform-es2015-modules-umd",
     // ES017
     "transform-runtime", // to make async/await work
-    "transform-async-to-generator" // to use async/await
+    "transform-async-to-generator", // to use async/await
+    "transform-object-rest-spread" // use object spread
   ]
 }
