@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
 import { setSearchTerm, getMovies } from '../../actions';
-import RmHeader from 'Components/RmHeader/RmHeader';
-import MovieCard from 'Components/RmMovieCard/RmMovieCard';
+import RmHeader from '../../components/RmHeader/RmHeader';
+import MovieCard from '../../components/RmMovieCard/RmMovieCard';
 
 class RmMovies extends Component {
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { func, string, bool } from 'prop-types';
 
-import RmSearcher from 'Components/RmSearcher/RmSearcher';
+import RmSearcher from '../RmSearcher/RmSearcher';
 
 export default class RmHeader extends Component {
 

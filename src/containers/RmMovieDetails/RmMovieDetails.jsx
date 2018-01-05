@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Header from 'Components/RmHeader/RmHeader';
-import RmMovie from 'Components/RmMovie/RmMovie';
+import Header from '../../components/RmHeader/RmHeader';
+import RmMovie from '../../components/RmMovie/RmMovie';
 
 export default class RmMovieDetails extends Component {
 
