@@ -15,7 +15,7 @@ export default function movies(state = [], action) {
 
     case SET_MOVIES:
 
-      return action.movies;
+      return [...action.movies];
 
     default:
       return state;
