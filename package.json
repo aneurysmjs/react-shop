@@ -103,6 +103,7 @@
     "firebase": "4.3.1",
     "flat-ui": "2.1.1",
     "global": "4.3.2",
+    "lodash.throttle": "4.1.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-medium-editor": "1.8.1",

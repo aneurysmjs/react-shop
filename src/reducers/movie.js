@@ -6,9 +6,9 @@ import { SET_MOVIE }  from '../constants/ActionTypes';
 
 /**
  *
- * @param state
- * @param action
- * @return {*}
+ * @param {Object} state = {}
+ * @param {Object} action
+ * @return {Object} new state
  */
 export default function movies(state = {}, action) {
 
@@ -16,10 +16,14 @@ export default function movies(state = {}, action) {
 
     case SET_MOVIE:
 
-      return action.movie;
+      return {
+        ...state,
+        movie: action.movie
+      };
 
     default:
       return state;
+
   }
 
 }
