@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getMovie } from '../../actions';
 
 import Header from '../../components/RmHeader/RmHeader';
 import RmMovie from '../../components/RmMovie/RmMovie';
 
-export default class RmMovieDetails extends Component {
+class RmMovieDetails extends Component {
 
   constructor() {
     super();
   }
 
+  componentWillMount() {
+    this.props.dispatch(getMovie('1'));
+  }
+
   render() {
+
     const { movie } = this.props;
+
     return (
       <div>
         <Header />
@@ -19,6 +28,13 @@ export default class RmMovieDetails extends Component {
         </div>
       </div>
     );
+
   }
   
 }
+
+const mapStateToProps = (state) => ({
+  movie: state.movie
+});
+
+export default connect(mapStateToProps)(RmMovieDetails);

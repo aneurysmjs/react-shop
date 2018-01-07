@@ -22,11 +22,7 @@ const RmRoot = ({ store }) => (
           />
           <Route
             path="/details/:id"
-            component={props => {
-              const { match: { params } } = props;
-              const movie = movies.filter(({ id }) => +params.id === id)[0];
-              return <RmMovieDetails movie={movie} {...props} />;
-            }}
+            component={props => <RmMovieDetails {...props} /> }
           />
         </div>
         <RmFooter />

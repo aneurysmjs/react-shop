@@ -53,6 +53,32 @@ export function getMovies(url) {
 
 /**
  *
+ * @param {Object} movie
+ * @return {Object.<Action>}
+ */
+export const setMovie = makeActionCreator(types.SET_MOVIE, 'movie');
+
+/**
+ *
+ * @param {String} id
+ * @return {Function} function
+ */
+export function getMovie(id) {
+
+  return function (dispatch, getState) {
+
+    const movies = getState().movies;
+
+    const movie = movies.filter(m => m.id === +id)[0];
+
+    dispatch(setMovie(movie));
+
+  };
+
+}
+
+/**
+ *
  * @param {Array.<Object>} countries
  * @return {Object.<Action>}
  */
