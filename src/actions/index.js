@@ -3,6 +3,7 @@
  */
 
 import * as types from '../constants/ActionTypes';
+import makeActionCreator from './makeActionCreator';
 import api from 'api';
 
 /**
@@ -10,36 +11,22 @@ import api from 'api';
  * @param {String} searchTerm
  * @return {Object.<Action>} action
  */
-export function setSearchTerm(searchTerm) {
-  return {
-    type: types.SET_SEARCH_TERM,
-    searchTerm
-  };
-}
+export const setSearchTerm = makeActionCreator(types.SET_SEARCH_TERM, 'searchTerm');
+
 
 /**
  *
  * @param {String} selectedCountry
  * @return {Object.<Action>} action
  */
-export function setSelectedCountry(selectedCountry) {
-  return {
-    type: types.SET_SELECTED_COUNTRY,
-    selectedCountry
-  };
-}
+export const setSelectedCountry = makeActionCreator(types.SET_SELECTED_COUNTRY, 'selectedCountry');
 
 /**
  *
  * @param {Array.<Object>} movies
  * @return {Object.<Action>}
  */
-export function setMovies(movies) {
-  return {
-    type: types.SET_MOVIES,
-    movies
-  };
-}
+export const setMovies = makeActionCreator(types.SET_MOVIES, 'movies');
 
 /**
  *
@@ -69,12 +56,7 @@ export function getMovies(url) {
  * @param {Array.<Object>} countries
  * @return {Object.<Action>}
  */
-export function setCountries(countries) {
-  return {
-    type: types.SET_COUNTRIES,
-    countries
-  };
-}
+export const setCountries = makeActionCreator(types.SET_COUNTRIES, 'countries');
 
 /**
  *
