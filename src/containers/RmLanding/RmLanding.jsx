@@ -3,37 +3,31 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { COUNTRIES } from '../../constants/Urls';
-import api from 'api';
-import { setSelectedCountry } from '../../actions';
+import { getCountries, setSelectedCountry } from '../../actions';
 
 class RmLanding extends Component {
 
-  constructor() {
-    super();
-
-    this.state = {
-      countries: []
-    };
+  constructor(props) {
+    super(props);
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   /**
-   * @async
-   * @return {Promise<void>}
+   *
+   * @return {void}
    */
-  async componentWillMount() {
-    try {
-      const { data } = await api.get(`${COUNTRIES}/all`);
-      this.setState({countries: data});
-    } catch (err) {
-      throw new Error('ReactMovies: ', err);
+  componentWillMount() {
+
+    if (!this.props.countries.length) {
+      this.props.dispatch(getCountries(`${COUNTRIES}/all`));
     }
+
   }
 
   render () {
-    const { countries } = this.state;
-    const { selectedCountry } = this.props;
+
+    const { selectedCountry, countries } = this.props;
 
     return (
       <div className='RmLanding d-flex flex-column align-items-center justify-content-center'>
@@ -78,7 +72,8 @@ class RmLanding extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  selectedCountry: state.selectedCountry
+  selectedCountry: state.selectedCountry,
+  countries: state.countries
 });
 
 export default connect(mapStateToProps)(RmLanding);

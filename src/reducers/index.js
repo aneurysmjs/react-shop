@@ -3,12 +3,14 @@
  */
 
 import { combineReducers } from 'redux';
+import movies from './movies';
 import searchTerm from './searchTerm';
 import selectedCountry from './selectedCountry';
-import movies from './movies';
+import countries from './countries';
 
 export default combineReducers({
+  movies,
   searchTerm,
   selectedCountry,
-  movies
+  countries
 });

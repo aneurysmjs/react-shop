@@ -29,7 +29,11 @@ export function setSelectedCountry(selectedCountry) {
   };
 }
 
-
+/**
+ *
+ * @param {Array.<Object>} movies
+ * @return {Object.<Action>}
+ */
 export function setMovies(movies) {
   return {
     type: types.SET_MOVIES,
@@ -40,7 +44,7 @@ export function setMovies(movies) {
 /**
  *
  * @param {String} url
- * @return {Object.<Action>} action
+ * @return {Function} async function
  */
 export function getMovies(url) {
   /**
@@ -59,3 +63,39 @@ export function getMovies(url) {
   };
 
 }
+
+/**
+ *
+ * @param {Array.<Object>} countries
+ * @return {Object.<Action>}
+ */
+export function setCountries(countries) {
+  return {
+    type: types.SET_COUNTRIES,
+    countries
+  };
+}
+
+/**
+ *
+ * @param {String} url
+ * @return {Function} async function
+ */
+export function getCountries(url) {
+  /**
+   * 'dispatch' is the same one that we use to dispatch actions to Redux
+   *
+   * 'getState' is a function that if you need to do something based on
+   * the Redux store's data, you can call it to get the current state.
+   */
+  return async function (dispatch, getState) {
+    try {
+      const { data } = await api.get(url);
+      dispatch(setCountries(data));
+    } catch (err) {
+      throw new Error('ReactMovies: ', err);
+    }
+  };
+
+}
+
