@@ -1,25 +1,19 @@
 /**
  * @module reducers/searchTerm
  */
+import createReducer from './createReducer';
 
 import { SET_SEARCH_TERM }  from '../constants/ActionTypes';
+
 
 /**
  *
  * @param state
  * @param action
- * @return {*}
+ * @return {Function} reducer
  */
-export default function searchTerm(state = '', action) {
-
-  switch (action.type) {
-
-    case SET_SEARCH_TERM:
-
-      return action.searchTerm;
-
-    default:
-      return state;
+export default createReducer('', {
+  [SET_SEARCH_TERM](state, action) {
+    return action.searchTerm;
   }
-
-}
+});
