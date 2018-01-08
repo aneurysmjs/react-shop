@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getMovie } from '../../actions';
 
-import Header from '../../components/RmHeader/RmHeader';
+import RmNav from '../RmNav/RmNav';
 import RmMovie from '../../components/RmMovie/RmMovie';
 
 class RmMovieDetails extends Component {
@@ -22,7 +22,7 @@ class RmMovieDetails extends Component {
 
     return (
       <div>
-        <Header />
+        <RmNav />
         <div className="movieDetails d-flex flex-column align-items-center justify-content-center">
           <RmMovie {...movie} />
         </div>

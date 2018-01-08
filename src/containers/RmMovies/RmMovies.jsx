@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
 import { setSearchTerm, getMovies } from '../../actions';
-import RmHeader from '../../components/RmHeader/RmHeader';
+import RmNav from '../RmNav/RmNav';
 import MovieCard from '../../components/RmMovieCard/RmMovieCard';
 
 class RmMovies extends Component {
@@ -29,23 +29,19 @@ class RmMovies extends Component {
 
     return (
       <section>
-        <RmHeader
+        <RmNav
           showSearch={true}
           searchTerm={searchTerm}
           onSearch={this.searchTermHandler}
         />
-        <div className="d-flex align-items-start justify-content-between flex-wrap">
-          {movies.filter(movie => (
-            `${movie.movieTitle} ${movie.description}`.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0
-          )).map(movie => (
-            /*
-              we can also `spread` the object, is like taking everything inside of `movie` and spread it out
-              so is the exact same as movie-title={movie.movieTitle}, country={movie.country} for every single thing
-              in `movie`, this is not part of ES feature but that's JSX mimicking what ES does and spread it out
-              over the entire object.
-            */
-            <MovieCard {...movie} key={movie.id} />
-          ))}
+        <div className="px-3">
+          <div className="d-flex align-items-start justify-content-between flex-wrap">
+            {movies.filter(movie => (
+              `${movie.movieTitle} ${movie.description}`.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0
+            )).map(movie => (
+              <MovieCard {...movie} key={movie.id} />
+            ))}
+          </div>
         </div>
       </section>
     );
