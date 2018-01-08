@@ -9,8 +9,7 @@ import logger from './logger';
  * @type {Object.<middleware>[]}
  */
 let middleware = [
-  thunk,
-  logger
+  thunk
 ];
 
 if (process.env.NODE_ENV !== 'production') {
