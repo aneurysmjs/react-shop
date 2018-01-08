@@ -3,11 +3,12 @@
  */
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
 
 import { saveState, loadState } from './localStorage';
-
+// Middleware is the suggested way to extend Redux with custom functionality.
+import middleware from './middleware';
+// import all reducers
 import reducer from './reducers';
 // Get the state from localStorage
 const persistedState = loadState();
@@ -17,7 +18,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
   persistedState,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(...middleware)) // the third parameter is what is called an 'enhancer'
 );
 
 // Save the state any time the store state changes
