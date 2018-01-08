@@ -1,8 +1,13 @@
+// Variables
+//
+@import './variables';
 // Global
 //
 @import './global';
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+@import '~font-awesome/scss/font-awesome.scss';
 
 // Import all .scss
 @import '../../components/**/*.scss';
