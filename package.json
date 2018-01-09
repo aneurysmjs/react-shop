@@ -33,8 +33,10 @@
   "devDependencies": {
     "add-asset-html-webpack-plugin": "2.1.1",
     "babel-core": "6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "7.1.2",
     "babel-plugin-transform-async-to-generator": "6.24.1",
+    "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-es2015-arrow-functions": "6.22.0",
     "babel-plugin-transform-es2015-block-scoped-functions": "6.22.0",
     "babel-plugin-transform-es2015-block-scoping": "6.26.0",
@@ -71,6 +73,7 @@
     "enzyme-to-json": "3.3.0",
     "eslint": "4.6.1",
     "eslint-loader": "1.9.0",
+    "eslint-plugin-class-property": "1.1.0",
     "eslint-plugin-react": "7.3.0",
     "extract-text-webpack-plugin": "3.0.0",
     "file-loader": "0.11.2",

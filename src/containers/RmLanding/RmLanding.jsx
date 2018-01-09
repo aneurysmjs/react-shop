@@ -7,10 +7,20 @@ import { getCountries, setSelectedCountry } from '../../actions';
 
 class RmLanding extends Component {
 
+  /**
+   *
+   * @param {SyntheticEvent} evt
+   * @return {void}
+   */
+  handleChange = (evt) => {
+    const selectedCountry = evt.target.value;
+    this.props.dispatch(setSelectedCountry(selectedCountry));
+  }
+
   constructor(props) {
     super(props);
 
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
   }
 
   /**
@@ -57,16 +67,6 @@ class RmLanding extends Component {
         </Link>
       </div>
     );
-  }
-
-  /**
-   *
-   * @param {SyntheticEvent} evt
-   * @return {void}
-   */
-  handleChange(evt) {
-    const selectedCountry = evt.target.value;
-    this.props.dispatch(setSelectedCountry(selectedCountry));
   }
 
 }
