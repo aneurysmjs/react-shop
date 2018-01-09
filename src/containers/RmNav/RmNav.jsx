@@ -45,7 +45,7 @@ class RmNav extends Component {
 
     return (
       <div className="mb-3">
-        <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+        <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
           <NavLink
             to="/"
             className="navbar-brand">
