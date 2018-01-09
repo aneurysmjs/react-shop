@@ -2,6 +2,8 @@
  * @module reducers/movies
  */
 
+import createReducer from './createReducer';
+
 import { SET_COUNTRIES }  from '../constants/ActionTypes';
 
 /**
@@ -10,16 +12,8 @@ import { SET_COUNTRIES }  from '../constants/ActionTypes';
  * @param action
  * @return {*}
  */
-export default function countries(state = [], action) {
-
-  switch (action.type) {
-
-    case SET_COUNTRIES:
-
-      return [...action.countries];
-
-    default:
-      return state;
+export default createReducer([], {
+  [SET_COUNTRIES](state, action) {
+    return [...action.countries];
   }
-
-}
+});

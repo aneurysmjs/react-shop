@@ -2,7 +2,9 @@
  * @module reducers/movie
  */
 
-import { SET_MOVIE }  from '../constants/ActionTypes';
+import createReducer from './createReducer';
+
+import { SET_MOVIE } from '../constants/ActionTypes';
 
 /**
  *
@@ -10,20 +12,11 @@ import { SET_MOVIE }  from '../constants/ActionTypes';
  * @param {Object} action
  * @return {Object} new state
  */
-export default function movies(state = {}, action) {
-
-  switch (action.type) {
-
-    case SET_MOVIE:
-
-      return {
-        ...state,
-        movie: action.movie
-      };
-
-    default:
-      return state;
-
+export default createReducer({}, {
+  [SET_MOVIE](state, action) {
+    return {
+      ...state,
+      movie: action.movie
+    };
   }
-
-}
+});

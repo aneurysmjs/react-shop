@@ -2,6 +2,8 @@
  * @module reducers/selectedCountry
  */
 
+import createReducer from './createReducer';
+
 import { SET_SELECTED_COUNTRY }  from '../constants/ActionTypes';
 
 /**
@@ -10,14 +12,8 @@ import { SET_SELECTED_COUNTRY }  from '../constants/ActionTypes';
  * @param action
  * @return {*}
  */
-export default function selectedCountry(state = 'Colombia', action) {
-
-  switch (action.type) {
-    case SET_SELECTED_COUNTRY:
-      return action.selectedCountry;
-
-    default:
-      return state;
+export default createReducer('Colombia', {
+  [SET_SELECTED_COUNTRY](state, action) {
+    return action.selectedCountry;
   }
-
-}
+});
