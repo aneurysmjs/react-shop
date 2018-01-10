@@ -21,8 +21,8 @@ class RmNav extends Component {
   links = [
     {
       id: v4(),
-      path: 'home',
-      name: 'Home'
+      path: 'about',
+      name: 'About'
     },
     {
       id: v4(),
@@ -54,39 +54,36 @@ class RmNav extends Component {
     }
 
     return (
-      <div className="mb-3">
-        <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
-          <NavLink
-            to="/"
-            className="navbar-brand">
-            React Movies
-          </NavLink>
-          <button
-            className="navbar-toggler navbar-toggler-right"
-            type="button">
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav mr-auto">
-              {this.links.map(({ path, name, id}) => (
-                <li key={id} className="nav-item">
-                  <NavLink
-                    to={`/${path}`}
-                    key={id}
-                    activeClassName="active"
-                    className="nav-link">
-                    {name}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-            <div className="form-inline">
-              {space}
-            </div>
+      <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
+        <NavLink
+          to="/"
+          className="navbar-brand">
+          React Movies
+        </NavLink>
+        <button
+          className="navbar-toggler navbar-toggler-right"
+          type="button">
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse">
+          <ul className="navbar-nav mr-auto">
+            {this.links.map(({ path, name, id}) => (
+              <li key={id} className="nav-item">
+                <NavLink
+                  to={`/${path}`}
+                  key={id}
+                  activeClassName="active"
+                  className="nav-link">
+                  {name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <div className="form-inline">
+            {space}
           </div>
-
-        </nav>
-      </div>
+        </div>
+      </nav>
     );
   }
 
