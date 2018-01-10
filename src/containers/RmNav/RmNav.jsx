@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { func, string, bool } from 'prop-types';
 import { connect } from 'react-redux';
+import { v4 } from 'node-uuid';
 
 import RmSearcher from '../../components/RmSearcher/RmSearcher';
 
@@ -16,6 +17,19 @@ class RmNav extends Component {
   searchTermHandler = (searchTerm) => {
     this.setState({searchTerm});
   };
+
+  links = [
+    {
+      id: v4(),
+      path: 'home',
+      name: 'Home'
+    },
+    {
+      id: v4(),
+      path: 'movies',
+      name: 'Movies'
+    }
+  ];
 
   render() {
 
@@ -54,22 +68,17 @@ class RmNav extends Component {
           </button>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <NavLink
-                  to="/"
-                  activeClassName="active"
-                  className="nav-link">
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/movies"
-                  activeClassName="active"
-                  className="nav-link">
-                  Movies
-                </NavLink>
-              </li>
+              {this.links.map(({ path, name, id}) => (
+                <li key={id} className="nav-item">
+                  <NavLink
+                    to={`/${path}`}
+                    key={id}
+                    activeClassName="active"
+                    className="nav-link">
+                    {name}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
             <div className="form-inline">
               {space}
