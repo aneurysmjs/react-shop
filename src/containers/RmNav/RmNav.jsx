@@ -7,19 +7,15 @@ import RmSearcher from '../../components/RmSearcher/RmSearcher';
 
 class RmNav extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * Sets state's searchTerm and filter the movies.
    *
    * @param {string} searchTerm
    * @return {void}
    */
-  searchTermHandler(searchTerm) {
+  searchTermHandler = (searchTerm) => {
     this.setState({searchTerm});
-  }
+  };
 
   render() {
 

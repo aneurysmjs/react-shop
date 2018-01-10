@@ -8,12 +8,15 @@ import MovieCard from '../../components/RmMovieCard/RmMovieCard';
 
 class RmMovies extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.searchTermHandler = this.searchTermHandler.bind(this);
-
-  }
+  /**
+   * Sets state's searchTerm and filter the movies.
+   *
+   * @param {string} searchTerm
+   * @return {void}
+   */
+  searchTermHandler = (searchTerm) => {
+    this.props.dispatch(setSearchTerm(searchTerm));
+  };
 
   componentWillMount() {
 
@@ -48,15 +51,6 @@ class RmMovies extends Component {
 
   }
 
-  /**
-   * Sets state's searchTerm and filter the movies.
-   *
-   * @param {string} searchTerm
-   * @return {void}
-   */
-  searchTermHandler(searchTerm) {
-    this.props.dispatch(setSearchTerm(searchTerm));
-  }
   
 }
 

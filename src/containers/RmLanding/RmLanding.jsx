@@ -15,7 +15,7 @@ class RmLanding extends Component {
   handleChange = (evt) => {
     const selectedCountry = evt.target.value;
     this.props.dispatch(setSelectedCountry(selectedCountry));
-  }
+  };
 
   constructor(props) {
     super(props);
