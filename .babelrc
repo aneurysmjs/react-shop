@@ -41,5 +41,7 @@
     "transform-runtime", // to make async/await work
     "transform-async-to-generator", // to use async/await
     "transform-object-rest-spread", // use object spread
+    //
+    "syntax-dynamic-import" // to use dynamic import syntax
   ]
 }

@@ -4,13 +4,36 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+import Loadable from 'react-loadable';
 
-import RmLanding from '../../containers/RmLanding/RmLanding';
-import RmAbout from '../../containers/RmAbout/RmAbout';
-import RmMovies from '../../containers/RmMovies/RmMovies';
-import RmProfile from '../../containers/RmProfile/RmProfile';
-import RmMovieDetails from '../../containers/RmMovieDetails/RmMovieDetails';
 import RmFooter from '../../components/RmFooter/RmFooter';
+
+const Loading = () => (<div>...</div>);
+
+const RmLanding = Loadable({
+  loader: () => import('../../containers/RmLanding/RmLanding'),
+  loading: Loading
+});
+
+const RmAbout = Loadable({
+  loader: () => import('../../containers/RmAbout/RmAbout'),
+  loading: Loading
+});
+
+const RmMovies = Loadable({
+  loader: () => import('../../containers/RmMovies/RmMovies'),
+  loading: Loading
+});
+
+const RmProfile = Loadable({
+  loader: () => import('../../containers/RmProfile/RmProfile'),
+  loading: Loading
+});
+
+const RmMovieDetails = Loadable({
+  loader: () => import('../../containers/RmMovieDetails/RmMovieDetails'),
+  loading: Loading
+});
 
 const RmRoot = ({ store }) => (
   <Provider store={store}>
