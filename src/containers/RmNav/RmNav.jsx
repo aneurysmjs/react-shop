@@ -18,6 +18,10 @@ class RmNav extends Component {
     this.setState({searchTerm});
   };
 
+  /**
+   *
+   * @type {Object[]}
+   */
   links = [
     {
       id: v4(),
@@ -36,6 +40,7 @@ class RmNav extends Component {
     const {
       searchTerm,
       showSearch,
+      showProfile,
       onSearch
     } = this.props;
 
@@ -43,6 +48,14 @@ class RmNav extends Component {
 
     if (showSearch) {
       space = <RmSearcher searchTerm={searchTerm} onSearch={onSearch} />;
+    } else if (showProfile) {
+      space = (
+        <NavLink
+          to='/profile'
+          className="btn btn-outline-secondary">
+          Profile
+        </NavLink>
+      );
     } else {
       space = (
         <NavLink

@@ -8,6 +8,7 @@ import {
 import RmLanding from '../../containers/RmLanding/RmLanding';
 import RmAbout from '../../containers/RmAbout/RmAbout';
 import RmMovies from '../../containers/RmMovies/RmMovies';
+import RmProfile from '../../containers/RmProfile/RmProfile';
 import RmMovieDetails from '../../containers/RmMovieDetails/RmMovieDetails';
 import RmFooter from '../../components/RmFooter/RmFooter';
 
@@ -20,9 +21,14 @@ const RmRoot = ({ store }) => (
           <Route
             path="/about"
             component={props => <RmAbout {...props} />}
-          /><Route
+          />
+          <Route
             path="/movies"
             component={props => <RmMovies {...props} />}
+          />
+          <Route
+            path="/Profile"
+            component={props => <RmProfile {...props} />}
           />
           <Route
             path="/details/:id"

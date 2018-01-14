@@ -8,7 +8,7 @@ class RmAbout extends Component {
   render() {
     return (
       <section className="rmAbout">
-        <RmNav />
+        <RmNav showProfile />
         <div className="rmAbout__wrapper">
           <RmHeader
             heading="About"
@@ -18,7 +18,7 @@ class RmAbout extends Component {
               <div className="col-lg-8 col-md-10 mx-auto">
                 <p>
                   This is just an app to save and share your favorite movies, because sometimes we need a recommendation
-                  when we doesn't has anything to see, so this is the perfect place.
+                  when we doesn't have anything to see, so this is the perfect place.
                 </p>
               </div>
             </div>
