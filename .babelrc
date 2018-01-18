@@ -9,6 +9,7 @@
     }
   },
   "plugins": [
+    "react-hot-loader/babel", // to use React HMR
     // In order to work, it must be first, I don't know why?? da fuq?
     "transform-class-properties", // use class properties syntax
 

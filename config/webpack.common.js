@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
-  entry: './src/Main.jsx',
+  entry: ['react-hot-loader/patch', './src/Main.jsx'],
 
   resolve: {
     extensions: ['.js', '.jsx'],

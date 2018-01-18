@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const { setupCommonConfig, setupPath } = require('./helpers');
 
@@ -32,7 +33,9 @@ module.exports = (env) => {
        * Basically tells the dev-server "hey! if you don't match something here,
        * the browser probable would know what to do with it"
        */
-      historyApiFallback: true
+      historyApiFallback: true,
+      // enable Hot Module Replacement
+      hot: true
     },
 
     plugins: [
@@ -71,8 +74,17 @@ module.exports = (env) => {
         {
           filepath: setupPath(`../dll/${DllBundlesPlugin.resolveFile('vendor')}`)
         }
-      ])
-    ]
+      ]),
+      /**
+       * Makes easier to see which dependencies are being patched.
+       */
+      new webpack.NamedModulesPlugin(),
+      /**
+       *
+       */
+      new webpack.HotModuleReplacementPlugin()
+
+    ],
 
   });
 

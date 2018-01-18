@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 
-// store
-import store from './store';
+import App from './containers/App/App';
 
 // import main CSS styles
 import './assets/scss/styles.scss';
 
-import Root from './components/RmRoot/RmRoot';
+const render = Component => {
+  ReactDom.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.querySelector('#app')
+  );
+};
 
-class MainComponent extends Component {
+render(App);
 
-  render() {
-    return (
-      <Root store={store} />
-    );
-  }
-  
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./containers/App/App', () => {
+    render(App);
+  });
 }
-
-ReactDom.render(<MainComponent />, document.querySelector('#app'));
