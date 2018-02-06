@@ -4,7 +4,7 @@
 
 import createReducer from './createReducer';
 
-import { SET_COUNTRIES }  from '../constants/ActionTypes';
+import { GET_COUNTRIES_SUCCESS }  from '../constants/ActionTypes';
 
 /**
  *
@@ -13,7 +13,12 @@ import { SET_COUNTRIES }  from '../constants/ActionTypes';
  * @return {*}
  */
 export default createReducer([], {
-  [SET_COUNTRIES](state, action) {
-    return [...action.countries];
+  [GET_COUNTRIES_SUCCESS](state, action) {
+    const {
+      response: {
+        data
+      }
+    } = action;
+    return [...data];
   }
 });
