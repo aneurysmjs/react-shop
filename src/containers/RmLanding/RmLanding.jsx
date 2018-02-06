@@ -17,12 +17,6 @@ class RmLanding extends Component {
     this.props.dispatch(setSelectedCountry(selectedCountry));
   };
 
-  constructor(props) {
-    super(props);
-
-    //this.handleChange = this.handleChange.bind(this);
-  }
-
   /**
    *
    * @return {void}
