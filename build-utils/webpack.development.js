@@ -2,10 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 const webpackMerge = require('webpack-merge');
 const { setupCommonConfig, setupPath } = require('./helpers');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AutoDllPlugin = require('autodll-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 const {
   constants: {
@@ -22,8 +22,9 @@ module.exports = (env) => {
   const publicPath = `http://localhost:${PORT}`;
 
   return webpackMerge(commonConfig, {
+    cache: true,
     mode: 'development',
-    devtool: 'source-map',
+    devtool: 'eval',
 
     output: {
       path: pathToProject,
@@ -49,6 +50,15 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         template: setupPath('../src/index.html'),
       }),
+      new webpack.DllReferencePlugin({
+        context: path.join(__dirname, '..'),
+        manifest: require('../dll/vendor-manifest.json'),
+      }),
+      new AddAssetHtmlPlugin([
+        {
+          filepath: path.resolve(__dirname, '../dll/*.dll.js'),
+        }
+      ])
     ],
 
   });

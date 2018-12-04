@@ -1,6 +1,8 @@
 const webpack = require('webpack');
-const { setupPath } = require('./helpers');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
+
+const { setupPath } = require('./helpers');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const progressHandler = (percentage, message, ...args) => {
@@ -30,23 +32,33 @@ module.exports = (mode) => {
           test: /\.jsx?$/, // both .js and .jsx
           loader: 'eslint-loader',
           enforce: 'pre',
+          exclude: /node_modules/,
+          include: [
+            path.join(__dirname, '..', 'src') //important for performance!
+          ],
           options: {
             fix: false
           }
         },
         {
           test: /\.jsx?$/,
-          exclude: [/node_modules/],
+          exclude: /node_modules/,
+          include: [
+            path.join(__dirname, '..', 'src') //important for performance!
+          ],
           use: [
             {
-              loader: 'babel-loader'
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+              }
             }
           ]
         },
         {
           test: /\.scss/,
           enforce: 'pre',
-          loader: 'import-glob-loader'
+          loader: 'import-glob-loader'  
         },
         {
           test: /\.(sa|sc|c)ss$/,
@@ -75,6 +87,9 @@ module.exports = (mode) => {
         },
         {
           test: /\.(png|jpe?g|gif)$/,
+          include: [
+            path.join(__dirname, '..', 'src') //important for performance!
+          ],
           use: [
             {
               loader: 'file-loader?name=assets/img/[name].[ext]'
@@ -103,15 +118,15 @@ module.exports = (mode) => {
       }),
       
       // copy files and folders to specific paths.
-      new CopyWebpackPlugin([{
-        // Copy `assets` contents to {output}/assets/
-        from: 'src/assets',
-        to: 'assets',
-        ignore: [
-          // Doesn't copy any files with a scss extension
-          '*.scss'
-        ],
-      }])
+      // new CopyWebpackPlugin([{
+      //   // Copy `assets` contents to {output}/assets/
+      //   from: 'src/assets',
+      //   to: 'assets',
+      //   ignore: [
+      //     // Doesn't copy any files with a scss extension
+      //     '*.scss'
+      //   ],
+      // }])
     ]
   };
 };

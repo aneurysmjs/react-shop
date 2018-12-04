@@ -3,11 +3,21 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     // create two library bundles, one with jQuery and
     // another with Angular and related libraries
-    vendor: ['react', 'react-dom'],
+    vendor: [
+      'axios',
+      'intersection-observer',
+      'react-dom',
+      'react-redux',
+      'react-router-dom',
+      'react-router',
+      'react',
+      'redux-thunk',
+      'redux'
+    ],
   
   },
 
@@ -21,8 +31,10 @@ module.exports = {
 
   plugins: [
     new webpack.DllPlugin({
+      context: path.resolve(__dirname, '..'),
       path: `${path.resolve('./dll')}/[name]-manifest.json`,
-      name: '[name]`'
+      name: '[name]'
     }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
   ],
 };
