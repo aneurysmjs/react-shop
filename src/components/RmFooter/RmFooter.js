@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class RmFooter extends React.Component {
+class RmFooter extends React.Component {
 
   constructor() {
     super();
@@ -38,3 +38,5 @@ export default class RmFooter extends React.Component {
   }
   
 }
+
+export default RmFooter;

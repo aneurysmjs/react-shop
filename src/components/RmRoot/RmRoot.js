@@ -10,30 +10,15 @@ import RmFooter from '../../components/RmFooter/RmFooter';
 
 const Loading = () => (<div>...</div>);
 
-const RmLanding = Loadable({
-  loader: () => import('../../containers/RmLanding/RmLanding'),
-  loading: Loading
-});
+import RmLanding from '../../containers/RmLanding/RmLanding';
 
-const RmAbout = Loadable({
-  loader: () => import('../../containers/RmAbout/RmAbout'),
-  loading: Loading
-});
+import RmAbout from '../../containers/RmAbout/RmAbout';
 
-const RmMovies = Loadable({
-  loader: () => import('../../containers/RmMovies/RmMovies'),
-  loading: Loading
-});
+import RmMovies from '../../containers/RmMovies/RmMovies';
 
-const RmProfile = Loadable({
-  loader: () => import('../../containers/RmProfile/RmProfile'),
-  loading: Loading
-});
+import RmProfile from '../../containers/RmProfile/RmProfile';
 
-const RmMovieDetails = Loadable({
-  loader: () => import('../../containers/RmMovieDetails/RmMovieDetails'),
-  loading: Loading
-});
+import RmMovieDetails from '../../containers/RmMovieDetails/RmMovieDetails';
 
 const RmRoot = ({ store }) => (
   <Provider store={store}>

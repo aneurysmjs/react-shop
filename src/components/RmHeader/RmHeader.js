@@ -1,15 +1,6 @@
 import React from 'react';
 
-/**
- *
- * @param {String} heading
- * @param {String} subHeading
- * @param {String} imgUrl
- * @return {component}
- * @constructor
- */
 const RmHeader = ({ heading, subHeading, imgUrl = '' }) => (
-
   <header className="rmHeader__masthead" style={{'background': imgUrl}}>
     <div className="rmHeader__overlay" />
     <div className="container">
@@ -23,7 +14,6 @@ const RmHeader = ({ heading, subHeading, imgUrl = '' }) => (
       </div>
     </div>
   </header>
-
 );
 
 export default RmHeader;

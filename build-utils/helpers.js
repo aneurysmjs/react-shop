@@ -11,10 +11,9 @@ exports.setupPath = (folderPath) => resolve(__dirname, `${folderPath}`);
 /**
  * sets the configuration paths
  *
- * @param {Object} env
  * @return {string}
  */
-exports.setupCommonConfig = (env) => {
+exports.setupCommonConfig = () => {
 
   return {
     // specify the path for the common webpack's config
@@ -27,10 +26,9 @@ exports.setupCommonConfig = (env) => {
 
 /**
  * sets the `production` path
- * @param {Object} env
  * @return {string} the path for the `dist` folder
  */
-exports.productionPath = (env) => {
+exports.productionPath = () => {
   let pathSetup = '../dist';
 
   return resolve(__dirname, pathSetup);
