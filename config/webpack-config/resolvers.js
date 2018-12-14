@@ -5,6 +5,9 @@ module.exports = {
   extensions: ['.js', '.mjs', '.json', '.jsx', '.css'],
   modules: paths.resolveModules,
   alias: {
-    'api$': path.resolve(__dirname, '../../src/shared/api/api.js'),
+    'api$': `${paths.srcShared}/api/api.js`,
+    components: `${paths.srcShared}/components`,
+    pages: `${paths.srcShared}/pages`,
+    routing: `${paths.srcShared}/routing`,
   }
 };

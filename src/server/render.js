@@ -4,7 +4,7 @@ import { StaticRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import Html from './components/HTML';
-import App from '../shared/containers/App/App';
+import App from '../shared/App';
 
 const serverRenderer = () => (req, res) => {
 

@@ -15,7 +15,7 @@ gulp.task('rename', () => {
     .pipe(rename((pathObj) => {
       console.log('pathObj', pathObj);
       // pathObj.basename = pathObj.basename.replace('temp', capitalCase(name));
-      pathObj.basename = pathObj.basename.replace('Rm', name);
+      pathObj.basename = pathObj.basename.replace('Rm', '');
     }))
     .pipe(gulp.dest(path.join(ROOT + 'sisa')));
 
