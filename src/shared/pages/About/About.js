@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from 'components/Header/Header';
-import Nav from 'components/Nav/Nav';
 
 import './About.scss';
 
@@ -10,7 +9,7 @@ class About extends Component {
   render() {
     return (
       <section className="rmAbout">
-        <Nav showProfile />
+       
         <div className="rmAbout__wrapper">
           <Header
             heading="About"

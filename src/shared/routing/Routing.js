@@ -3,6 +3,7 @@ import {
   Route
 } from 'react-router-dom';
 
+import { Nav } from 'components/Nav';
 import Footer from 'components/Footer/Footer';
 
 const Loading = () => (<div>...</div>);
@@ -19,6 +20,7 @@ import MovieDetails from 'pages/MovieDetails/MovieDetails';
 
 const Routing = () => (
   <main>
+    <Nav />
     <div>
       <Route exact path="/" component={Landing} />
       <Route

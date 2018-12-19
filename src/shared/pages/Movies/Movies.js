@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
 import { setSearchTerm, getMovies } from '../../actions';
-import Nav from 'components/Nav/Nav';
 import MovieCard from 'components/MovieCard/MovieCard';
 
 import './Movies.scss';
@@ -39,11 +38,6 @@ class Movies extends Component {
 
     return (
       <section>
-        <Nav
-          showSearch={true}
-          searchTerm={searchTerm}
-          onSearch={this.searchTermHandler}
-        />
         <div className="px-3">
           <div className="d-flex align-items-start justify-content-between flex-wrap">
             {movies.filter(movie => (

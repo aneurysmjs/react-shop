@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { getMovie } from '../../actions';
 
-import Nav from 'components/Nav/Nav';
 import Movie from 'components/Movie/Movie';
 
 import './MovieDetails.scss';
@@ -20,7 +19,6 @@ class MovieDetails extends Component {
 
     return (
       <div>
-        <Nav />
         <div className="movieDetails d-flex flex-column align-items-center justify-content-center">
           <Movie {...movie} />
         </div>
