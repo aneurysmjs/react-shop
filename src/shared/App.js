@@ -12,7 +12,7 @@ class App extends Component {
       <Routing store={store} />
     );
   }
-
+ 
 }
 
 export default App;
