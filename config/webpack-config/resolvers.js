@@ -9,5 +9,7 @@ module.exports = {
     components: `${paths.srcShared}/components`,
     pages: `${paths.srcShared}/pages`,
     routing: `${paths.srcShared}/routing`,
+    actions: `${paths.srcShared}/appState/actions`,
+    reducers: `${paths.srcShared}/appState/reducers`,
   }
 };

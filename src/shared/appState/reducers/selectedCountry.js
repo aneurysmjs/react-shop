@@ -4,7 +4,7 @@
 
 import createReducer from './createReducer';
 
-import { SET_SELECTED_COUNTRY }  from '../constants/ActionTypes';
+import { SET_SELECTED_COUNTRY }  from '../ActionTypes';
 
 /**
  *

@@ -1,6 +1,6 @@
 import api from 'api';
 
-import * as types from '../constants/ActionTypes';
+import * as types from '../ActionTypes';
 
 const API_KEY = 'cb8c255cd5c9be31d0d60734f0bbef58';
 

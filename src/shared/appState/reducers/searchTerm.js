@@ -3,7 +3,7 @@
  */
 import createReducer from './createReducer';
 
-import { SET_SEARCH_TERM }  from '../constants/ActionTypes';
+import { SET_SEARCH_TERM }  from '../ActionTypes';
 
 
 /**

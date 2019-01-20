@@ -1,6 +1,6 @@
 import api from 'api';
 
-import * as types from '../constants/ActionTypes';
+import * as types from '../ActionTypes';
 
 /**
  *

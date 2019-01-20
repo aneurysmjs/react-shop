@@ -1,9 +1,10 @@
 /**
  * @module reducers/movies
  */
+
 import createReducer from './createReducer';
 
-import { MOVIES_SUCCESS }  from '../constants/ActionTypes';
+import { GET_COUNTRIES_SUCCESS }  from '../ActionTypes';
 
 /**
  *
@@ -12,14 +13,12 @@ import { MOVIES_SUCCESS }  from '../constants/ActionTypes';
  * @return {*}
  */
 export default createReducer([], {
-  [MOVIES_SUCCESS](state, action) {
+  [GET_COUNTRIES_SUCCESS](state, action) {
     const {
       response: {
-        data: {
-          results
-        },
-      },
+        data
+      }
     } = action;
-    return [...results];
+    return [...data];
   }
 });

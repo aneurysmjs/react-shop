@@ -2,7 +2,7 @@
  * @module reducers
  */
 
-import * as types from '../constants/ActionTypes';
+import * as types from '../ActionTypes';
 import makeActionCreator from './makeActionCreator';
 import api from 'api';
 

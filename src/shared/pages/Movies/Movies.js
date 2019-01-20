@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
-import { setSearchTerm, getMovies } from '../../actions';
+import { setSearchTerm, getMovies } from 'actions';
 
 import MovieCard from 'components/MovieCard/MovieCard';
 

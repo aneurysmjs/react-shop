@@ -4,7 +4,7 @@
 
 import createReducer from './createReducer';
 
-import { SET_MOVIE } from '../constants/ActionTypes';
+import { SET_MOVIE } from '../ActionTypes';
 
 /**
  *
