@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { COUNTRIES } from '../../constants/Urls';
-import { getCountries, setSelectedCountry } from '../../actions';
+import { getCountries as getCountriesAction, setSelectedCountry } from '../../actions';
 
 import './Landing.scss';
 
@@ -15,13 +15,15 @@ class Landing extends Component {
    * @return {void}
    */
   handleChange = (evt) => {
+    const { setSelectedCountry } = this.props;
     const selectedCountry = evt.target.value;
-    this.props.dispatch(setSelectedCountry(selectedCountry));
+    setSelectedCountry(selectedCountry);
   };
 
   componentDidMount() {
-    if (!this.props.countries.length) {
-      this.props.dispatch(getCountries(`${COUNTRIES}/all`));
+    const { countries, getCountries } = this.props;
+    if (!countries.length) {
+      getCountries(`${COUNTRIES}/all`);
     }
   }
 
@@ -66,4 +68,13 @@ const mapStateToProps = (state) => ({
   countries: state.countries
 });
 
-export default connect(mapStateToProps)(Landing);
+const mapDispatchToProps = (dispatch) => ({
+  getCountries(url) {
+    dispatch(getCountriesAction(url));
+  },
+  setCountry(country) {
+    dispatch(setSelectedCountry(country));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

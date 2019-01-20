@@ -14,7 +14,7 @@ const Footer = () => (
               alt="react logo" />
           </div>
           <div className="footer__copyright">
-            <p>Copyright © 2018. All Rights Reserved</p>
+            <p>Copyright © {new Date().getFullYear()}. All Rights Reserved</p>
           </div>
         </div>
       </div>
