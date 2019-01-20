@@ -1,46 +1,21 @@
 {
   "presets": [
-    "react",
-    ["env", {"modules": false}]
+    ["@babel/preset-env", {"modules": false}],
+    "@babel/flow",
+    "@babel/preset-react"
   ],
   "env": {
     "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
     }
   },
   "plugins": [
-    "react-hot-loader/babel", // to use React HMR
-    // In order to work, it must be first, I don't know why?? da fuq?
-    "transform-class-properties", // use class properties syntax
-
-    // ES2015 preset, manual version:
-    "transform-es2015-arrow-functions",
-    "transform-es2015-block-scoped-functions",
-    "transform-es2015-block-scoping",
-    "transform-es2015-classes",
-    "transform-es2015-computed-properties",
-    "transform-es2015-destructuring",
-    "transform-es2015-for-of",
-    "transform-es2015-function-name",
-    "transform-es2015-literals",
-    "transform-es2015-object-super",
-    "transform-es2015-parameters",
-    "transform-es2015-shorthand-properties",
-    "transform-es2015-spread",
-    "transform-es2015-sticky-regex",
-    "transform-es2015-template-literals",
-    "transform-es2015-typeof-symbol",
-    "transform-es2015-unicode-regex",
-    //"transform-regenerator", // not needed in Chrome or Firefox. Soon won't be needed in Edge or Safari.
-    "transform-es5-property-mutators",
-    // module support
-    "transform-es2015-modules-commonjs",
-    "transform-es2015-modules-umd",
-    // ES017
-    "transform-runtime", // to make async/await work
-    "transform-async-to-generator", // to use async/await
-    "transform-object-rest-spread", // use object spread
-    //
-    "syntax-dynamic-import" // to use dynamic import syntax
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-transform-runtime", 
+    "@babel/plugin-syntax-async-generators",
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }

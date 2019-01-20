@@ -1,9 +1,9 @@
 'use strict';
 
-import 'babel-register';
+import '@babel/register';
 
 import gulp from 'gulp';
-import {join} from 'path';
+import path from 'path';
 import rename from 'gulp-rename';
 import template from 'gulp-template';
 import yargs from 'yargs';
@@ -13,15 +13,15 @@ import {
   capitalCase,
   camelToDashCase,
   componentPath
-} from '../../utils/utils';
+} from '../../utils';
 
 gulp.task('component', () => {
 
   // extract the arguments that was given in the CLI
-  let name = yargs.argv.name,
-    parentPath = yargs.argv.parent || '',
-    folder = yargs.argv.folder || 'components',
-    destPath = join(resolveFolderPath(folder), parentPath, capitalCase(name));
+  const name = yargs.argv.name;
+  const parentPath = yargs.argv.parent || '';
+  const folder = yargs.argv.folder || 'components';
+  const destPath = path.join(resolveFolderPath(folder), parentPath, capitalCase(name));
 
   return gulp.src(componentPath)
     .pipe(template({

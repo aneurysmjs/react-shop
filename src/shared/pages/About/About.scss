@@ -1,0 +1,12 @@
+@import '../../assets/scss/mixins';
+
+.rmAbout {
+
+  @include min-height;
+
+  .rmAbout__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+}

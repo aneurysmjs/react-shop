@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Searcher snapshot test 1`] = `
+<div
+  className="row justify-content-center"
+>
+  <div
+    className="col-xs-12 col-sm-12 col-md-12"
+  >
+    <form
+      name="searcher"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          className="sr-only"
+          htmlFor="searcher"
+        >
+          Just type
+        </label>
+        <input
+          className="form-control"
+          id="searcher"
+          name="searcher"
+          onChange={[Function]}
+          placeholder="Type..."
+          type="text"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+`;
