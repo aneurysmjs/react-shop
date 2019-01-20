@@ -1,0 +1,1 @@
+export const COUNTRIES = 'https://restcountries.eu/rest/v2';
