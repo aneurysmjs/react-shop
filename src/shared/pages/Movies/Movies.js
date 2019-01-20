@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { arrayOf, shape, string, number } from 'prop-types';
 
 import { setSearchTerm, getMovies } from '../../actions';
+
 import MovieCard from 'components/MovieCard/MovieCard';
 
 import './Movies.scss';
@@ -16,14 +17,14 @@ class Movies extends Component {
    * @return {void}
    */
   searchTermHandler = (searchTerm) => {
-    this.props.setSearchTerm(searchTerm);
+    const { setSearchTerm } = this.props;
+    setSearchTerm(searchTerm);
   };
 
   componentDidMount() {
-
-    console.log('this.props', this.props);
-    if (this.props.movies.length === 0) {
-      
+    const { movies, fetchMovies } = this.props;
+    if (movies.length === 0) {
+      fetchMovies('movie/popular');
     }
 
   }
@@ -61,7 +62,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = { 
-  getMovies,
+  fetchMovies: getMovies,
   setSearchTerm,  
 };
 

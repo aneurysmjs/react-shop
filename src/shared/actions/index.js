@@ -7,6 +7,7 @@ import makeActionCreator from './makeActionCreator';
 import api from 'api';
 
 import { getCountries as getCountriesAction } from './getCountries';
+import { getMovies as getMoviesAction } from './getMovies';
 
 /**
  *
@@ -30,28 +31,7 @@ export const setSelectedCountry = makeActionCreator(types.SET_SELECTED_COUNTRY, 
  */
 export const setMovies = makeActionCreator(types.SET_MOVIES, 'movies');
 
-/**
- *
- * @param {String} url
- * @return {Function} async function
- */
-export function getMovies(url) {
-  /**
-   * 'dispatch' is the same one that we use to dispatch actions to Redux
-   *
-   * 'getState' is a function that if you need to do something based on
-   * the Redux store's data, you can call it to get the current state.
-   */
-  return async function (dispatch, getState) {
-    try {
-      const { data } = await api.get(url);
-      dispatch(setMovies(data));
-    } catch (err) {
-      throw new Error('ReactMovies: ', err);
-    }
-  };
-
-}
+export const getMovies = getMoviesAction;
 
 /**
  *

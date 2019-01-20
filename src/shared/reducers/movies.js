@@ -3,7 +3,7 @@
  */
 import createReducer from './createReducer';
 
-import { SET_MOVIES }  from '../constants/ActionTypes';
+import { MOVIES_SUCCESS }  from '../constants/ActionTypes';
 
 /**
  *
@@ -12,7 +12,14 @@ import { SET_MOVIES }  from '../constants/ActionTypes';
  * @return {*}
  */
 export default createReducer([], {
-  [SET_MOVIES](state, action) {
-    return [...action.movies];
+  [MOVIES_SUCCESS](state, action) {
+    const {
+      response: {
+        data: {
+          results
+        },
+      },
+    } = action;
+    return [...results];
   }
 });
