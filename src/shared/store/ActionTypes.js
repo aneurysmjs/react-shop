@@ -1,0 +1,15 @@
+/**
+ * @module constants/ActionTypes
+ */
+export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
+export const SET_SELECTED_COUNTRY = 'SET_SELECTED_COUNTRY';
+export const SET_MOVIE = 'SET_MOVIE';
+export const SET_MOVIES = 'SET_MOVIES';
+
+export const GET_COUNTRIES_REQUEST = 'GET_COUNTRIES_REQUEST';
+export const GET_COUNTRIES_SUCCESS = 'GET_COUNTRIES_SUCCESS';
+export const GET_COUNTRIES_FAILURE = 'GET_COUNTRIES_FAILURE';
+
+export const MOVIES_REQUEST = 'MOVIES_REQUEST';
+export const MOVIES_SUCCESS = 'MOVIES_SUCCESS';
+export const MOVIES_FAILURE = 'MOVIES_FAILURE';
