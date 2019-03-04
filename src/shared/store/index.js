@@ -7,9 +7,9 @@ import throttle from 'lodash/throttle';
 
 import { saveState, loadState } from './localStorage';
 // Middleware is the suggested way to extend Redux with custom functionality.
-import middlewares from './appState/middlewares';
+import middlewares from 'store/middlewares';
 // import all reducers
-import reducer from './appState/reducers';
+import reducer from 'store/reducers';
 // Get the state from localStorage
 const persistedState = loadState();
 const devtools =
@@ -36,8 +36,8 @@ store.subscribe(throttle(() => {
 
 if (process.env.NODE_ENV !== 'production') {
   if (module.hot) {
-    module.hot.accept('./appState/reducers', () =>
-      store.replaceReducer(require('./appState/reducers').default)
+    module.hot.accept('store/reducers', () =>
+      store.replaceReducer(require('store/reducers').default)
     );
   }
 }
