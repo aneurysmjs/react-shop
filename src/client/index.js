@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import App from '../shared/App';
-import store from '../shared/store';
+import store from 'store';
 
 const browserHistory = window.browserHistory || createHistory();
 
