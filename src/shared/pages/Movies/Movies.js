@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { arrayOf, shape, string, number } from 'prop-types';
 
 import { setSearchTerm, getMovies } from 'actions';
 
@@ -9,17 +8,6 @@ import MovieCard from 'components/MovieCard/MovieCard';
 import './Movies.scss';
 
 class Movies extends Component {
-
-  /**
-   * Sets state's searchTerm and filter the movies.
-   *
-   * @param {string} searchTerm
-   * @return {void}
-   */
-  searchTermHandler = (searchTerm) => {
-    const { setSearchTerm } = this.props;
-    setSearchTerm(searchTerm);
-  };
 
   componentDidMount() {
     const { movies, fetchMovies } = this.props;
@@ -41,9 +29,7 @@ class Movies extends Component {
       <section>
         <div className="px-3">
           <div className="d-flex align-items-start justify-content-between flex-wrap">
-            {movies.filter(movie => (
-              `${movie.movieTitle} ${movie.description}`.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0
-            )).map(movie => (
+            {movies.map(movie => (
               <MovieCard key={movie.id} {...movie} />
             ))}
           </div>
