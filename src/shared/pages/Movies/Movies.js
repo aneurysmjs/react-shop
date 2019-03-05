@@ -6,7 +6,6 @@ import { setSearchTerm, getMovies } from 'actions';
 import MovieCard from 'components/MovieCard/MovieCard';
 
 import './Movies.scss';
-
 class Movies extends Component {
 
   componentDidMount() {
@@ -14,7 +13,6 @@ class Movies extends Component {
     if (movies.length === 0) {
       fetchMovies('movie/popular');
     }
-
   }
 
   componentDidUpdate() {
@@ -23,7 +21,7 @@ class Movies extends Component {
 
   render() {
 
-    const { searchTerm, movies } = this.props;
+    const { movies } = this.props;
 
     return (
       <section>
@@ -36,10 +34,7 @@ class Movies extends Component {
         </div>
       </section>
     );
-
   }
-
-  
 }
 
 const mapStateToProps = (state) => ({

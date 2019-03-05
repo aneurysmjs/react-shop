@@ -72,6 +72,7 @@
     "enzyme-to-json": "3.3.5",
     "escape-string-regexp": "1.0.5",
     "eslint": "5.15.0",
+    "eslint-config-airbnb-base": "13.1.0",
     "eslint-loader": "2.1.2",
     "eslint-plugin-class-property": "1.1.0",
     "eslint-plugin-flowtype": "3.4.2",
