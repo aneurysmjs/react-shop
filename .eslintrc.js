@@ -12,9 +12,12 @@ module.exports = {
   parser: "babel-eslint",
   extends: [
     "airbnb-base",
+    "eslint:recommended",
+    "plugin:react/recommended"
   ],
   plugins: [
-    "flowtype"
+    "flowtype",
+    "react"
   ],
   rules: {
     "indent": ["error", 2, { "SwitchCase": 1 }],
