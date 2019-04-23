@@ -1,10 +1,10 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
-const paths = require('../paths');
-const { server: serverLoaders } = require('./loaders');
-const resolvers = require('./resolvers');
-const plugins = require('./plugins');
+const paths = require('../../paths');
+const { server: serverLoaders } = require('./../loaders');
+const resolvers = require('./../resolvers');
+const plugins = require('./../plugins');
 
 module.exports = {
   name: 'server',

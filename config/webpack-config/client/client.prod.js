@@ -1,4 +1,5 @@
 const baseConfig = require('./client.base');
+
 const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
 
 const config = {

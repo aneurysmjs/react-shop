@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "73447f41a95a1627481d";
+/******/ 	var hotCurrentHash = "2dcbc800e97acd0f9895";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -902,7 +902,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../../../node_module
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _react = _interopRequireDefault(__webpack_require__(/*! react */ \"react\"));\n\n__webpack_require__(/*! ./Header.scss */ \"./src/shared/components/Header/Header.scss\");\n\nvar Header = function Header(_ref) {\n  var heading = _ref.heading,\n      subHeading = _ref.subHeading,\n      _ref$imgUrl = _ref.imgUrl,\n      imgUrl = _ref$imgUrl === void 0 ? '' : _ref$imgUrl;\n  return _react[\"default\"].createElement(\"header\", {\n    className: \"Header__masthead\",\n    style: {\n      'background': imgUrl\n    }\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"Header__overlay\"\n  }), _react[\"default\"].createElement(\"div\", {\n    className: \"container\"\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"row\"\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"col-lg-8 col-md-10 mx-auto\"\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"Header__page-heading\"\n  }, _react[\"default\"].createElement(\"h1\", null, heading), _react[\"default\"].createElement(\"span\", {\n    className: \"Header__subheading\"\n  }, subHeading))))));\n};\n\nvar _default = Header;\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/components/Header/Header.js?");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _react = _interopRequireDefault(__webpack_require__(/*! react */ \"react\"));\n\n__webpack_require__(/*! ./Header.scss */ \"./src/shared/components/Header/Header.scss\");\n\n//  strict\nvar Header = function Header(_ref) {\n  var heading = _ref.heading,\n      subHeading = _ref.subHeading,\n      _ref$imgUrl = _ref.imgUrl,\n      imgUrl = _ref$imgUrl === void 0 ? '' : _ref$imgUrl;\n  return _react[\"default\"].createElement(\"header\", {\n    className: \"Header__masthead\",\n    style: {\n      'background': imgUrl\n    }\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"Header__overlay\"\n  }), _react[\"default\"].createElement(\"div\", {\n    className: \"container\"\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"row\"\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"col-lg-8 col-md-10 mx-auto\"\n  }, _react[\"default\"].createElement(\"div\", {\n    className: \"Header__page-heading\"\n  }, _react[\"default\"].createElement(\"h1\", null, heading), _react[\"default\"].createElement(\"span\", {\n    className: \"Header__subheading\"\n  }, subHeading))))));\n};\n\nvar _default = Header;\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/components/Header/Header.js?");
 
 /***/ }),
 
@@ -1350,7 +1350,7 @@ eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/he
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! /Users/jero/Documents/my-shit/react-movies/node_modules/@babel/polyfill/lib/index.js */\"./node_modules/@babel/polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! /Users/jero/Documents/my-shit/react-movies/src/server/index.js */\"./src/server/index.js\");\n\n\n//# sourceURL=webpack:///multi_./node_modules/@babel/polyfill/lib/index.js_./src/server/index.js?");
+eval("__webpack_require__(/*! /Users/jero/Documents/my-shit/react-shop/node_modules/@babel/polyfill/lib/index.js */\"./node_modules/@babel/polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! /Users/jero/Documents/my-shit/react-shop/src/server/index.js */\"./src/server/index.js\");\n\n\n//# sourceURL=webpack:///multi_./node_modules/@babel/polyfill/lib/index.js_./src/server/index.js?");
 
 /***/ }),
 
