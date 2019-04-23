@@ -3,18 +3,18 @@
   "version": "0.0.0-semantically-released",
   "description": "поиск фильмов с использованием React",
   "main": "src/Main.jsx",
-  "repository": "git+https://github.com/aneurysmjs/react-movies.git",
+  "repository": "git+https://github.com/aneurysmjs/react-shop.git",
   "keywords": [
-    "movies",
+    "shop",
     "react",
     "reactjs"
   ],
-  "author": "jero <aneurysm@outlook.com> (https://twitter.com/aneurysmjs)",
+  "author": "jero <aneurysm@outlook.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aneurysmjs/react-movies/issues"
+    "url": "https://github.com/aneurysmjs/react-shop/issues"
   },
-  "homepage": "https://github.com/aneurysmjs/react-movies#readme",
+  "homepage": "https://github.com/aneurysmjs/react-shop#readme",
   "scripts": {
     "analyze": "yarn build:with-stats && yarn start:analyzer",
     "build": "cross-env NODE_ENV=production node scripts/build.js",
