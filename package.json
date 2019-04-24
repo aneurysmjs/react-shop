@@ -18,7 +18,7 @@
   "scripts": {
     "analyze": "yarn build:with-stats && yarn start:analyzer",
     "build": "cross-env NODE_ENV=production node scripts/build.js",
-    "build:with-stats": "cross-env NODE_ENV=production webpack --config config/webpack-config/client.prod.js --json > build/client/static/bundle-stats.json",
+    "build:with-stats": "cross-env NODE_ENV=production webpack --config config/webpack-config/client/client.prod.js --json > build/client/static/bundle-stats.json",
     "commit": "git-cz",
     "lint": "eslint ./src",
     "plop": "plop",

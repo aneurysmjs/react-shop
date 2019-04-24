@@ -1,5 +1,8 @@
 {
-  "bundle.css": "http://localhost:8501/static/bundle.css",
-  "bundle.js": "http://localhost:8501/static/bundle.js",
-  "vendor.js": "http://localhost:8501/static/vendor.043e63e1.chunk.js"
+  "bundle.css": "/static/bundle.c9e51f8702c0fb4333c4.css",
+  "bundle.js": "/static/bundle.5b92b899.js",
+  "bundle.css.map": "/static/bundle.c9e51f8702c0fb4333c4.css.map",
+  "bundle.js.map": "/static/bundle.5b92b899.js.map",
+  "vendor.js": "/static/vendor.09d3f38a.chunk.js",
+  "vendor.js.map": "/static/vendor.09d3f38a.chunk.js.map"
 }
