@@ -1,5 +1,4 @@
-// @flow
-/* eslint-disable react/no-danger */
+// @flow strict
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 

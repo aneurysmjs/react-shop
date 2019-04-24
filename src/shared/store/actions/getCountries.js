@@ -1,13 +1,10 @@
+// @flow strict
+
 import api from 'api';
 
 import * as types from '../ActionTypes';
 
-/**
- *
- * @param {String} query = ''
- * @return {{}}
- */
-export function getCountries(query = '') {
+export default function getCountries(query: string = '') {
 
   return {
     types: [
