@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { COUNTRIES } from 'constants/Urls';
-import { getCountries as getCountriesAction, setSelectedCountry } from 'actions';
+import { COUNTRIES } from '@/constants/Urls';
+import { getCountries as getCountriesAction, setSelectedCountry } from '@/store/actions';
 
 import './Home.scss';
 

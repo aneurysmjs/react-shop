@@ -3,8 +3,9 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
+import App from '@/App';
+
 import Html from './components/HTML';
-import App from '../shared/App';
 
 const serverRenderer = () => (req, res) => {
 
