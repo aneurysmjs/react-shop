@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0ff9457d59142909e049";
+/******/ 	var hotCurrentHash = "d4e5a0048d4fae2e24b9";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1025,6 +1025,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
+/***/ "./src/shared/store/configureStore.js":
+/*!********************************************!*\
+  !*** ./src/shared/store/configureStore.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ \"@babel/runtime/helpers/toConsumableArray\"));\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _throttle = _interopRequireDefault(__webpack_require__(/*! lodash/throttle */ \"lodash/throttle\"));\n\nvar _localStorage = __webpack_require__(/*! ./localStorage */ \"./src/shared/store/localStorage.js\");\n\nvar _middlewares = _interopRequireDefault(__webpack_require__(/*! store/middlewares */ \"./src/shared/store/middlewares/index.js\"));\n\nvar _reducers = _interopRequireDefault(__webpack_require__(/*! store/reducers */ \"./src/shared/store/reducers/index.js\"));\n\n// Middleware is the suggested way to extend Redux with custom functionality.\n// import all reducers\n// Get the state from localStorage\nvar persistedState = (0, _localStorage.loadState)();\n\nvar devtools = typeof window !== 'undefined' && typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function' && // when the extension is not installed, we’re using Redux compose here.\nwindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({\n  actionsBlacklist: []\n});\n\nvar composeEnhancers = devtools || _redux.compose;\n\nfunction configureStore() {\n  var store = (0, _redux.createStore)(_reducers[\"default\"], persistedState, composeEnhancers(_redux.applyMiddleware.apply(void 0, (0, _toConsumableArray2[\"default\"])(_middlewares[\"default\"]))) // the third parameter is what is called an 'enhancer'\n  ); // Save the state any time the store state changes\n\n  store.subscribe((0, _throttle[\"default\"])(function () {\n    // Rather than pass the whole state object, just pass an object with the key field from the state object.\n    (0, _localStorage.saveState)({\n      product: store.getState().product\n    });\n  }, 1000));\n  return store;\n}\n\nvar _default = configureStore;\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/configureStore.js?");
+
+/***/ }),
+
 /***/ "./src/shared/store/index.js":
 /*!***********************************!*\
   !*** ./src/shared/store/index.js ***!
@@ -1033,7 +1045,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ \"@babel/runtime/helpers/toConsumableArray\"));\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _throttle = _interopRequireDefault(__webpack_require__(/*! lodash/throttle */ \"lodash/throttle\"));\n\nvar _localStorage = __webpack_require__(/*! ./localStorage */ \"./src/shared/store/localStorage.js\");\n\nvar _middlewares = _interopRequireDefault(__webpack_require__(/*! store/middlewares */ \"./src/shared/store/middlewares/index.js\"));\n\nvar _reducers = _interopRequireDefault(__webpack_require__(/*! store/reducers */ \"./src/shared/store/reducers/index.js\"));\n\n/**\n * @module store\n */\n// Middleware is the suggested way to extend Redux with custom functionality.\n// import all reducers\n// Get the state from localStorage\nvar persistedState = (0, _localStorage.loadState)();\n\nvar devtools = typeof window !== 'undefined' && typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function' && // when the extension is not installed, we’re using Redux compose here.\nwindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({\n  actionsBlacklist: []\n});\n\nvar composeEnhancers = devtools || _redux.compose;\nvar store = (0, _redux.createStore)(_reducers[\"default\"], persistedState, composeEnhancers(_redux.applyMiddleware.apply(void 0, (0, _toConsumableArray2[\"default\"])(_middlewares[\"default\"]))) // the third parameter is what is called an 'enhancer'\n); // Save the state any time the store state changes\n\nstore.subscribe((0, _throttle[\"default\"])(function () {\n  // Rather than pass the whole state object, just pass an object with the key field from the state object.\n  (0, _localStorage.saveState)({\n    movie: store.getState().movie\n  });\n}, 1000));\n\nif (true) {\n  if (true) {\n    module.hot.accept(/*! store/reducers */ \"./src/shared/store/reducers/index.js\", function () {\n      return store.replaceReducer(__webpack_require__(/*! store/reducers */ \"./src/shared/store/reducers/index.js\")[\"default\"]);\n    });\n  }\n}\n\nvar _default = store;\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/index.js?");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _configureStore = _interopRequireDefault(__webpack_require__(/*! ./configureStore */ \"./src/shared/store/configureStore.js\"));\n\n/**\n * @module store\n */\nvar store = (0, _configureStore[\"default\"])();\n\nif (true) {\n  if (true) {\n    module.hot.accept(/*! store/reducers */ \"./src/shared/store/reducers/index.js\", function () {\n      return store.replaceReducer(__webpack_require__(/*! store/reducers */ \"./src/shared/store/reducers/index.js\")[\"default\"]);\n    });\n  }\n}\n\nvar _default = store;\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/index.js?");
 
 /***/ }),
 
@@ -1105,7 +1117,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _selectedProduct = _interopRequireDefault(__webpack_require__(/*! ./selectedProduct */ \"./src/shared/store/reducers/selectedProduct.js\"));\n\nvar _products = _interopRequireDefault(__webpack_require__(/*! ./products */ \"./src/shared/store/reducers/products.js\"));\n\n/**\n * @module reducers\n */\nvar _default = (0, _redux.combineReducers)({\n  selectedProduct: _selectedProduct[\"default\"],\n  products: _products[\"default\"]\n});\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/index.js?");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _products = _interopRequireDefault(__webpack_require__(/*! ./products */ \"./src/shared/store/reducers/products.js\"));\n\n/**\n * @module reducers\n */\nvar _default = (0, _redux.combineReducers)({\n  products: _products[\"default\"]\n});\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/index.js?");
 
 /***/ }),
 
@@ -1118,18 +1130,6 @@ eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/he
 
 "use strict";
 eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"@babel/runtime/helpers/defineProperty\"));\n\nvar _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ \"@babel/runtime/helpers/toConsumableArray\"));\n\nvar _createReducer2 = _interopRequireDefault(__webpack_require__(/*! ./createReducer */ \"./src/shared/store/reducers/createReducer.js\"));\n\nvar _ActionTypes = __webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\");\n\n/**\n * @module reducers/movies\n */\n\n/**\n *\n * @param state\n * @param action\n * @return {*}\n */\nvar _default = (0, _createReducer2[\"default\"])([], (0, _defineProperty2[\"default\"])({}, _ActionTypes.GET_PRODUCTS_SUCCESS, function (state, action) {\n  var data = action.response.data;\n  return (0, _toConsumableArray2[\"default\"])(data);\n}));\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/products.js?");
-
-/***/ }),
-
-/***/ "./src/shared/store/reducers/selectedProduct.js":
-/*!******************************************************!*\
-  !*** ./src/shared/store/reducers/selectedProduct.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"@babel/runtime/helpers/defineProperty\"));\n\nvar _createReducer2 = _interopRequireDefault(__webpack_require__(/*! ./createReducer */ \"./src/shared/store/reducers/createReducer.js\"));\n\nvar _ActionTypes = __webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\");\n\n/**\n * @module reducers/selectedCountry\n */\nvar _default = (0, _createReducer2[\"default\"])('Colombia', (0, _defineProperty2[\"default\"])({}, _ActionTypes.SET_SELECTED_PRODUCT, function (state, action) {\n  return action.selectedCountry;\n}));\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/selectedProduct.js?");
 
 /***/ }),
 
