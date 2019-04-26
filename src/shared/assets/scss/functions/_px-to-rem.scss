@@ -1,0 +1,5 @@
+$base-font-size: 16;
+
+@function px-to-rem($target, $base: $base-font-size) {
+  @return ($target / $base) * 1rem;
+}

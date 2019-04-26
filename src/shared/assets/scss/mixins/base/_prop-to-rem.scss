@@ -1,0 +1,18 @@
+@import '../../functions/px-to-rem';
+
+@mixin prop-to-rem($property, $values...) {
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+
+  @for $i from 1 through $max {
+    $value: px-to-rem($i);
+    $remValues: #{$remValues + $value};
+
+    @if $i < $max {
+      $remValues: #{$remValues + " "};
+    }
+  } 
+  
+  #{$property}: $remValues; 
+}

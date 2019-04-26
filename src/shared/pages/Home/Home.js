@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { getProducts as getProductsAction } from '@/store/actions';
 
+import ProductCard from '@/components/shared/ProductCard/ProductCard';
+
 import './Home.scss';
 
 type PropsType = {
@@ -29,7 +31,7 @@ class Home extends Component<{}> {
         <h1>Shop</h1>
         <form className="text-center col-md-4">
           <div className="form-group">
-            <pre> { JSON.stringify(products, null, 2) } </pre>
+            { products.map(product => (<ProductCard product={product} />))}
           </div>
         </form>
         {/* <Link to="products">
