@@ -1,3 +1,17 @@
-.Home {
-  height: calc(100vh - 181px);
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.home {
+  // height: calc(100vh - 56px);
+  // display: flex;
+  // flex-direction: column;
+
+  // @include element(wrapper) {
+  //   flex-grow: 1;
+  // }
+
+  @include element(products) {
+    display: flex;
+    // flex-grow: 1;
+  }
 }

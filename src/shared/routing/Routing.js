@@ -3,9 +3,7 @@ import {
   Route
 } from 'react-router-dom';
 
-import { Nav } from '@/components/Nav';
-
-import Footer from '@/components/Footer/Footer';
+import Layout from '@/components/core/Layout/Layout';
 
 import Home from '@/pages/Home/Home';
 
@@ -13,11 +11,9 @@ const Loading = () => (<div>...</div>);
 
 const Routing = () => (
   <main>
-    <Nav />
-    <div>
+    <Layout>
       <Route exact path="/" component={Home} />
-    </div>
-    <Footer />
+    </Layout>
   </main>
 );
 

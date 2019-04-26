@@ -27,13 +27,19 @@ class Home extends Component<{}> {
     const { products } = this.props;
 
     return (
-      <div className='Home d-flex flex-column align-items-center justify-content-center'>
-        <h1>Shop</h1>
-        <form className="text-center col-md-4">
-          <div className="form-group">
-            { products.map(product => (<ProductCard product={product} />))}
+      <div className="home">
+        <h2 className="text-center">Shop</h2>
+        <div className="home__wrapper">
+          <div className="home__products">
+            { products.map(product => (
+              <ProductCard
+                key={product.id}
+                width="20rem"
+                product={product}
+              />)
+            )}
           </div>
-        </form>
+        </div>
         {/* <Link to="products">
           <button type="button" className="btn btn-primary">
             All products

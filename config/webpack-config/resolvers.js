@@ -7,5 +7,6 @@ module.exports = {
   alias: {
     'api$': `${paths.srcShared}/api/api.js`,
     '@': paths.srcShared,
+    styles: `${paths.srcShared}/assets/scss`,
   }
 };

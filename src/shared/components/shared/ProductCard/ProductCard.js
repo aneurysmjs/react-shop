@@ -1,6 +1,7 @@
 // @flow strict
 import React, { Component } from 'react';
 
+import './ProductCard.scss';
 type PropsType = {
   product: {
     _id: string,
@@ -36,24 +37,28 @@ class ProductCart extends Component<PropsType> {
 
     return (
       <figure
-        class={hasOverlay ? 'product-card--overlay' : 'product-card'}
+        className={hasOverlay ? 'product-card--overlay' : 'product-card'}
         style={{
           width,
           margin: '0 auto',
         }}
       >
-        <div
-          v-if="hasOverlay"
-          class="product-card__overlay"
-        />
+        {hasOverlay ? <div className="product-card__overlay" /> : null }
         <img
           src={product.image}
           alt={product.name}
           onClick="handleClick"
-          class="img-fluid product-card__image"
+          className="img-fluid product-card__image"
+        />
+        <img
+          data-hovered
+          src={product.imageHovered}
+          alt={product.name}
+          onClick="handleClick"
+          className="img-fluid product-card__image--hovered"
         />
         <figcaption
-          class={hasOverlay ? 'product-card__description--overlay' : 'product-card__description'}
+          className={hasOverlay ? 'product-card__description--overlay' : 'product-card__description'}
         >
           { product.name }
         </figcaption>

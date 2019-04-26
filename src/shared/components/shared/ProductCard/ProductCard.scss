@@ -1,5 +1,55 @@
+@import '~styles/mixins';
+@import '~styles/variables';
+
 .product-card {
   position: relative;
+
+  @include element(image) {
+    // &:hover {
+    //   & + img {
+    //     visibility: visible;
+    //   }
+    // }
+  }
+  
+  @include element(image--hovered) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  
+  @include element(overlay) {
+    background: #000000;
+    opacity: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.3s ease;
+    width: 100%;
+  }
+  
+  @include element(description) {
+    color: #505050;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  @include element(description--overlay) {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    transition: bottom 0.3s ease;
+    width: 100%;
+  }
 }
 
 .product-card--overlay {
@@ -12,40 +62,4 @@
       opacity: 1;
     }
   }
-}
-
-.product-card__image {
-  cursor: pointer;
-}
-
-.product-card__overlay {
-  background: #000000;
-  opacity: 0;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  transition: opacity 0.3s ease;
-  width: 100%;
-}
-
-.product-card__description {
-  color: #505050;
-  text-align: center;
-  font-size: 18px;
-}
-
-.product-card__description--overlay {
-  align-items: center;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  opacity: 0;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  transition: bottom 0.3s ease;
-  width: 100%;
 }
