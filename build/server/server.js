@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "dd513997a715a9ddf0d0";
+/******/ 	var hotCurrentHash = "880686aea7e3943ec4df";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -860,6 +860,18 @@ eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/he
 
 /***/ }),
 
+/***/ "./src/shared/api/index.js":
+/*!*********************************!*\
+  !*** ./src/shared/api/index.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nObject.defineProperty(exports, \"api\", {\n  enumerable: true,\n  get: function get() {\n    return _api[\"default\"];\n  }\n});\n\nvar _api = _interopRequireDefault(__webpack_require__(/*! ./api */ \"./src/shared/api/api.js\"));\n\n//# sourceURL=webpack:///./src/shared/api/index.js?");
+
+/***/ }),
+
 /***/ "./src/shared/assets/scss/styles.scss":
 /*!********************************************!*\
   !*** ./src/shared/assets/scss/styles.scss ***!
@@ -997,7 +1009,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = getCountries;\n\nvar _api = _interopRequireDefault(__webpack_require__(/*! api */ \"./src/shared/api/api.js\"));\n\nvar types = _interopRequireWildcard(__webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\"));\n\n//  strict\nfunction getCountries() {\n  var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';\n  return {\n    types: [types.GET_COUNTRIES_REQUEST, types.GET_COUNTRIES_SUCCESS, types.GET_COUNTRIES_FAILURE],\n    callAPI: function callAPI() {\n      return _api[\"default\"].get(query);\n    }\n  };\n}\n\n//# sourceURL=webpack:///./src/shared/store/actions/getCountries.js?");
+eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = getCountries;\n\nvar _api = __webpack_require__(/*! @/api */ \"./src/shared/api/index.js\");\n\nvar types = _interopRequireWildcard(__webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\"));\n\n//  strict\nfunction getCountries() {\n  var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';\n  return {\n    types: [types.GET_COUNTRIES_REQUEST, types.GET_COUNTRIES_SUCCESS, types.GET_COUNTRIES_FAILURE],\n    callAPI: function callAPI() {\n      return _api.api.get(query);\n    }\n  };\n}\n\n//# sourceURL=webpack:///./src/shared/store/actions/getCountries.js?");
 
 /***/ }),
 

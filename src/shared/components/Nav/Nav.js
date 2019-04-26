@@ -23,7 +23,8 @@ class Nav extends Component<{}, StateType> {
         </NavLink>
         <button
           className="navbar-toggler navbar-toggler-right"
-          type="button">
+          type="button"
+        >
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse">

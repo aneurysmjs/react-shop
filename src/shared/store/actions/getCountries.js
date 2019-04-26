@@ -1,6 +1,6 @@
 // @flow strict
 
-import api from 'api';
+import { api } from '@/api';
 
 import * as types from '../ActionTypes';
 

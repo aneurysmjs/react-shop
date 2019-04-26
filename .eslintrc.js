@@ -1,3 +1,4 @@
+require('babel-register')
 const paths = require('./config/paths');
 
 module.exports = {
@@ -10,6 +11,9 @@ module.exports = {
     }
   },
   parser: "babel-eslint",
+  "settings": {
+    "import/resolver": "webpack"
+  },
   extends: [
     "airbnb-base",
     "eslint:recommended",
@@ -23,6 +27,12 @@ module.exports = {
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
   }
 };
