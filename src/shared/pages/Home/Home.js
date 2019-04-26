@@ -2,61 +2,41 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { COUNTRIES } from '@/constants/Urls';
-import { getCountries as getCountriesAction, setSelectedCountry } from '@/store/actions';
+import { getProducts as getProductsAction } from '@/store/actions';
 
 import './Home.scss';
 
 type PropsType = {
-  setSelectedCountry: string,
-  getCountries: (string) => Array<Object>,
+  setSelectedProduct: string,
+  getProducts: (string) => Array<Object>,
 };
 
-class Home extends Component<PropsType> {
-
-  handleChange = (evt) => {
-    const { setSelectedCountry } = this.props;
-    const selectedCountry = evt.target.value;
-    setSelectedCountry(selectedCountry);
-  };
+class Home extends Component<{}> {
 
   componentDidMount() {
-    const { countries, getCountries } = this.props;
-    if (!countries.length) {
-      getCountries(`${COUNTRIES}/all`);
+    const { products, getProducts } = this.props;
+    if (!products.length) {
+      getProducts(`/products`);
     }
   }
 
   render () {
 
-    const { selectedCountry, countries } = this.props;
+    const { products } = this.props;
 
     return (
       <div className='Home d-flex flex-column align-items-center justify-content-center'>
         <h1>Shop</h1>
         <form className="text-center col-md-4">
           <div className="form-group">
-            <label htmlFor="countries">Select a Country</label>
-            <select
-              value={selectedCountry}
-              className="form-control"
-              onChange={this.handleChange}>
-              {countries.map(({ name }) => (
-                <option
-                  id="countries"
-                  key={name}
-                  value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
+            <pre> { JSON.stringify(products, null, 2) } </pre>
           </div>
         </form>
-        <Link to="products">
+        {/* <Link to="products">
           <button type="button" className="btn btn-primary">
             All products
           </button>
-        </Link>
+        </Link> */}
       </div>
     );
   }
@@ -64,16 +44,12 @@ class Home extends Component<PropsType> {
 }
 
 const mapStateToProps = (state) => ({
-  selectedCountry: state.selectedCountry,
-  countries: state.countries
+  products: state.products
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCountries(url) {
-    dispatch(getCountriesAction(url));
-  },
-  setCountry(country) {
-    dispatch(setSelectedCountry(country));
+  getProducts(url) {
+    dispatch(getProductsAction(url));
   }
 });
 

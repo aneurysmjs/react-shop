@@ -4,10 +4,10 @@
 
 import { combineReducers } from 'redux';
 
-import selectedCountry from './selectedCountry';
-import countries from './countries';
+import selectedProduct from './selectedProduct';
+import products from './products';
 
 export default combineReducers({
-  selectedCountry,
-  countries
+  selectedProduct,
+  products
 });

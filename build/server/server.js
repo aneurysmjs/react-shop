@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "880686aea7e3943ec4df";
+/******/ 	var hotCurrentHash = "0ff9457d59142909e049";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -856,7 +856,7 @@ eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/h
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _axios = _interopRequireDefault(__webpack_require__(/*! axios */ \"axios\"));\n\n/**\n * @module api/api\n */\nvar _default = _axios[\"default\"];\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/api/api.js?");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _axios = _interopRequireDefault(__webpack_require__(/*! axios */ \"axios\"));\n\n/**\n * @module api\n */\nvar _default = _axios[\"default\"].create({\n  baseURL: 'http://localhost:3000/api'\n});\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/api/api.js?");
 
 /***/ }),
 
@@ -930,18 +930,6 @@ eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/he
 
 /***/ }),
 
-/***/ "./src/shared/constants/Urls.js":
-/*!**************************************!*\
-  !*** ./src/shared/constants/Urls.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.COUNTRIES = void 0;\nvar COUNTRIES = 'https://restcountries.eu/rest/v2';\nexports.COUNTRIES = COUNTRIES;\n\n//# sourceURL=webpack:///./src/shared/constants/Urls.js?");
-
-/***/ }),
-
 /***/ "./src/shared/pages/Home/Home.js":
 /*!***************************************!*\
   !*** ./src/shared/pages/Home/Home.js ***!
@@ -950,7 +938,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ \"@babel/runtime/helpers/classCallCheck\"));\n\nvar _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ \"@babel/runtime/helpers/createClass\"));\n\nvar _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ \"@babel/runtime/helpers/possibleConstructorReturn\"));\n\nvar _getPrototypeOf3 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ \"@babel/runtime/helpers/getPrototypeOf\"));\n\nvar _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ \"@babel/runtime/helpers/assertThisInitialized\"));\n\nvar _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ \"@babel/runtime/helpers/inherits\"));\n\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"@babel/runtime/helpers/defineProperty\"));\n\nvar _react = _interopRequireWildcard(__webpack_require__(/*! react */ \"react\"));\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _Urls = __webpack_require__(/*! @/constants/Urls */ \"./src/shared/constants/Urls.js\");\n\nvar _actions = __webpack_require__(/*! @/store/actions */ \"./src/shared/store/actions/index.js\");\n\n__webpack_require__(/*! ./Home.scss */ \"./src/shared/pages/Home/Home.scss\");\n\nvar Home =\n/*#__PURE__*/\nfunction (_Component) {\n  (0, _inherits2[\"default\"])(Home, _Component);\n\n  function Home() {\n    var _getPrototypeOf2;\n\n    var _this;\n\n    (0, _classCallCheck2[\"default\"])(this, Home);\n\n    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {\n      args[_key] = arguments[_key];\n    }\n\n    _this = (0, _possibleConstructorReturn2[\"default\"])(this, (_getPrototypeOf2 = (0, _getPrototypeOf3[\"default\"])(Home)).call.apply(_getPrototypeOf2, [this].concat(args)));\n    (0, _defineProperty2[\"default\"])((0, _assertThisInitialized2[\"default\"])(_this), \"handleChange\", function (evt) {\n      var setSelectedCountry = _this.props.setSelectedCountry;\n      var selectedCountry = evt.target.value;\n      setSelectedCountry(selectedCountry);\n    });\n    return _this;\n  }\n\n  (0, _createClass2[\"default\"])(Home, [{\n    key: \"componentDidMount\",\n    value: function componentDidMount() {\n      var _this$props = this.props,\n          countries = _this$props.countries,\n          getCountries = _this$props.getCountries;\n\n      if (!countries.length) {\n        getCountries(\"\".concat(_Urls.COUNTRIES, \"/all\"));\n      }\n    }\n  }, {\n    key: \"render\",\n    value: function render() {\n      var _this$props2 = this.props,\n          selectedCountry = _this$props2.selectedCountry,\n          countries = _this$props2.countries;\n      return _react[\"default\"].createElement(\"div\", {\n        className: \"Home d-flex flex-column align-items-center justify-content-center\"\n      }, _react[\"default\"].createElement(\"h1\", null, \"Shop\"), _react[\"default\"].createElement(\"form\", {\n        className: \"text-center col-md-4\"\n      }, _react[\"default\"].createElement(\"div\", {\n        className: \"form-group\"\n      }, _react[\"default\"].createElement(\"label\", {\n        htmlFor: \"countries\"\n      }, \"Select a Country\"), _react[\"default\"].createElement(\"select\", {\n        value: selectedCountry,\n        className: \"form-control\",\n        onChange: this.handleChange\n      }, countries.map(function (_ref) {\n        var name = _ref.name;\n        return _react[\"default\"].createElement(\"option\", {\n          id: \"countries\",\n          key: name,\n          value: name\n        }, name);\n      })))), _react[\"default\"].createElement(_reactRouterDom.Link, {\n        to: \"products\"\n      }, _react[\"default\"].createElement(\"button\", {\n        type: \"button\",\n        className: \"btn btn-primary\"\n      }, \"All products\")));\n    }\n  }]);\n  return Home;\n}(_react.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    selectedCountry: state.selectedCountry,\n    countries: state.countries\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    getCountries: function getCountries(url) {\n      dispatch((0, _actions.getCountries)(url));\n    },\n    setCountry: function setCountry(country) {\n      dispatch((0, _actions.setSelectedCountry)(country));\n    }\n  };\n};\n\nvar _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/pages/Home/Home.js?");
+eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ \"@babel/runtime/helpers/classCallCheck\"));\n\nvar _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ \"@babel/runtime/helpers/createClass\"));\n\nvar _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ \"@babel/runtime/helpers/possibleConstructorReturn\"));\n\nvar _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ \"@babel/runtime/helpers/getPrototypeOf\"));\n\nvar _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ \"@babel/runtime/helpers/inherits\"));\n\nvar _react = _interopRequireWildcard(__webpack_require__(/*! react */ \"react\"));\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _actions = __webpack_require__(/*! @/store/actions */ \"./src/shared/store/actions/index.js\");\n\n__webpack_require__(/*! ./Home.scss */ \"./src/shared/pages/Home/Home.scss\");\n\nvar Home =\n/*#__PURE__*/\nfunction (_Component) {\n  (0, _inherits2[\"default\"])(Home, _Component);\n\n  function Home() {\n    (0, _classCallCheck2[\"default\"])(this, Home);\n    return (0, _possibleConstructorReturn2[\"default\"])(this, (0, _getPrototypeOf2[\"default\"])(Home).apply(this, arguments));\n  }\n\n  (0, _createClass2[\"default\"])(Home, [{\n    key: \"componentDidMount\",\n    value: function componentDidMount() {\n      var _this$props = this.props,\n          products = _this$props.products,\n          getProducts = _this$props.getProducts;\n\n      if (!products.length) {\n        getProducts(\"/products\");\n      }\n    }\n  }, {\n    key: \"render\",\n    value: function render() {\n      var products = this.props.products;\n      return _react[\"default\"].createElement(\"div\", {\n        className: \"Home d-flex flex-column align-items-center justify-content-center\"\n      }, _react[\"default\"].createElement(\"h1\", null, \"Shop\"), _react[\"default\"].createElement(\"form\", {\n        className: \"text-center col-md-4\"\n      }, _react[\"default\"].createElement(\"div\", {\n        className: \"form-group\"\n      }, _react[\"default\"].createElement(\"pre\", null, \" \", JSON.stringify(products, null, 2), \" \"))));\n    }\n  }]);\n  return Home;\n}(_react.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    products: state.products\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    getProducts: function getProducts(url) {\n      dispatch((0, _actions.getProducts)(url));\n    }\n  };\n};\n\nvar _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/pages/Home/Home.js?");
 
 /***/ }),
 
@@ -997,19 +985,19 @@ eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/he
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.GET_COUNTRIES_FAILURE = exports.GET_COUNTRIES_SUCCESS = exports.GET_COUNTRIES_REQUEST = exports.SET_SELECTED_COUNTRY = void 0;\n\n/**\n * @module constants/ActionTypes\n */\nvar SET_SELECTED_COUNTRY = 'SET_SELECTED_COUNTRY';\nexports.SET_SELECTED_COUNTRY = SET_SELECTED_COUNTRY;\nvar GET_COUNTRIES_REQUEST = 'GET_COUNTRIES_REQUEST';\nexports.GET_COUNTRIES_REQUEST = GET_COUNTRIES_REQUEST;\nvar GET_COUNTRIES_SUCCESS = 'GET_COUNTRIES_SUCCESS';\nexports.GET_COUNTRIES_SUCCESS = GET_COUNTRIES_SUCCESS;\nvar GET_COUNTRIES_FAILURE = 'GET_COUNTRIES_FAILURE';\nexports.GET_COUNTRIES_FAILURE = GET_COUNTRIES_FAILURE;\n\n//# sourceURL=webpack:///./src/shared/store/ActionTypes.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.GET_PRODUCTS_FAILURE = exports.GET_PRODUCTS_SUCCESS = exports.GET_PRODUCTS_REQUEST = exports.SET_SELECTED_PRODUCT = void 0;\n\n/**\n * @module constants/ActionTypes\n */\nvar SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT';\nexports.SET_SELECTED_PRODUCT = SET_SELECTED_PRODUCT;\nvar GET_PRODUCTS_REQUEST = 'GET_PRODUCTS_REQUEST';\nexports.GET_PRODUCTS_REQUEST = GET_PRODUCTS_REQUEST;\nvar GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';\nexports.GET_PRODUCTS_SUCCESS = GET_PRODUCTS_SUCCESS;\nvar GET_PRODUCTS_FAILURE = 'GET_PRODUCTS_FAILURE';\nexports.GET_PRODUCTS_FAILURE = GET_PRODUCTS_FAILURE;\n\n//# sourceURL=webpack:///./src/shared/store/ActionTypes.js?");
 
 /***/ }),
 
-/***/ "./src/shared/store/actions/getCountries.js":
-/*!**************************************************!*\
-  !*** ./src/shared/store/actions/getCountries.js ***!
-  \**************************************************/
+/***/ "./src/shared/store/actions/getProducts.js":
+/*!*************************************************!*\
+  !*** ./src/shared/store/actions/getProducts.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = getCountries;\n\nvar _api = __webpack_require__(/*! @/api */ \"./src/shared/api/index.js\");\n\nvar types = _interopRequireWildcard(__webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\"));\n\n//  strict\nfunction getCountries() {\n  var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';\n  return {\n    types: [types.GET_COUNTRIES_REQUEST, types.GET_COUNTRIES_SUCCESS, types.GET_COUNTRIES_FAILURE],\n    callAPI: function callAPI() {\n      return _api.api.get(query);\n    }\n  };\n}\n\n//# sourceURL=webpack:///./src/shared/store/actions/getCountries.js?");
+eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = getCountries;\n\nvar _api = __webpack_require__(/*! @/api */ \"./src/shared/api/index.js\");\n\nvar types = _interopRequireWildcard(__webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\"));\n\n//  strict\nfunction getCountries() {\n  var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';\n  return {\n    types: [types.GET_PRODUCTS_REQUEST, types.GET_PRODUCTS_SUCCESS, types.GET_PRODUCTS_FAILURE],\n    callAPI: function callAPI() {\n      return _api.api.get(query);\n    }\n  };\n}\n\n//# sourceURL=webpack:///./src/shared/store/actions/getProducts.js?");
 
 /***/ }),
 
@@ -1021,7 +1009,7 @@ eval("\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/h
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nObject.defineProperty(exports, \"getCountries\", {\n  enumerable: true,\n  get: function get() {\n    return _getCountries[\"default\"];\n  }\n});\nexports.setSelectedCountry = void 0;\n\nvar types = _interopRequireWildcard(__webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\"));\n\nvar _makeActionCreator = _interopRequireDefault(__webpack_require__(/*! ./makeActionCreator */ \"./src/shared/store/actions/makeActionCreator.js\"));\n\nvar _getCountries = _interopRequireDefault(__webpack_require__(/*! ./getCountries */ \"./src/shared/store/actions/getCountries.js\"));\n\n/**\n * @module reducers\n */\n\n/**\n *\n * @param {String} selectedCountry\n * @return {Object.<Action>} action\n */\nvar setSelectedCountry = (0, _makeActionCreator[\"default\"])(types.SET_SELECTED_COUNTRY, 'selectedCountry');\nexports.setSelectedCountry = setSelectedCountry;\n\n//# sourceURL=webpack:///./src/shared/store/actions/index.js?");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nvar _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ \"@babel/runtime/helpers/interopRequireWildcard\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nObject.defineProperty(exports, \"getProducts\", {\n  enumerable: true,\n  get: function get() {\n    return _getProducts[\"default\"];\n  }\n});\nexports.setSelectedCountry = void 0;\n\nvar types = _interopRequireWildcard(__webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\"));\n\nvar _makeActionCreator = _interopRequireDefault(__webpack_require__(/*! ./makeActionCreator */ \"./src/shared/store/actions/makeActionCreator.js\"));\n\nvar _getProducts = _interopRequireDefault(__webpack_require__(/*! ./getProducts */ \"./src/shared/store/actions/getProducts.js\"));\n\n/**\n * @module reducers\n */\nvar setSelectedCountry = (0, _makeActionCreator[\"default\"])(types.SET_SELECTED_PRODUCT, 'selectedCountry');\nexports.setSelectedCountry = setSelectedCountry;\n\n//# sourceURL=webpack:///./src/shared/store/actions/index.js?");
 
 /***/ }),
 
@@ -1097,18 +1085,6 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
-/***/ "./src/shared/store/reducers/countries.js":
-/*!************************************************!*\
-  !*** ./src/shared/store/reducers/countries.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"@babel/runtime/helpers/defineProperty\"));\n\nvar _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ \"@babel/runtime/helpers/toConsumableArray\"));\n\nvar _createReducer2 = _interopRequireDefault(__webpack_require__(/*! ./createReducer */ \"./src/shared/store/reducers/createReducer.js\"));\n\nvar _ActionTypes = __webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\");\n\n/**\n * @module reducers/movies\n */\n\n/**\n *\n * @param state\n * @param action\n * @return {*}\n */\nvar _default = (0, _createReducer2[\"default\"])([], (0, _defineProperty2[\"default\"])({}, _ActionTypes.GET_COUNTRIES_SUCCESS, function (state, action) {\n  var data = action.response.data;\n  return (0, _toConsumableArray2[\"default\"])(data);\n}));\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/countries.js?");
-
-/***/ }),
-
 /***/ "./src/shared/store/reducers/createReducer.js":
 /*!****************************************************!*\
   !*** ./src/shared/store/reducers/createReducer.js ***!
@@ -1129,19 +1105,31 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _selectedCountry = _interopRequireDefault(__webpack_require__(/*! ./selectedCountry */ \"./src/shared/store/reducers/selectedCountry.js\"));\n\nvar _countries = _interopRequireDefault(__webpack_require__(/*! ./countries */ \"./src/shared/store/reducers/countries.js\"));\n\n/**\n * @module reducers\n */\nvar _default = (0, _redux.combineReducers)({\n  selectedCountry: _selectedCountry[\"default\"],\n  countries: _countries[\"default\"]\n});\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/index.js?");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _selectedProduct = _interopRequireDefault(__webpack_require__(/*! ./selectedProduct */ \"./src/shared/store/reducers/selectedProduct.js\"));\n\nvar _products = _interopRequireDefault(__webpack_require__(/*! ./products */ \"./src/shared/store/reducers/products.js\"));\n\n/**\n * @module reducers\n */\nvar _default = (0, _redux.combineReducers)({\n  selectedProduct: _selectedProduct[\"default\"],\n  products: _products[\"default\"]\n});\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/index.js?");
 
 /***/ }),
 
-/***/ "./src/shared/store/reducers/selectedCountry.js":
+/***/ "./src/shared/store/reducers/products.js":
+/*!***********************************************!*\
+  !*** ./src/shared/store/reducers/products.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"@babel/runtime/helpers/defineProperty\"));\n\nvar _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ \"@babel/runtime/helpers/toConsumableArray\"));\n\nvar _createReducer2 = _interopRequireDefault(__webpack_require__(/*! ./createReducer */ \"./src/shared/store/reducers/createReducer.js\"));\n\nvar _ActionTypes = __webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\");\n\n/**\n * @module reducers/movies\n */\n\n/**\n *\n * @param state\n * @param action\n * @return {*}\n */\nvar _default = (0, _createReducer2[\"default\"])([], (0, _defineProperty2[\"default\"])({}, _ActionTypes.GET_PRODUCTS_SUCCESS, function (state, action) {\n  var data = action.response.data;\n  return (0, _toConsumableArray2[\"default\"])(data);\n}));\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/products.js?");
+
+/***/ }),
+
+/***/ "./src/shared/store/reducers/selectedProduct.js":
 /*!******************************************************!*\
-  !*** ./src/shared/store/reducers/selectedCountry.js ***!
+  !*** ./src/shared/store/reducers/selectedProduct.js ***!
   \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"@babel/runtime/helpers/defineProperty\"));\n\nvar _createReducer2 = _interopRequireDefault(__webpack_require__(/*! ./createReducer */ \"./src/shared/store/reducers/createReducer.js\"));\n\nvar _ActionTypes = __webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\");\n\n/**\n * @module reducers/selectedCountry\n */\n\n/**\n *\n * @param state\n * @param action\n * @return {*}\n */\nvar _default = (0, _createReducer2[\"default\"])('Colombia', (0, _defineProperty2[\"default\"])({}, _ActionTypes.SET_SELECTED_COUNTRY, function (state, action) {\n  return action.selectedCountry;\n}));\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/selectedCountry.js?");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ \"@babel/runtime/helpers/interopRequireDefault\");\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports[\"default\"] = void 0;\n\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"@babel/runtime/helpers/defineProperty\"));\n\nvar _createReducer2 = _interopRequireDefault(__webpack_require__(/*! ./createReducer */ \"./src/shared/store/reducers/createReducer.js\"));\n\nvar _ActionTypes = __webpack_require__(/*! ../ActionTypes */ \"./src/shared/store/ActionTypes.js\");\n\n/**\n * @module reducers/selectedCountry\n */\nvar _default = (0, _createReducer2[\"default\"])('Colombia', (0, _defineProperty2[\"default\"])({}, _ActionTypes.SET_SELECTED_PRODUCT, function (state, action) {\n  return action.selectedCountry;\n}));\n\nexports[\"default\"] = _default;\n\n//# sourceURL=webpack:///./src/shared/store/reducers/selectedProduct.js?");
 
 /***/ }),
 

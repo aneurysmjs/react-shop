@@ -3,14 +3,9 @@
  */
 
 import * as types from '../ActionTypes';
+
 import makeActionCreator from './makeActionCreator';
 
-export { default as getCountries } from './getCountries';
+export { default as getProducts } from './getProducts';
 
-
-/**
- *
- * @param {String} selectedCountry
- * @return {Object.<Action>} action
- */
-export const setSelectedCountry = makeActionCreator(types.SET_SELECTED_COUNTRY, 'selectedCountry');
+export const setSelectedCountry = makeActionCreator(types.SET_SELECTED_PRODUCT, 'selectedCountry');

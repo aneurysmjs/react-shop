@@ -8,9 +8,9 @@ export default function getCountries(query: string = '') {
 
   return {
     types: [
-      types.GET_COUNTRIES_REQUEST,
-      types.GET_COUNTRIES_SUCCESS,
-      types.GET_COUNTRIES_FAILURE
+      types.GET_PRODUCTS_REQUEST,
+      types.GET_PRODUCTS_SUCCESS,
+      types.GET_PRODUCTS_FAILURE
     ],
     callAPI: () => api.get(query),
   };

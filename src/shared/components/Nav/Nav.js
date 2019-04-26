@@ -18,7 +18,8 @@ class Nav extends Component<{}, StateType> {
       <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
         <NavLink
           to="/"
-          className="navbar-brand">
+          className="navbar-brand"
+        >
           Shop
         </NavLink>
         <button
