@@ -4,11 +4,19 @@ const paths = require('../paths');
 
 // const cssRegex = /\.css$/;
 // const cssModuleRegex = /\.module\.css$/;
+const jsRegex = /\.(js|jsx|mjs)$/
 const cssRegex = /\.(sa|sc|c)ss$/;
 const cssModuleRegex = /\.module\.css$/;
 
+const eslintLoader = {
+  enforce: 'pre',
+  test: jsRegex,
+  loader: 'eslint-loader',
+  exclude: /node_modules/,
+};
+
 const babelLoader = {
-  test: /\.(js|jsx|mjs)$/,
+  test: jsRegex,
   exclude: /node_modules/,
   loader: require.resolve('babel-loader'),
   options: {
@@ -160,6 +168,7 @@ const fileLoaderServer = {
 };
 
 const client = [
+  eslintLoader,
   {
     oneOf: [
       babelLoader,
@@ -172,6 +181,7 @@ const client = [
   },
 ];
 const server = [
+  eslintLoader,
   {
     oneOf: [
       babelLoader,
