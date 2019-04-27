@@ -22,7 +22,7 @@ module.exports = {
     },
     "react": {
       "version": "detect",
-      "flow": "0.97.0"
+      "flow": "0.98.0"
     }
   },
   extends: [
