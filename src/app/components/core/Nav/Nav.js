@@ -1,10 +1,15 @@
 // @flow strict
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+// $FlowIgnore
 import { connect } from 'react-redux';
 
 type StateType = {
-  links: Array<?string>
+  links: Array<{
+    id: string,
+    path: string,
+    name: string,
+  }>
 };
 class Nav extends Component<{}, StateType> {
 
@@ -30,7 +35,7 @@ class Nav extends Component<{}, StateType> {
         </button>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
-            { links.length ? links.map(({ path, name, id}) => (
+            { links.length ? links.map(({ path, name, id }) => (
               <li key={id} className="nav-item">
                 <NavLink
                   to={`/${path}`}
