@@ -11,7 +11,7 @@ const Footer = () => (
           <div className="footer__logo">
             <img
               className="img-fluid"
-              src="../../assets/img/react-logo.png"
+              src="../../../assets/img/react-logo.png"
               alt="react logo" />
           </div>
           <div className="footer__copyright">

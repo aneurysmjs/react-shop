@@ -28,23 +28,20 @@ class Home extends Component<{}> {
 
     return (
       <div className="home">
-        <h2 className="text-center">Shop</h2>
+        <h2 className="home__title">Shop</h2>
         <div className="home__wrapper">
           <div className="home__products">
             { products.map(product => (
-              <ProductCard
-                key={product.id}
-                width="20rem"
-                product={product}
-              />)
+              <div class="home__product-card">
+                <ProductCard
+                  key={product.id}
+                  width="20rem"
+                  product={product}
+                />
+              </div>)
             )}
           </div>
         </div>
-        {/* <Link to="products">
-          <button type="button" className="btn btn-primary">
-            All products
-          </button>
-        </Link> */}
       </div>
     );
   }

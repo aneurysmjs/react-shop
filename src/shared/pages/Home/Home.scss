@@ -1,17 +1,18 @@
+@import '~styles/functions/px-to-rem';
 @import '~styles/mixins';
 @import '~styles/variables';
 
 .home {
-  // height: calc(100vh - 56px);
-  // display: flex;
-  // flex-direction: column;
 
-  // @include element(wrapper) {
-  //   flex-grow: 1;
-  // }
+  @include element(title) {
+    text-align: center;
+    margin: px-to-rem(10) 0;
+  }
 
   @include element(products) {
     display: flex;
-    // flex-grow: 1;
+    justify-content: space-around;
   }
+
+  @include element(product-card) {}
 }
