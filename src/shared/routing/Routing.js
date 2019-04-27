@@ -7,7 +7,7 @@ import Layout from '@/components/core/Layout/Layout';
 
 import Home from '@/pages/Home/Home';
 
-const Loading = () => (<div>...</div>);
+// const Loading = () => (<div>...</div>);
 
 const Routing = () => (
   <main>

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Taken from: https://github.com/gaearon/todos/blob/17-the-middleware-chain/src/configureStore.js
  *

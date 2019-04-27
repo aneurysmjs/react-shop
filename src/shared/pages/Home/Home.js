@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getProducts as getProductsAction } from '@/store/actions';
@@ -9,11 +9,11 @@ import ProductCard from '@/components/shared/ProductCard/ProductCard';
 import './Home.scss';
 
 type PropsType = {
-  setSelectedProduct: string,
+  products: Array<Object>,
   getProducts: (string) => Array<Object>,
 };
 
-class Home extends Component<{}> {
+class Home extends Component<PropsType> {
 
   componentDidMount() {
     const { products, getProducts } = this.props;
@@ -32,9 +32,11 @@ class Home extends Component<{}> {
         <div className="home__wrapper">
           <div className="home__products">
             { products.map(product => (
-              <div class="home__product-card">
+              <div 
+                key={product.id}
+                className="home__product-card"
+              >
                 <ProductCard
-                  key={product.id}
                   width="20rem"
                   product={product}
                 />

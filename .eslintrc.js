@@ -1,7 +1,9 @@
-// require('babel-register')
-const paths = require('./config/paths');
+require('@babel/register')
 
 module.exports = {
+  env: {
+    browser: true
+  },
   parserOptions: {
     "ecmaVersion": 2017,
     "sourceType": "module",
@@ -12,14 +14,25 @@ module.exports = {
   },
   parser: "babel-eslint",
   "settings": {
-    "import/resolver": "webpack"
+    "import/resolver": {
+      "webpack": {
+        "config": "./config/webpack-config/index.js"
+      }
+    },
+    "react": {
+      "version": "detect",
+      "flow": "0.97.0"
+    }
   },
   extends: [
     "airbnb-base",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
   ],
   plugins: [
+    "import",
     "flowtype",
     "react"
   ],

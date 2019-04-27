@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 
 import './ProductCard.scss';
+
 type PropsType = {
   product: {
     _id: string,

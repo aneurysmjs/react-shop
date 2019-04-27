@@ -181,7 +181,6 @@ const client = [
   },
 ];
 const server = [
-  eslintLoader,
   {
     oneOf: [
       babelLoader,

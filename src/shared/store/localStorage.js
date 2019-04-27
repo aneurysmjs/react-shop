@@ -14,7 +14,7 @@ export const loadState = () => {
    * if the user privacy mode does not allow the use of localStorage.
    */
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = window.localStorage.getItem('state');
     // If serializedState is null it means that the key doesn't exist so I'll return undefined to let the reducers initialize the state instead.
     if (serializedState === null) {
       return undefined;
@@ -40,8 +40,9 @@ export const saveState = (state) => {
    */
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
+    window.localStorage.setItem('state', serializedState);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('localStorage shit: ', err);
   }
 

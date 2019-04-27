@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import throttle from 'lodash/throttle';
+import throttle from 'lodash.throttle';
 
-import { saveState, loadState } from './localStorage';
 // Middleware is the suggested way to extend Redux with custom functionality.
-import middlewares from 'store/middlewares';
+import middlewares from '@/store/middlewares';
 
 // import all reducers
-import reducer from 'store/reducers';
+import reducer from '@/store/reducers';
+
+import { saveState, loadState } from './localStorage';
+
 // Get the state from localStorage
 const persistedState = loadState();
 

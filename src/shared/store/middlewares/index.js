@@ -9,6 +9,7 @@ import apiMiddleware from './apiMiddleware';
 /**
  * @type {middleware[]}
  */
+// eslint-disable-next-line import/no-mutable-exports
 let middlewares = [
   thunk,
   apiMiddleware
