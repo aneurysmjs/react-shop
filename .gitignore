@@ -62,3 +62,7 @@ typings/
 
 # vscode
 .vscode
+
+build/*
+
+dist/*
