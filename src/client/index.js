@@ -8,7 +8,7 @@ import {
 
 import store from '@/store';
 
-import App from '../shared/App';
+import App from '@/App';
 
 const browserHistory = window.browserHistory || createHistory();
 

@@ -5,8 +5,8 @@ module.exports = {
   extensions: ['.js', '.mjs', '.json', '.jsx', '.css'],
   modules: paths.resolveModules,
   alias: {
-    'api$': `${paths.srcShared}/api/api.js`,
-    '@': paths.srcShared,
-    styles: `${paths.srcShared}/assets/scss`,
+    'api$': `${paths.srcApp}/api/api.js`,
+    '@': paths.srcApp,
+    styles: `${paths.srcApp}/assets/scss`,
   }
 };

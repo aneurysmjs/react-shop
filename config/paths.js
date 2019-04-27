@@ -11,14 +11,14 @@ const paths = {
   src: resolveApp('src'),
   srcClient: resolveApp('src/client'),
   srcServer: resolveApp('src/server'),
-  srcShared: resolveApp('src/shared'),
+  srcApp: resolveApp('src/app'),
   publicPath: '/static/',
 };
 
 paths.resolveModules = [
   paths.srcClient,
   paths.srcServer,
-  paths.srcShared,
+  paths.srcApp,
   paths.src,
   'node_modules',
 ];

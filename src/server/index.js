@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 
 import serverRender from './render';
 import paths from '../../config/paths';
-import store from '../shared/store';
+import store from '@/store';
 
 require('dotenv').config();
 
