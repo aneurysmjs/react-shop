@@ -21,6 +21,6 @@ include_warnings=true
 module.file_ext=.js
 module.file_ext=.scss
 
-module.name_mapper='^@' -> '<PROJECT_ROOT>/src/shared'
+module.name_mapper='^@' -> '<PROJECT_ROOT>/src/app'
 
 [strict]
