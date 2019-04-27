@@ -27,13 +27,13 @@
     "airbnb-base",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:jsx-a11y/recommended"
   ],
   "plugins": [
     "import",
     "flowtype",
-    "react"
+    "react",
+    "jsx-a11y"
   ],
   "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],

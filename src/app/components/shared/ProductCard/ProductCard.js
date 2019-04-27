@@ -22,7 +22,7 @@ type PropsType = {
 class ProductCart extends Component<PropsType> {
 
   static defaultProps = {
-    width: '29rem'
+    width: '29rem',
   };
 
   handleClick = () => {
@@ -46,12 +46,14 @@ class ProductCart extends Component<PropsType> {
       >
         {hasOverlay ? <div className="product-card__overlay" /> : null }
         <img
+          role="presentation"
           src={product.image}
           alt={product.name}
           onClick="handleClick"
           className="img-fluid product-card__image"
         />
         <img
+          role="presentation"
           data-hovered
           src={product.imageHovered}
           alt={product.name}
