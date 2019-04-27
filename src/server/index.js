@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -66,6 +67,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(process.env.PORT || 8500, () => {
+  // eslint-disable-next-line no-console
   console.log(
     `[${new Date().toISOString()}]`,
     chalk.blue(`App is running: http://localhost:${process.env.PORT || 8500}`)

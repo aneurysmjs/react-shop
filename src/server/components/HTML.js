@@ -1,11 +1,13 @@
 // @flow strict
 import React, { Component } from 'react';
+// $FlowIgnore
 import Helmet from 'react-helmet';
 
 type PropsT = {
   children: *,
   css: string[],
   scripts: string[],
+  state: Object
 };
 
 export default class HTML extends Component<PropsT> {
@@ -16,6 +18,7 @@ export default class HTML extends Component<PropsT> {
 
   render() {
     const head = Helmet.renderStatic();
+    // eslint-disable-next-line no-unused-vars, react/prop-types
     const { children, scripts, css, state } = this.props;
     
     return (

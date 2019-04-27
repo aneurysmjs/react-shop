@@ -1,12 +1,12 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
-const paths = require('../paths');
 
 // const cssRegex = /\.css$/;
 // const cssModuleRegex = /\.module\.css$/;
-const jsRegex = /\.(js|jsx|mjs)$/
+const jsRegex = /\.(js|jsx|mjs)$/;
 const cssRegex = /\.(sa|sc|c)ss$/;
-const cssModuleRegex = /\.module\.css$/;
+// const cssModuleRegex = /\.module\.css$/;
 
 const eslintLoader = {
   enforce: 'pre',
@@ -181,6 +181,7 @@ const client = [
   },
 ];
 const server = [
+  eslintLoader,
   {
     oneOf: [
       babelLoader,
