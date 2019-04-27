@@ -2,7 +2,8 @@ require('@babel/register')
 
 module.exports = {
   env: {
-    browser: true
+    browser: true,
+    "jest": true
   },
   parserOptions: {
     "ecmaVersion": 2017,
