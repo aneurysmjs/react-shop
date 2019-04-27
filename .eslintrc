@@ -1,11 +1,9 @@
-require('@babel/register')
-
-module.exports = {
-  env: {
-    browser: true,
+{
+  "env": {
+    "browser": true,
     "jest": true
   },
-  parserOptions: {
+  "parserOptions": {
     "ecmaVersion": 2017,
     "sourceType": "module",
     "ecmaFeatures": {
@@ -13,7 +11,7 @@ module.exports = {
       "experimentalObjectRestSpread": true
     }
   },
-  parser: "babel-eslint",
+  "parser": "babel-eslint",
   "settings": {
     "import/resolver": {
       "webpack": {
@@ -25,19 +23,19 @@ module.exports = {
       "flow": "0.98.0"
     }
   },
-  extends: [
+  "extends": [
     "airbnb-base",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
-  plugins: [
+  "plugins": [
     "import",
     "flowtype",
     "react"
   ],
-  rules: {
+  "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
@@ -49,4 +47,4 @@ module.exports = {
       }
     ],
   }
-};
+}
