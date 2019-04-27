@@ -18,21 +18,7 @@ const eslintLoader = {
 const babelLoader = {
   test: jsRegex,
   exclude: /node_modules/,
-  loader: require.resolve('babel-loader'),
-  options: {
-    plugins: [
-      [
-        require.resolve('babel-plugin-named-asset-import'),
-        {
-          loaderMap: {
-            svg: {
-              ReactComponent: '@svgr/webpack?-prettier,-svgo![path]',
-            },
-          },
-        },
-      ],
-    ],
-  },
+  loader: require.resolve('babel-loader')
 };
 
 // const cssModuleLoaderClient = {
