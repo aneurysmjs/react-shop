@@ -1,6 +1,8 @@
+// @flow strict
 import React from 'react';
 import createHistory from 'history/createBrowserHistory';
 import { hydrate } from 'react-dom';
+// $FlowIgnore
 import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
@@ -17,7 +19,9 @@ hydrate(
     <Router>
       <App />
     </Router>
-  </Provider>, document.getElementById('app')
+  </Provider>,
+  // $FlowIgnore
+  document.getElementById('app')
 );
 
 if (process.env.NODE_ENV === 'development') {
