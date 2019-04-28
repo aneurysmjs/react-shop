@@ -1,12 +1,11 @@
 // @flow strict
 import React, { Component } from 'react';
-// $FlowIgnore
 import Helmet from 'react-helmet';
 
 type PropsT = {
   children: *,
-  css: string[],
-  scripts: string[],
+  css: Array<string>,
+  scripts: Array<string>,
   state: Object
 };
 
@@ -22,7 +21,7 @@ export default class HTML extends Component<PropsT> {
     const { children, scripts, css, state } = this.props;
     
     return (
-      <html lang="">
+      <html lang="en_US">
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,7 +35,10 @@ export default class HTML extends Component<PropsT> {
           })}
         </head>
         <body>
-          <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+          <div
+            id="app"
+            dangerouslySetInnerHTML={{ __html: children }}
+          />
           {scripts.map((src) => {
             return <script key={src} src={src} />;
           })}
