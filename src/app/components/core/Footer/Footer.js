@@ -4,20 +4,10 @@ import React from 'react';
 import './Footer.scss';
 
 const Footer = () => (
-  <footer className="footer sm-padding bg-dark">
+  <footer className="footer">
     <div className="container">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="footer__logo">
-            <img
-              className="img-fluid"
-              src="../../../assets/img/react-logo.png"
-              alt="react logo" />
-          </div>
-          <div className="footer__copyright">
-            <p>Copyright © {new Date().getFullYear()}. All Rights Reserved</p>
-          </div>
-        </div>
+      <div className="footer__copyright">
+        <p>Copyright © {new Date().getFullYear()}. All Rights Reserved</p>
       </div>
     </div>
   </footer>
