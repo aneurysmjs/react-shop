@@ -92,6 +92,7 @@
     "node-sass": "4.11.0",
     "nodemon": "1.18.11",
     "optimize-css-assets-webpack-plugin": "5.0.1",
+    "plop": "2.3.0",
     "postcss-assets": "5.0.0",
     "postcss-import": "12.0.1",
     "postcss-loader": "3.0.0",
