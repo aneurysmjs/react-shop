@@ -5,8 +5,7 @@ const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
 // const cssRegex = /\.css$/;
 // const cssModuleRegex = /\.module\.css$/;
 const jsRegex = /\.(js|jsx|mjs)$/;
-const cssRegex = /\.(sa|sc|c)ss$/;
-// const cssModuleRegex = /\.module\.css$/;
+const scssRegex = /\.(sa|sc|c)ss$/;
 
 const eslintLoader = {
   enforce: 'pre',
@@ -21,33 +20,8 @@ const babelLoader = {
   loader: require.resolve('babel-loader')
 };
 
-// const cssModuleLoaderClient = {
-//   test: cssModuleRegex,
-//   use: [
-//     require.resolve('css-hot-loader'),
-//     MiniCssExtractPlugin.loader,
-//     {
-//       loader: require.resolve('css-loader'),
-//       options: {
-//         camelCase: true,
-//         modules: true,
-//         importLoaders: 1,
-//         sourceMap: generateSourceMap,
-//         localIdentName: '[name]__[local]--[hash:base64:5]',
-//       },
-//     },
-//     {
-//       loader: require.resolve('postcss-loader'),
-//       options: {
-//         sourceMap: generateSourceMap,
-//       },
-//     },
-//   ],
-// };
-
 const cssLoaderClient = {
-  test: cssRegex,
-  // exclude: cssModuleRegex,
+  test: scssRegex,
   use: [
     {
       loader: require.resolve('css-hot-loader'),
@@ -71,36 +45,8 @@ const cssLoaderClient = {
   ],
 };
 
-// const cssModuleLoaderServer = {
-//   test: cssModuleRegex,
-//   use: [
-//     {
-//       loader: require.resolve('css-loader/locals'),
-//       options: {
-//         camelCase: true,
-//         importLoaders: 1,
-//         modules: true,
-//         localIdentName: '[name]__[local]--[hash:base64:5]',
-//       },
-//     },
-//     {
-//       loader: require.resolve('postcss-loader'),
-//       options: {
-//         sourceMap: generateSourceMap,
-//       },
-//     }
-//   ],
-// };
-
-// const cssLoaderServer = {
-//   test: cssRegex,
-//   exclude: cssModuleRegex,
-//   loader: require.resolve('css-loader'),
-// };
-
 const cssLoaderServer = {
-  test: cssRegex,
-  // exclude: cssModuleRegex,
+  test: scssRegex,
   use: [
     {
       loader: require.resolve('css-loader'),
@@ -157,9 +103,7 @@ const client = [
   eslintLoader,
   {
     oneOf: [
-      babelLoader,
-      // cssModuleLoaderClient,
-     
+      babelLoader,     
       cssLoaderClient,
       urlLoaderClient,
       fileLoaderClient,
@@ -170,9 +114,7 @@ const server = [
   eslintLoader,
   {
     oneOf: [
-      babelLoader,
-      // cssModuleLoaderServer,
-      
+      babelLoader,      
       cssLoaderServer,
       urlLoaderServer,
       fileLoaderServer,
