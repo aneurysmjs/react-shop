@@ -2,14 +2,11 @@
  * @module actions/makeActionCreator
  */
 
-/**
- * Makes an action creator function to reduce boilerplate
- *
- * @param {String} type
- * @param argNames
- * @return {Function} the action creator itself
- */
-export default function makeActionCreator(type, ...argNames) {
+type ActionType = {
+  type: string,
+};
+
+export default function makeActionCreator<T>(type: string, ...argNames: Array<T>): (Array<T>) => ActionType {
 
   return function (...args) {
     let action = { type };
