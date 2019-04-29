@@ -21,6 +21,17 @@ module.exports = function(plop) {
         ]
       },
       {
+        type: 'list',
+        name: 'componentRole',
+        message: 'Choose component\'s role',
+        choices: [
+          'base',
+          'core',
+          'shared'
+        ],
+        default: 'shared',
+      },
+      {
         type: 'confirm',
         name: 'connectToRedux',
         message: 'Do you want the component to be connected to Redux?',
@@ -28,23 +39,24 @@ module.exports = function(plop) {
         when: ({ componentType }) => !isFunctional(componentType),
       },
     ],
-    actions({ componentType }) {
+    actions({ componentType, componentRole }) {
       const prefix = isFunctional(componentType) ? 'functional-' : 'class-';
+      const role = componentRole;
 
       const actions = [
         {
           type: 'add',
-          path: `${components}/shared/{{properCase componentName}}/{{properCase componentName}}.js`,
+          path: `${components}/${role}/{{properCase componentName}}/{{properCase componentName}}.js`,
           templateFile: `./config/plop/component/${prefix}component.js.plop`,
         },
         {
           type: 'add',
-          path: `${components}/shared/{{properCase componentName}}/{{properCase componentName}}.scss`,
+          path: `${components}/${role}/{{properCase componentName}}/{{properCase componentName}}.scss`,
           templateFile: './config/plop/component/component.scss.plop',
         },
         {
           type: 'add',
-          path: `${components}/shared/{{properCase componentName}}/{{properCase componentName}}.test.js`,
+          path: `${components}/${role}/{{properCase componentName}}/{{properCase componentName}}.test.js`,
           templateFile: './config/plop/component/component.test.js.plop',
         },
       ];
