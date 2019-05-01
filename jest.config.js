@@ -7,7 +7,8 @@ module.exports = {
     '<rootDir>/node_modules/regenerator-runtime/runtime',
     '<rootDir>/config/polyfills.js',
   ],
-  setupTestFrameworkScriptFile: '<rootDir>config/jest/setup.js',
+  // A list of paths to modules that run some code to configure or set up the testing framework before each test.
+  setupFilesAfterEnv: ['<rootDir>config/jest/setup.js'],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}',
     '<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}',
