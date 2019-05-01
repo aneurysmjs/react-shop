@@ -1,7 +1,7 @@
 {
-  "name": "react-movies",
-  "version": "0.0.0-semantically-released",
-  "description": "поиск фильмов с использованием React",
+  "name": "react-shop",
+  "version": "0.0.0",
+  "description": "React online shop",
   "main": "src/Main.jsx",
   "repository": "git+https://github.com/aneurysmjs/react-shop.git",
   "keywords": [
