@@ -1,6 +1,6 @@
 {
   "name": "react-shop",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "description": "React online shop",
   "main": "src/Main.jsx",
   "repository": "git+https://github.com/aneurysmjs/react-shop.git",
@@ -26,7 +26,8 @@
     "start:analyzer": "webpack-bundle-analyzer build/client/static/bundle-stats.json",
     "test": "node scripts/test.js --env=jsdom",
     "test:update": "yarn test --updateSnapshot",
-    "flow-typed": "node_modules/.bin/flow-typed"
+    "flow-typed": "node_modules/.bin/flow-typed",
+    "semantic-release": "semantic-release"
   },
   "config": {
     "commitizen": {
@@ -114,7 +115,8 @@
     "webpack-manifest-plugin": "2.0.4",
     "webpack-merge": "4.2.1",
     "webpack-node-externals": "1.7.2",
-    "write-file-webpack-plugin": "4.5.0"
+    "write-file-webpack-plugin": "4.5.0",
+    "semantic-release": "^15.13.3"
   },
   "dependencies": {
     "axios": "0.18.0",
