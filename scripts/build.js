@@ -1,11 +1,12 @@
 const webpack = require('webpack');
 const rimraf = require('rimraf');
+const { choosePort } = require('react-dev-utils/WebpackDevServerUtils');
 
 const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV || 'production');
+
 const paths = require('../config/paths');
 const { logMessage, compilerPromise } = require('./utils');
 
-const { choosePort } = require('react-dev-utils/WebpackDevServerUtils');
 
 const generateStaticHTML = async () => {
   const nodemon = require('nodemon');
@@ -31,6 +32,7 @@ const generateStaticHTML = async () => {
       script.emit('quit');
     } catch (err) {
       script.emit('quit');
+      // eslint-disable-next-line no-console
       console.log(err);
     }
   });
@@ -59,6 +61,7 @@ const build = async () => {
 
   serverCompiler.watch({}, (error, stats) => {
     if (!error && !stats.hasErrors()) {
+      // eslint-disable-next-line no-console
       console.log(stats.toString(serverConfig.stats));
       return;
     }
@@ -66,6 +69,7 @@ const build = async () => {
 
   clientCompiler.watch({}, (error, stats) => {
     if (!error && !stats.hasErrors()) {
+      // eslint-disable-next-line no-console
       console.log(stats.toString(clientConfig.stats));
       return;
     }
