@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 
 import ImgLoader from '@/components/shared/ImgLoader/ImgLoader';
-// import spinner from '@/components/shared/ImgLoader/ImgLoader';
 
 import './ProductCard.scss';
 

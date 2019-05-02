@@ -1,6 +1,8 @@
 // @flow strict
 import React, { useState } from 'react';
 
+import Spinner from '@/components/base/Spinner/Spinner';
+
 import './ImgLoader.scss';
 
 type PropsType = {
@@ -15,7 +17,7 @@ function ImgLoader({ src }: PropsType) {
   image.src = src;
 
   return (
-    imgObj.isLoading ? 'Loading...' : (<img className="imgLoader img-fluid" src={imgObj.img} alt="img" />)
+    imgObj.isLoading ? (<Spinner />) : (<img className="imgLoader img-fluid" src={imgObj.img} alt="img" />)
   );
 }
 
