@@ -3,17 +3,19 @@ import React, { Component } from 'react';
 
 import './ProductCard.scss';
 
+export type ProductType = {
+  _id: string,
+  name: string,
+  image: string,
+  imageHovered: string,
+  description: string,
+  price: number,
+  stock: number,
+  shop: string,
+};
+
 type PropsType = {
-  product: {
-    _id: string,
-    name: string,
-    image: string,
-    imageHovered: string,
-    description: string,
-    price: number,
-    stock: number,
-    shop: string,
-  },
+  product: ProductType,
   hasOverlay: boolean,
   hasHover: boolean,
   width: string,
@@ -23,6 +25,8 @@ class ProductCart extends Component<PropsType> {
 
   static defaultProps = {
     width: '29rem',
+    hasOverlay: false,
+    hasHover: false,
   };
 
   handleClick = () => {
