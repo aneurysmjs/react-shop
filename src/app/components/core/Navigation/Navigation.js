@@ -1,8 +1,6 @@
 // @flow strict
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-// $FlowIgnore
-import { connect } from 'react-redux';
 
 type StateType = {
   links: Array<{
@@ -11,7 +9,8 @@ type StateType = {
     name: string,
   }>
 };
-class Nav extends Component<{}, StateType> {
+
+class Navigation extends Component<{}, StateType> {
 
   state = {
     links: [],
@@ -53,8 +52,4 @@ class Nav extends Component<{}, StateType> {
   }
 }
 
-const mapStateToProps = (state) => ({
-  selectedCountry: state.selectedCountry
-});
-
-export default connect(mapStateToProps)(Nav);
+export default Navigation;

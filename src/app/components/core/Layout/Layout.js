@@ -3,7 +3,7 @@ import React from 'react';
 import type { Node } from 'react';
 
 import Footer from '@/components/core/Footer/Footer';
-import Nav from '@/components/core/Nav/Nav';
+import Header from '@/components/core/Header/Header';
 
 import './Layout.scss';
 
@@ -13,7 +13,7 @@ type PropsType = {
 
 const Layout = (props: PropsType) => (
   <div className="layout">
-    <Nav />
+    <Header />
     <div className="layout__content">
       { props.children }
     </div>
