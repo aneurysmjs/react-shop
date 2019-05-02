@@ -5,7 +5,7 @@ const { choosePort } = require('react-dev-utils/WebpackDevServerUtils');
 const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV || 'production');
 
 const paths = require('../config/paths');
-const { logMessage, compilerPromise } = require('./utils');
+const { logMessage, compilerPromise, findCompiler } = require('./utils');
 
 
 const generateStaticHTML = async () => {
@@ -23,8 +23,11 @@ const generateStaticHTML = async () => {
 
   script.on('start', async () => {
     try {
+      // browser: created when puppeteer connects to a Chromium instance
       const browser = await puppeteer.launch();
+      // provides methods to interact with a tab or extension
       const page = await browser.newPage();
+      // navigate to page
       await page.goto(`http://localhost:${port}`);
       const pageContent = await page.content();
       fs.writeFileSync(`${paths.clientBuild}/index.html`, pageContent);
@@ -53,8 +56,10 @@ const build = async () => {
   const [clientConfig, serverConfig] = webpackConfig;
   const multiCompiler = webpack([clientConfig, serverConfig]);
 
-  const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'client');
-  const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'server');
+  const getCompiler = findCompiler(multiCompiler);
+
+  const clientCompiler = getCompiler('client');
+  const serverCompiler = getCompiler('server');
 
   const clientPromise = compilerPromise('client', clientCompiler);
   const serverPromise = compilerPromise('server', serverCompiler);

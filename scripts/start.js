@@ -1,12 +1,13 @@
 const webpack = require('webpack');
+const express = require('express');
 const nodemon = require('nodemon');
 const rimraf = require('rimraf');
-const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV || 'development');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const express = require('express');
+
+const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV || 'development');
 const paths = require('../config/paths');
-const { logMessage, compilerPromise } = require('./utils');
+const { logMessage, compilerPromise, findCompiler } = require('./utils');
 
 const app = express();
 
@@ -39,8 +40,10 @@ const start = async () => {
 
   const multiCompiler = webpack([clientConfig, serverConfig]);
 
-  const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'client');
-  const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'server');
+  const getCompiler = findCompiler(multiCompiler);
+
+  const clientCompiler = getCompiler('client');
+  const serverCompiler = getCompiler('server');
 
   const clientPromise = compilerPromise('client', clientCompiler);
   const serverPromise = compilerPromise('server', serverCompiler);
@@ -72,6 +75,7 @@ const start = async () => {
 
   serverCompiler.watch(watchOptions, (error, stats) => {
     if (!error && !stats.hasErrors()) {
+      // eslint-disable-next-line no-console
       console.log(stats.toString(serverConfig.stats));
       return;
     }
@@ -107,6 +111,7 @@ const start = async () => {
   });
 
   script.on('quit', () => {
+    // eslint-disable-next-line no-console
     console.log('Process ended');
     process.exit();
   });

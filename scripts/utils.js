@@ -19,7 +19,12 @@ const compilerPromise = (name, compiler) => {
   });
 };
 
+const findCompiler = (multiCompiler) => (compilerName) => (
+  multiCompiler.compilers.find((compiler) => compiler.name === compilerName)
+);
+
 module.exports = {
   logMessage,
   compilerPromise,
+  findCompiler,
 };
