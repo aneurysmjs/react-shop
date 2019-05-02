@@ -3,5 +3,9 @@
 @import '~styles/variables';
 
 .header {
-
+  display: flex;
+  justify-content: space-between;
+  background: var(--white);
+  border-bottom: 1px solid #6c6c6c1f;
+  width: 100%;
 }

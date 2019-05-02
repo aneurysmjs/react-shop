@@ -14,7 +14,7 @@ const links = [];
 
 function Navigation() {
   return (
-    <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
+    <nav className="navbar navbar-expand-lg">
       <NavLink
         to="/"
         className="navbar-brand"
