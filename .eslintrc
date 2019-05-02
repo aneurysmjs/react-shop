@@ -33,9 +33,12 @@
     "import",
     "flowtype",
     "react",
+    "react-hooks",
     "jsx-a11y"
   ],
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],

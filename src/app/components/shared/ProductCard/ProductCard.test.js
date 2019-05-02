@@ -24,4 +24,5 @@ describe('ProductCard', () => {
     expect(wrap.instance().props.hasHover).toEqual(false);
     expect(wrap.instance().props.hasOverlay).toEqual(false);
   });
+  
 });
