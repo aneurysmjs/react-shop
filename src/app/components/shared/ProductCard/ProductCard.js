@@ -1,6 +1,9 @@
 // @flow strict
 import React, { Component } from 'react';
 
+import ImgLoader from '@/components/shared/ImgLoader/ImgLoader';
+// import spinner from '@/components/shared/ImgLoader/ImgLoader';
+
 import './ProductCard.scss';
 
 export type ProductType = {
@@ -50,21 +53,7 @@ class ProductCart extends Component<PropsType> {
         }}
       >
         {hasOverlay ? <div className="product-card__overlay" /> : null }
-        <img
-          role="presentation"
-          src={product.image}
-          alt={product.name}
-          onClick={this.handleClick}
-          className="img-fluid product-card__image"
-        />
-        <img
-          role="presentation"
-          data-hovered
-          src={product.imageHovered}
-          alt={product.name}
-          onClick={this.handleClick}
-          className="img-fluid product-card__image--hovered"
-        />
+        <ImgLoader src={product.image} />
         <figcaption
           className={hasOverlay ? 'product-card__description--overlay' : 'product-card__description'}
         >
