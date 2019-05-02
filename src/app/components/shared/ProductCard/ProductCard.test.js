@@ -24,5 +24,10 @@ describe('ProductCard', () => {
     expect(wrap.instance().props.hasHover).toEqual(false);
     expect(wrap.instance().props.hasOverlay).toEqual(false);
   });
+
+  it('should return the clicked product', () => {
+    const wrap = shallow(<ProductCard product={product}/>);
+    expect(wrap.instance().handleClick()).toEqual(product);
+  });
   
 });

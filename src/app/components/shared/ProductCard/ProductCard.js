@@ -29,8 +29,9 @@ class ProductCart extends Component<PropsType> {
     hasHover: false,
   };
 
-  handleClick = () => {
-
+  handleClick = (): ProductType => {
+    const { product } = this.props;
+    return product;
   };
   
   render() {
@@ -53,7 +54,7 @@ class ProductCart extends Component<PropsType> {
           role="presentation"
           src={product.image}
           alt={product.name}
-          onClick="handleClick"
+          onClick={this.handleClick}
           className="img-fluid product-card__image"
         />
         <img
@@ -61,7 +62,7 @@ class ProductCart extends Component<PropsType> {
           data-hovered
           src={product.imageHovered}
           alt={product.name}
-          onClick="handleClick"
+          onClick={this.handleClick}
           className="img-fluid product-card__image--hovered"
         />
         <figcaption
