@@ -15,6 +15,10 @@ module.exports = {
   ],
   testEnvironment: 'node',
   testURL: 'http://localhost',
+  modulePaths: ['src'],
+  moduleNameMapper: {
+    '/^@/(.*)$/': '<rootDir>/src/app$1',
+  },
   transform: {
     '^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
