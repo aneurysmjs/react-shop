@@ -10,8 +10,8 @@ type PropsType = {
 };
 
 function ImgLoader({ src }: PropsType) {
-  const image = new Image();
   const [imgObj, setImg] = useState({ img: null, isLoading: true });
+  const image = new Image();
 
   image.onload = () => setImg({ img: image.src, isLoading: false });
   image.src = src;

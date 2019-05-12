@@ -17,7 +17,12 @@ module.exports = {
   testURL: 'http://localhost',
   modulePaths: ['src'],
   moduleNameMapper: {
-    '/^@/(.*)$/': '<rootDir>/src/app$1',
+    // '/^@/(.*)$/': '<rootDir>/src/app$1',
+    /**
+     * @link https://github.com/vuejs-templates/webpack/issues/807
+     */
+    '^@[/](.+)': '<rootDir>/src/app/$1',
+
   },
   transform: {
     '^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
