@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import Header from './Header';
 
-describe('Header', () => {
+describe.skip('Header', () => {
   const defaultProps = {};
 
   it('tests something', () => {
