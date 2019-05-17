@@ -1,7 +1,4 @@
-/**
- * @module actions/makeActionCreator
- */
-
+// @flow strict
 type ActionType = {
   type: string,
 };
@@ -11,6 +8,7 @@ export default function makeActionCreator<T>(type: string, ...argNames: Array<T>
   return function (...args) {
     let action = { type };
     argNames.forEach((arg, index) => {
+      // $FlowFixMe
       action[argNames[index]] = args[index];
     });
 
