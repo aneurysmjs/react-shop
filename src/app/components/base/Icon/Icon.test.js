@@ -1,15 +1,14 @@
 // @flow strict
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'react-testing-library';
 
 import Icon from './Icon';
 
 describe('Icon', () => {
-  // const defaultProps = {};
 
-  it('should have "name" and "selected" equal to undefined', () => {
-    const wrap = shallow(<Icon />);
-    expect(wrap.prop('name')).toEqual(undefined);
-    expect(wrap.prop('selected')).toEqual(undefined);
+  it('should have "src" equal to empty string', () => {
+    const { container } = render(<Icon name="cart" />);
+    const img = container.firstChild;
+    expect(img.src).toEqual('');
   });
 });

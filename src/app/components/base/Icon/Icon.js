@@ -11,10 +11,15 @@ type PropsType = {
 
 const Icon = ({ name, size }: PropsType) => {
   const [iconPath, setIconPath] = useState('');
+  const svgPath = `@/assets/svg/icons/${name}.svg`;
   (async () => {
-    // $FlowIgnore
-    const icon = await import(`@/assets/svg/icons/${name}.svg`);
-    setIconPath(icon.default);
+    try {
+      // $FlowIgnore
+      const icon = await import(svgPath);
+      setIconPath(icon.default);
+    // eslint-disable-next-line no-empty
+    } catch (err) {
+    }
   })();
 
   return (
