@@ -3,7 +3,7 @@ type ActionType = {
   type: string,
 };
 
-export default function makeActionCreator(type: string, ...argNames: Array<string>): <T>(Array<T>) => ActionType {
+export default function makeActionCreator(type: string, ...argNames: Array<string>): <T>(T | Array<T>) => ActionType {
 
   return function actionCreator(...args) {
     let action = { type };
