@@ -3,12 +3,11 @@ type ActionType = {
   type: string,
 };
 
-export default function makeActionCreator<T>(type: string, ...argNames: Array<T>): (Array<T>) => ActionType {
+export default function makeActionCreator(type: string, ...argNames: Array<string>): <T>(Array<T>) => ActionType {
 
-  return function (...args) {
+  return function actionCreator(...args) {
     let action = { type };
     argNames.forEach((arg, index) => {
-      // $FlowFixMe
       action[argNames[index]] = args[index];
     });
 
