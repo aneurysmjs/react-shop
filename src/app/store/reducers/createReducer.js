@@ -1,15 +1,13 @@
-/**
- * @module reducers/createReducer
- */
+// @flow strict
 
-/**
- *
- * @param {any} initialState
- * @param {Object} handlers
- * @return {Function} reducer
- */
-export default function createReducer(initialState, handlers) {
-  return function reducer(state = initialState, action) {
+import type { ActionType } from '@/store/actions/makeActionCreator';
+
+type HandlersType = {
+  [string]: <T>(state: T, ActionType) => T
+};
+
+function createReducer<T>(initialState: T, handlers: HandlersType)  {
+  return function reducer(state: T = initialState, action: ActionType): T {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
@@ -17,3 +15,5 @@ export default function createReducer(initialState, handlers) {
     }
   };
 }
+
+export default createReducer;

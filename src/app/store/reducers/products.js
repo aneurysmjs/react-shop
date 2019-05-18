@@ -1,17 +1,9 @@
-/**
- * @module reducers/movies
- */
+// @flow strict
 
 import createReducer from './createReducer';
 
-import { GET_PRODUCTS_SUCCESS }  from '../ActionTypes';
+import { GET_PRODUCTS_SUCCESS } from '../ActionTypes';
 
-/**
- *
- * @param state
- * @param action
- * @return {*}
- */
 export default createReducer([], {
   [GET_PRODUCTS_SUCCESS](state, action) {
     const {

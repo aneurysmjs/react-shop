@@ -1,5 +1,5 @@
 // @flow strict
-type ActionType = {
+export type ActionType = {
   type: string,
 };
 
