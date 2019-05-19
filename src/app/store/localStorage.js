@@ -1,3 +1,4 @@
+// @flow strict
 /**
  * @module localStorage
  * persist the state of the application in the localStorage using browser localStorage API.
@@ -33,7 +34,7 @@ export const loadState = () => {
  * @param {Object} state
  * @return {void}
  */
-export const saveState = (state) => {
+export function saveState<S>(state: S): void {
   /**
    * Serializes it to string by using JSON.stringify. This will only work if the state is serializable,
    * but this is the general recommendation in Redux. The state SHOULD be serializable.
@@ -46,4 +47,4 @@ export const saveState = (state) => {
     console.error('localStorage shit: ', err);
   }
 
-};
+}
