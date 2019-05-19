@@ -42,11 +42,11 @@ describe('ImgLoader', () => {
     let container;
     act(() => {
       const result = render(<ImgLoader src={imgUrl} />, {
-        container: document.body.appendChild(containerParent),
+        container: document.body && document.body.appendChild(containerParent),
       });
       container = result.container;
     });
-    
+    // $FlowIgnoreMe
     const spinner = container.firstChild;
 
     expect(spinner.className).toEqual('spinner');
