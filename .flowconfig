@@ -24,3 +24,8 @@ module.file_ext=.scss
 module.name_mapper='^@' -> '<PROJECT_ROOT>/src/app'
 
 [strict]
+nonstrict-import
+unclear-type
+unsafe-getters-setters
+untyped-import
+untyped-type-import
