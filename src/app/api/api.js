@@ -1,6 +1,5 @@
-/**
- * @module api
- */
+// @flow strict
+
 import axios from 'axios';
 
 export default axios.create({
