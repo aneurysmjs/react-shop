@@ -3,11 +3,11 @@
 import type { ActionType } from '@/store/actions/makeActionCreator';
 
 type HandlersType = {
-  [string]: <T>(state: T, ActionType) => T
+  [string]: <S>(state: S, ActionType) => S
 };
 
-function createReducer<T>(initialState: T, handlers: HandlersType)  {
-  return function reducer(state: T = initialState, action: ActionType): T {
+function createReducer<S>(initialState: S, handlers: HandlersType)  {
+  return function reducer(state: S = initialState, action: ActionType): S {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
