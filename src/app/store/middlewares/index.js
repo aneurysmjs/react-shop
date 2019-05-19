@@ -1,6 +1,5 @@
-/**
- * @module middleware
- */
+// @flow strict
+// $FlowFixMe
 import thunk from 'redux-thunk';
 
 import logger from './logger';
