@@ -1,7 +1,4 @@
-/**
- * @module reducers
- */
-
+// @flow strict
 import * as types from '../ActionTypes';
 
 import makeActionCreator from './makeActionCreator';
