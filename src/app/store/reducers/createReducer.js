@@ -9,7 +9,7 @@ type HandlersType<S, A> = {
 function createReducer<S, A: Action<string>>(
   initialState: S,
   handlers: HandlersType<S, A>
-): (state: S, action: A) => S {
+): Reducer<S, A> {
   return function reducer(state = initialState, action: A) {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
