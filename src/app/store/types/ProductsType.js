@@ -1,4 +1,7 @@
 // @flow strict
+import type { Action } from 'redux';
+
+import type { Response } from '@/store/types/CommonType';
 
 export type ProductType = {
   _id: string,
@@ -9,4 +12,11 @@ export type ProductType = {
   price: number,
   stock: number,
   shop: string,
+};
+
+export type ProductsType = Array<ProductType>;
+
+export type ProductActionType = {
+  ...$Exact<Action<string>>,
+  ...$Exact<Response<ProductsType>>
 };
