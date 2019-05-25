@@ -2,9 +2,11 @@
 
 import { api } from '@/api';
 
+import type { ProductsType } from '@/store/types/ProductsType';
+
 import * as types from '../ActionTypes';
 
-export default function getCountries(query: string = '') {
+export default function getProducts(query: string = '') {
 
   return {
     types: [
@@ -12,7 +14,7 @@ export default function getCountries(query: string = '') {
       types.GET_PRODUCTS_SUCCESS,
       types.GET_PRODUCTS_FAILURE
     ],
-    callAPI: () => api.get(query),
+    callAPI: () => api.get<string, ProductsType>(query),
   };
 
 }
