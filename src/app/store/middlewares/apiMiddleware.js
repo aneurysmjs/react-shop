@@ -1,15 +1,24 @@
-/**
- * @desc handles all API's async actions
- * @param {Function} dispatch
- * @param {Function} getState
- * @return {Function}
- */
-export default function apiMiddleware({ dispatch, getState }) {
+// @flow strict
+import type { Dispatch, Middleware } from 'redux';
+
+import type { State } from '@/store/types/State';
+import type { Actions } from '@/store/types/Actions';
+
+type ApiMiddlewareAction = {
+  callAPI?: () => Promise<*>,
+  payload?: *,
+  shouldCallAPI?: (State) => boolean,
+  type: string,
+  types?: Array<string>,
+};
+
+const apiMiddleware: Middleware<State, Actions, Dispatch<ApiMiddlewareAction>> = ({ dispatch, getState }) => {
+  // $FlowFixMe
   return next => action => {
     const {
       types,
       callAPI,
-      shouldCallAPI = () => true,
+      shouldCallAPI = (s = true) => s,
       payload = {}
     } = action;
 
@@ -31,6 +40,7 @@ export default function apiMiddleware({ dispatch, getState }) {
     }
 
     if (!shouldCallAPI(getState())) {
+      // $FlowFixMe
       return;
     }
 
@@ -58,4 +68,6 @@ export default function apiMiddleware({ dispatch, getState }) {
       }
     })();
   };
-}
+};
+
+export default apiMiddleware;
