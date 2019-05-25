@@ -2,17 +2,9 @@
 import type { Dispatch, Middleware } from 'redux';
 
 import type { State } from '@/store/types/State';
-import type { Actions } from '@/store/types/Actions';
+import type { Actions, MiddlewareAction } from '@/store/types/Actions';
 
-type ApiMiddlewareAction = {
-  callAPI?: () => Promise<*>,
-  payload?: *,
-  shouldCallAPI?: (State) => boolean,
-  type: string,
-  types?: Array<string>,
-};
-
-const apiMiddleware: Middleware<State, Actions, Dispatch<ApiMiddlewareAction>> = ({ dispatch, getState }) => {
+const apiMiddleware: Middleware<State, Actions, Dispatch<MiddlewareAction<State>>> = ({ dispatch, getState }) => {
   // $FlowFixMe
   return next => action => {
     const {
