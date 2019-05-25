@@ -1,3 +1,10 @@
+// @flow strict
+
+import type { Dispatch, Middleware } from 'redux';
+
+import type { State } from '@/store/types/State';
+import type { Actions, MiddlewareAction } from '@/store/types/Actions';
+
 /* eslint-disable no-console */
 /**
  * Taken from: https://github.com/gaearon/todos/blob/17-the-middleware-chain/src/configureStore.js
@@ -7,13 +14,14 @@
  * @param {Object} store - Redux's store
  * @return {Function}
  */
-export default function logger(store) {
+const logger: Middleware<State, Actions, Dispatch<MiddlewareAction<State>>> = (store) => {
+  
   /**
    * Rather than take the next middleware from the store, we'll
    * make it injectable as an argument, so the function that calls
-   * the middlewares can chose which middle ware to pass
+   * the middlewares can chose which middleware to pass
    */
-  return (next) => {
+  return (next) => {    
     if (!console.group) {
       return next;
     }
@@ -25,10 +33,13 @@ export default function logger(store) {
       console.log('%c action', 'color: blue', action);
       const returnValue = next(action);
       console.log('%c next state', 'color: green', store.getState());
+      // $FlowIgnore
       console.groupEnd(action.type);
       return returnValue;
     };
 
   };
 
-}
+};
+
+export default logger;
