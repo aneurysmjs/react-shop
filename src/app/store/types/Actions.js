@@ -3,15 +3,16 @@
 import type { ProductActionType } from '@/store/types/ProductsType';
 
 export type Actions = 
-  ProductActionType
+  ProductActionType;
 
-export type ApiMiddlewareAction<S> = {
-  type: string,
+export type AsyncAction<S> = {
   types?: Array<string>,
   callAPI?: () => Promise<*>,
   shouldCallAPI?: (S) => boolean,
   payload?: *,
 };
 
-export type MiddlewareAction<S> =
-  ApiMiddlewareAction<S>
+export type MiddlewareAction<S> = {
+  type: string,
+  ...AsyncAction<S>
+};
