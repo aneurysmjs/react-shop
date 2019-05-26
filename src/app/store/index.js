@@ -1,6 +1,4 @@
-/**
- * @module store
- */
+// @flow strict
 
 import configureStore from './configureStore';
 
