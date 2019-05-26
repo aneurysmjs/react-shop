@@ -2,11 +2,13 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
+import type { State } from '@/store/types/State';
+
 type PropsT = {
   children: *,
   css: Array<string>,
   scripts: Array<string>,
-  state: Object
+  state: State
 };
 
 export default class HTML extends Component<PropsT> {
