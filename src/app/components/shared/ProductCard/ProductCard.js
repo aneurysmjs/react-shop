@@ -1,20 +1,11 @@
 // @flow strict
-import React, { Component } from 'react';
+import React from 'react';
 
 import ImgLoader from '@/components/shared/ImgLoader/ImgLoader';
 
-import './ProductCard.scss';
+import type { ProductType } from '@/store/types/ProductsType';
 
-export type ProductType = {
-  _id: string,
-  name: string,
-  image: string,
-  imageHovered: string,
-  description: string,
-  price: number,
-  stock: number,
-  shop: string,
-};
+import './ProductCard.scss';
 
 type PropsType = {
   product: ProductType,
@@ -23,45 +14,32 @@ type PropsType = {
   width: string,
 };
 
-class ProductCart extends Component<PropsType> {
-
-  static defaultProps = {
-    width: '29rem',
-    hasOverlay: false,
-    hasHover: false,
-  };
-
-  handleClick = (): ProductType => {
-    const { product } = this.props;
-    return product;
-  };
+function ProductCart({ product, hasOverlay, width }: PropsType) {
   
-  render() {
-    const {
-      product,
-      hasOverlay,
-      width,
-    } = this.props;
-
-    return (
-      <figure
-        className={hasOverlay ? 'product-card--overlay' : 'product-card'}
-        style={{
-          width,
-          margin: '0 auto',
-        }}
+  return (
+    <figure
+      className={hasOverlay ? 'product-card--overlay' : 'product-card'}
+      style={{
+        width,
+        margin: '0 auto',
+      }}
+    >
+      {hasOverlay ? <div data-testid="overlay" className="product-card__overlay" /> : null }
+      <ImgLoader src={product.image} />
+      <figcaption
+        className={hasOverlay ? 'product-card__description--overlay' : 'product-card__description'}
       >
-        {hasOverlay ? <div className="product-card__overlay" /> : null }
-        <ImgLoader src={product.image} />
-        <figcaption
-          className={hasOverlay ? 'product-card__description--overlay' : 'product-card__description'}
-        >
-          { product.name }
-        </figcaption>
-      </figure>
-    );
-  }
+        { product.name }
+      </figcaption>
+    </figure>
+  );
 
 }
+
+ProductCart.defaultProps = {
+  width: '29rem',
+  hasOverlay: false,
+  hasHover: false,
+};
 
 export default ProductCart;
