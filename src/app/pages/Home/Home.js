@@ -1,25 +1,28 @@
 // @flow strict
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
+// $FlowFixMe
 import { connect } from 'react-redux';
 
-import { getProducts as getProductsAction } from '@/store/actions';
+import type { ProductsType } from '@/store/types/ProductsType';
+
+import { fetchProducts as fetchProductsAction } from '@/store/actions';
 
 import ProductCard from '@/components/shared/ProductCard/ProductCard';
 
 import './Home.scss';
 
 type PropsType = {
-  products: Array<Object>,
-  getProducts: (string) => Array<Object>,
+  products: ProductsType,
+  fetchProducts(string): void
 };
 
 class Home extends Component<PropsType> {
 
   componentDidMount() {
-    const { products, getProducts } = this.props;
+    const { products, fetchProducts } = this.props;
     if (!products.length) {
-      getProducts(`/products`);
+      fetchProducts(`/products`);
     }
   }
 
@@ -34,7 +37,7 @@ class Home extends Component<PropsType> {
           <div className="home__products">
             { products.map(product => (
               <div 
-                key={product.id}
+                key={product._id}
                 className="home__product-card"
               >
                 <ProductCard
@@ -56,8 +59,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProducts(url) {
-    dispatch(getProductsAction(url));
+  fetchProducts(url) {
+    dispatch(fetchProductsAction(url));
   }
 });
 
