@@ -8,7 +8,7 @@ type PropsT = {
   children: *,
   css: Array<string>,
   scripts: Array<string>,
-  state: State
+  state?: State
 };
 
 export default class HTML extends Component<PropsT> {
