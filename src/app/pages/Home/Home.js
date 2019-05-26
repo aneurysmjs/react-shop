@@ -58,10 +58,8 @@ const mapStateToProps = (state) => ({
   products: state.products
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchProducts(url) {
-    dispatch(fetchProductsAction(url));
-  }
-});
+const mapDispatchToProps = {
+  fetchProducts: fetchProductsAction,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
