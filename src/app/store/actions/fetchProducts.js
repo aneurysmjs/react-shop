@@ -3,7 +3,6 @@
 import { api } from '@/api';
 
 import type { AsyncAction } from '@/store/types/Actions';
-// import type { State } from '@/store/types/State';
 import type { ProductsType } from '@/store/types/ProductsType';
 
 import * as types from '../ActionTypes';
