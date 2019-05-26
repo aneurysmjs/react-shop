@@ -1,9 +1,12 @@
 // @flow strict
 import React from 'react';
-import { shallow } from 'enzyme';
+// $FlowFixMe
+import { render, cleanup } from 'react-testing-library';
 
 import ProductCard from './ProductCard';
-import type { ProductType } from './ProductCard';
+import type { ProductType } from '@/store/types/ProductsType';
+
+afterEach(cleanup);
 
 describe('ProductCard', () => {
   const product: ProductType = {
@@ -18,16 +21,22 @@ describe('ProductCard', () => {
     user: '5cc2ddd390118411e1311e90',
   };
 
-  it('should have "width", "hasOverlay", and "hasHover" with default values', () => {
-    const wrap = shallow(<ProductCard product={product}/>);
-    expect(wrap.instance().props.width).toEqual('29rem');
-    expect(wrap.instance().props.hasHover).toEqual(false);
-    expect(wrap.instance().props.hasOverlay).toEqual(false);
+  it('should default classes without \'hasOverlay\'', () => {
+    const { container, queryByTestId, getByText } = render(<ProductCard product={product} />);    
+    const overlay = queryByTestId('overlay');
+    const figCaption = getByText(product.name);
+    expect(container.firstChild.className).toBe('product-card');
+    expect(overlay).toBe(null);
+    expect(figCaption.className).toBe('product-card__description');
   });
 
-  it('should return the clicked product', () => {
-    const wrap = shallow(<ProductCard product={product}/>);
-    expect(wrap.instance().handleClick()).toEqual(product);
+  it('should render overlay content', () => {
+    const { container, queryByTestId, getByText } = render(<ProductCard product={product} hasOverlay />);
+    const overlay = queryByTestId('overlay');
+    const figCaption = getByText(product.name);
+    expect(container.firstChild.className).toEqual('product-card--overlay');
+    expect(overlay.className).toBe('product-card__overlay');    
+    expect(figCaption.className).toBe('product-card__description--overlay');
   });
   
 });
