@@ -1,6 +1,6 @@
 // @flow strict
 import React from 'react';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import { hydrate } from 'react-dom';
 // $FlowIgnore
 import { Provider } from 'react-redux';
@@ -12,7 +12,7 @@ import store from '@/store';
 
 import App from '@/App';
 
-const browserHistory = window.browserHistory || createHistory();
+const browserHistory = window.browserHistory || createBrowserHistory();
 
 hydrate(
   <Provider store={store}>
