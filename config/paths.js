@@ -1,10 +1,23 @@
+// @flow strict
 const path = require('path');
 const fs = require('fs');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
-const paths = {
+type PathsType = {
+  clientBuild: string,
+  serverBuild: string,
+  dotenv: string,
+  src: string,
+  srcClient: string,
+  srcServer: string,
+  srcApp: string,
+  publicPath: string,
+  resolveModules?: Array<string>
+};
+
+const paths: PathsType = {
   clientBuild: resolveApp('build/client'),
   serverBuild: resolveApp('build/server'),
   dotenv: resolveApp('.env'),
