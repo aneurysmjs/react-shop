@@ -9,9 +9,16 @@ import type {
   $Response,
   Middleware,
 } from 'express';
-import App from '@/App';
+// $FlowIgnore
+import { ChunkExtractor } from '@loadable/server';
 
+import App from '@/App';
+// $FlowIgnore
+import paths from '../../config/paths';
 import Html from './components/HTML';
+
+const statsFile = `${paths.serverBuild}/loadable-stats.json`;
+const extractor = new ChunkExtractor({ statsFile, entrypoints: ['server'] });
 
 type GetAssetsType = ((string) => string) => (Array<string>) => Array<string>;
 
@@ -24,24 +31,24 @@ const serverRenderer = (): Middleware => (req: $Request, res: $Response): $Respo
   // $FlowIgnoreMe
   const getAssetPath = getAssets(assetPath);
 
-  const content = renderToString(
+  const content = renderToString(extractor.collectChunks(
     /* $FlowIgnoreMe */
     <Provider store={req.store}>
       <Router location={req.url} context={{}}>
         <App />
       </Router>
     </Provider>
-  );
+  ));
  
   const css = getAssetPath(['bundle.css', 'vendor.css']);
   const scripts = getAssetPath(['bundle.js', 'vendor.js']);
-
+  
   return res.send(
     '<!doctype html>' +
     renderToString(
       <Html
         css={css}
-        scripts={scripts}
+        scripts={[...scripts]}
       >
         {content}
       </Html>
