@@ -49,6 +49,8 @@
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.4.4",
     "@babel/runtime": "7.4.5",
+    "@loadable/babel-plugin": "5.10.0",
+    "@loadable/webpack-plugin": "5.7.1",
     "autoprefixer": "9.5.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
@@ -124,6 +126,8 @@
     "write-file-webpack-plugin": "4.5.0"
   },
   "dependencies": {
+    "@loadable/component": "5.10.1",
+    "@loadable/server": "5.9.0",
     "axios": "0.18.0",
     "bootstrap": "4.3.1",
     "font-awesome": "4.7.0",
