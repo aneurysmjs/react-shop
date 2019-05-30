@@ -20,7 +20,7 @@
     },
     "react": {
       "version": "detect",
-      "flow": "0.98.0"
+      "flow": "0.99.1"
     }
   },
   "extends": [

@@ -85,7 +85,7 @@
     "express": "4.17.0",
     "express-manifest-helpers": "0.6.0",
     "file-loader": "3.0.1",
-    "flow-bin": "0.98.1",
+    "flow-bin": "0.99.1",
     "flow-typed": "2.5.2",
     "gulp": "4.0.2",
     "gulp-rename": "1.4.0",
