@@ -106,7 +106,6 @@
     "precss": "4.0.0",
     "puppeteer": "1.16.0",
     "react-dev-utils": "9.0.1",
-    "react-testing-library": "7.0.0",
     "rimraf": "2.6.3",
     "run-sequence": "2.2.1",
     "sass-loader": "7.1.0",
@@ -129,6 +128,7 @@
   "dependencies": {
     "@loadable/component": "5.10.1",
     "@loadable/server": "5.9.0",
+    "@testing-library/react": "8.0.1",
     "axios": "0.19.0",
     "bootstrap": "4.3.1",
     "font-awesome": "4.7.0",

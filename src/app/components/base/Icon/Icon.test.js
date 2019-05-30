@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 // $FlowFixMe
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 
 import Icon from './Icon';
 

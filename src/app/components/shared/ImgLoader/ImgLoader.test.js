@@ -2,7 +2,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 // $FlowFixMe
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 
 import ImgLoader from './ImgLoader';
 

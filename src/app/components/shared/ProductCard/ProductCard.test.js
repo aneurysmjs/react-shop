@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 // $FlowFixMe
-import { render, cleanup } from 'react-testing-library';
+import { render, cleanup } from '@testing-library/react';
 
 import ProductCard from './ProductCard';
 import type { ProductType } from '@/store/types/ProductsType';
