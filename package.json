@@ -27,6 +27,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "test:update": "yarn test --updateSnapshot",
     "flow-typed": "node_modules/.bin/flow-typed",
+    "lint:js": "eslint src/**/*.{js}",
     "semantic-release": "semantic-release"
   },
   "config": {
@@ -77,8 +78,8 @@
     "eslint-import-resolver-webpack": "0.11.1",
     "eslint-loader": "2.1.2",
     "eslint-plugin-class-property": "1.1.0",
-    "eslint-plugin-flowtype": "3.9.0",
-    "eslint-plugin-import": "2.17.2",
+    "eslint-plugin-flowtype": "3.9.1",
+    "eslint-plugin-import": "2.17.3",
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.13.0",
     "eslint-plugin-react-hooks": "1.6.0",
