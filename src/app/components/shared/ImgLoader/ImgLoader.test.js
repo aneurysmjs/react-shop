@@ -33,7 +33,7 @@ describe('ImgLoader', () => {
       expect(evt).toBeInstanceOf(Error);
       done();
     };
-    render(<ImgLoader onError={onError} />);
+    render(<ImgLoader  onError={onError} />);
   });
 
   let containerParent = document.createElement('div');
@@ -49,7 +49,7 @@ describe('ImgLoader', () => {
     // $FlowIgnoreMe
     const spinner = container.firstChild;
 
-    expect(spinner.className).toEqual('spinner');
+    expect(spinner.className).toEqual('imgLoader__spinner');
   });
 
 });
