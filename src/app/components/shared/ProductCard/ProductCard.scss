@@ -3,13 +3,11 @@
 
 .product-card {
   position: relative;
+  height: 0;
+  padding-top: 100%;
 
   @include element(image) {
-    // &:hover {
-    //   & + img {
-    //     visibility: visible;
-    //   }
-    // }
+   
   }
   
   @include element(image--hovered) {
