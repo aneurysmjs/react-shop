@@ -21,7 +21,11 @@ function ImgLoader({ src, onError }: PropsType) {
   }, [src, image, onError]);
 
   return (
-    imgObj.isLoading ? (<Spinner />) : (<img className="imgLoader img-fluid" src={imgObj.img} alt="img" />)
+    imgObj.isLoading ? (
+      <span className="imgLoader__spinner">
+        <Spinner />
+      </span>
+    ) : (<img className="imgLoader" src={imgObj.img} alt="img" />)
   );
 }
 
