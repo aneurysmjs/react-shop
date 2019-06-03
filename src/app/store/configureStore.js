@@ -23,7 +23,7 @@ const devtools =
   typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function' &&
   // when the extension is not installed, we’re using Redux compose here.
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionsBlacklist: [] });
-//
+// $FlowFixMe
 const composeEnhancers: StoreEnhancer<State, Actions, Dispatch<Actions>> = devtools || compose;
 
 function configureStore() {
