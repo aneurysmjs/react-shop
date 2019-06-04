@@ -1,13 +1,14 @@
 // @flow strict
 import React from 'react';
-import { shallow } from 'enzyme';
+// $FlowFixMe
+import { render } from '@testing-library/react';
 
 import {{pascalCase componentName}} from './{{pascalCase componentName}}';
 
 describe('{{pascalCase componentName}}', () => {
-  const defaultProps = {};
-
-  it('tests something', () => {
-    shallow(<{{pascalCase componentName}} {...defaultProps} />);
+  it('should have component\'s name as className', () => {
+    const { container } = render(<{{pascalCase componentName}} />);
+    const div = container.firstChild;
+    expect(div.className).toEqual('{{camelCase componentName}}');
   });
 });
