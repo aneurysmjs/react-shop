@@ -1,9 +1,11 @@
 // @flow strict
 
 import type { ProductActionType } from '@/store/types/ProductsType';
+import type { FooterActionType } from '@/store/types/FooterType';
 
 export type Actions = 
-  ProductActionType;
+  ProductActionType |
+  FooterActionType;
 
 export type AsyncAction<S> = {
   types?: Array<string>,
