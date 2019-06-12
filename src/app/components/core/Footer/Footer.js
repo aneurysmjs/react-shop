@@ -26,7 +26,7 @@ class Footer extends Component<PropsType> {
       <footer className="footer container">
         <div className="row">
           <div className="col">
-            <div>
+            <div data-testid="social">
               {social && social.map(s => (
                 <Icon
                   key={s.id}
@@ -37,7 +37,7 @@ class Footer extends Component<PropsType> {
           </div>
         </div>
         <div className="footer__copyright">
-          <p>Copyright © {new Date().getFullYear()}. All Rights Reserved</p>
+          <p data-testid="copyright">Copyright © {new Date().getFullYear()}. All Rights Reserved</p>
         </div>
       </footer>
     );
