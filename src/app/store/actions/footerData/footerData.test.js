@@ -12,7 +12,6 @@ describe('footerData action', () => {
       phone: '89189258147',
       email: 'me@shop.com'
     };
-
     const expectedData: FooterType = { type: 'FOOTER_DATA', footer: { social, contact } };
     expect(footerData({ social, contact })).toEqual(expectedData);
   });
