@@ -20,7 +20,7 @@ class Header extends Component<PropsType, StateType> {
       <div className="header">
         <Navigation />
         <span>
-          <Icon name="cart" />
+          <Icon path="icons/cart" />
         </span>
       </div>
     );
