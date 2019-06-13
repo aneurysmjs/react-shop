@@ -4,18 +4,18 @@ import React, { useState } from 'react';
 import './Icon.scss';
 
 type PropsType = {
-  name: string,
+  path: string,
   selected?: string,
   size: number | string
 };
 
-const Icon = ({ name, size }: PropsType) => {
+const Icon = ({ path, size }: PropsType) => {
   const [iconPath, setIconPath] = useState('');  
   
   (async () => {
     try {
       // $FlowIgnore
-      const icon = await import('@/assets/svg/icons/' + name + '.svg');
+      const icon = await import('@/assets/svg/' + path + '.svg');
       setIconPath(icon.default);
     // eslint-disable-next-line no-empty
     } catch (err) {
@@ -24,7 +24,7 @@ const Icon = ({ name, size }: PropsType) => {
 
   return (
     <img
-      alt={`icon ${name}`}
+      alt={`icon ${path}`}
       className="icon"
       style={{
         height: `${size}px`,
