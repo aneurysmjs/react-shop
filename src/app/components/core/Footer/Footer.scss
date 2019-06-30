@@ -11,7 +11,17 @@
     width: px-to-rem(200);
   }
 
+  @include element(bottom) {
+    background: var(--dark);
+    padding: px-to-rem(15) 0;
+  }
+
+  @include element(top) {
+    padding: px-to-rem(15) 0;
+  }
+
   @include element(copyright) {
+    color: var(--white);
     text-align: center;
   }
 
