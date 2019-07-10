@@ -6,16 +6,17 @@ type HandlersType<S, A> = {
   [string]: Reducer<S, A>
 };
 
+const has = Object.prototype.hasOwnProperty;
+
 function createReducer<S, A: Action<string>>(
   initialState: S,
-  handlers: HandlersType<S, A>
+  handlers: HandlersType<S, A>,
 ): Reducer<S, A> {
   return function reducer(state = initialState, action: A) {
-    if (handlers.hasOwnProperty(action.type)) {
+    if (has.call(handlers, action.type)) {
       return handlers[action.type](state, action);
-    } else {
-      return state;
     }
+    return state;
   };
 }
 
