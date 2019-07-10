@@ -21,7 +21,7 @@ hydrate(
     </Router>
   </Provider>,
   // $FlowIgnore
-  document.getElementById('app')
+  document.getElementById('app'),
 );
 
 if (process.env.NODE_ENV === 'development') {
