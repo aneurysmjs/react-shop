@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 import {
-  Route
+  Route,
 } from 'react-router-dom';
 
 import Layout from '@/components/core/Layout/Layout';
