@@ -11,7 +11,7 @@ import apiMiddleware from './apiMiddleware';
 // eslint-disable-next-line import/no-mutable-exports
 let middlewares = [
   thunk,
-  apiMiddleware
+  apiMiddleware,
 ];
 
 if (process.env.NODE_ENV !== 'production') {
