@@ -16,27 +16,28 @@ import reducer from '@/store/reducers';
 // import { saveState, loadState } from './localStorage';
 
 // Get the state from localStorage
-//const persistedState = loadState();
+// const persistedState = loadState();
 
+/* eslint-disable */
 const devtools =
   typeof window !== 'undefined' &&
   typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function' &&
-  // when the extension is not installed, we’re using Redux compose here.
+  // eslint-disable-next-line no-underscore-dangle
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionsBlacklist: [] });
+  /* eslint-enable */
 // $FlowFixMe
 const composeEnhancers: StoreEnhancer<State, Actions, Dispatch<Actions>> = devtools || compose;
 
 function configureStore() {
-  
   const store = createStore<{}, Actions, Dispatch<Actions>>(
     reducer,
     // persistedState,
-    composeEnhancers(applyMiddleware(...middlewares)) // the third parameter is what is called an 'enhancer'
+    composeEnhancers(applyMiddleware(...middlewares)), // third parameter is called an 'enhancer'
   );
-  
   /* // Save the state any time the store state changes
   store.subscribe(throttle(() => {
-    // Rather than pass the whole state object, just pass an object with the key field from the state object.
+    // Rather than pass the whole state object,
+    // just pass an object with the key field from the state object.
     saveState({
       product: store.getState().product,
     });

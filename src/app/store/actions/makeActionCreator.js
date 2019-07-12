@@ -3,16 +3,16 @@ export type ActionType = {
   type: string,
 };
 
-export default function makeActionCreator(type: string, ...argNames: Array<string>): <T>(T | Array<T>) => ActionType {
+type ActionCreatorType = <T>(T | Array<T>) => ActionType;
 
+function makeActionCreator(type: string, ...argNames: Array<string>): ActionCreatorType {
   return function actionCreator(...args) {
-    let action = { type };
+    const action = { type };
     argNames.forEach((arg, index) => {
       action[argNames[index]] = args[index];
     });
-
     return action;
-
   };
-
 }
+
+export default makeActionCreator;

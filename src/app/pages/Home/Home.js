@@ -18,7 +18,6 @@ type PropsType = {
 };
 
 class Home extends Component<PropsType> {
-
   componentDidMount() {
     const { products, fetchProducts } = this.props;
     if (!products.length) {
@@ -26,8 +25,7 @@ class Home extends Component<PropsType> {
     }
   }
 
-  render () {
-
+  render() {
     const { products } = this.props;
 
     return (
@@ -36,7 +34,8 @@ class Home extends Component<PropsType> {
         <div className="home__wrapper">
           <div className="home__products">
             { products.map(product => (
-              <div 
+              <div
+                // eslint-disable-next-line no-underscore-dangle
                 key={product._id}
                 className="home__product-card"
               >
@@ -44,18 +43,16 @@ class Home extends Component<PropsType> {
                   width="20rem"
                   product={product}
                 />
-              </div>)
-            )}
+              </div>))}
           </div>
         </div>
       </div>
     );
   }
-
 }
 
-const mapStateToProps = (state) => ({
-  products: state.products
+const mapStateToProps = state => ({
+  products: state.products,
 });
 
 const mapDispatchToProps = {

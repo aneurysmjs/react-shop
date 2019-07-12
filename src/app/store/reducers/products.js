@@ -10,9 +10,9 @@ export default createReducer<ProductsType, ProductActionType>([], {
   [GET_PRODUCTS_SUCCESS](state, action) {
     const {
       response: {
-        data
-      }
+        data,
+      },
     } = action;
     return [...data];
-  }
+  },
 });

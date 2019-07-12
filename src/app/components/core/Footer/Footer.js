@@ -50,7 +50,7 @@ class Footer extends Component<PropsType> {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   footer: state.footer,
 });
 
@@ -60,5 +60,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Footer);

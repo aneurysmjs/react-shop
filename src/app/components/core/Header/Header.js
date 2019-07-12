@@ -1,34 +1,18 @@
 // @flow strict
-import React, { Component } from 'react';
-// $FlowIgnore
-import { connect } from 'react-redux';
+import React from 'react';
 
 import Icon from '@/components/base/Icon/Icon';
 import Navigation from '@/components/core/Navigation/Navigation';
 
 import './Header.scss';
 
-type PropsType = {};
+const Header = () => (
+  <div className="header">
+    <Navigation />
+    <span>
+      <Icon path="icons/cart" />
+    </span>
+  </div>
+);
 
-type StateType = {};
-
-class Header extends Component<PropsType, StateType> {
-  state = {};
-
-  render() {
-    return (
-      <div className="header">
-        <Navigation />
-        <span>
-          <Icon path="icons/cart" />
-        </span>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

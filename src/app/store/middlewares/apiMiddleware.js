@@ -4,14 +4,15 @@ import type { Dispatch, Middleware } from 'redux';
 import type { State } from '@/store/types/State';
 import type { Actions, MiddlewareAction } from '@/store/types/Actions';
 
+// eslint-disable-next-line max-len, arrow-body-style
 const apiMiddleware: Middleware<State, Actions, Dispatch<MiddlewareAction<State>>> = ({ dispatch, getState }) => {
   // $FlowFixMe
-  return next => action => {
+  return next => (action) => { // eslint-disable-line consistent-return
     const {
       types,
       callAPI,
       shouldCallAPI = (s = true) => s,
-      payload = {}
+      payload = {},
     } = action;
 
     if (!types) {
@@ -20,9 +21,9 @@ const apiMiddleware: Middleware<State, Actions, Dispatch<MiddlewareAction<State>
     }
 
     if (
-      !Array.isArray(types) ||
-      types.length !== 3 ||
-      !types.every(type => typeof type === 'string')
+      !Array.isArray(types)
+      || types.length !== 3
+      || !types.every(type => typeof type === 'string')
     ) {
       throw new Error('Expected an array of three string types.');
     }
@@ -33,14 +34,14 @@ const apiMiddleware: Middleware<State, Actions, Dispatch<MiddlewareAction<State>
 
     if (!shouldCallAPI(getState())) {
       // $FlowFixMe
-      return;
+      return; // eslint-disable-line consistent-return
     }
 
     const [requestType, successType, failureType] = types;
 
     dispatch({
       ...payload,
-      type: requestType
+      type: requestType,
     });
 
     (async () => {
@@ -49,13 +50,13 @@ const apiMiddleware: Middleware<State, Actions, Dispatch<MiddlewareAction<State>
         return dispatch({
           ...payload,
           response,
-          type: successType
+          type: successType,
         });
       } catch (error) {
         return dispatch({
           ...payload,
           error,
-          type: failureType
+          type: failureType,
         });
       }
     })();

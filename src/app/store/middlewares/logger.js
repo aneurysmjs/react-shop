@@ -14,18 +14,17 @@ import type { Actions, MiddlewareAction } from '@/store/types/Actions';
  * @param {Object} store - Redux's store
  * @return {Function}
  */
+// eslint-disable-next-line arrow-body-style
 const logger: Middleware<State, Actions, Dispatch<MiddlewareAction<State>>> = (store) => {
-  
   /**
    * Rather than take the next middleware from the store, we'll
    * make it injectable as an argument, so the function that calls
    * the middlewares can chose which middleware to pass
    */
-  return (next) => {    
+  return (next) => {
     if (!console.group) {
       return next;
     }
-
     // The actual dispatch function
     return (action) => {
       console.group(action.type);
@@ -37,9 +36,7 @@ const logger: Middleware<State, Actions, Dispatch<MiddlewareAction<State>>> = (s
       console.groupEnd(action.type);
       return returnValue;
     };
-
   };
-
 };
 
 export default logger;

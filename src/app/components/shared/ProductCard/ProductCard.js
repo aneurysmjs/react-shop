@@ -15,7 +15,6 @@ type PropsType = {
 };
 
 function ProductCart({ product, hasOverlay, width }: PropsType) {
-  
   return (
     <figure
       className={hasOverlay ? 'product-card--overlay' : 'product-card'}
@@ -33,7 +32,6 @@ function ProductCart({ product, hasOverlay, width }: PropsType) {
       </figcaption>
     </figure>
   );
-
 }
 
 ProductCart.defaultProps = {
