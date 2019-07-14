@@ -7,6 +7,7 @@ $pos: calc(50% - 24px);
 .imgLoader {
   height: 100%;
   left: 0;
+  object-fit: contain;
   position: absolute;
   top: 0;
   width: 100%;
