@@ -9,10 +9,4 @@
     margin: px-to-rem(10) 0;
   }
 
-  @include element(products) {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  @include element(product-card) {}
 }
