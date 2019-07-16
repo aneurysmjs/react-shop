@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import Spinner from '@/components/base/Spinner/Spinner';
 
+import NO_IMAGE from '@/assets/img/no-image.png';
+
 import './ImgLoader.scss';
 
 type PropsType = {
@@ -17,7 +19,10 @@ function ImgLoader({ src, onError }: PropsType) {
 
   useEffect(() => {
     image.onload = (): void => setImg({ img: image.src, isLoading: false });
-    image.onerror = (error: Error): void => onError(error);
+    image.onerror = (error: Error): void => {
+      setImg({ img: NO_IMAGE, isLoading: false });
+      onError(error);
+    };
   }, [src, image, onError]);
 
   return (
