@@ -1,5 +1,5 @@
 // @flow strict
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import Spinner from '@/components/base/Spinner/Spinner';
 
@@ -51,4 +51,4 @@ ImgLoader.defaultProps = {
   onError: () => {},
 };
 
-export default ImgLoader;
+export default memo<PropsType>(ImgLoader);
