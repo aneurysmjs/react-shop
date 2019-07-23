@@ -14,8 +14,6 @@ type PropsType = {
 
 function ImgLoader({ src, onError }: PropsType) {
   const [imgObj, setImg] = useState({ img: null, isLoading: true });
-  // eslint-disable-next-line no-console
-  console.log('imgObj', imgObj);
 
   const image = new Image();
   image.src = src;
