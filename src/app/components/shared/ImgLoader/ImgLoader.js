@@ -9,7 +9,7 @@ import './ImgLoader.scss';
 
 type PropsType = {
   src: string,
-  onError: (error: Error) => void
+  onError?: (error: Error) => void
 };
 
 function ImgLoader({ src, onError }: PropsType) {
@@ -26,7 +26,9 @@ function ImgLoader({ src, onError }: PropsType) {
     image.onload = (): void => applyImage(image.src);
     image.onerror = (error: Error): void => {
       applyImage(NO_IMAGE);
-      onError(error);
+      if (onError) {
+        onError(error);
+      }
     };
     return function cleanup() {
       image.onload = null;
@@ -44,9 +46,5 @@ function ImgLoader({ src, onError }: PropsType) {
     ) : (<img className="imgLoader" src={imgObj.img} alt="img" />)
   );
 }
-
-ImgLoader.defaultProps = {
-  onError: () => {},
-};
 
 export default memo<PropsType>(ImgLoader);
