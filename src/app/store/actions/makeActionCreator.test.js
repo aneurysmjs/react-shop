@@ -11,8 +11,7 @@ describe('makeActionCreator', () => {
 
   it('should return an action when calling the action creator', () => {
     const actionCreation = makeActionCreator(GET_INFO, 'user');
-    const action = actionCreation({ name: 'Jero' });    
-    expect(action).toEqual(expect.objectContaining({ type: GET_INFO}));
+    const action = actionCreation({ name: 'Jero' });
+    expect(action).toEqual(expect.objectContaining({ type: GET_INFO }));
   });
-
 });

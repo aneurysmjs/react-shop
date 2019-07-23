@@ -20,8 +20,11 @@ export default class HTML extends Component<PropsT> {
   render() {
     const head = Helmet.renderStatic();
     // eslint-disable-next-line no-unused-vars, react/prop-types
-    const { children, scripts, css, state } = this.props;
-    
+    const {
+      // eslint-disable-next-line no-unused-vars
+      children, scripts, css, state,
+    } = this.props;
+
     return (
       <html lang="en_US">
         <head>
@@ -32,18 +35,14 @@ export default class HTML extends Component<PropsT> {
           {head.meta.toComponent()}
           {head.link.toComponent()}
           {head.script.toComponent()}
-          {css.map((href) => {
-            return <link key={href} rel="stylesheet" href={href} />;
-          })}
+          {css.map(href => <link key={href} rel="stylesheet" href={href} />)}
         </head>
         <body>
           <div
             id="app"
             dangerouslySetInnerHTML={{ __html: children }}
           />
-          {scripts.map((src) => {
-            return <script key={src} src={src} />;
-          })}
+          {scripts.map(src => <script key={src} src={src} />)}
         </body>
       </html>
     );

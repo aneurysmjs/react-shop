@@ -10,7 +10,6 @@ import Footer from './Footer';
 afterEach(cleanup);
 
 describe('Footer test', () => {
-
   it('should have only one social network', () => {
     // eslint-disable-next-line no-unused-vars
     const { getByTestId } = renderWithRedux(<Footer />);
@@ -23,5 +22,4 @@ describe('Footer test', () => {
     const copyright = getByTestId('copyright');
     expect(copyright.textContent).toBe('Copyright © 2019. All Rights Reserved');
   });
-
 });

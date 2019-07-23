@@ -22,10 +22,9 @@ const extractor = new ChunkExtractor({ statsFile, entrypoints: ['server'] });
 
 type GetAssetsType = ((string) => string) => (Array<string>) => Array<string>;
 
-const getAssets: GetAssetsType = (fn) => (assets) => assets.map(fn);
+const getAssets: GetAssetsType = fn => assets => assets.map(fn);
 
 const serverRenderer = (): Middleware => (req: $Request, res: $Response): $Response => {
-
   const { assetPath } = res.locals;
   // 'assetPath' doesn't match Express's mixed value, so we can ignore it
   // $FlowIgnoreMe
@@ -37,22 +36,22 @@ const serverRenderer = (): Middleware => (req: $Request, res: $Response): $Respo
       <Router location={req.url} context={{}}>
         <App />
       </Router>
-    </Provider>
+    </Provider>,
   ));
- 
+
   const css = getAssetPath(['bundle.css', 'vendor.css']);
   const scripts = getAssetPath(['bundle.js', 'vendor.js']);
-  
+
   return res.send(
-    '<!doctype html>' +
-    renderToString(
-      <Html
-        css={css}
-        scripts={[...scripts]}
-      >
-        {content}
-      </Html>
-    )
+    `<!doctype html>${
+      renderToString(
+        <Html
+          css={css}
+          scripts={[...scripts]}
+        >
+          {content}
+        </Html>,
+      )}`,
   );
 };
 

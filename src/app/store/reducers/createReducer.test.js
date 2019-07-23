@@ -4,7 +4,6 @@ import type { Action } from 'redux';
 import createReducer from './createReducer';
 
 describe('createReducer', () => {
-
   type User = { name: string };
 
   type State = Array<User>;
@@ -20,9 +19,8 @@ describe('createReducer', () => {
     const reducer = createReducer<State, ActionType>([], {
       [TYPE](state, action) {
         return [action.user];
-      }
-    });    
+      },
+    });
     expect(typeof reducer).toBe('function');
   });
-
 });
