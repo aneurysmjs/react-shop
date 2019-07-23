@@ -14,16 +14,29 @@ type PropsType = {
 
 function ImgLoader({ src, onError }: PropsType) {
   const [imgObj, setImg] = useState({ img: null, isLoading: true });
+  // eslint-disable-next-line no-console
+  console.log('imgObj', imgObj);
+
   const image = new Image();
   image.src = src;
 
+  const applyImage = (img: string): void => {
+    setImg({ img, isLoading: false });
+  };
+
   useEffect(() => {
-    image.onload = (): void => setImg({ img: image.src, isLoading: false });
+    image.onload = (): void => applyImage(image.src);
     image.onerror = (error: Error): void => {
-      setImg({ img: NO_IMAGE, isLoading: false });
+      applyImage(NO_IMAGE);
       onError(error);
     };
-  }, [src, image, onError]);
+    return function cleanup() {
+      image.onload = null;
+      image.onerror = null;
+    };
+    // [] tells React that your effect doesn’t depend on any values from props or state,
+    // so it never needs to re-run.
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     imgObj.isLoading ? (
