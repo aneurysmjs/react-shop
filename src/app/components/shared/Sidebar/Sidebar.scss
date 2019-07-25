@@ -1,0 +1,26 @@
+@import '~styles/functions/px-to-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.sidebar {
+  background: var(--white);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  transition: left, right 2s, transform 2s;
+  width: px-to-rem(200);
+
+  @include element(overlay) {
+    background: rgba(0, 0, 0, .7);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+  }
+
+  @include element(header) {
+    // height: px-to-rem(141);
+    // margin: 0 auto;
+    // text-align: center;
+    // width: px-to-rem(200);
+  }
+}
