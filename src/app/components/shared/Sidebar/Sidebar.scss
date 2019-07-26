@@ -2,25 +2,41 @@
 @import '~styles/mixins';
 @import '~styles/variables';
 
+$sidebar-width: px-to-rem(300);
+
 .sidebar {
   background: var(--white);
   position: fixed;
   top: 0;
   height: 100%;
-  transition: left, right 2s, transform 2s;
-  width: px-to-rem(200);
+  padding: 1rem;
+  transition: left, right .3s, transform .3s;
+  width: $sidebar-width;
+  z-index: 10;
 
   @include element(overlay) {
-    background: rgba(0, 0, 0, .7);
-    position: fixed;
+    background: rgba(0, 0, 0, .6);
     height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
     width: 100%;
+    z-index: 9;
   }
 
   @include element(header) {
-    // height: px-to-rem(141);
-    // margin: 0 auto;
-    // text-align: center;
-    // width: px-to-rem(200);
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: px-to-rem(30);
+  }
+
+  @include element(close) {
+    cursor: pointer;
+  }
+
+  @include element(title) {
+    text-transform: capitalize;
+    margin: 0;
   }
 }
