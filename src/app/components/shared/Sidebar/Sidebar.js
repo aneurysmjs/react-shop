@@ -11,7 +11,7 @@ import './Sidebar.scss';
 type PropsType = {
   isOpen?: boolean,
   side?: string,
-  onClose: () => void,
+  onClose?: () => void,
   title?: string,
   children: Node,
 };
@@ -32,9 +32,11 @@ const Sidebar = ({
     }
   };
 
+  const delay = (cb: () => void): TimeoutID => setTimeout(cb, 100);
+
   const closeSidebar = (): void => {
     toggleSidebar();
-    setTimeout(onClose, 100);
+    delay(onClose);
   };
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const Sidebar = ({
     };
 
     if (isOpen) {
-      setTimeout(toggleSidebar, 100);
+      delay(toggleSidebar);
     }
 
     document.addEventListener('keydown', handleKeyDown);
@@ -60,12 +62,14 @@ const Sidebar = ({
     ? createPortal(
       <Fragment>
         <div
+          data-testid="overlay"
           onKeyPress={() => {}}
           role="presentation"
           onClick={closeSidebar}
           className={`sidebar__overlay sidebar__overlay--fade-${isOpen ? 'in' : 'out'}`}
         />
         <aside
+          data-testid="sidebar"
           // $FlowFixMe
           ref={asideRef}
           className={`sidebar sidebar--${side}`}
@@ -82,7 +86,10 @@ const Sidebar = ({
               <Icon path="icons/close" />
             </span>
           </header>
-          <div className="sidebar__content">
+          <div
+            data-testid="content"
+            className="sidebar__content"
+          >
             {children}
           </div>
         </aside>
