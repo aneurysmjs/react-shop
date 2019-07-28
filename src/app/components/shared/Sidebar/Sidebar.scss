@@ -10,9 +10,25 @@ $sidebar-width: px-to-rem(300);
   top: 0;
   height: 100%;
   padding: 1rem;
-  transition: left, right .3s, transform .3s;
+  transition: left .3s, right .3s, transform .3s;
   width: $sidebar-width;
   z-index: 10;
+
+  @include modifier(left) {
+    left: #{-$sidebar-width};
+  }
+
+  @include modifier(right) {
+    right: #{-$sidebar-width};
+  }
+
+  @include modifier(open-left) {
+    left: 0;
+  }
+
+  @include modifier(open-right) {
+    right: 0;
+  }
 
   @include element(overlay) {
     background: rgba(0, 0, 0, .6);

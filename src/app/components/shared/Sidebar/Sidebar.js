@@ -1,5 +1,6 @@
 // @flow strict
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import type { Node } from 'react';
 
 import Icon from '@/components/base/Icon/Icon';
@@ -22,34 +23,52 @@ const Sidebar = ({
   title = 'sidebar',
   children,
 }: PropsType) => {
+  const asideRef = useRef<null>(null);
+
+  const toggleSidebar = (): void => {
+    // avoid 'sketchy' null
+    if (asideRef.current) {
+      asideRef.current.classList.toggle(`sidebar--open-${side}`);
+    }
+  };
+
+  const closeSidebar = (): void => {
+    toggleSidebar();
+    setTimeout(onClose, 100);
+  };
+
   useEffect(() => {
-    const handle = (evt: KeyboardEvent): void => {
+    // @link https://stackoverflow.com/questions/53834672/flow-type-keydown-event
+    const handleKeyDown = (evt: KeyboardEvent): void => {
       if (isOpen && evt.keyCode === KEYBOARD.ESCAPE_KEY) {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handle);
+    if (isOpen) {
+      setTimeout(toggleSidebar, 100);
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handle);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   });
 
   return isOpen
-    ? (
+    ? createPortal(
       <Fragment>
         <div
           onKeyPress={() => {}}
           role="presentation"
-          onClick={onClose}
+          onClick={closeSidebar}
           className="sidebar__overlay"
         />
         <aside
-          className="sidebar"
-          style={{
-            [side]: isOpen ? 0 : '-300px',
-          }}
+          // $FlowFixMe
+          ref={asideRef}
+          className={`sidebar sidebar--${side}`}
         >
           <header className="sidebar__header">
             <h3 className="sidebar__title">{ title }</h3>
@@ -58,7 +77,7 @@ const Sidebar = ({
               tabIndex="-1"
               role="button"
               onKeyPress={() => {}}
-              onClick={onClose}
+              onClick={closeSidebar}
             >
               <Icon path="icons/close" />
             </span>
@@ -67,7 +86,9 @@ const Sidebar = ({
             {children}
           </div>
         </aside>
-      </Fragment>
+      </Fragment>,
+      // $FlowFixMe
+      document.body,
     ) : null;
 };
 
