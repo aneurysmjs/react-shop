@@ -18,6 +18,7 @@ const Header = () => {
         isOpen={open}
         onClose={handleOpen}
         title="Cart"
+        side="right"
       >
         <p className="lead">
           You have nothing, let&apos;s shop!
