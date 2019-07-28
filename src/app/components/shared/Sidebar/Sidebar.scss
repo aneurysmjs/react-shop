@@ -38,6 +38,24 @@ $sidebar-width: px-to-rem(300);
     top: 0;
     width: 100%;
     z-index: 9;
+
+    @include modifier(fade-in) {
+      animation: fadeIn .4s linear forwards;
+    }
+
+    @include modifier(fade-out) {
+      animation: fadeOut .4s linear forwards;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
   }
 
   @include element(header) {

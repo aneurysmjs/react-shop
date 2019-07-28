@@ -63,7 +63,7 @@ const Sidebar = ({
           onKeyPress={() => {}}
           role="presentation"
           onClick={closeSidebar}
-          className="sidebar__overlay"
+          className={`sidebar__overlay sidebar__overlay--fade-${isOpen ? 'in' : 'out'}`}
         />
         <aside
           // $FlowFixMe
