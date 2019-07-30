@@ -66,6 +66,8 @@ $sidebar-width: px-to-rem(300);
   }
 
   @include element(close) {
+    background: transparent;
+    border: none;
     cursor: pointer;
   }
 
