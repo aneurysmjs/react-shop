@@ -1,8 +1,12 @@
 // @flow strict
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-// $FlowFixMe
-import { render, cleanup } from '@testing-library/react';
+import {
+  render,
+  cleanup,
+  fireEvent,
+  // $FlowFixMe
+} from '@testing-library/react';
 
 import Sidebar from './Sidebar';
 
@@ -77,5 +81,57 @@ describe('Sidebar', () => {
     });
     expect(sidebar.className).toEqual('sidebar sidebar--left sidebar--open-left');
     expect(content.firstChild.innerHTML).toEqual('some content');
+  });
+
+  it('should close the sidebar when click the "close" icon', () => {
+    jest.useFakeTimers();
+    let open = true;
+
+    const handleOnClose = jest.fn(() => {
+      open = !open;
+    });
+
+    let component = {};
+
+    act(() => {
+      component = render(
+        <Sidebar
+          onClose={handleOnClose}
+          isOpen={open}
+          side="left"
+        >
+          <Content />
+        </Sidebar>,
+      );
+    });
+
+    const { queryByTestId, rerender } = component;
+
+    const closeIcon = queryByTestId('close');
+    const openedSidebar = queryByTestId('sidebar');
+
+    expect(openedSidebar).not.toEqual(null);
+
+    fireEvent.click(closeIcon);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(handleOnClose.mock.calls.length).toBe(1);
+    // re-render "closed" sidebar (open = false)
+    rerender(
+      <Sidebar
+        onClose={handleOnClose}
+        isOpen={open}
+        side="left"
+      >
+        <Content />
+      </Sidebar>,
+    );
+
+    const closedSidebar = queryByTestId('sidebar');
+
+    expect(closedSidebar).toEqual(null);
   });
 });

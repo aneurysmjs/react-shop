@@ -76,15 +76,15 @@ const Sidebar = ({
         >
           <header className="sidebar__header">
             <h3 className="sidebar__title">{ title }</h3>
-            <span
+            <button
+              data-testid="close"
               className="sidebar__close"
               tabIndex="-1"
-              role="button"
               onKeyPress={() => {}}
               onClick={closeSidebar}
             >
               <Icon path="icons/close" />
-            </span>
+            </button>
           </header>
           <div
             data-testid="content"
