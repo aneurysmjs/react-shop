@@ -12,9 +12,6 @@ const compilerPromise = (name, compiler) => new Promise((resolve, reject) => {
     logMessage(`[${name}] Compiling `);
   });
   compiler.hooks.done.tap(name, (stats) => {
-    // eslint-disable-next-line no-console
-    // `console.log('stats', stats);
-
     const info = stats.toJson();
 
     if (!stats.hasErrors()) {

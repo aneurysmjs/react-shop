@@ -7,11 +7,12 @@ const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV |
 const paths = require('../config/paths');
 const { logMessage, compilerPromise, findCompiler } = require('./utils');
 
-
 const generateStaticHTML = async () => {
+  /* eslint-disable global-require */
   const nodemon = require('nodemon');
   const fs = require('fs');
   const puppeteer = require('puppeteer');
+  /* eslint-enable global-require */
   const port = await choosePort('localhost', 8505);
 
   process.env.PORT = port;
@@ -68,6 +69,7 @@ const build = async () => {
     if (!error && !stats.hasErrors()) {
       // eslint-disable-next-line no-console
       console.log(stats.toString(serverConfig.stats));
+      // eslint-disable-next-line no-useless-return
       return;
     }
   });
@@ -76,6 +78,7 @@ const build = async () => {
     if (!error && !stats.hasErrors()) {
       // eslint-disable-next-line no-console
       console.log(stats.toString(clientConfig.stats));
+      // eslint-disable-next-line no-useless-return
       return;
     }
   });
