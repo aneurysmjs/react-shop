@@ -87,7 +87,7 @@
     "express-manifest-helpers": "0.6.0",
     "file-loader": "4.1.0",
     "flow-bin": "0.104.0",
-    "flow-typed": "2.6.0",
+    "flow-typed": "2.6.1",
     "gulp": "4.0.2",
     "gulp-rename": "1.4.0",
     "gulp-template": "5.0.0",
@@ -109,11 +109,11 @@
     "rimraf": "2.6.3",
     "run-sequence": "2.2.1",
     "sass-loader": "7.1.0",
-    "semantic-release": "15.13.18",
+    "semantic-release": "15.13.19",
     "style-loader": "0.23.1",
     "url-loader": "2.1.0",
     "webpack": "4.38.0",
-    "webpack-bundle-analyzer": "3.3.2",
+    "webpack-bundle-analyzer": "3.4.1",
     "webpack-cli": "3.3.6",
     "webpack-dev-middleware": "3.7.0",
     "webpack-dll-bundles-plugin": "1.0.0-beta.5",
@@ -121,7 +121,7 @@
     "webpack-manifest-plugin": "2.0.4",
     "webpack-merge": "4.2.1",
     "webpack-node-externals": "1.7.2",
-    "write-file-webpack-plugin": "4.5.0"
+    "write-file-webpack-plugin": "4.5.1"
   },
   "dependencies": {
     "@loadable/component": "5.10.2",
