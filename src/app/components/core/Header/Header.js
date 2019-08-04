@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import Icon from '@/components/base/Icon/Icon';
 import Navigation from '@/components/core/Navigation/Navigation';
-import Sidebar from '@/components/shared/Sidebar/Sidebar';
+import { useLazy } from '@/components/shared/LazyComponent/LazyComponent';
 
 import './Header.scss';
 
@@ -12,18 +12,26 @@ const Header = () => {
 
   const handleOpen = () => setOpen(!open);
 
+  const Sidebar = useLazy(
+    () => import(/* webpackChunkName: "Sidebar" */'@/components/shared/Sidebar/Sidebar'),
+    open,
+  );
+
   return (
     <div className="header">
-      <Sidebar
-        isOpen={open}
-        onClose={handleOpen}
-        title="Cart"
-        side="right"
-      >
-        <p className="lead">
-          You have nothing, let&apos;s shop!
-        </p>
-      </Sidebar>
+      {Sidebar
+        ? (
+          <Sidebar
+            title="Cart"
+            side="right"
+            isOpen={open}
+            onClose={handleOpen}
+          >
+            <p className="lead">
+              You have nothing, let&apos;s shop!
+            </p>
+          </Sidebar>)
+        : null}
       <Navigation />
       <div className="header__user-menu">
         <span
