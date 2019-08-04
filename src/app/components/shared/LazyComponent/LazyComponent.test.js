@@ -13,6 +13,6 @@ describe('LazyComponent', () => {
       <LazyComponent getModule={() => Promise.resolve({ default: Example })} />,
     );
     const div = container.firstChild;
-    expect(div.className).toEqual('lazy');
+    expect(div).toEqual(null);
   });
 });
