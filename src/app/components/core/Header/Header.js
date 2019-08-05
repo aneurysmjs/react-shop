@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import Icon from '@/components/base/Icon/Icon';
 import Navigation from '@/components/core/Navigation/Navigation';
-import { useLazy } from '@/components/shared/LazyComponent/LazyComponent';
+import { useLazy } from '@/hooks/useLazy';
 
 import './Header.scss';
 

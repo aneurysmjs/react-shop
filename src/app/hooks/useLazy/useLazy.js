@@ -1,32 +1,29 @@
 // @flow strict
-import React, { useState, useEffect } from 'react';
-import type { Node } from 'react';
+import { useState, useEffect } from 'react';
 
-type PropsType = {
+const useLazy = (
   getModule: () => Promise<*>,
-  children?: Node,
-};
-
-const LazyComponent = ({ getModule, ...rest }: PropsType) => {
+  cond?: boolean = false,
+) => {
   const [AsyncModule, setAsyncModule] = useState(null);
-
   useEffect(() => {
     (async () => {
       try {
+        if (!cond) {
+          return;
+        }
         const module = await getModule();
+        // eslint-disable-next-line no-console
+        console.log('module', module);
         setAsyncModule(() => module.default);
       } catch (err) {
         throw new Error(`LazyComponent error: ${err}`);
       }
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cond]);
 
-  if (AsyncModule) {
-    return <AsyncModule {...rest} />;
-  }
-
-  return null;
+  return AsyncModule;
 };
 
-export default LazyComponent;
+export default useLazy;

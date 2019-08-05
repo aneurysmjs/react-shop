@@ -106,6 +106,7 @@
     "precss": "4.0.0",
     "puppeteer": "1.19.0",
     "react-dev-utils": "9.0.1",
+    "react-test-renderer": "16.8.6",
     "rimraf": "2.6.3",
     "run-sequence": "2.2.1",
     "sass-loader": "7.1.0",
