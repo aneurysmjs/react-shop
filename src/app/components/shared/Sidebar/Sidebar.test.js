@@ -26,11 +26,11 @@ describe('Sidebar', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  it('should render sidebar\'s content and animate it by default from "right" after 100ms', () => {
+  it('should render sidebar\'s content and animate it by default from "right" after 100ms', async () => {
     jest.useFakeTimers();
     let component = {};
 
-    act(() => {
+    await act(async () => {
       component = render(
         <Sidebar isOpen>
           <Content />
@@ -53,11 +53,11 @@ describe('Sidebar', () => {
     expect(content.firstChild.innerHTML).toEqual('some content');
   });
 
-  it('should render sidebar\'s content and animate it from "left" after 100ms', () => {
+  it('should render sidebar\'s content and animate it from "left" after 100ms', async () => {
     jest.useFakeTimers();
     let component = {};
 
-    act(() => {
+    await act(async () => {
       component = render(
         <Sidebar
           isOpen
@@ -83,7 +83,7 @@ describe('Sidebar', () => {
     expect(content.firstChild.innerHTML).toEqual('some content');
   });
 
-  it('should close the sidebar when click the "close" icon', () => {
+  it('should close the sidebar when click the "close" icon', async () => {
     jest.useFakeTimers();
     let open = true;
 
@@ -93,7 +93,7 @@ describe('Sidebar', () => {
 
     let component = {};
 
-    act(() => {
+    await act(async () => {
       component = render(
         <Sidebar
           onClose={handleOnClose}
