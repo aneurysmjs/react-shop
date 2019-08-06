@@ -7,4 +7,3 @@ export type State = {
   products: ProductsType,
   footer: FooterType
 };
-

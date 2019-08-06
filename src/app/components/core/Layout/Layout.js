@@ -14,7 +14,7 @@ type PropsType = {
 const Layout = (props: PropsType) => (
   <div className="layout">
     <Header />
-    <div className="layout__content">
+    <div className="layout__content container-fluid">
       { props.children }
     </div>
     <Footer />

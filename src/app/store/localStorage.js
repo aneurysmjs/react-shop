@@ -1,4 +1,5 @@
 // @flow strict
+/* eslint-disable max-len */
 /**
  * @module localStorage
  * persist the state of the application in the localStorage using browser localStorage API.
@@ -26,7 +27,6 @@ export const loadState = () => {
     // In case of any errors return undefined to let reducers initialize the application.
     return undefined;
   }
-
 };
 
 /**
@@ -46,5 +46,4 @@ export function saveState<S>(state: S): void {
     // eslint-disable-next-line no-console
     console.error('localStorage shit: ', err);
   }
-
 }

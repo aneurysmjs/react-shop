@@ -7,6 +7,7 @@ import type {
   NextFunction,
 } from 'express';
 import cors from 'cors';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import path from 'path';
 import chalk from 'chalk';
 // "express-manifest-helpers" has not compatible Flow version
@@ -50,40 +51,36 @@ const manifestPath = path.join(paths.clientBuild, paths.publicPath);
 app.use(
   manifestHelpers({
     manifestPath: `${manifestPath}/manifest.json`,
-  })
+  }),
 );
 
 app.use(serverRender());
 
-// eslint-disable-next-line no-unused-vars
-app.use((err: Error, req: $Request, res: $Response, next: NextFunction): $Response => {
-  return res.status(404).json({
-    status: 'error',
-    message: err.message,
-    stack:
+// eslint-disable-next-line no-unused-vars, max-len
+app.use((err: Error, req: $Request, res: $Response, next: NextFunction): $Response => res.status(404).json({
+  status: 'error',
+  message: err.message,
+  stack:
       // print a nicer stack trace by splitting line breaks and making them array items
-      process.env.NODE_ENV === 'development' &&
-      (err.stack || '')
+      process.env.NODE_ENV === 'development'
+      && (err.stack || '')
         .split('\n')
-        .map((line) => line.trim())
-        .map((line) => line.split(path.sep).join('/'))
-        .map((line) =>
-          line.replace(
-            process
-              .cwd()
-              .split(path.sep)
-              .join('/'),
-            '.'
-          )
-        ),
-  });
-});
+        .map(line => line.trim())
+        .map(line => line.split(path.sep).join('/'))
+        .map(line => line.replace(
+          process
+            .cwd()
+            .split(path.sep)
+            .join('/'),
+          '.',
+        )),
+}));
 
 app.listen(process.env.PORT || 8500, (): void => {
   // eslint-disable-next-line no-console
   console.log(
     `[${new Date().toISOString()}]`,
-    chalk.blue(`App is running: http://localhost:${process.env.PORT || 8500}`)
+    chalk.blue(`App is running: http://localhost:${process.env.PORT || 8500}`),
   );
 });
 

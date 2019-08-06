@@ -17,7 +17,7 @@ const eslintLoader = {
 const babelLoader = {
   test: jsRegex,
   exclude: /node_modules/,
-  loader: require.resolve('babel-loader')
+  loader: require.resolve('babel-loader'),
 };
 
 const cssLoaderClient = {
@@ -41,7 +41,7 @@ const cssLoaderClient = {
     },
     {
       loader: require.resolve('sass-loader'),
-    }
+    },
   ],
 };
 
@@ -53,7 +53,7 @@ const cssLoaderServer = {
     },
     {
       loader: require.resolve('sass-loader'),
-    }
+    },
   ],
 };
 
@@ -103,7 +103,7 @@ const client = [
   eslintLoader,
   {
     oneOf: [
-      babelLoader,     
+      babelLoader,
       cssLoaderClient,
       urlLoaderClient,
       fileLoaderClient,
@@ -114,7 +114,7 @@ const server = [
   eslintLoader,
   {
     oneOf: [
-      babelLoader,      
+      babelLoader,
       cssLoaderServer,
       urlLoaderServer,
       fileLoaderServer,

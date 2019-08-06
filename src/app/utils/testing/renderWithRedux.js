@@ -19,8 +19,8 @@ export default function renderWithRedux<T>(
   {
     initialState,
     // $FlowIgnore it can be ignore just for testing
-    store = createStore(reducer, initialState)
-  }: StateStoreType<T> = {}
+    store = createStore(reducer, initialState),
+  }: StateStoreType<T> = {},
 ) {
   return {
     ...render(<Provider store={store}>{ui}</Provider>),
