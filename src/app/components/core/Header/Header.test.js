@@ -1,13 +1,14 @@
 // @flow strict
 import React from 'react';
-import { shallow } from 'enzyme';
+// $FlowFixMe
+import { render } from '@testing-library/react';
 
 import Header from './Header';
 
-describe.skip('Header', () => {
-  const defaultProps = {};
-
+describe('Header', () => {
   it('tests something', () => {
-    shallow(<Header {...defaultProps} />);
+    const { container } = render(<Header />);
+    const header = container.firstChild;
+    expect(header.className).toEqual('header');
   });
 });
