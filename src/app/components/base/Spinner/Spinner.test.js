@@ -1,13 +1,14 @@
 // @flow strict
 import React from 'react';
-import { shallow } from 'enzyme';
+// $FlowFixMe
+import { render } from '@testing-library/react';
 
 import Spinner from './Spinner';
 
 describe('Spinner', () => {
-  const defaultProps = {};
-
   it('tests something', () => {
-    shallow(<Spinner {...defaultProps} />);
+    const { container } = render(<Spinner />);
+    const spinner = container.firstChild;
+    expect(spinner.className).toEqual('spinner');
   });
 });
