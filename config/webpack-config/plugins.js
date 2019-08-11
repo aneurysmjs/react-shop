@@ -7,7 +7,7 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 const env = require('../env')();
 
 const shared = [
- 
+
 ];
 
 const client = [
