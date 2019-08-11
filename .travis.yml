@@ -12,6 +12,7 @@ node_js:
 after_success:
   - yarn run semantic-release
 scripts:
+  - yarn test
   - yarn run build
 branches:
   except:
