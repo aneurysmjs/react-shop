@@ -12,6 +12,7 @@ node_js:
 after_success:
   - yarn run semantic-release
 scripts:
+  - yarn install --ignore-engines
   - yarn run build
 branches:
   except:
