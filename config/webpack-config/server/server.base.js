@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
@@ -10,7 +11,7 @@ module.exports = {
   name: 'server',
   target: 'node',
   entry: {
-    server: [require.resolve('@babel/polyfill'), path.resolve(paths.srcServer, 'index.js')],
+    server: [path.resolve(paths.srcServer, 'index.js')],
   },
   externals: [
     nodeExternals({

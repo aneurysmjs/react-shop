@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const path = require('path');
 const paths = require('../../paths');
 const { client: clientLoaders } = require('./../loaders');
@@ -8,7 +9,7 @@ module.exports = {
   name: 'client',
   target: 'web',
   entry: {
-    bundle: [require.resolve('@babel/polyfill'), `${paths.srcClient}/index.js`],
+    bundle: [`${paths.srcClient}/index.js`],
   },
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
