@@ -3,6 +3,7 @@
 import type { FooterType, FooterActionType } from '@/store/types/FooterType';
 
 import { FOOTER_DATA } from '@/store/ActionTypes';
+import type { State } from '@/store/types/State';
 
 import createReducer from '../createReducer';
 
@@ -19,3 +20,5 @@ export default createReducer<FooterType, FooterActionType>(initialState, {
     };
   },
 });
+
+export const getFooter = ({ footer }: State) => footer;
