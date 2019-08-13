@@ -19,7 +19,7 @@ import store from '@/store';
 // "paths" isn't been transpiled, so it can be ignored
 // $FlowIgnoreMe
 import paths from '../../config/paths';
-import serverRender from './render';
+import serverRender from './middleware/serverRender';
 import errorHandler from './middleware/errorHandler';
 // "dotenv" has not compatible Flow version
 // $FlowFixMe
