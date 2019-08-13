@@ -7,13 +7,17 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV || 'development');
 const paths = require('../config/paths');
-const { logMessage, compilerPromise, findCompiler } = require('./utils');
+const {
+  COMPILER_NAMES,
+  findCompiler,
+  logMessage,
+  makeCompilerPromise,
+} = require('./utils');
 
 const app = express();
 
-const WEBPACK_PORT =
-  process.env.WEBPACK_PORT ||
-  (!isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) + 1 : 8501);
+const WEBPACK_PORT = process.env.WEBPACK_PORT
+  || (!Number.isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) + 1 : 8501);
 
 const start = async () => {
   rimraf.sync(paths.clientBuild);
@@ -28,7 +32,7 @@ const start = async () => {
   clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
   clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js';
 
-  const publicPath = clientConfig.output.publicPath;
+  const { publicPath } = clientConfig.output;
 
   clientConfig.output.publicPath = [`http://localhost:${WEBPACK_PORT}`, publicPath]
     .join('/')
@@ -42,11 +46,8 @@ const start = async () => {
 
   const getCompiler = findCompiler(multiCompiler);
 
-  const clientCompiler = getCompiler('client');
-  const serverCompiler = getCompiler('server');
-
-  const clientPromise = compilerPromise('client', clientCompiler);
-  const serverPromise = compilerPromise('server', serverCompiler);
+  const [clientCompiler, serverCompiler] = COMPILER_NAMES.map(getCompiler);
+  const [clientPromise, serverPromise] = makeCompilerPromise([clientCompiler, serverCompiler]);
 
   const watchOptions = {
     // poll: true,
@@ -64,7 +65,7 @@ const start = async () => {
       publicPath: clientConfig.output.publicPath,
       stats: clientConfig.stats,
       watchOptions,
-    })
+    }),
   );
 
   app.use(webpackHotMiddleware(clientCompiler));

@@ -5,7 +5,12 @@ const { choosePort } = require('react-dev-utils/WebpackDevServerUtils');
 const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV || 'production');
 
 const paths = require('../config/paths');
-const { logMessage, compilerPromise, findCompiler } = require('./utils');
+const {
+  COMPILER_NAMES,
+  findCompiler,
+  logMessage,
+  makeCompilerPromise,
+} = require('./utils');
 
 const generateStaticHTML = async () => {
   /* eslint-disable global-require */
@@ -59,11 +64,8 @@ const build = async () => {
 
   const getCompiler = findCompiler(multiCompiler);
 
-  const clientCompiler = getCompiler('client');
-  const serverCompiler = getCompiler('server');
-
-  const clientPromise = compilerPromise('client', clientCompiler);
-  const serverPromise = compilerPromise('server', serverCompiler);
+  const [clientCompiler, serverCompiler] = COMPILER_NAMES.map(getCompiler);
+  const [clientPromise, serverPromise] = makeCompilerPromise([clientCompiler, serverCompiler]);
 
   serverCompiler.watch({}, (error, stats) => {
     if (!error && !stats.hasErrors()) {

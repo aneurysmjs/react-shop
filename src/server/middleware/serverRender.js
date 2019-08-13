@@ -14,8 +14,8 @@ import { ChunkExtractor } from '@loadable/server';
 
 import App from '@/App';
 // $FlowIgnore
-import paths from '../../config/paths';
-import Html from './components/HTML';
+import paths from '../../../config/paths';
+import Html from '../components/HTML';
 
 const statsFile = `${paths.serverBuild}/loadable-stats.json`;
 const extractor = new ChunkExtractor({ statsFile, entrypoints: ['server'] });

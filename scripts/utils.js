@@ -18,18 +18,26 @@ const compilerPromise = (name, compiler) => new Promise((resolve, reject) => {
       resolve();
     }
     // eslint-disable-next-line no-console
-    console.error(info.errors);
+    console.error('compilerPromise error: ', info.errors);
 
     return reject(new Error(`Failed to compile ${name}`));
   });
 });
 
+const COMPILER_NAMES = ['client', 'server'];
+
 const findCompiler = multiCompiler => compilerName => (
   multiCompiler.compilers.find(compiler => compiler.name === compilerName)
 );
 
+const makeCompilerPromise = compilers => (
+  compilers.map(compiler => compilerPromise(compiler.name, compiler))
+);
+
 module.exports = {
-  logMessage,
+  COMPILER_NAMES,
   compilerPromise,
   findCompiler,
+  logMessage,
+  makeCompilerPromise,
 };
