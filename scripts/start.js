@@ -7,7 +7,12 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const webpackConfig = require('../config/webpack-config')(process.env.NODE_ENV || 'development');
 const paths = require('../config/paths');
-const { logMessage, compilerPromise, findCompiler } = require('./utils');
+const {
+  COMPILER_NAMES,
+  findCompiler,
+  logMessage,
+  makeCompilerPromise,
+} = require('./utils');
 
 const app = express();
 
@@ -41,11 +46,8 @@ const start = async () => {
 
   const getCompiler = findCompiler(multiCompiler);
 
-  const clientCompiler = getCompiler('client');
-  const serverCompiler = getCompiler('server');
-
-  const clientPromise = compilerPromise('client', clientCompiler);
-  const serverPromise = compilerPromise('server', serverCompiler);
+  const [clientCompiler, serverCompiler] = COMPILER_NAMES.map(getCompiler);
+  const [clientPromise, serverPromise] = makeCompilerPromise([clientCompiler, serverCompiler]);
 
   const watchOptions = {
     // poll: true,
