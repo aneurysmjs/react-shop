@@ -64,7 +64,7 @@ const start = async () => {
       publicPath: clientConfig.output.publicPath,
       stats: clientConfig.stats,
       watchOptions,
-    })
+    }),
   );
 
   app.use(webpackHotMiddleware(clientCompiler));
