@@ -82,7 +82,7 @@
     "express": "4.17.1",
     "express-manifest-helpers": "0.6.0",
     "file-loader": "4.2.0",
-    "flow-bin": "0.105.1",
+    "flow-bin": "0.105.2",
     "flow-typed": "2.6.1",
     "glob": "7.1.4",
     "html-webpack-plugin": "4.0.0-beta.4",
