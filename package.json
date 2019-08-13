@@ -112,7 +112,6 @@
     "webpack-bundle-analyzer": "3.4.1",
     "webpack-cli": "3.3.6",
     "webpack-dev-middleware": "3.7.0",
-    "webpack-dll-bundles-plugin": "1.0.0-beta.5",
     "webpack-hot-middleware": "2.25.0",
     "webpack-manifest-plugin": "2.0.4",
     "webpack-merge": "4.2.1",
