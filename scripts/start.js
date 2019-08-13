@@ -11,9 +11,8 @@ const { logMessage, compilerPromise, findCompiler } = require('./utils');
 
 const app = express();
 
-const WEBPACK_PORT =
-  process.env.WEBPACK_PORT ||
-  (!isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) + 1 : 8501);
+const WEBPACK_PORT = process.env.WEBPACK_PORT
+  || (!Number.isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) + 1 : 8501);
 
 const start = async () => {
   rimraf.sync(paths.clientBuild);
@@ -28,7 +27,7 @@ const start = async () => {
   clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
   clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js';
 
-  const publicPath = clientConfig.output.publicPath;
+  const { publicPath } = clientConfig.output;
 
   clientConfig.output.publicPath = [`http://localhost:${WEBPACK_PORT}`, publicPath]
     .join('/')
