@@ -32,7 +32,7 @@ class Home extends Component<PropsType> {
       <div className="home">
         <h2 className="home__title">Shop</h2>
         <div className="row">
-          { products.map(product => (
+          { products.map((product) => (
             <div
               // eslint-disable-next-line no-underscore-dangle
               key={product._id}
@@ -49,7 +49,7 @@ class Home extends Component<PropsType> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   products: state.products,
 });
 

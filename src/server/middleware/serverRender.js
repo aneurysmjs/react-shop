@@ -22,7 +22,7 @@ const extractor = new ChunkExtractor({ statsFile, entrypoints: ['server'] });
 
 type GetAssetsType = ((string) => string) => (Array<string>) => Array<string>;
 
-const getAssets: GetAssetsType = fn => assets => assets.map(fn);
+const getAssets: GetAssetsType = (fn) => (assets) => assets.map(fn);
 
 const serverRenderer = (): Middleware => (req: $Request, res: $Response): $Response => {
   const { assetPath } = res.locals;
