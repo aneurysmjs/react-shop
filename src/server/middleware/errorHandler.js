@@ -10,15 +10,15 @@ import type {
 
 // print a nicer stack trace by splitting line breaks and making them array items
 const printStackTrace = compose(
-  map(line => line.replace(
+  map((line) => line.replace(
     process
       .cwd()
       .split(path.sep)
       .join('/'),
     '.',
   )),
-  map(line => line.split(path.sep).join('/')),
-  map(line => line.trim()),
+  map((line) => line.split(path.sep).join('/')),
+  map((line) => line.trim()),
   split('\n'),
 );
 
