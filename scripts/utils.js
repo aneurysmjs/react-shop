@@ -26,12 +26,12 @@ const compilerPromise = (name, compiler) => new Promise((resolve, reject) => {
 
 const COMPILER_NAMES = ['client', 'server'];
 
-const findCompiler = multiCompiler => compilerName => (
-  multiCompiler.compilers.find(compiler => compiler.name === compilerName)
+const findCompiler = (multiCompiler) => (compilerName) => (
+  multiCompiler.compilers.find((compiler) => compiler.name === compilerName)
 );
 
-const makeCompilerPromise = compilers => (
-  compilers.map(compiler => compilerPromise(compiler.name, compiler))
+const makeCompilerPromise = (compilers) => (
+  compilers.map((compiler) => compilerPromise(compiler.name, compiler))
 );
 
 module.exports = {
