@@ -29,7 +29,7 @@ class Footer extends Component<PropsType> {
             <div className="row">
               <div className="col">
                 <div data-testid="social">
-                  {social && social.map(s => (
+                  {social && social.map((s) => (
                     <Icon
                       key={s.id}
                       path={`social/${s.icon}`}
@@ -50,7 +50,7 @@ class Footer extends Component<PropsType> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   footer: state.footer,
 });
 
