@@ -43,7 +43,7 @@ function resultContainer() {
   const updateResult = (val, err) => {
     value = val;
     error = err;
-    resolvers.splice(0, resolvers.length).forEach(resolve => resolve());
+    resolvers.splice(0, resolvers.length).forEach((resolve) => resolve());
   };
 
   return {
@@ -51,8 +51,8 @@ function resultContainer() {
     addResolver: (resolver) => {
       resolvers.push(resolver);
     },
-    setValue: val => updateResult(val),
-    setError: err => updateResult(undefined, err),
+    setValue: (val) => updateResult(val),
+    setError: (err) => updateResult(undefined, err),
   };
 }
 
@@ -62,7 +62,7 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   } = resultContainer();
   const hookProps = { current: initialProps };
 
-  const wrapUiIfNeeded = innerElement => (
+  const wrapUiIfNeeded = (innerElement) => (
     wrapper
       ? React.createElement(wrapper, null, innerElement)
       : innerElement
@@ -85,7 +85,7 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
 
   return {
     result,
-    waitForNextUpdate: () => new Promise(resolve => addResolver(resolve)),
+    waitForNextUpdate: () => new Promise((resolve) => addResolver(resolve)),
     rerender: (newProps = hookProps.current) => {
       hookProps.current = newProps;
       act(() => {
