@@ -1,6 +1,7 @@
 // @flow strict
 
 import type { ProductsType, ProductActionType } from '@/store/types/ProductsType';
+import type { State } from '@/store/types/State';
 
 import createReducer from './createReducer';
 
@@ -16,3 +17,5 @@ export default createReducer<ProductsType, ProductActionType>([], {
     return [...data];
   },
 });
+
+export const getProducts = ({ products }: State) => products;
