@@ -9,7 +9,7 @@ import type { State } from '@/store/types/State';
 
 import * as types from '../ActionTypes';
 
-export default function fetchProducts(query: string = ''): AsyncAction<ProductsType> {
+export default function fetchProducts(query: string = ''): AsyncAction<State> {
   return {
     types: [
       types.GET_PRODUCTS_REQUEST,
@@ -19,8 +19,6 @@ export default function fetchProducts(query: string = ''): AsyncAction<ProductsT
     callAPI: () => api.get<string, ProductsType>(query),
     shouldCallAPI: (state: State) => {
       const products = getProducts(state);
-      // eslint-disable-next-line no-console
-      console.log('products', products);
       return !products.length;
     },
   };
