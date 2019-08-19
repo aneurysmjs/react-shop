@@ -1,8 +1,8 @@
 // @flow strict
 import React, { useState } from 'react';
 
-import Icon from '@/components/base/Icon/Icon';
 import Navigation from '@/components/core/Navigation/Navigation';
+import { UserMenu } from '@/components/core/UserMenu';
 import { useLazy } from '@/hooks/useLazy';
 
 import './Header.scss';
@@ -33,19 +33,7 @@ const Header = () => {
           </Sidebar>)
         : null}
       <Navigation />
-      <div className="header__user-menu">
-        <span
-          tabIndex="-1"
-          role="button"
-          onKeyPress={() => {}}
-          onClick={handleOpen}
-        >
-          <Icon
-            size="20"
-            path="icons/cart"
-          />
-        </span>
-      </div>
+      <UserMenu onClick={handleOpen} />
     </div>
   );
 };
