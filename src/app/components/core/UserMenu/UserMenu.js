@@ -6,14 +6,7 @@ import { useLazy } from '@/hooks/useLazy';
 
 import './UserMenu.scss';
 
-type PropsType = {
-  onClick?: () => void,
-};
-
-const UserMenu = ({
-  // eslint-disable-next-line no-unused-vars
-  onClick = () => {},
-}: PropsType) => {
+const UserMenu = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);

@@ -7,15 +7,33 @@ import { fireEvent, render } from '@testing-library/react';
 import UserMenu from './UserMenu';
 
 describe('UserMenu', () => {
-  it('should call \'onClick\' prop', async () => {
-    const mockOnClick = jest.fn();
+  it('should toggle <Sidebar /> when clicking icon', async () => {
     let testRenderer = {};
+
     await act(async () => {
-      testRenderer = render(<UserMenu onClick={mockOnClick} />);
+      testRenderer = render(<UserMenu />);
     });
-    const { queryByRole } = testRenderer;
+
+    const { queryByRole, queryByTestId } = testRenderer;
     const button = queryByRole('button');
-    fireEvent.click(button);
-    expect(mockOnClick.mock.calls.length).toBe(1);
+    const sidebar = queryByTestId('sidebar');
+
+    expect(sidebar).toBe(null);
+
+    await act(async () => {
+      fireEvent.click(button);
+    });
+
+    const sidebarOpened = queryByTestId('sidebar');
+
+    expect(sidebarOpened).not.toBe(null);
+
+    await act(async () => {
+      fireEvent.click(button);
+    });
+
+    const sidebarClosed = queryByTestId('sidebar');
+
+    expect(sidebarClosed).toBe(null);
   });
 });
