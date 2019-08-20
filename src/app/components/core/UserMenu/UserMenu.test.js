@@ -46,4 +46,21 @@ describe('UserMenu', () => {
 
     expect(sidebarClosed).toBe(null);
   });
+  it('should display cart\'s quantity', async () => {
+    const store = createStore(reducer);
+    let testRenderer = {};
+
+    await act(async () => {
+      testRenderer = render(
+        <Provider store={store}>
+          <UserMenu />
+        </Provider>,
+      );
+    });
+
+    const { queryByRole } = testRenderer;
+    const button = queryByRole('button');
+
+    expect(button.textContent).toBe('(0)');
+  });
 });
