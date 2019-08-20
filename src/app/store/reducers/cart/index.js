@@ -6,4 +6,4 @@ import cart from './cart';
 
 export default cart;
 
-export const cartFooter = (state: State) => state.cart;
+export const getCart = (state: State) => state.cart;
