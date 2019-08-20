@@ -3,15 +3,25 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 // $FlowFixMe
 import { fireEvent, render } from '@testing-library/react';
+import { createStore } from 'redux';
+// $FlowFixMe
+import { Provider } from 'react-redux';
+
+import reducer from '@/store/reducers';
 
 import UserMenu from './UserMenu';
 
 describe('UserMenu', () => {
   it('should toggle <Sidebar /> when clicking icon', async () => {
+    const store = createStore(reducer);
     let testRenderer = {};
 
     await act(async () => {
-      testRenderer = render(<UserMenu />);
+      testRenderer = render(
+        <Provider store={store}>
+          <UserMenu />
+        </Provider>,
+      );
     });
 
     const { queryByRole, queryByTestId } = testRenderer;
