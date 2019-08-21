@@ -9,18 +9,13 @@ import { render } from '@testing-library/react';
 
 import reducer from '@/store/reducers';
 
-type StateStoreType<S> = {
-  initialState: S,
-  store: *
-};
-
-export default function renderWithRedux<T>(
+export default function renderWithRedux(
   ui: Element<*>,
+  // $FlowIgnore
   {
     initialState,
-    // $FlowIgnore it can be ignore just for testing
     store = createStore(reducer, initialState),
-  }: StateStoreType<T> = {},
+  } = {},
 ) {
   return {
     ...render(<Provider store={store}>{ui}</Provider>),
