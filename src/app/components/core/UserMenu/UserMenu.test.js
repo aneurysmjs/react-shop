@@ -2,26 +2,18 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 // $FlowFixMe
-import { fireEvent, render } from '@testing-library/react';
-import { createStore } from 'redux';
-// $FlowFixMe
-import { Provider } from 'react-redux';
+import { fireEvent } from '@testing-library/react';
 
-import reducer from '@/store/reducers';
+import renderWithRedux from '@/utils/testing/renderWithRedux';
 
 import UserMenu from './UserMenu';
 
 describe('UserMenu', () => {
   it('should toggle <Sidebar /> when clicking icon', async () => {
-    const store = createStore(reducer);
     let testRenderer = {};
 
     await act(async () => {
-      testRenderer = render(
-        <Provider store={store}>
-          <UserMenu />
-        </Provider>,
-      );
+      testRenderer = renderWithRedux(<UserMenu />);
     });
 
     const { queryByRole, queryByTestId } = testRenderer;
@@ -46,16 +38,12 @@ describe('UserMenu', () => {
 
     expect(sidebarClosed).toBe(null);
   });
+
   it('should display cart\'s quantity', async () => {
-    const store = createStore(reducer);
     let testRenderer = {};
 
     await act(async () => {
-      testRenderer = render(
-        <Provider store={store}>
-          <UserMenu />
-        </Provider>,
-      );
+      testRenderer = renderWithRedux(<UserMenu />);
     });
 
     const { queryByRole } = testRenderer;
