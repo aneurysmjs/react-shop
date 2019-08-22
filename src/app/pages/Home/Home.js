@@ -28,6 +28,7 @@ const Home = () => {
             // eslint-disable-next-line no-underscore-dangle
             key={product._id}
             className="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"
+            data-testid="product-card-item"
           >
             <ProductCard
               width="20rem"

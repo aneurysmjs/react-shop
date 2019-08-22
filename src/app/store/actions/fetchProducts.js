@@ -2,6 +2,7 @@
 
 import { api } from '@/api';
 
+import { ASYNC_ACTION_TYPE } from '@/constants';
 import { getProducts } from '@/store/reducers/products';
 import type { AsyncAction } from '@/store/types/Actions';
 import type { ProductsType } from '@/store/types/ProductsType';
@@ -11,6 +12,7 @@ import * as types from '../ActionTypes';
 
 export default function fetchProducts(query: string = ''): AsyncAction<State> {
   return {
+    type: ASYNC_ACTION_TYPE,
     types: [
       types.GET_PRODUCTS_REQUEST,
       types.GET_PRODUCTS_SUCCESS,
