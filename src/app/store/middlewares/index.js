@@ -2,12 +2,9 @@
 // $FlowFixMe
 import thunk from 'redux-thunk';
 
-import logger from './logger';
-import apiMiddleware from './apiMiddleware';
+import { apiMiddleware } from './apiMiddleware';
+import { logger } from './logger';
 
-/**
- * @type {middleware[]}
- */
 // eslint-disable-next-line import/no-mutable-exports
 let middlewares = [
   thunk,
