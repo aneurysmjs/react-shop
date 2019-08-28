@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchProducts as fetchProductsAction } from '@/store/actions';
+import { fetchProducts } from '@/store/actions';
 import { getProducts } from '@/store/reducers/products';
 import type { ProductsType } from '@/store/types/ProductsType';
 
@@ -16,7 +16,7 @@ const Home = () => {
   const products: ProductsType = useSelector(getProducts);
 
   useEffect(() => {
-    dispatch(fetchProductsAction(`/products`));
+    dispatch(fetchProducts(`/products`));
   }, [dispatch]);
 
   return (

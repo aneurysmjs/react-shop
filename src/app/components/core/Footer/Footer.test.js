@@ -1,4 +1,3 @@
-// @flow strict
 import React from 'react';
 // $FlowFixMe
 import { cleanup } from '@testing-library/react';

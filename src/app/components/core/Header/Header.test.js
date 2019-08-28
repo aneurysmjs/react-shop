@@ -1,4 +1,3 @@
-// @flow strict
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter as Router } from 'react-router-dom';
