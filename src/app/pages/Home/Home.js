@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchProducts } from '@/store/actions';
-import { getProducts } from '@/store/reducers/products';
+import { getProducts } from '@/store/selectors/getProducts';
 import type { ProductsType } from '@/store/types/ProductsType';
 
 import ProductCard from '@/components/shared/ProductCard/ProductCard';
