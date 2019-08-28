@@ -1,8 +1,8 @@
 const components = './src/app/components';
 
-const isFunctional = componentType => componentType === 'functional';
+const isFunctional = (componentType) => componentType === 'functional';
 
-module.exports = function(plop) {
+module.exports = function plopFn(plop) {
   plop.setGenerator('React Component', {
     description: 'Create a new React component',
     prompts: [

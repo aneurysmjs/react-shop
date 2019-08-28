@@ -1,64 +1,45 @@
 // @flow strict
-import React, { Component } from 'react';
+import React from 'react';
 // $FlowIgnore
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { footerData } from '@/store/actions';
+import { getFooter } from '@/store/reducers/footer';
 import type { FooterType } from '@/store/types/FooterType';
 
 import Icon from '@/components/base/Icon/Icon';
 
 import './Footer.scss';
 
-type PropsType = {
-  footer: FooterType
-};
+const Footer = () => {
+  const { social }: FooterType = useSelector(getFooter);
 
-class Footer extends Component<PropsType> {
-  render() {
-    const {
-      footer: {
-        social,
-      },
-    } = this.props;
-
-    return (
-      <footer className="footer">
-        <div className="container">
-          <div className="footer__top">
-            <div className="row">
-              <div className="col">
-                <div data-testid="social">
-                  {social && social.map((s) => (
-                    <Icon
-                      key={s.id}
-                      path={`social/${s.icon}`}
-                    />
-                  ))}
-                </div>
+  return (
+    <footer className="footer">
+      <div className="container">
+        <div className="footer__top">
+          <div className="row">
+            <div className="col">
+              <div data-testid="social">
+                {social && social.map((s) => (
+                  <Icon
+                    key={s.id}
+                    path={`social/${s.icon}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
-        <div className="footer__bottom">
-          <div className="footer__copyright">
-            <span data-testid="copyright">Copyright © {new Date().getFullYear()}. All Rights Reserved</span>
-          </div>
+      </div>
+      <div className="footer__bottom">
+        <div className="footer__copyright">
+          <span data-testid="copyright">
+            Copyright © {new Date().getFullYear()}. All Rights Reserved
+          </span>
         </div>
-      </footer>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  footer: state.footer,
-});
-
-const mapDispatchToProps = {
-  footerData,
+      </div>
+    </footer>
+  );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Footer);
+export default Footer;

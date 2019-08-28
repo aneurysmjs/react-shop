@@ -1,9 +1,8 @@
-// @flow strict
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter as Router } from 'react-router-dom';
-// $FlowFixMe
-import { render } from '@testing-library/react';
+
+import renderWithRedux from '@/utils/testing/renderWithRedux';
 
 import Header from './Header';
 
@@ -12,7 +11,7 @@ describe('Header', () => {
     let testRenderer = {};
 
     await act(async () => {
-      testRenderer = render(
+      testRenderer = renderWithRedux(
         <Router>
           <Header />
         </Router>,

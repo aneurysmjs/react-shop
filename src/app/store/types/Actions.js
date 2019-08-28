@@ -1,11 +1,13 @@
 // @flow strict
 
-import type { ProductActionType } from '@/store/types/ProductsType';
 import type { FooterActionType } from '@/store/types/FooterType';
+import type { CartActionType } from '@/store/types/CartType';
+import type { ProductActionType } from '@/store/types/ProductsType';
 
 export type Actions =
-  ProductActionType |
-  FooterActionType;
+  CartActionType |
+  FooterActionType |
+  ProductActionType;
 
 export type AsyncAction<S> = {
   types?: Array<string>,

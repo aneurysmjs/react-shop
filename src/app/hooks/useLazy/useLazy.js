@@ -13,8 +13,6 @@ const useLazy = (
           return;
         }
         const module = await getModule();
-        // eslint-disable-next-line no-console
-        console.log('module', module);
         setAsyncModule(() => module.default);
       } catch (err) {
         throw new Error(`LazyComponent error: ${err}`);

@@ -9,4 +9,10 @@
     margin: px-to-rem(10) 0;
   }
 
+  @include element(loader) {
+    align-items: center;
+    display: flex;
+    justify-content: center
+  }
+
 }

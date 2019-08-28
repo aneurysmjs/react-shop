@@ -1,0 +1,18 @@
+@import '~styles/functions/px-to-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.user-menu {
+  align-items: center;
+  display: flex;
+  padding: 0 px-to-rem(16);
+
+  @include element(cart-icon) {
+    align-items: center;
+    display: flex;
+  }
+
+  @include element(cart-quantity) {
+    margin-left: px-to-rem(5);
+  }
+}
