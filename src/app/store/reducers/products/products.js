@@ -9,21 +9,13 @@ import {
   GET_PRODUCTS_SUCCESS,
 } from '../../ActionTypes';
 
-type ProductsReducerType = {
-  isLoading: boolean,
-  payload: ProductsType,
-  error: ?{
-    message: string,
-  }
-}
-
 const initialState = {
   error: null,
   isLoading: false,
   payload: [],
 };
 
-export default createReducer<ProductsReducerType, ProductActionType>(initialState, {
+export default createReducer<ProductsType, ProductActionType>(initialState, {
   [GET_PRODUCTS_REQUEST](state) {
     return {
       ...state,

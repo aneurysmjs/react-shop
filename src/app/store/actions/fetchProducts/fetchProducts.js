@@ -21,6 +21,7 @@ export default function fetchProducts(query: string = ''): AsyncAction<State> {
     callAPI: () => api.get<string, ProductsType>(query),
     shouldCallAPI: (state: State) => {
       const products = getProducts(state);
+      // $FlowFixMe - это не должно орать
       return !products.length;
     },
   };

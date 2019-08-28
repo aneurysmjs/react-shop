@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 
+import Spinner from '@/components/base/Spinner/Spinner';
 import { fetchProducts } from '@/store/actions';
 import { getProducts } from '@/store/selectors/getProducts';
 import type { ProductsType } from '@/store/types/ProductsType';
@@ -13,7 +14,7 @@ import './Home.scss';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const products: ProductsType = useSelector(getProducts);
+  const { isLoading, payload, error }: ProductsType = useSelector(getProducts);
 
   useEffect(() => {
     dispatch(fetchProducts(`/products`));
@@ -23,7 +24,9 @@ const Home = () => {
     <div className="home">
       <h2 className="home__title">Shop</h2>
       <div className="row">
-        { products.length && products.map((product) => (
+        { error ? (<span className="home__loader">{ error.message }</span>) : null}
+        { isLoading ? (<span className="home__loader"><Spinner /></span>) : null}
+        { !isLoading ? payload.map((product) => (
           <div
             // eslint-disable-next-line no-underscore-dangle
             key={product._id}
@@ -31,10 +34,10 @@ const Home = () => {
             data-testid="product-card-item"
           >
             <ProductCard
-              width="20rem"
+              width="100%"
               product={product}
             />
-          </div>))}
+          </div>)) : null }
       </div>
     </div>
   );

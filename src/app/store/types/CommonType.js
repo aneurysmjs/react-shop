@@ -11,3 +11,11 @@ export type ResponseError = {
     message: string
   }
 };
+
+export type Base<T> = {
+  isLoading: boolean,
+  error: ?{
+    message: string
+  },
+  payload: T,
+};
