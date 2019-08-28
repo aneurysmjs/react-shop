@@ -5,3 +5,9 @@ export type Response<D> = {
     data: D
   }
 };
+
+export type ResponseError = {
+  error: {
+    message: string
+  }
+};
