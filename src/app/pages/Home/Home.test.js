@@ -6,8 +6,8 @@ import renderWithRedux from '@/utils/testing/renderWithRedux';
 
 import Home from './Home';
 
-describe('Home', () => {
-  it('should toggle <Sidebar /> when clicking icon', async () => {
+describe.skip('Home', () => {
+  it('should display products', async () => {
     let testRenderer = {};
 
     await act(async () => {
