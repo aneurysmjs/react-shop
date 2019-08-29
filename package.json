@@ -25,9 +25,7 @@
     "start": "cross-env NODE_ENV=development node scripts/start.js",
     "start:analyzer": "webpack-bundle-analyzer build/client/static/bundle-stats.json",
     "test": "node scripts/test.js --env=jsdom",
-    "test:update": "yarn test --updateSnapshot",
     "flow-typed": "node_modules/.bin/flow-typed",
-    "lint:js": "eslint src/**/*.{js}",
     "semantic-release": "semantic-release"
   },
   "config": {
