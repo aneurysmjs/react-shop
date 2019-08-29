@@ -3,7 +3,7 @@ import React from 'react';
 // $FlowIgnore
 import { useSelector } from 'react-redux';
 
-import { getFooter } from '@/store/reducers/footer';
+import { getFooter } from '@/store/modules/footer/selectors';
 import type { FooterType } from '@/store/types/FooterType';
 
 import Icon from '@/components/base/Icon/Icon';

@@ -8,7 +8,7 @@ import type { State } from '@/store/types/State';
 import type { AsyncAction } from '@/store/types/Actions';
 import type { ProductsType } from '@/store/types/ProductsType';
 
-import { getProducts } from '@/store/selectors/getProducts';
+import { getProducts } from '@/store/modules/products/selectors';
 
 export default function fetchProducts(query: string = ''): AsyncAction<State> {
   return {
