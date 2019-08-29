@@ -1,14 +1,11 @@
 // @flow strict
-/**
- * @module reducers
- */
 
 import { combineReducers } from 'redux';
 
 import type { Actions } from '@/store/types/Actions';
 
-import cart from './cart';
 import footer from './footer';
+import { cart } from '@/store/modules/cart/reducers';
 import { products } from '@/store/modules/products/reducers';
 
 export default combineReducers<{}, Actions>({

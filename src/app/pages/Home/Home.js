@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from '@/components/base/Spinner/Spinner';
-import { fetchProducts } from '@/store/actions';
+import { fetchProducts } from '@/store/modules/products/actions';
 import { getProducts } from '@/store/modules/products/selectors';
 import type { ProductsType } from '@/store/types/ProductsType';
 

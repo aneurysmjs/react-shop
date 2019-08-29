@@ -1,9 +1,5 @@
 // @flow strict
 
 import type { State } from '@/store/types/State';
-
-import cart from './cart';
-
-export default cart;
-
+// eslint-disable-next-line import/prefer-default-export
 export const getCart = (state: State) => state.cart;

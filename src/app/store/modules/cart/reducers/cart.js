@@ -4,7 +4,7 @@ import type { CartType, CartActionType } from '@/store/types/CartType';
 
 import { CART_DATA } from '@/store/ActionTypes';
 
-import createReducer from '../createReducer';
+import createReducer from '@/store/reducers/createReducer';
 
 const initialState = {
   quantity: 0,

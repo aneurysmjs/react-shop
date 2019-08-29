@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import Icon from '@/components/base/Icon/Icon';
 import { useLazy } from '@/hooks/useLazy';
-import { getCart } from '@/store/reducers/cart';
+import { getCart } from '@/store/modules/cart/selectors';
 
 import type { CartType } from '@/store/types/CartType';
 
