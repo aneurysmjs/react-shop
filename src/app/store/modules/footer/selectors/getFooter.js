@@ -1,9 +1,5 @@
 // @flow strict
 
 import type { State } from '@/store/types/State';
-
-import footer from './footer';
-
-export default footer;
-
+// eslint-disable-next-line import/prefer-default-export
 export const getFooter = (state: State) => state.footer;

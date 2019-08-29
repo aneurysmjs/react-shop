@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 
 import type { Actions } from '@/store/types/Actions';
 
-import footer from './footer';
+import { footer } from '@/store/modules/footer/reducers';
 import { cart } from '@/store/modules/cart/reducers';
 import { products } from '@/store/modules/products/reducers';
 

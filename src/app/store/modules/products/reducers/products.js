@@ -1,7 +1,7 @@
 // @flow strict
 import type { ProductsType, ProductActionType } from '@/store/types/ProductsType';
 
-import createReducer from '@/store/reducers/createReducer';
+import { createReducer } from '@/store/helpers/createReducer';
 
 import {
   GET_PRODUCTS_FAILURE,
