@@ -1,13 +1,13 @@
 // @flow strict
 import type { ProductsType, ProductActionType } from '@/store/types/ProductsType';
 
-import createReducer from '../createReducer';
+import createReducer from '@/store/reducers/createReducer';
 
 import {
   GET_PRODUCTS_FAILURE,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-} from '../../ActionTypes';
+} from '@/store/ActionTypes';
 
 const initialState = {
   error: null,

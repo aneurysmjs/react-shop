@@ -9,7 +9,7 @@ import type { Actions } from '@/store/types/Actions';
 
 import cart from './cart';
 import footer from './footer';
-import { products } from './products';
+import { products } from '@/store/modules/products/reducers';
 
 export default combineReducers<{}, Actions>({
   cart,
