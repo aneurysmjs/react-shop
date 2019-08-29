@@ -8,12 +8,12 @@ import type { Actions } from '@/store/types/Actions';
 // import throttle from 'lodash.throttle';
 
 // Middleware is the suggested way to extend Redux with custom functionality.
-import middlewares from '@/store/middlewares';
+import middlewares from '@/store/config/middlewares';
 
 // import all reducers
 import reducer from '@/store/reducers';
 
-// import { saveState, loadState } from './localStorage';
+// import { saveState, loadState } from './storage';
 
 // Get the state from localStorage
 // const persistedState = loadState();

@@ -1,6 +1,6 @@
 // @flow strict
 
-import configureStore from './configureStore';
+import configureStore from './config/configureStore';
 
 const store = configureStore();
 
