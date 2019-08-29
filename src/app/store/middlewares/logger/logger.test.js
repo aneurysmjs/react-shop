@@ -41,7 +41,7 @@ describe('logger middleware', () => {
         };
         const dispatch = jest.fn(() => {});
         const actionHandler = nextHandler(dispatch);
-        
+
         actionHandler(action);
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(console.group).toHaveBeenCalledTimes(1);
