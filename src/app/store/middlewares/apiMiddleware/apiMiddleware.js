@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // @flow strict
 import type { Dispatch, Middleware } from 'redux';
 
@@ -32,7 +33,8 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
   }
 
   if (!shouldCallAPI(getState())) {
-    return undefined;
+    // $FlowFixMe
+    return; // eslint-disable-line consistent-return
   }
 
   const [requestType, successType, failureType] = types;
@@ -41,7 +43,7 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
     ...payload,
     type: requestType,
   });
-
+  // $FlowFixMe
   return (async () => {
     try {
       const response = await callAPI();

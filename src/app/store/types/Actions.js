@@ -18,5 +18,5 @@ export type AsyncAction<S> = {
 
 export type MiddlewareAction<S> = {
   type: string,
-  ...AsyncAction<S>
+  ...$Exact<AsyncAction<S>>
 };
