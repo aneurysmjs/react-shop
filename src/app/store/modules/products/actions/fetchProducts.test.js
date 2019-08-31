@@ -1,7 +1,7 @@
 import axiosMock from 'axios';
 import configureMockStore from 'redux-mock-store';
 
-import { apiMiddleware } from '@/store/middlewares/apiMiddleware';
+import { apiMiddleware } from '@/store/config/middlewares/apiMiddleware';
 
 import fetchProducts from './fetchProducts';
 

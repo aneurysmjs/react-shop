@@ -4,7 +4,7 @@ import {
   GET_PRODUCTS_FAILURE,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-} from '../../ActionTypes';
+} from '@/store/ActionTypes';
 
 const productsData = [
   {
