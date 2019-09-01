@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 import { createBrowserHistory } from 'history';
-import { hydrate } from 'react-dom';
+import reactDOM from 'react-dom';
 // $FlowIgnore
 import { Provider } from 'react-redux';
 import {
@@ -14,13 +14,14 @@ import App from '@/App';
 
 const browserHistory = window.browserHistory || createBrowserHistory();
 
-hydrate(
+const SSR = process.env.RENDER_TYPE === 'ssr';
+
+reactDOM[`${SSR ? 'hydrate' : 'render'}`](
   <Provider store={store}>
     <Router>
       <App />
     </Router>
   </Provider>,
-  // $FlowIgnore
   document.getElementById('app'),
 );
 

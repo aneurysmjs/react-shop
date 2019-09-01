@@ -5,13 +5,13 @@ import {
 } from 'react-router-dom';
 
 // $FlowIgnoreMe
-import loadable from '@loadable/component';
+import loadable from '@loadable/component'; // eslint-disable-line no-unused-vars
 
 import Layout from '@/components/core/Layout/Layout';
 
-const Home = loadable(() => import(/* webpackChunkName: "Home" */'@/pages/Home/Home'));
+// const Home = loadable(() => import(/* webpackChunkName: "Home" */'@/pages/Home/Home'));
 
-// import Home from '@/pages/Home/Home';
+import Home from '@/pages/Home/Home';
 
 // const Loading = () => (<div>...</div>);
 
