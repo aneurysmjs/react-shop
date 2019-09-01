@@ -1,11 +1,3 @@
-const { clientOnly } = require('./utils');
-
-if (clientOnly()) {
-  // eslint-disable-next-line no-console
-  console.log('clientONLY madafacka');
-  // eslint-disable-next-line global-require
-  require('./buildClient');
-} else {
-  // eslint-disable-next-line global-require
-  require('./buildSSR');
-}
+const { SCRIPT_TYPE } = require('./utils');
+// eslint-disable-next-line import/no-dynamic-require
+require(`./build.${SCRIPT_TYPE}`);

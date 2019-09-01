@@ -30,7 +30,7 @@ const startClient = async () => {
 
   const webpackCompiler = webpack([clientConfig]);
   const clientCompiler = findCompiler(webpackCompiler)('client');
-  const clientPromise = makeCompilerPromise([clientCompiler]);
+  const [clientPromise] = makeCompilerPromise([clientCompiler]);
 
   const watchOptions = {
     ignored: /node_modules/,

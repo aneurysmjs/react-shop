@@ -34,13 +34,16 @@ const makeCompilerPromise = (compilers) => (
   compilers.map((compiler) => compilerPromise(compiler.name, compiler))
 );
 
-const clientOnly = () => process.argv.includes('--client-only');
+const withSSR = () => process.argv.includes('--with-ssr');
+
+const SCRIPT_TYPE = withSSR() ? 'ssr' : 'client';
 
 module.exports = {
   COMPILER_NAMES,
+  SCRIPT_TYPE,
   compilerPromise,
   findCompiler,
   logMessage,
   makeCompilerPromise,
-  clientOnly,
+  withSSR,
 };

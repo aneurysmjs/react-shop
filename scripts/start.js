@@ -1,14 +1,10 @@
 const rimraf = require('rimraf');
 const paths = require('../config/paths');
-const { clientOnly } = require('./utils');
+const { SCRIPT_TYPE } = require('./utils');
 
 rimraf.sync(paths.clientBuild);
 rimraf.sync(paths.serverBuild);
+console.log('SCRIPT_TYPE', SCRIPT_TYPE);
 
-if (clientOnly()) {
-  // eslint-disable-next-line global-require
-  require('./startClient');
-} else {
-  // eslint-disable-next-line global-require
-  require('./startSSR');
-}
+// eslint-disable-next-line import/no-dynamic-require
+require(`./start.${SCRIPT_TYPE}`);

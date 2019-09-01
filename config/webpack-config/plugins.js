@@ -7,20 +7,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 
-const { clientOnly } = require('../../scripts/utils');
+const { withSSR } = require('../../scripts/utils');
 const paths = require('../paths');
 const env = require('../env')();
+
+const html = new HtmlWebpackPlugin({
+  filename: path.join(paths.clientBuild, 'index.html'),
+  inject: true,
+  template: paths.appHtml,
+});
+
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 const shared = [
 
 ];
 
 const client = [
-  clientOnly() && new HtmlWebpackPlugin({
-    filename: path.join(paths.clientBuild, 'index.html'),
-    inject: true,
-    template: paths.appHtml,
-  }),
   new CaseSensitivePathsPlugin(),
   new webpack.DefinePlugin(env.stringified),
   new webpack.DefinePlugin({
@@ -28,13 +31,15 @@ const client = [
     __CLIENT__: 'true',
   }),
   new MiniCssExtractPlugin({
-    filename:
-      process.env.NODE_ENV === 'development' ? '[name].css' : '[name].[contenthash].css',
-    chunkFilename:
-      process.env.NODE_ENV === 'development' ? '[id].css' : '[id].[contenthash].css',
+    filename: IS_DEV ? '[name].css' : '[name].[contenthash].css',
+    chunkFilename: IS_DEV ? '[id].css' : '[id].[contenthash].css',
   }),
   new ManifestPlugin({ fileName: 'manifest.json' }),
-].filter(Boolean);
+];
+
+if (!withSSR()) {
+  client.push(html);
+}
 
 const server = [
   new LoadablePlugin(),
