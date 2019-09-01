@@ -29,7 +29,7 @@ const buildClient = async () => {
     console.error(chalk.red(stats.compilation.errors));
   });
 
-  // wait until client and server is compiled
+  // wait until client is compiled
   try {
     await clientPromise;
     logMessage('Client build done!', 'info');
