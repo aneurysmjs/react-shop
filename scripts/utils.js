@@ -34,10 +34,13 @@ const makeCompilerPromise = (compilers) => (
   compilers.map((compiler) => compilerPromise(compiler.name, compiler))
 );
 
+const clientOnly = () => process.argv.includes('--client-only');
+
 module.exports = {
   COMPILER_NAMES,
   compilerPromise,
   findCompiler,
   logMessage,
   makeCompilerPromise,
+  clientOnly,
 };
