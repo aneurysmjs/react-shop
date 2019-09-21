@@ -1,21 +1,20 @@
 // @flow strict
-import { compose, applyMiddleware } from 'redux';
-import type { Dispatch, StoreEnhancer } from 'redux';
+import { applyMiddleware, compose } from 'redux';
+import type { StoreEnhancer } from 'redux';
 
 import middlewares from '@/store/config/middlewares';
 
 import type { State } from '@/store/types/State';
 import type { Actions } from '@/store/types/Actions';
 
-type EnhancersType = StoreEnhancer<State, Actions, Dispatch<Actions>>
 /* eslint-disable */
 const devtools =
   typeof window !== 'undefined' &&
   typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function' &&
+  // eslint-disable-next-line no-underscore-dangle
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionsBlacklist: [] });
   /* eslint-enable */
-const composeEnhancers = devtools || compose;
-// eslint-disable-next-line no-underscore-dangle
-const enhancer: EnhancersType = composeEnhancers(applyMiddleware(...middlewares));
+// $FlowFixMe
+const composeEnhancers: StoreEnhancer<State, Actions> = devtools || compose;
 
-export default enhancer;
+export default composeEnhancers(applyMiddleware(...middlewares));
