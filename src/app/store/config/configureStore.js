@@ -32,6 +32,7 @@ function configureStore() {
   const store = createStore<{}, Actions, Dispatch<Actions>>(
     reducer,
     // persistedState,
+    // $FlowFixMe
     composeEnhancers(applyMiddleware(...middlewares)), // third parameter is called an 'enhancer'
   );
   /* // Save the state any time the store state changes
