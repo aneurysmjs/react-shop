@@ -1,13 +1,13 @@
 // @flow strict
 import { compose, applyMiddleware } from 'redux';
-import type { Dispatch, StoreEnhancer } from 'redux';
+import type { StoreEnhancer } from 'redux';
 
 import middlewares from '@/store/config/middlewares';
 
 import type { State } from '@/store/types/State';
 import type { Actions } from '@/store/types/Actions';
 
-type EnhancerType = StoreEnhancer<State, Actions, Dispatch<Actions>>;
+type EnhancerType = StoreEnhancer<State, Actions>;
 
 /* eslint-disable */
 const devtools =
