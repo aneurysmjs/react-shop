@@ -1,22 +1,19 @@
 // @flow strict
 
-import type { FooterActionType } from '@/store/types/FooterType';
 import type { CartActionType } from '@/store/types/CartType';
+import type { FooterActionType } from '@/store/types/FooterType';
 import type { ProductActionType } from '@/store/types/ProductsType';
+import type { State } from '@/store/types/State';
 
 export type Actions =
   CartActionType |
   FooterActionType |
   ProductActionType;
 
-export type AsyncAction<S> = {
+export type AsyncAction = {
+  type: string,
   types?: Array<string>,
   callAPI?: () => Promise<*>,
-  shouldCallAPI?: (S) => boolean,
+  shouldCallAPI?: (State) => boolean,
   payload?: *,
-};
-
-export type MiddlewareAction<S> = {
-  type: string,
-  ...$Exact<AsyncAction<S>>
 };

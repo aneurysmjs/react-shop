@@ -3,9 +3,9 @@
 import type { Dispatch, Middleware } from 'redux';
 
 import type { State } from '@/store/types/State';
-import type { Actions, MiddlewareAction } from '@/store/types/Actions';
+import type { Actions, AsyncAction } from '@/store/types/Actions';
 
-type ApiMiddlewareType = Middleware<State, Actions, Dispatch<MiddlewareAction<State>>>;
+type ApiMiddlewareType = Middleware<State, Actions, Dispatch<AsyncAction>>;
 
 const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (action) => {
   const {
