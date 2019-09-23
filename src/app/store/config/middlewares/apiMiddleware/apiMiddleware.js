@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // @flow strict
 import type { Dispatch, Middleware } from 'redux';
 
@@ -8,17 +7,26 @@ import type { Actions, AsyncAction } from '@/store/types/Actions';
 type ApiMiddlewareType = Middleware<State, Actions, Dispatch<AsyncAction>>;
 
 const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (action) => {
+  let meta = {};
+
+  if (action.meta) {
+    meta = { ...action.meta };
+  }
+
+  if (!action.meta && !meta.types) {
+    // Normal action: pass it on
+    return next(action);
+  }
+
+  const {
+    payload = {},
+  } = action;
+
   const {
     types,
     callAPI,
     shouldCallAPI = (s = true) => s,
-    payload = {},
-  } = action;
-
-  if (!types) {
-    // Normal action: pass it on
-    return next(action);
-  }
+  } = meta;
 
   if (
     !Array.isArray(types)
@@ -40,7 +48,7 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
   const [requestType, successType, failureType] = types;
 
   dispatch({
-    ...payload,
+    payload: { ...payload },
     type: requestType,
   });
   // $FlowFixMe
@@ -48,14 +56,12 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
     try {
       const response = await callAPI();
       return dispatch({
-        ...payload,
-        response,
+        payload: { response },
         type: successType,
       });
     } catch (error) {
       return dispatch({
-        ...payload,
-        error,
+        payload: { error },
         type: failureType,
       });
     }

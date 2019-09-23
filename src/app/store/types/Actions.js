@@ -12,8 +12,10 @@ export type Actions =
 
 export type AsyncAction = {
   type: string,
-  types?: Array<string>,
-  callAPI?: () => Promise<*>,
-  shouldCallAPI?: (State) => boolean,
   payload?: *,
+  meta?: {
+    types: Array<string>,
+    callAPI: () => Promise<*>,
+    shouldCallAPI?: (State) => boolean,
+  }
 };

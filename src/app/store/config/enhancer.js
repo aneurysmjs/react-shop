@@ -17,6 +17,7 @@ const devtools =
   /* eslint-enable */
 const composeEnhancers = devtools || compose;
 // eslint-disable-next-line no-underscore-dangle
+// $FlowFixMe
 const enhancer: EnhancerType = composeEnhancers(applyMiddleware(...middlewares));
 
 export default enhancer;

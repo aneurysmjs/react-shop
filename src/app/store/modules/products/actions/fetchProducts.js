@@ -13,16 +13,18 @@ import { getProducts } from '@/store/modules/products/selectors';
 export default function fetchProducts(query: string = ''): AsyncAction {
   return {
     type: ASYNC_ACTION_TYPE,
-    types: [
-      types.GET_PRODUCTS_REQUEST,
-      types.GET_PRODUCTS_SUCCESS,
-      types.GET_PRODUCTS_FAILURE,
-    ],
-    callAPI: () => api.get<string, ProductsType>(query),
-    shouldCallAPI: (state) => {
-      const products = getProducts(state);
-      // $FlowFixMe - это не должно орать
-      return !products.length;
+    meta: {
+      types: [
+        types.GET_PRODUCTS_REQUEST,
+        types.GET_PRODUCTS_SUCCESS,
+        types.GET_PRODUCTS_FAILURE,
+      ],
+      callAPI: () => api.get<string, ProductsType>(query),
+      shouldCallAPI: (state) => {
+        const products = getProducts(state);
+        // $FlowFixMe - это не должно орать
+        return !products.length;
+      },
     },
   };
 }

@@ -24,8 +24,10 @@ export default createReducer<ProductsType, ProductActionType>(initialState, {
   },
   [GET_PRODUCTS_SUCCESS](state, action) {
     const {
-      response: {
-        data,
+      payload: {
+        response: {
+          data,
+        },
       },
     } = action;
     return {
@@ -35,7 +37,7 @@ export default createReducer<ProductsType, ProductActionType>(initialState, {
     };
   },
   [GET_PRODUCTS_FAILURE](state, action) {
-    const { error } = action;
+    const { payload: { error } } = action;
     return {
       ...state,
       isLoading: false,

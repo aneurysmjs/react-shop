@@ -1,6 +1,4 @@
 // @flow strict
-import type { Action } from 'redux';
-
 import type { Response, ResponseError } from '@/store/types/CommonType';
 
 export type ProductType = {
@@ -23,7 +21,6 @@ export type ProductsType = {
 };
 
 export type ProductActionType = {
-  ...$Exact<Action<string>>,
-  ...$Exact<Response<Array<ProductType>>>,
-  ...$Exact<ResponseError>,
+  type: string,
+  payload: Response<Array<ProductType>> & ResponseError,
 };
