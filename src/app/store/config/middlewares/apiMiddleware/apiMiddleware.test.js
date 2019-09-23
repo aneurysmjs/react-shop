@@ -64,8 +64,10 @@ describe('api middleware', () => {
 
       it('should throw when \'types\' property is not correct', () => {
         const actionObj = {
-          types: [],
-          callAPI: () => {},
+          meta: {
+            types: [],
+            callAPI: () => {},
+          },
         };
 
         const actionHandler = nextHandler(() => {});
@@ -77,7 +79,9 @@ describe('api middleware', () => {
 
       it('should throw when there\'s no \'callAPI\' property', () => {
         const actionObj = {
-          types: requestTypes,
+          meta: {
+            types: requestTypes,
+          },
         };
 
         const actionHandler = nextHandler();
@@ -90,8 +94,10 @@ describe('api middleware', () => {
       it('should \'success\' the API call', async () => {
         axiosMock.get.mockReturnValue(Promise.resolve(response));
         const actionObj = {
-          types: requestTypes,
-          callAPI: jest.fn(() => axiosMock.get('someApiEndpoint')),
+          meta: {
+            types: requestTypes,
+            callAPI: jest.fn(() => axiosMock.get('someApiEndpoint')),
+          },
         };
         const actionHandler = nextHandler();
 
@@ -100,18 +106,20 @@ describe('api middleware', () => {
         // The first argument of the first call is a REQUEST
         expect(store.dispatch.mock.calls[0][0]).toMatchObject({ type: REQUEST });
         // callAPI should been called
-        expect(actionObj.callAPI).toHaveBeenCalledTimes(1);
+        expect(actionObj.meta.callAPI).toHaveBeenCalledTimes(1);
         // check that was called with the right endpoint
         expect(axiosMock.get).toHaveBeenCalledWith('someApiEndpoint');
         // The first argument of the second call is a SUCCESS
-        expect(store.dispatch.mock.calls[1][0]).toMatchObject({ type: SUCCESS, response });
+        expect(store.dispatch.mock.calls[1][0]).toMatchObject({ type: SUCCESS, payload: { response } });
       });
 
       it('should \'fail\' the API call', async () => {
         axiosMock.get.mockReturnValue(Promise.reject(error));
         const actionObj = {
-          types: requestTypes,
-          callAPI: jest.fn(() => axiosMock.get('someBadApiEndpoint')),
+          meta: {
+            types: requestTypes,
+            callAPI: jest.fn(() => axiosMock.get('someBadApiEndpoint')),
+          },
         };
         const actionHandler = nextHandler();
 
@@ -120,19 +128,21 @@ describe('api middleware', () => {
         // The first argument of the first call is a REQUEST
         expect(store.dispatch.mock.calls[0][0]).toMatchObject({ type: REQUEST });
         // callAPI should been called
-        expect(actionObj.callAPI).toHaveBeenCalledTimes(1);
+        expect(actionObj.meta.callAPI).toHaveBeenCalledTimes(1);
         // check that was called with the right endpoint
         expect(axiosMock.get).toHaveBeenCalledWith('someBadApiEndpoint');
         // The first argument of the second call is a FAILURE
-        expect(store.dispatch.mock.calls[1][0]).toMatchObject({ type: FAILURE, error });
+        expect(store.dispatch.mock.calls[1][0]).toMatchObject({ type: FAILURE, payload: { error } });
       });
 
       it('should NOT call the API', async () => {
         axiosMock.get.mockReturnValue(Promise.resolve(response));
         const actionObj = {
-          types: requestTypes,
-          callAPI: jest.fn(() => axiosMock.get('endpoint')),
-          shouldCallAPI: () => false,
+          meta: {
+            types: requestTypes,
+            callAPI: jest.fn(() => axiosMock.get('endpoint')),
+            shouldCallAPI: () => false,
+          },
         };
         const actionHandler = nextHandler();
 
@@ -140,7 +150,7 @@ describe('api middleware', () => {
 
         expect(store.dispatch).not.toHaveBeenCalled();
         // callAPI should NOT been called
-        expect(actionObj.callAPI).toHaveBeenCalledTimes(0);
+        expect(actionObj.meta.callAPI).toHaveBeenCalledTimes(0);
       });
     });
   });
