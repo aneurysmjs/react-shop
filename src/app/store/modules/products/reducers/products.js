@@ -12,7 +12,7 @@ import {
 const initialState = {
   error: null,
   isLoading: false,
-  payload: [],
+  products: [],
 };
 
 export default createReducer<ProductsType, ProductActionType>(initialState, {
@@ -31,7 +31,7 @@ export default createReducer<ProductsType, ProductActionType>(initialState, {
     return {
       ...state,
       isLoading: false,
-      payload: [...data],
+      products: [...data],
     };
   },
   [GET_PRODUCTS_FAILURE](state, action) {

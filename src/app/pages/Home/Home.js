@@ -14,7 +14,7 @@ import './Home.scss';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { isLoading, payload, error }: ProductsType = useSelector(getProducts);
+  const { isLoading, products, error }: ProductsType = useSelector(getProducts);
 
   useEffect(() => {
     dispatch(fetchProducts(`/products`));
@@ -26,7 +26,7 @@ const Home = () => {
       <div className="row">
         { error ? (<span className="home__loader">{ error.message }</span>) : null}
         { isLoading ? (<span className="home__loader"><Spinner /></span>) : null}
-        { !isLoading ? payload.map((product) => (
+        { !isLoading ? products.map((product) => (
           <div
             // eslint-disable-next-line no-underscore-dangle
             key={product._id}

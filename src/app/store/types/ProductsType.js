@@ -1,7 +1,7 @@
 // @flow strict
 import type { Action } from 'redux';
 
-import type { Response, ResponseError, Base } from '@/store/types/CommonType';
+import type { Response, ResponseError } from '@/store/types/CommonType';
 
 export type ProductType = {
   _id: string,
@@ -14,12 +14,13 @@ export type ProductType = {
   shop: string,
 };
 
-export type ProductsType = Base<Array<ProductType>>;
-// export type ProductsType = {
-//   isLoading: boolean,
-//   payload: Array<ProductType>,
-//   ...$Exact<ResponseError>,
-// };
+export type ProductsType = {
+  isLoading: boolean,
+  products: Array<ProductType>,
+  error: ?{
+    message: string
+  },
+};
 
 export type ProductActionType = {
   ...$Exact<Action<string>>,
