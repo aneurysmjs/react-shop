@@ -8,7 +8,7 @@ import { fetchProducts } from '@/store/modules/products/actions';
 import { getProducts } from '@/store/modules/products/selectors';
 import type { ProductsType } from '@/store/types/ProductsType';
 
-import { ProductCard } from '@/components/shared/ProductCard';
+import { ProductCard } from '@/components/common/ProductCard';
 
 import './Home.scss';
 

@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 
-import ImgLoader from '@/components/shared/ImgLoader/ImgLoader';
+import ImgLoader from '@/components/common/ImgLoader/ImgLoader';
 
 import type { ProductType } from '@/store/types/ProductsType';
 
