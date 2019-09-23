@@ -19,7 +19,7 @@ const response = { data: productsData };
 const error = { message: 'Request failed with status code 404' };
 const state = {
   isLoading: false,
-  payload: [],
+  products: [],
   error: null,
 };
 
@@ -39,16 +39,16 @@ describe('products reducer', () => {
   it('should return products', () => {
     const successAction = {
       type: GET_PRODUCTS_SUCCESS,
-      response,
+      payload: { response },
       error: null,
     };
-    expect(products([], successAction)).toEqual({ isLoading: false, payload: productsData });
+    expect(products([], successAction)).toEqual({ isLoading: false, products: productsData });
   });
 
   it('should return error', () => {
     const errorAction = {
       type: GET_PRODUCTS_FAILURE,
-      error,
+      payload: { error },
     };
     expect(products([], errorAction)).toEqual({ isLoading: false, error });
   });
