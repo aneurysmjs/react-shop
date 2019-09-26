@@ -8,10 +8,15 @@ type ActionCreatorType = <T>(T | Array<T>) => ActionType;
 function makeActionCreator(type: string, ...argNames: Array<string>): ActionCreatorType {
   return function actionCreator(...args) {
     const action = { type };
-    argNames.forEach((arg, index) => {
-      action[argNames[index]] = args[index];
-    });
-    return action;
+    return argNames.reduce((current, arg, index) => {
+      const currentAction = {
+        ...current,
+        payload: {
+          [argNames[index]]: args[index],
+        },
+      };
+      return currentAction;
+    }, action);
   };
 }
 
