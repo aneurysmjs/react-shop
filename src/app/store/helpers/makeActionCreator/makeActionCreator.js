@@ -1,22 +1,26 @@
 // @flow strict
-export type ActionType = {
+export type ActionType<P, M> = {
   type: string,
+  payload: P,
+  meta?: M,
 };
 
-type ActionCreatorType = <T>(T | Array<T>) => ActionType;
+type ActionCreatorType = <P, M>(P, M) => ActionType<P, M>;
 
-function makeActionCreator(type: string, ...argNames: Array<string>): ActionCreatorType {
-  return function actionCreator(...args) {
-    const action = { type };
-    return argNames.reduce((current, arg, index) => {
-      const currentAction = {
-        ...current,
-        payload: {
-          [argNames[index]]: args[index],
-        },
-      };
-      return currentAction;
-    }, action);
+/**
+ * @desc: conditionally append properties as they exist
+ */
+const bareAction = (action) => ({
+  ...action.payload && { payload: action.payload },
+  ...action.meta && { meta: action.meta },
+});
+
+function makeActionCreator(type: string): ActionCreatorType {
+  return function actionCreator<P, M>(payload: P, meta: ?M = undefined) {
+    return {
+      type,
+      ...bareAction({ payload, meta }),
+    };
   };
 }
 
