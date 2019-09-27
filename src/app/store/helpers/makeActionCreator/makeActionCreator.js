@@ -1,4 +1,7 @@
 // @flow strict
+// $FlowIgnore
+import { appendProps } from '@/utils/appendProps';
+
 export type ActionType<P, M> = {
   type: string,
   payload: P,
@@ -7,13 +10,7 @@ export type ActionType<P, M> = {
 
 type ActionCreatorType = <P, M>(P, M) => ActionType<P, M>;
 
-/**
- * @desc: conditionally append properties as they exist
- */
-const bareAction = (action) => ({
-  ...action.payload && { payload: action.payload },
-  ...action.meta && { meta: action.meta },
-});
+const bareAction = appendProps('payload', 'meta');
 
 function makeActionCreator(type: string): ActionCreatorType {
   return function actionCreator<P, M>(payload: P, meta: ?M = undefined) {
