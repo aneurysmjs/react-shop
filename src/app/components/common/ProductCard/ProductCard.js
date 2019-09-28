@@ -3,7 +3,7 @@ import React from 'react';
 
 import ImgLoader from '@/components/common/ImgLoader/ImgLoader';
 
-import type { ProductType } from '@/store/types/ProductsType';
+import type { ProductType } from '@/shared/types/ProductsType';
 
 import './ProductCard.scss';
 

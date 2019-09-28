@@ -2,7 +2,7 @@
 import { createStore } from 'redux';
 import type { Dispatch } from 'redux';
 
-import type { Actions } from '@/store/types/Actions';
+import type { Actions } from '@/shared/types/Actions';
 
 // import throttle from 'lodash.throttle';
 

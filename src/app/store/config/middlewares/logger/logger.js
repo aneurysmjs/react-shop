@@ -2,8 +2,8 @@
 
 import type { Middleware } from 'redux';
 
-import type { State } from '@/store/types/State';
-import type { Actions } from '@/store/types/Actions';
+import type { State } from '@/shared/types/State';
+import type { Actions } from '@/shared/types/Actions';
 
 /* eslint-disable no-console */
 /**

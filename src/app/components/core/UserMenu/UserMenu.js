@@ -7,7 +7,7 @@ import Icon from '@/components/base/Icon/Icon';
 import { useLazy } from '@/hooks/useLazy';
 import { getCart } from '@/store/modules/cart/selectors';
 
-import type { CartType } from '@/store/types/CartType';
+import type { CartType } from '@/shared/types/CartType';
 
 import './UserMenu.scss';
 

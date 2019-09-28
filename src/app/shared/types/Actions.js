@@ -1,9 +1,8 @@
 // @flow strict
-
-import type { CartActionType } from '@/store/types/CartType';
-import type { FooterActionType } from '@/store/types/FooterType';
-import type { ProductActionType } from '@/store/types/ProductsType';
-import type { State } from '@/store/types/State';
+import type { CartActionType } from '@/shared/types/CartType';
+import type { FooterActionType } from '@/shared/types/FooterType';
+import type { ProductActionType } from '@/shared/types/ProductsType';
+import type { State } from '@/shared/types/State';
 
 export type Actions =
   CartActionType |

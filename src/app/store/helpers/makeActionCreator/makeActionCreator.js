@@ -2,11 +2,7 @@
 // $FlowIgnore
 import { appendProps } from '@/utils/appendProps';
 
-export type ActionType<P, M> = {
-  type: string,
-  payload: P,
-  meta?: M,
-};
+import type { ActionType } from '@/shared/types/CommonType';
 
 type ActionCreatorType = <P, M>(P, M) => ActionType<P, M>;
 

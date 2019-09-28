@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { CartType, CartActionType } from '@/store/types/CartType';
+import type { CartType, CartActionType } from '@/shared/types/CartType';
 
 import { CART_DATA } from '@/store/ActionTypes';
 

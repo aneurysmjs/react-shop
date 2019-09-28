@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { FooterType, FooterActionType } from '@/store/types/FooterType';
+import type { FooterType, FooterActionType } from '@/shared/types/FooterType';
 
 import { FOOTER_DATA } from '@/store/ActionTypes';
 

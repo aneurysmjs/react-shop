@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 
-import type { Actions } from '@/store/types/Actions';
+import type { Actions } from '@/shared/types/Actions';
 
 import { footer } from '@/store/modules/footer/reducers';
 import { cart } from '@/store/modules/cart/reducers';

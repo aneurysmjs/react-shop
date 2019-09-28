@@ -4,7 +4,7 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 
 import ProductCard from './ProductCard';
-import type { ProductType } from '@/store/types/ProductsType';
+import type { ProductType } from '@/shared/types/ProductsType';
 
 afterEach(cleanup);
 

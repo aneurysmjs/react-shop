@@ -12,10 +12,8 @@ export type ResponseError = {
   }
 };
 
-export type Base<T> = {
-  isLoading: boolean,
-  error: ?{
-    message: string
-  },
-  payload: T,
+export type ActionType<P, M = {}> = {
+  type: string,
+  payload: P,
+  meta?: M,
 };

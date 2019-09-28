@@ -1,5 +1,5 @@
 // @flow strict
-import type { ProductsType, ProductActionType } from '@/store/types/ProductsType';
+import type { ProductsType, ProductActionType } from '@/shared/types/ProductsType';
 
 import { createReducer } from '@/store/helpers/createReducer';
 

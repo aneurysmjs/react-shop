@@ -4,8 +4,8 @@ import type { StoreEnhancer } from 'redux';
 
 import middlewares from '@/store/config/middlewares';
 
-import type { State } from '@/store/types/State';
-import type { Actions } from '@/store/types/Actions';
+import type { State } from '@/shared/types/State';
+import type { Actions } from '@/shared/types/Actions';
 
 type EnhancerType = StoreEnhancer<State, Actions>;
 

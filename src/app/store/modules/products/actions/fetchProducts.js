@@ -7,12 +7,11 @@ import * as types from '@/store/ActionTypes';
 
 import { makeActionCreator } from '@/store/helpers/makeActionCreator';
 
-import type { AsyncAction } from '@/store/types/Actions';
-import type { ProductsType } from '@/store/types/ProductsType';
+import type { ProductsType, ProductActionType } from '@/shared/types/ProductsType';
 
 import { getProducts } from '@/store/modules/products/selectors';
 
-export default function fetchProducts(query: string = ''): AsyncAction {
+export default function fetchProducts(query: string = ''): ProductActionType {
   const meta = {
     types: [
       types.GET_PRODUCTS_REQUEST,
@@ -27,5 +26,11 @@ export default function fetchProducts(query: string = ''): AsyncAction {
     },
   };
 
-  return makeActionCreator(ASYNC_ACTION_TYPE)({}, meta);
+  const payload = {
+    products: [],
+    error: { message: '' },
+    response: { data: [] },
+  };
+
+  return makeActionCreator(ASYNC_ACTION_TYPE)(payload, meta);
 }
