@@ -16,9 +16,7 @@ export type ProductType = {
 export type ProductsType = {
   isLoading: boolean,
   products: Array<ProductType>,
-  error: ?{
-    message: string
-  },
+  ...$Exact<ResponseError>,
 };
 
 type ProductPayloadType = Response<Array<ProductType>> & ResponseError;

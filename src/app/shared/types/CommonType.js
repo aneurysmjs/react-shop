@@ -7,7 +7,7 @@ export type Response<D> = {
 };
 
 export type ResponseError = {
-  error: {
+  error: ?{
     message: string
   }
 };
