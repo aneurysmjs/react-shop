@@ -1,4 +1,5 @@
 // @flow strict
+import type { State } from '@/shared/types/State';
 
 export type Response<D> = {
   response: {
@@ -11,6 +12,12 @@ export type ResponseError = {
     message: string
   }
 };
+
+export type ApiMetaType = $Shape<{
+  types: Array<string>,
+  callAPI: () => Promise<*>,
+  shouldCallAPI: (State) => boolean,
+}>;
 
 export type ActionType<P, M = {}> = {
   type: string,

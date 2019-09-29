@@ -1,6 +1,10 @@
 // @flow strict
-import type { ActionType, Response, ResponseError } from '@/shared/types/CommonType';
-import type { State } from '@/shared/types/State';
+import type {
+  ActionType,
+  ApiMetaType,
+  Response,
+  ResponseError,
+} from '@/shared/types/CommonType';
 
 export type ProductType = {
   _id: string,
@@ -21,12 +25,6 @@ export type ProductsType = {
   },
 };
 
-type ProductMetaType = {
-  types: Array<string>,
-  callAPI: () => Promise<*>,
-  shouldCallAPI: (State) => boolean,
-};
-
 type ProductPayloadType = Response<Array<ProductType>> & ResponseError;
 
-export type ProductActionType = ActionType<ProductPayloadType, ProductMetaType>;
+export type ProductActionType = ActionType<ProductPayloadType, ApiMetaType>;
