@@ -1,10 +1,6 @@
 // @flow strict
-import type {
-  ActionType,
-  ApiMetaType,
-  Response,
-  ResponseError,
-} from '@/shared/types/CommonType';
+import type { ActionType, Response, ResponseError } from '@/shared/types/CommonType';
+import type { ApiMetaType } from '@/shared/types/MiddlewareTypes';
 
 export type ProductType = {
   _id: string,

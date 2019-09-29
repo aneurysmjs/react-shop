@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 // @flow strict
-import type { ApiMetaType } from '@/shared/types/CommonType';
-import type { ApiMiddlewareType } from '@/shared/types/MiddlewareTypes';
+import type { ApiMiddlewareType, ApiMetaType } from '@/shared/types/MiddlewareTypes';
 
+// $FlowIgnore
 const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (action) => {
   let meta: ApiMetaType = {};
 
@@ -38,6 +38,7 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
   }
 
   if (!shouldCallAPI(getState())) {
+    // $FlowIgnore
     return;
   }
 
