@@ -16,8 +16,7 @@ const devtools =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionsBlacklist: [] });
   /* eslint-enable */
 const composeEnhancers = devtools || compose;
-// eslint-disable-next-line no-underscore-dangle
-// $FlowFixMe
+
 const enhancer: EnhancerType = composeEnhancers(applyMiddleware(...middlewares));
 
 export default enhancer;

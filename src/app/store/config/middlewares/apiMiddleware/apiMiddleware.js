@@ -1,14 +1,8 @@
 /* eslint-disable consistent-return */
 // @flow strict
-import type { Dispatch, Middleware } from 'redux';
-
-import type { State } from '@/shared/types/State';
-import type { Actions } from '@/shared/types/Actions';
 import type { ApiMetaType } from '@/shared/types/CommonType';
+import type { ApiMiddlewareType } from '@/shared/types/MiddlewareTypes';
 
-type ApiMiddlewareType = Middleware<State, Actions, Dispatch<Actions>>;
-
-// $FlowIgnore - middlewares dispatch actions and not return anything
 const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (action) => {
   let meta: ApiMetaType = {};
 
@@ -44,7 +38,6 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
   }
 
   if (!shouldCallAPI(getState())) {
-    // $FlowIgnore
     return;
   }
 
@@ -58,8 +51,6 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
   (async () => {
     try {
       const response: Response = await callAPI();
-      // eslint-disable-next-line no-console
-      // console.log('response', response);
       return dispatch({
         payload: { response },
         type: successType,
