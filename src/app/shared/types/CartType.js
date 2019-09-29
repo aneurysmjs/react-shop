@@ -1,11 +1,8 @@
 // @flow strict
-import type { Action } from 'redux';
+import type { ActionType } from '@/shared/types/CommonType';
 
 export type CartType = {
   quantity: number
 };
 
-export type CartActionType = {
-  ...$Exact<Action<string>>,
-  ...$Exact<CartType>
-};
+export type CartActionType = ActionType<CartType>;

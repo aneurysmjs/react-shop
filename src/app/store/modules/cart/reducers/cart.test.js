@@ -7,7 +7,7 @@ describe('cart reducer', () => {
   };
 
   it('should return initial state', () => {
-    const initialState = cart(undefined, { type: '', quantity: 0 });
+    const initialState = cart(undefined, { type: '', payload: { quantity: 0 } });
 
     expect(initialState).toStrictEqual(expectedState);
   });
