@@ -19,6 +19,6 @@ export type ProductsType = {
   ...$Exact<ResponseError>,
 };
 
-type ProductPayloadType = Response<Array<ProductType>> & ResponseError;
+type ProductPayloadType = $Shape<Response<Array<ProductType>> & ResponseError>;
 
 export type ProductActionType = ActionType<ProductPayloadType, ApiMetaType>;

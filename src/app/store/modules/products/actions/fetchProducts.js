@@ -26,11 +26,5 @@ export default function fetchProducts(query: string = ''): ProductActionType {
     },
   };
 
-  const payload = {
-    products: [],
-    error: { message: '' },
-    response: { data: [] },
-  };
-
-  return makeActionCreator(ASYNC_ACTION_TYPE)(payload, meta);
+  return makeActionCreator(ASYNC_ACTION_TYPE)({}, meta);
 }
