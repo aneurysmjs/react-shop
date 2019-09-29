@@ -1,5 +1,5 @@
 // @flow strict
-import type { Action } from 'redux';
+import type { ActionType } from '@/shared/types/CommonType';
 
 type FooterContact = {
   phone: string,
@@ -16,7 +16,4 @@ export type FooterType = {
   columns?: Array<FooterColumn>
 };
 
-export type FooterActionType = {
-  ...$Exact<Action<string>>,
-  ...$Exact<FooterType>
-};
+export type FooterActionType = ActionType<FooterType>;
