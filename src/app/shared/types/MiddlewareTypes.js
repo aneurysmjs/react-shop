@@ -5,7 +5,7 @@ import type { Actions } from '@/shared/types/Actions';
 
 export type ApiMetaType = $Shape<{
   types: Array<string>,
-  callAPI: () => Promise<*>,
+  callAPI: () => Promise<Response>,
   shouldCallAPI: (State) => boolean,
 }>;
 
