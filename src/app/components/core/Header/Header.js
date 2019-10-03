@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Navigation from '@/components/core/Navigation';
-import { UserMenu } from '@/components/core/UserMenu';
+import UserMenu from '@/components/core/UserMenu';
 
 import './Header.scss';
 
