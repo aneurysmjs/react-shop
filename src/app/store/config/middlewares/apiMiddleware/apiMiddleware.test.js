@@ -132,6 +132,7 @@ describe('api middleware', () => {
         // check that was called with the right endpoint
         expect(axiosMock.get).toHaveBeenCalledWith('someBadApiEndpoint');
         // The first argument of the second call is a FAILURE
+        // eslint-disable-next-line max-len
         expect(store.dispatch.mock.calls[1][0]).toMatchObject({ type: FAILURE, payload: { error } });
       });
 

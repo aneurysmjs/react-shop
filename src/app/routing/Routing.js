@@ -7,11 +7,11 @@ import {
 // $FlowIgnoreMe
 import loadable from '@loadable/component'; // eslint-disable-line no-unused-vars
 
-import Layout from '@/components/core/Layout/Layout';
+import Layout from '@/components/core/Layout';
 
 // const Home = loadable(() => import(/* webpackChunkName: "Home" */'@/pages/Home/Home'));
 
-import Home from '@/pages/Home/Home';
+import Home from '@/components/pages/Home';
 
 // const Loading = () => (<div>...</div>);
 
