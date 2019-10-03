@@ -1,7 +1,6 @@
-/* eslint-disable */
+/* eslint-disable prettier/prettier */
 import React, { Fragment, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { Node } from 'react';
 
 import Icon from '~/components/base/Icon';
 import { KEYBOARD } from '~/constants';
@@ -9,21 +8,21 @@ import { KEYBOARD } from '~/constants';
 import './Sidebar.scss';
 
 type PropsType = {
-  isOpen?: boolean,
-  side?: string,
-  onClose?: () => void,
-  title?: string,
-  children: Node,
+  isOpen?: boolean;
+  side?: string;
+  onClose?: () => void;
+  title?: string;
+  children: Node;
 };
 
 const Sidebar = ({
   isOpen = false,
   side = 'right',
-  onClose = () => {},
+  onClose = (): void => {},
   title = 'sidebar',
   children,
-}: PropsType) => {
-  const asideRef = useRef<null>(null);
+}: PropsType): null | React.ReactElement => {
+  const asideRef = useRef<HTMLElement>(null);
 
   const toggleSidebar = (): void => {
     // avoid 'sketchy' null
@@ -32,7 +31,7 @@ const Sidebar = ({
     }
   };
 
-  const delay = (cb: () => void): TimeoutID => setTimeout(cb, 100);
+  const delay = (cb: () => void): NodeJS.Timeout => setTimeout(cb, 100);
 
   const closeSidebar = (): void => {
     toggleSidebar();
@@ -53,7 +52,7 @@ const Sidebar = ({
 
     document.addEventListener('keydown', handleKeyDown);
 
-    return () => {
+    return (): void => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   });
@@ -63,40 +62,37 @@ const Sidebar = ({
       <Fragment>
         <div
           data-testid="overlay"
-          onKeyPress={() => {}}
+          onKeyPress={(): void => {}}
           role="presentation"
           onClick={closeSidebar}
           className={`sidebar__overlay sidebar__overlay--fade-${isOpen ? 'in' : 'out'}`}
         />
         <aside
           data-testid="sidebar"
-          // $FlowFixMe
+          
           ref={asideRef}
           className={`sidebar sidebar--${side}`}
         >
           <header className="sidebar__header">
-            <h3 className="sidebar__title">{ title }</h3>
+            <h3 className="sidebar__title">{title}</h3>
             <button
               data-testid="close"
               className="sidebar__close"
-              tabIndex="-1"
-              onKeyPress={() => {}}
+              tabIndex={-1}
+              onKeyPress={(): void => {}}
               onClick={closeSidebar}
             >
               <Icon path="icons/close" />
             </button>
           </header>
-          <div
-            data-testid="content"
-            className="sidebar__content"
-          >
+          <div data-testid="content" className="sidebar__content">
             {children}
           </div>
         </aside>
       </Fragment>,
-      // $FlowFixMe
       document.body,
-    ) : null;
+    )
+    : null;
 };
 
 export default Sidebar;

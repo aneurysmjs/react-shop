@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { ProductsType, ProductActionType } from '~/shared/types/ProductsType';
 
 import { createReducer } from '~/store/helpers/createReducer';
@@ -25,9 +24,7 @@ export default createReducer<ProductsType, ProductActionType>(initialState, {
   [GET_PRODUCTS_SUCCESS](state, action) {
     const {
       payload: {
-        response: {
-          data,
-        },
+        response: { data },
       },
     } = action;
     return {
@@ -37,7 +34,9 @@ export default createReducer<ProductsType, ProductActionType>(initialState, {
     };
   },
   [GET_PRODUCTS_FAILURE](state, action) {
-    const { payload: { error } } = action;
+    const {
+      payload: { error },
+    } = action;
     return {
       ...state,
       isLoading: false,

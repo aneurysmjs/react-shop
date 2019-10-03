@@ -1,7 +1,4 @@
-/* eslint-disable */
 import { createStore } from 'redux';
-
-import { Actions } from '~/shared/types/Actions';
 
 // import throttle from 'lodash.throttle';
 
@@ -15,6 +12,7 @@ import enhancer from '~/store/config/enhancer';
 // Get the state from localStorage
 // const persistedState = loadState();
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function configureStore() {
   const store = createStore(
     reducer,

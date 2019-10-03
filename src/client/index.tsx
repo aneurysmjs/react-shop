@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /* eslint-disable no-undef */
 import React from 'react';
 import { createBrowserHistory } from 'history';
@@ -23,7 +24,9 @@ reactDOM[`${SSR ? 'hydrate' : 'render'}`](
 );
 
 if (process.env.NODE_ENV === 'development') {
+  // @ts-ignore
   if (module.hot) {
+    // @ts-ignore
     module.hot.accept();
   }
 

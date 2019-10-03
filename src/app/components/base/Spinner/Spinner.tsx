@@ -3,11 +3,11 @@ import React from 'react';
 import './Spinner.scss';
 
 type PropsType = {
-  height: number | string,
-  width: number | string,
+  height: number | string;
+  width: number | string;
 };
 
-const Spinner = ({ height, width }: PropsType) => (
+const Spinner = ({ height, width }: PropsType): JSX.Element => (
   <div
     style={{
       height: `${height}px`,

@@ -1,5 +1,4 @@
-/* eslint-disable */
-import footer from './footer';
+import  footer from './footer';
 
 describe('footer reducer', () => {
   const social = [

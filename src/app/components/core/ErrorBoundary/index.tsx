@@ -1,4 +1,3 @@
-/* eslint-disable */
 import ErrorBoundaryFallbackComponent from './ErrorBoundaryFallbackComponent';
 import ErrorBoundary, { withErrorBoundary } from './ErrorBoundary';
 

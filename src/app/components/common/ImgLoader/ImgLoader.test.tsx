@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-// $FlowFixMe
 import { cleanup, render } from '@testing-library/react';
 
 import ImgLoader from './ImgLoader';
@@ -10,27 +10,25 @@ afterEach(cleanup);
 const mockedError = new Error('mocked error');
 
 describe('ImgLoader', () => {
-  const imgUrl = 'https://static.street-beat.ru/upload/resize_cache/iblock/d69/450_450_1/d699afc7b3428f2f51c2f2de6665b506.jpg';
+  const imgUrl =
+    'https://static.street-beat.ru/upload/resize_cache/iblock/d69/450_450_1/d699afc7b3428f2f51c2f2de6665b506.jpg';
   /**
    * @link https://stackoverflow.com/questions/44462665/how-do-you-use-jest-to-test-img-onerror
    */
   beforeAll(() => {
     // Mocking Image.prototype.src to call the onload or onerror
-    Me
     Object.defineProperties(global.Image.prototype, {
       onerror: {
-        value: function onerror() {
-        },
+        value: function onerror(): void {},
         writable: true,
       },
       onload: {
-        value: function onload() {
-        },
+        value: function onload(): void {},
         writable: true,
       },
       src: {
-      // Define the property setter
-        set(src) {
+        // Define the property setter
+        set(src): void {
           if (src === undefined) {
             // Call with setTimeout to simulate async loading
             setTimeout(() => this.onerror(mockedError));
@@ -49,7 +47,6 @@ describe('ImgLoader', () => {
     const onError = jest.fn();
 
     act(() => {
-       - just for testing
       testRenderer = render(<ImgLoader onError={onError} />);
     });
 

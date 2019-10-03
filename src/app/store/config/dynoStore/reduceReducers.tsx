@@ -1,5 +1,4 @@
-/* eslint-disable */
-import { State } from '~/shared/types/State';
+import  { State } from '~/shared/types/State';
 import { Actions } from '~/shared/types/Actions';
 
 type ReducersType = Array<(State, Actions) => {}>;

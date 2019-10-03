@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect, memo } from 'react';
 
 import Spinner from '~/components/base/Spinner';
@@ -8,12 +7,12 @@ import NO_IMAGE from '~/assets/img/no-image.png';
 import './ImgLoader.scss';
 
 type PropsType = {
-  src: string,
-  onError?: (error: Error) => void
+  src: string;
+  onError?: (error: Error) => void;
 };
 
-function ImgLoader({ src, onError }: PropsType) {
-  const [imgObj, setImg] = useState({ img: null, isLoading: true });
+function ImgLoader({ src, onError }: PropsType): JSX.Element {
+  const [imgObj, setImg] = useState({ img: '', isLoading: true });
 
   const image = new Image();
   image.src = src;
@@ -24,13 +23,15 @@ function ImgLoader({ src, onError }: PropsType) {
 
   useEffect(() => {
     image.onload = (): void => applyImage(image.src);
-    image.onerror = (error: Error): void => {
+    image.onerror = (error): void => {
       applyImage(NO_IMAGE);
       if (onError) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
         onError(error);
       }
     };
-    return function cleanup() {
+    return function cleanup(): void {
       image.onload = null;
       image.onerror = null;
     };
@@ -38,12 +39,12 @@ function ImgLoader({ src, onError }: PropsType) {
     // so it never needs to re-run.
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return (
-    imgObj.isLoading ? (
-      <span className="imgLoader__spinner">
-        <Spinner />
-      </span>
-    ) : (<img className="imgLoader" src={imgObj.img} alt="img" />)
+  return imgObj.isLoading ? (
+    <span className="imgLoader__spinner">
+      <Spinner />
+    </span>
+  ) : (
+    <img className="imgLoader" src={imgObj.img} alt="img" />
   );
 }
 

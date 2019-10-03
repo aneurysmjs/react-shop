@@ -6,9 +6,7 @@ export type Response<D> = {
   }
 };
 
-export type ResponseError = {
-  error: { message: string; } | null
-};
+export type ResponseError = { message: string; } | null
 
 export type ActionType<P, M = {}> = {
   type: string,

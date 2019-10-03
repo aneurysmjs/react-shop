@@ -7,13 +7,13 @@ import { ProductType } from '~/shared/types/ProductsType';
 import './ProductCard.scss';
 
 type PropsType = {
-  product: ProductType,
-  hasOverlay: boolean,
-  hasHover: boolean,
-  width: string,
+  product: ProductType;
+  hasOverlay: boolean;
+  hasHover: boolean;
+  width: string;
 };
 
-function ProductCart({ product, hasOverlay, width }: PropsType) {
+function ProductCart({ product, hasOverlay, width }: PropsType): React.ReactElement {
   return (
     <figure
       className={hasOverlay ? 'product-card--overlay' : 'product-card'}
@@ -22,12 +22,12 @@ function ProductCart({ product, hasOverlay, width }: PropsType) {
         margin: '0 auto',
       }}
     >
-      {hasOverlay ? <div data-testid="overlay" className="product-card__overlay" /> : null }
+      {hasOverlay ? <div data-testid="overlay" className="product-card__overlay" /> : null}
       <ImgLoader src={product.image} />
       <figcaption
         className={hasOverlay ? 'product-card__description--overlay' : 'product-card__description'}
       >
-        { product.name }
+        {product.name}
       </figcaption>
     </figure>
   );

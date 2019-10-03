@@ -4,6 +4,6 @@ import Routing from '~/components/routing';
 
 import './assets/scss/styles.scss';
 
-const App = () => <Routing />;
+const App = (): React.ReactElement => <Routing />;
 
 export default App;

@@ -1,5 +1,5 @@
 import React from 'react';
-// $FlowFixMe
+
 import { render } from '@testing-library/react';
 
 import Spinner from './Spinner';

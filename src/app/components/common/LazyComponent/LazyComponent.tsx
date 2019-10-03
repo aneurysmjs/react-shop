@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 
 type PropsType = {
-  getModule: () => Promise<any>,
-  children?: any,
+  getModule: () => Promise<any>;
+  children?: any;
 };
 
 const LazyComponent = ({ getModule, ...rest }: PropsType) => {
@@ -18,7 +17,7 @@ const LazyComponent = ({ getModule, ...rest }: PropsType) => {
         throw new Error(`LazyComponent error: ${err}`);
       }
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (AsyncModule) {

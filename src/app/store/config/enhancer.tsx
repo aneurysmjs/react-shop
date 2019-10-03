@@ -1,10 +1,6 @@
-/* eslint-disable */
 import { compose, applyMiddleware } from 'redux';
 
 import middlewares from '~/store/config/middlewares';
-
-import { State } from '~/shared/types/State';
-import { Actions } from '~/shared/types/Actions';
 
 /* eslint-disable */
 const devtools =

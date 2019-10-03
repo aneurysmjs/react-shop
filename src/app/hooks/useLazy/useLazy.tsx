@@ -1,13 +1,13 @@
-/* eslint-disable */
 import { useState, useEffect } from 'react';
 
-const useLazy = (
-  getModule: () => Promise<any>,
-  cond?: boolean = false,
-) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Module = { default: any };
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+const useLazy = (getModule: () => Promise<Module>, cond? = false): React.ReactElement | null => {
   const [AsyncModule, setAsyncModule] = useState(null);
   useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       try {
         if (!cond) {
           return;
@@ -18,7 +18,7 @@ const useLazy = (
         throw new Error(`LazyComponent error: ${err}`);
       }
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cond]);
 
   return AsyncModule;

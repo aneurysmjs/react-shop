@@ -7,7 +7,7 @@ const listDir = (dir, fileList = []) => {
   files.forEach((file) => {
     if (fs.statSync(path.join(dir, file)).isDirectory()) {
       fileList = listDir(path.join(dir, file), fileList);
-    } else if (/\.txt$/.test(file)) {
+    } else if (/\.js$/.test(file)) {
       const name = file.replace(/\.(js)/, '.tsx');
       const src = path.join(dir, file);
       const newSrc = path.join(dir, name);

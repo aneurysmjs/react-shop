@@ -5,7 +5,7 @@ import UserMenu from '~/components/core/UserMenu';
 
 import './Header.scss';
 
-const Header = () => (
+const Header = (): React.ReactElement => (
   <div className="header">
     <Navigation />
     <UserMenu />

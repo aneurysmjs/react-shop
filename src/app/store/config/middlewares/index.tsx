@@ -1,5 +1,5 @@
 /* eslint-disable */
-// $FlowFixMe
+
 import thunk from 'redux-thunk';
 
 import apiMiddleware from './apiMiddleware';

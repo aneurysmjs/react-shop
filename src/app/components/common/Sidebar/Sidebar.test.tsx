@@ -4,7 +4,7 @@ import {
   render,
   cleanup,
   fireEvent,
-  // $FlowFixMe
+  
 } from '@testing-library/react';
 
 import Sidebar from './Sidebar';

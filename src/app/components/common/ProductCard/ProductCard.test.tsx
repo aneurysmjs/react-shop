@@ -1,5 +1,5 @@
 import React from 'react';
-// $FlowFixMe
+
 import { render, cleanup } from '@testing-library/react';
 
 import ProductCard from './ProductCard';

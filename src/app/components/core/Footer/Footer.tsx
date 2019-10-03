@@ -9,7 +9,7 @@ import Icon from '~/components/base/Icon';
 
 import './Footer.scss';
 
-const Footer = () => {
+const Footer = (): React.ReactElement => {
   const { social }: FooterType = useSelector(getFooter);
 
   return (

@@ -21,7 +21,7 @@ export default function fetchProducts(query: string = ''): ProductActionType {
     callAPI: () => api.get<string, ProductsType>(query),
     shouldCallAPI: (state) => {
       const products = getProducts(state);
-      // $FlowFixMe - это не должно орать
+      // - это не должно орать
       return !products.length;
     },
   };

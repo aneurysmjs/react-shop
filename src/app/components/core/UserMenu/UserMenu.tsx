@@ -1,6 +1,5 @@
-/* eslint-disable */
 import React, { useState } from 'react';
-// $FlowFixMe
+
 import { useSelector } from 'react-redux';
 
 import Icon from '~/components/base/Icon';
@@ -11,46 +10,36 @@ import { CartType } from '~/shared/types/CartType';
 
 import './UserMenu.scss';
 
-const UserMenu = () => {
+const UserMenu = (): React.ReactElement => {
   const [open, setOpen] = useState(false);
   const cart: CartType = useSelector(getCart);
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = (): void => setOpen(!open);
 
-  const Sidebar = useLazy(
-    () => import(/* webpackChunkName: "Sidebar" */'~/components/common/Sidebar'),
-    open,
-  );
+  const Sidebar: React.ReactElement = useLazy({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    getModule: (): Promise<any> => // eslint-disable-line @typescript-eslint/no-explicit-any
+      import(/* webpackChunkName: "Sidebar" */ '~/components/common/Sidebar'),
+    cond: open,
+  });
 
   return (
     <div className="user-menu">
-      {Sidebar
-        ? (
-          <Sidebar
-            title="Cart"
-            side="right"
-            isOpen={open}
-            onClose={handleOpen}
-          >
-            <p className="lead">
-              You have nothing, let&apos;s shop!
-            </p>
-          </Sidebar>)
-        : null}
+      {Sidebar ? (
+        <Sidebar title="Cart" side="right" isOpen={open} onClose={handleOpen}>
+          <p className="lead">You have nothing, let&apos;s shop!</p>
+        </Sidebar>
+      ) : null}
       <span
         className="user-menu__cart-icon"
-        tabIndex="-1"
+        tabIndex={-1}
         role="button"
-        onKeyPress={() => {}}
+        onKeyPress={(): void => {}}
         onClick={handleOpen}
       >
-        <Icon
-          size="20"
-          path="icons/cart"
-        />
-        <span className="user-menu__cart-quantity">
-          ({ cart.quantity })
-        </span>
+        <Icon size="20" path="icons/cart" />
+        <span className="user-menu__cart-quantity">({cart.quantity})</span>
       </span>
     </div>
   );

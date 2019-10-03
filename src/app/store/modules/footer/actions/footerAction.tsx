@@ -1,5 +1,4 @@
-/* eslint-disable */
-import * as types from '~/store/ActionTypes';
+import  * as types from '~/store/ActionTypes';
 
 import { makeActionCreator } from '~/store/helpers/makeActionCreator';
 

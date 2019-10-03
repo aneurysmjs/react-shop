@@ -1,9 +1,7 @@
-import { Element } from React from 'react';
-
 import { createStore } from 'redux';
-// $FlowFixMe
+
 import { Provider } from 'react-redux';
-// $FlowFixMe
+
 import { render } from '@testing-library/react';
 
 import reducer from '~/store/reducers';

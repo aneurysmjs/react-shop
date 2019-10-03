@@ -1,4 +1,3 @@
-/* eslint-disable */
 import makeActionCreator from './makeActionCreator';
 
 describe('makeActionCreator', () => {
