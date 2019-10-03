@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Icon from '@/components/base/Icon/Icon';
-import { useLazy } from '@/hooks/useLazy';
+import useLazy from '@/hooks/useLazy';
 import { getCart } from '@/store/modules/cart/selectors';
 
 import type { CartType } from '@/shared/types/CartType';
