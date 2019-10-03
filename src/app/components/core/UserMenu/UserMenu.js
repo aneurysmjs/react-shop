@@ -18,7 +18,7 @@ const UserMenu = () => {
   const handleOpen = () => setOpen(!open);
 
   const Sidebar = useLazy(
-    () => import(/* webpackChunkName: "Sidebar" */'@/components/common/Sidebar/Sidebar'),
+    () => import(/* webpackChunkName: "Sidebar" */'@/components/common/Sidebar'),
     open,
   );
 
