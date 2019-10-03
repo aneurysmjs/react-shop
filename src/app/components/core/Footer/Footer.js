@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { getFooter } from '@/store/modules/footer/selectors';
 import type { FooterType } from '@/shared/types/FooterType';
 
-import Icon from '@/components/base/Icon/Icon';
+import Icon from '@/components/base/Icon';
 
 import './Footer.scss';
 

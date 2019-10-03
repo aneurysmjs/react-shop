@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { Node } from 'react';
 
-import Icon from '@/components/base/Icon/Icon';
+import Icon from '@/components/base/Icon';
 import { KEYBOARD } from '@/constants';
 
 import './Sidebar.scss';

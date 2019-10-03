@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // $FlowFixMe
 import { useSelector } from 'react-redux';
 
-import Icon from '@/components/base/Icon/Icon';
+import Icon from '@/components/base/Icon';
 import useLazy from '@/hooks/useLazy';
 import { getCart } from '@/store/modules/cart/selectors';
 
