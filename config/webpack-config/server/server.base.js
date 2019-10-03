@@ -11,7 +11,7 @@ module.exports = {
   name: 'server',
   target: 'node',
   entry: {
-    server: [path.resolve(paths.srcServer, 'index.js')],
+    server: [path.resolve(paths.srcServer, 'index.tsx')],
   },
   externals: [
     nodeExternals({
