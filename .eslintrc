@@ -3,47 +3,46 @@
     "browser": true,
     "jest": true
   },
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true,
-      "experimentalObjectRestSpread": true
-    }
-  },
-  "parser": "babel-eslint",
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "./config/webpack-config/index.js"
-      }
-    },
-    "react": {
-      "version": "detect",
-      "flow": "0.99.1"
-    }
-  },
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb-base",
-    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended", 
     "plugin:react/recommended",
+    // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:flowtype/recommended"
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
   "plugins": [
     "import",
-    "flowtype",
+    "@typescript-eslint", 
     "react",
     "react-hooks",
     "jsx-a11y"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "webpack": {
+        "config": "./config/webpack-config/index.js"
+      }
+    }
+  },
+  "parserOptions":  {
+    "ecmaVersion": 2018,  // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module"  // Allows for the use of imports
+  },
   "rules": {
+    "@typescript-eslint/indent": ["error", 2],
+    "react/jsx-uses-vars": "error",
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "semi": ["error", "always"],
     "import/no-extraneous-dependencies": [
       "error",
       {
