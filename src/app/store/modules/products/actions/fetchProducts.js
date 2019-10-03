@@ -1,6 +1,6 @@
 // @flow strict
 
-import { api } from '@/api';
+import api from '@/api';
 
 import { ASYNC_ACTION_TYPE } from '@/constants';
 import * as types from '@/store/ActionTypes';
