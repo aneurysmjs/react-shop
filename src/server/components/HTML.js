@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
-import type { State } from '@/store/types/State';
+import type { State } from '@/shared/types/State';
 
 type PropsT = {
   children: *,

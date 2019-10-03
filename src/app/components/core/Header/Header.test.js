@@ -2,7 +2,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import renderWithRedux from '@/utils/testing/renderWithRedux';
+import renderWithRedux from '@/shared/utils/testing/renderWithRedux';
 
 import Header from './Header';
 

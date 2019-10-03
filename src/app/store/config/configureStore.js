@@ -1,38 +1,26 @@
 // @flow strict
-import { createStore, applyMiddleware, compose } from 'redux';
-import type { Dispatch, StoreEnhancer } from 'redux';
+import { createStore } from 'redux';
+import type { Dispatch } from 'redux';
 
-import type { State } from '@/store/types/State';
-import type { Actions } from '@/store/types/Actions';
+import type { Actions } from '@/shared/types/Actions';
 
 // import throttle from 'lodash.throttle';
 
-// Middleware is the suggested way to extend Redux with custom functionality.
-import middlewares from '@/store/config/middlewares';
-
 // import all reducers
 import reducer from '@/store/reducers';
+
+import enhancer from '@/store/config/enhancer';
 
 // import { saveState, loadState } from './storage';
 
 // Get the state from localStorage
 // const persistedState = loadState();
 
-/* eslint-disable */
-const devtools =
-  typeof window !== 'undefined' &&
-  typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function' &&
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionsBlacklist: [] });
-  /* eslint-enable */
-// $FlowFixMe
-const composeEnhancers: StoreEnhancer<State, Actions, Dispatch<Actions>> = devtools || compose;
-
 function configureStore() {
   const store = createStore<{}, Actions, Dispatch<Actions>>(
     reducer,
     // persistedState,
-    composeEnhancers(applyMiddleware(...middlewares)), // third parameter is called an 'enhancer'
+    enhancer, // third parameter is called an 'enhancer'
   );
   /* // Save the state any time the store state changes
   store.subscribe(throttle(() => {

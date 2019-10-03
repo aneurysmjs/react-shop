@@ -1,3 +1,2 @@
 // @flow strict
-// eslint-disable-next-line import/prefer-default-export
-export { default as UserMenu } from './UserMenu';
+export { default } from './UserMenu';

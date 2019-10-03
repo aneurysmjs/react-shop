@@ -1,17 +1,19 @@
 // @flow strict
-export type ActionType = {
-  type: string,
-};
+// $FlowIgnore
+import { appendProps } from '@/shared/utils/appendProps';
 
-type ActionCreatorType = <T>(T | Array<T>) => ActionType;
+import type { ActionType } from '@/shared/types/CommonType';
 
-function makeActionCreator(type: string, ...argNames: Array<string>): ActionCreatorType {
-  return function actionCreator(...args) {
-    const action = { type };
-    argNames.forEach((arg, index) => {
-      action[argNames[index]] = args[index];
-    });
-    return action;
+type ActionCreatorType = <P, M>(P, M) => ActionType<P, M>;
+
+const bareAction = appendProps('payload', 'meta');
+
+function makeActionCreator(type: string): ActionCreatorType {
+  return function actionCreator<P, M>(payload: P, meta: ?M = undefined) {
+    return {
+      type,
+      ...bareAction({ payload, meta }),
+    };
   };
 }
 

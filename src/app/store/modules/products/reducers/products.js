@@ -1,5 +1,5 @@
 // @flow strict
-import type { ProductsType, ProductActionType } from '@/store/types/ProductsType';
+import type { ProductsType, ProductActionType } from '@/shared/types/ProductsType';
 
 import { createReducer } from '@/store/helpers/createReducer';
 
@@ -12,7 +12,7 @@ import {
 const initialState = {
   error: null,
   isLoading: false,
-  payload: [],
+  products: [],
 };
 
 export default createReducer<ProductsType, ProductActionType>(initialState, {
@@ -24,18 +24,20 @@ export default createReducer<ProductsType, ProductActionType>(initialState, {
   },
   [GET_PRODUCTS_SUCCESS](state, action) {
     const {
-      response: {
-        data,
+      payload: {
+        response: {
+          data,
+        },
       },
     } = action;
     return {
       ...state,
       isLoading: false,
-      payload: [...data],
+      products: [...data],
     };
   },
   [GET_PRODUCTS_FAILURE](state, action) {
-    const { error } = action;
+    const { payload: { error } } = action;
     return {
       ...state,
       isLoading: false,

@@ -1,9 +1,9 @@
 // @flow strict
 
-import type { Dispatch, Middleware } from 'redux';
+import type { Middleware } from 'redux';
 
-import type { State } from '@/store/types/State';
-import type { Actions, MiddlewareAction } from '@/store/types/Actions';
+import type { State } from '@/shared/types/State';
+import type { Actions } from '@/shared/types/Actions';
 
 /* eslint-disable no-console */
 /**
@@ -15,7 +15,7 @@ import type { Actions, MiddlewareAction } from '@/store/types/Actions';
  * @return {Function}
  */
 // eslint-disable-next-line arrow-body-style
-const logger: Middleware<State, Actions, Dispatch<MiddlewareAction<State>>> = (store) => {
+const logger: Middleware<State, Actions> = (store) => {
   /**
    * Rather than take the next middleware from the store, we'll
    * make it injectable as an argument, so the function that calls

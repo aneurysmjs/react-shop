@@ -2,8 +2,8 @@
 import React from 'react';
 import type { Node } from 'react';
 
-import Footer from '@/components/core/Footer/Footer';
-import Header from '@/components/core/Header/Header';
+import Footer from '@/components/core/Footer';
+import Header from '@/components/core/Header';
 
 import './Layout.scss';
 

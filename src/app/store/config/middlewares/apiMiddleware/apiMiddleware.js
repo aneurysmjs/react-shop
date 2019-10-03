@@ -1,24 +1,29 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
 // @flow strict
-import type { Dispatch, Middleware } from 'redux';
+import type { ApiMiddlewareType, ApiMetaType } from '@/shared/types/MiddlewareTypes';
 
-import type { State } from '@/store/types/State';
-import type { Actions, MiddlewareAction } from '@/store/types/Actions';
-
-type ApiMiddlewareType = Middleware<State, Actions, Dispatch<MiddlewareAction<State>>>;
-
+// $FlowIgnore
 const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (action) => {
+  let meta: ApiMetaType = {};
+
+  if (action.meta) {
+    meta = { ...action.meta };
+  }
+
+  if (!action.meta && !meta.types) {
+    // Normal action: pass it on
+    return next(action);
+  }
+
+  const {
+    payload = {},
+  } = action;
+
   const {
     types,
     callAPI,
     shouldCallAPI = (s = true) => s,
-    payload = {},
-  } = action;
-
-  if (!types) {
-    // Normal action: pass it on
-    return next(action);
-  }
+  } = meta;
 
   if (
     !Array.isArray(types)
@@ -33,29 +38,27 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
   }
 
   if (!shouldCallAPI(getState())) {
-    // $FlowFixMe
-    return; // eslint-disable-line consistent-return
+    // $FlowIgnore
+    return;
   }
 
   const [requestType, successType, failureType] = types;
-
+  // $FlowIgnore
   dispatch({
-    ...payload,
+    payload: { ...payload },
     type: requestType,
   });
-  // $FlowFixMe
-  return (async () => {
+
+  (async () => {
     try {
-      const response = await callAPI();
+      const response: Response = await callAPI();
       return dispatch({
-        ...payload,
-        response,
+        payload: { response },
         type: successType,
       });
     } catch (error) {
       return dispatch({
-        ...payload,
-        error,
+        payload: { error },
         type: failureType,
       });
     }

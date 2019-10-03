@@ -1,3 +1,3 @@
 // @flow strict
 // eslint-disable-next-line import/prefer-default-export
-export { default as logger } from './logger';
+export { default } from './logger';

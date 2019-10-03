@@ -36,14 +36,15 @@ const error = { message: 'Request failed with status code 404' };
 const mockStore = configureMockStore([apiMiddleware]);
 const makeStore = (initialState = []) => mockStore(() => ({ products: initialState }));
 
-let action;
+let action = { meta: {} };
+
 beforeEach(() => {
   axiosMock.mockRestore();
 });
 
 afterAll(() => {
-  action.callAPI.mockRestore();
-  action.shouldCallAPI.mockRestore();
+  action.meta.callAPI.mockRestore();
+  action.meta.shouldCallAPI.mockRestore();
 });
 
 describe('fetchProducts', () => {
@@ -51,19 +52,18 @@ describe('fetchProducts', () => {
     axiosMock.get.mockReturnValue(Promise.resolve(response));
     const store = makeStore();
     action = fetchProducts('/products');
-
-    jest.spyOn(action, 'callAPI');
-    jest.spyOn(action, 'shouldCallAPI');
+    jest.spyOn(action.meta, 'callAPI');
+    jest.spyOn(action.meta, 'shouldCallAPI');
 
     await store.dispatch(action);
 
-    expect(action.callAPI).toHaveBeenCalledTimes(1);
-    expect(action.shouldCallAPI).toHaveBeenCalledTimes(1);
+    expect(action.meta.callAPI).toHaveBeenCalledTimes(1);
+    expect(action.meta.shouldCallAPI).toHaveBeenCalledTimes(1);
     const expectedActions = [
-      { type: 'GET_PRODUCTS_REQUEST' },
+      { type: 'GET_PRODUCTS_REQUEST', payload: {} },
       {
-        response,
         type: 'GET_PRODUCTS_SUCCESS',
+        payload: { response },
       },
     ];
     expect(store.getActions()).toEqual(expectedActions);
@@ -74,13 +74,13 @@ describe('fetchProducts', () => {
     const store = makeStore(products);
     action = fetchProducts('/products');
 
-    jest.spyOn(action, 'callAPI');
-    jest.spyOn(action, 'shouldCallAPI');
+    jest.spyOn(action.meta, 'callAPI');
+    jest.spyOn(action.meta, 'shouldCallAPI');
 
     await store.dispatch(action);
 
-    expect(action.callAPI).not.toHaveBeenCalled();
-    expect(action.shouldCallAPI).toHaveBeenCalledTimes(1);
+    expect(action.meta.callAPI).not.toHaveBeenCalled();
+    expect(action.meta.shouldCallAPI).toHaveBeenCalledTimes(1);
     expect(store.getActions()).toEqual([]);
   });
 
@@ -89,20 +89,22 @@ describe('fetchProducts', () => {
     const store = makeStore();
     action = fetchProducts('/products-bad-url');
 
-    jest.spyOn(action, 'callAPI');
-    jest.spyOn(action, 'shouldCallAPI');
+    jest.spyOn(action.meta, 'callAPI');
+    jest.spyOn(action.meta, 'shouldCallAPI');
 
     await store.dispatch(action);
 
-    expect(action.callAPI).toHaveBeenCalledTimes(1);
-    expect(action.shouldCallAPI).toHaveBeenCalledTimes(1);
+    expect(action.meta.callAPI).toHaveBeenCalledTimes(1);
+    expect(action.meta.shouldCallAPI).toHaveBeenCalledTimes(1);
     const expectedActions = [
-      { type: 'GET_PRODUCTS_REQUEST' },
+      { type: 'GET_PRODUCTS_REQUEST', payload: {} },
       {
-        error: {
-          message: 'Request failed with status code 404',
-        },
         type: 'GET_PRODUCTS_FAILURE',
+        payload: {
+          error: {
+            message: 'Request failed with status code 404',
+          },
+        },
       },
     ];
     expect(store.getActions()).toEqual(expectedActions);

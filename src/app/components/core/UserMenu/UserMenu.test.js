@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils';
 // $FlowFixMe
 import { fireEvent } from '@testing-library/react';
 
-import renderWithRedux from '@/utils/testing/renderWithRedux';
+import renderWithRedux from '@/shared/utils/testing/renderWithRedux';
 
 import UserMenu from './UserMenu';
 

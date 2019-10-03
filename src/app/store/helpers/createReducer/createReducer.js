@@ -3,7 +3,7 @@
 import type { Action, Reducer } from 'redux';
 
 type HandlersType<S, A> = {
-  [string]: Reducer<S, A>
+  [key: string]: Reducer<S, A>
 };
 
 const has = Object.prototype.hasOwnProperty;
