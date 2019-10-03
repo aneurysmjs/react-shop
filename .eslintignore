@@ -3,3 +3,6 @@
 src/frontend/config/env.js
 **/build
 **/flow-typed
+
+config/**
+jest.config.js
