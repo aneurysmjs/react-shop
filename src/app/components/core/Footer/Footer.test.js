@@ -3,7 +3,7 @@ import React from 'react';
 import { cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
-import renderWithRedux from '@/utils/testing/renderWithRedux';
+import renderWithRedux from '@/shared/utils/testing/renderWithRedux';
 
 import Footer from './Footer';
 

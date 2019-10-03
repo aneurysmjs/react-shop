@@ -43,7 +43,7 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (
   }
 
   const [requestType, successType, failureType] = types;
-
+  // $FlowIgnore
   dispatch({
     payload: { ...payload },
     type: requestType,

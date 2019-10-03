@@ -1,6 +1,6 @@
 // @flow strict
 // $FlowFixMe
-import { renderHook } from '@/utils/testing/renderHook';
+import { renderHook } from '@/shared/utils/testing/renderHook';
 
 import useLazy from './useLazy';
 

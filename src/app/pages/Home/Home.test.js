@@ -2,7 +2,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 
-import renderWithRedux from '@/utils/testing/renderWithRedux';
+import renderWithRedux from '@/shared/utils/testing/renderWithRedux';
 
 import Home from './Home';
 

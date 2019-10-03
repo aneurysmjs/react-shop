@@ -1,6 +1,6 @@
 // @flow strict
 // $FlowIgnore
-import { appendProps } from '@/utils/appendProps';
+import { appendProps } from '@/shared/utils/appendProps';
 
 import type { ActionType } from '@/shared/types/CommonType';
 
