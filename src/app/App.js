@@ -1,7 +1,7 @@
 // @flow strict
 import React from 'react';
 
-import { Routing } from '@/routing';
+import Routing from '@/components/routing';
 
 import store from './store';
 
