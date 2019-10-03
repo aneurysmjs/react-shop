@@ -1,7 +1,7 @@
 // @flow strict
 import React, { useState, useEffect, memo } from 'react';
 
-import Spinner from '@/components/base/Spinner/Spinner';
+import Spinner from '@/components/base/Spinner';
 
 import NO_IMAGE from '@/assets/img/no-image.png';
 
