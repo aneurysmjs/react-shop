@@ -4,11 +4,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from '@/components/base/Spinner';
+import ProductCard from '@/components/common/ProductCard';
+
 import { fetchProducts } from '@/store/modules/products/actions';
 import { getProducts } from '@/store/modules/products/selectors';
-import type { ProductsType } from '@/shared/types/ProductsType';
 
-import { ProductCard } from '@/components/common/ProductCard';
+import type { ProductsType } from '@/shared/types/ProductsType';
 
 import './Home.scss';
 
