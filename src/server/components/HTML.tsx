@@ -1,14 +1,13 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
 import { State } from '~/shared/types/State';
 
 type PropsT = {
-  children: *,
-  css: Array<string>,
-  scripts: Array<string>,
-  state?: State
+  children: JSX.Element | Array<JSX.Element> | string;
+  css: Array<string>;
+  scripts: Array<string>;
+  state?: State;
 };
 
 export default class HTML extends Component<PropsT> {
@@ -17,12 +16,14 @@ export default class HTML extends Component<PropsT> {
     scripts: [],
   };
 
-  render() {
+  render(): JSX.Element {
     const head = Helmet.renderStatic();
     // eslint-disable-next-line no-unused-vars, react/prop-types
     const {
       // eslint-disable-next-line no-unused-vars
-      children, scripts, css, state,
+      children,
+      scripts,
+      css,
     } = this.props;
 
     return (
@@ -35,14 +36,18 @@ export default class HTML extends Component<PropsT> {
           {head.meta.toComponent()}
           {head.link.toComponent()}
           {head.script.toComponent()}
-          {css.map((href) => <link key={href} rel="stylesheet" href={href} />)}
+          {css.map(href => (
+            <link key={href} rel="stylesheet" href={href} />
+          ))}
         </head>
         <body>
-          <div
-            id="app"
-            dangerouslySetInnerHTML={{ __html: children }}
-          />
-          {scripts.map((src) => <script key={src} src={src} />)}
+          {/*
+            * @link https://stackoverflow.com/a/40245490/5378393
+            // @ts-ignore */}
+          <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+          {scripts.map(src => (
+            <script key={src} src={src} />
+          ))}
         </body>
       </html>
     );
