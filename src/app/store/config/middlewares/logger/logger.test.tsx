@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { createStore } from 'redux';
+import { createStore, Dispatch } from 'redux';
 
 import logger from './logger';
 
@@ -8,7 +8,7 @@ jest.spyOn(console, 'log');
 jest.spyOn(console, 'groupEnd');
 
 let store;
-let nextHandler;
+let nextHandler: Dispatch;
 beforeEach(() => {
   store = createStore(() => ({ name: 'Some state' }));
   store.dispatch = jest.fn(store.dispatch);
