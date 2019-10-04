@@ -63,6 +63,8 @@
     "@types/react-helmet": "5.0.11",
     "@types/react-redux": "7.1.4",
     "@types/react-router-dom": "5.1.0",
+    "@types/testing-library__dom": "6.5.0",
+    "@types/testing-library__react": "9.1.1",
     "@typescript-eslint/eslint-plugin": "2.3.2",
     "@typescript-eslint/parser": "2.3.2",
     "autoprefixer": "9.6.1",
