@@ -22,6 +22,8 @@ const UserMenu = (): React.ReactElement => {
   return (
     <div className="user-menu">
       {Sidebar ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
         <Sidebar title="Cart" side="right" isOpen={open} onClose={handleOpen}>
           <p className="lead">You have nothing, let&apos;s shop!</p>
         </Sidebar>
