@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-
 import { useSelector } from 'react-redux';
-
 import Icon from '~/components/base/Icon';
 import useLazy from '~/hooks/useLazy';
-import { getCart } from '~/store/modules/cart/selectors';
 
 import { CartType } from '~/shared/types/CartType';
+import { getCart } from '~/store/modules/cart/selectors';
 
 import './UserMenu.scss';
 
@@ -16,13 +14,10 @@ const UserMenu = (): React.ReactElement => {
 
   const handleOpen = (): void => setOpen(!open);
 
-  const Sidebar: React.ReactElement = useLazy({
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    getModule: (): Promise<any> => // eslint-disable-line @typescript-eslint/no-explicit-any
-      import(/* webpackChunkName: "Sidebar" */ '~/components/common/Sidebar'),
-    cond: open,
-  });
+  const Sidebar = useLazy(
+    () => import(/* webpackChunkName: "Sidebar" */ '~/components/common/Sidebar'),
+    open,
+  );
 
   return (
     <div className="user-menu">
