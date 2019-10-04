@@ -1,16 +1,25 @@
-import { createStore } from 'redux';
-
+import React from 'react';
+import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
 
-import { render } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
+import { State } from '~/shared/types/State';
 
 import reducer from '~/store/reducers';
 
-export default function renderWithRedux(
-  ui: JSX.Element,
+type WithReduxConfig = {
+  initialState?: State;
+  store?: Store<State>;
+};
 
-  { initialState, store = createStore(reducer, initialState) } = {},
-) {
+export interface RenderWithRedux extends RenderResult {
+  store: Store<State>;
+}
+
+export default function renderWithRedux(
+  ui: React.ReactElement | React.Component,
+  { initialState, store = createStore(reducer, initialState) }: WithReduxConfig = {},
+): RenderWithRedux {
   return {
     ...render(<Provider store={store}>{ui}</Provider>),
     // adding `store` to the returned utilities to allow us
