@@ -1,6 +1,4 @@
-// @flow strict
 import React from 'react';
-// $FlowFixMe
 import { render } from '@testing-library/react';
 
 import {{pascalCase componentName}} from './{{pascalCase componentName}}';

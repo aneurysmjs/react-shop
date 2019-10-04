@@ -1,15 +1,14 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
+const generateSourceMap = process.env.OMIT_SOURCEMAP !== 'true';
 
-// const cssRegex = /\.css$/;
-// const cssModuleRegex = /\.module\.css$/;
-const jsRegex = /\.(js|jsx|mjs)$/;
+const jsRegex = /\.(js|mjs|jsx|ts|tsx)$/;
 const scssRegex = /\.(sa|sc|c)ss$/;
 
 const eslintLoader = {
   enforce: 'pre',
-  test: jsRegex,
+  test: /\.tsx?$/,
   loader: 'eslint-loader',
   exclude: /node_modules/,
 };
@@ -36,7 +35,6 @@ const cssLoaderClient = {
       loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: generateSourceMap,
-
       },
     },
     {
@@ -102,23 +100,13 @@ const fileLoaderServer = {
 const client = [
   eslintLoader,
   {
-    oneOf: [
-      babelLoader,
-      cssLoaderClient,
-      urlLoaderClient,
-      fileLoaderClient,
-    ],
+    oneOf: [babelLoader, cssLoaderClient, urlLoaderClient, fileLoaderClient],
   },
 ];
 const server = [
   eslintLoader,
   {
-    oneOf: [
-      babelLoader,
-      cssLoaderServer,
-      urlLoaderServer,
-      fileLoaderServer,
-    ],
+    oneOf: [babelLoader, cssLoaderServer, urlLoaderServer, fileLoaderServer],
   },
 ];
 
