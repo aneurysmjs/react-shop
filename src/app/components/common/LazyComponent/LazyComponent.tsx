@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+type GetModule = () => Promise<{ default: () => React.ReactElement }>;
+
 type PropsType = {
-  getModule: () => Promise<any>;
-  children?: any;
+  getModule: GetModule;
+  children?: React.ElementType;
 };
 
-const LazyComponent = ({ getModule, ...rest }: PropsType) => {
-  const [AsyncModule, setAsyncModule] = useState(null);
+const LazyComponent = ({ getModule, ...rest }: PropsType): React.ReactElement | null => {
+  const [AsyncModule, setAsyncModule] = useState<(() => React.ReactElement) | null>(null);
 
   useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       try {
         const module = await getModule();
         setAsyncModule(() => module.default);
