@@ -8,10 +8,10 @@ import './ImgLoader.scss';
 
 type PropsType = {
   src: string;
-  onError?: (error: Error) => void;
+  onError?: (error: string | Event) => void;
 };
 
-function ImgLoader({ src, onError }: PropsType): JSX.Element {
+function ImgLoader({ src, onError }: PropsType): React.ReactElement {
   const [imgObj, setImg] = useState({ img: '', isLoading: true });
 
   const image = new Image();
@@ -26,8 +26,6 @@ function ImgLoader({ src, onError }: PropsType): JSX.Element {
     image.onerror = (error): void => {
       applyImage(NO_IMAGE);
       if (onError) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
         onError(error);
       }
     };
