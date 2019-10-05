@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 /**
  * @link https://stackoverflow.com/questions/52112948/whats-the-return-type-of-a-dynamic-import
  */
-type DynamicImport = () => Promise<{ default: React.ComponentType<{}> | React.ElementType }>;
+type DynamicImport = () => Promise<{ default: () => React.ReactElement }>;
 
-const useLazy = (getModule: DynamicImport, cond = false): React.ReactElement | null => {
-  const [AsyncModule, setAsyncModule] = useState(null);
+const useLazy = (getModule: DynamicImport, cond = false): (() => React.ReactElement) | null => {
+  const [AsyncModule, setAsyncModule] = useState<(() => React.ReactElement) | null>(null);
+
   useEffect(() => {
     (async (): Promise<void> => {
       try {
@@ -14,11 +15,9 @@ const useLazy = (getModule: DynamicImport, cond = false): React.ReactElement | n
           return;
         }
         const module = await getModule();
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
         setAsyncModule(() => module.default);
       } catch (err) {
-        throw new Error(`LazyComponent error: ${err}`);
+        throw new Error(`useLazy error: ${err}`);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
