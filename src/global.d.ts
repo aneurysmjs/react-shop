@@ -4,6 +4,18 @@ declare namespace NodeJS {
     NODE_ENV: 'development' | 'production' | 'test';
     PUBLIC_URL: string;
   }
+  /**
+   * @desc augment existing NodeJS.Global type definition
+   * @link https://stackoverflow.com/questions/40743131/how-to-prevent-property-does-not-exist-on-type-global-with-jsdom-and-t
+   *
+   * @desc Image for Global scope
+   * @link https://stackoverflow.com/questions/25203906/typescript-new-image-from-global-scope
+   */
+  interface Global {
+    Image: {
+      prototype: HTMLImageElement;
+    };
+  }
 }
 
 declare module '*.bmp' {

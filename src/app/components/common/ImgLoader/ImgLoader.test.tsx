@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, RenderResult } from '@testing-library/react';
 
 import ImgLoader from './ImgLoader';
 
@@ -42,7 +42,7 @@ describe('ImgLoader', () => {
 
   it('calls onError when there\'s not "src" and', () => {
     jest.useFakeTimers();
-    let testRenderer = {};
+    let testRenderer = {} as RenderResult;
 
     const onError = jest.fn();
 
@@ -51,7 +51,7 @@ describe('ImgLoader', () => {
     });
 
     const { container } = testRenderer;
-    const spinner = container.firstChild;
+    const spinner = container.firstChild as HTMLDivElement;
 
     expect(spinner).toBeInstanceOf(HTMLSpanElement);
     expect(spinner.className).toEqual('imgLoader__spinner');
@@ -60,7 +60,7 @@ describe('ImgLoader', () => {
       jest.runAllTimers();
     });
 
-    const img = container.firstChild;
+    const img = container.firstChild as HTMLImageElement;
 
     expect(onError).toHaveBeenCalled();
     expect(onError).toHaveBeenCalledWith(mockedError);
@@ -71,14 +71,14 @@ describe('ImgLoader', () => {
 
   it('should render <Spinner/> while loading and then <img />', () => {
     jest.useFakeTimers();
-    let testRenderer = {};
+    let testRenderer = {} as RenderResult;
 
     act(() => {
       testRenderer = render(<ImgLoader src={imgUrl} />);
     });
 
     const { container } = testRenderer;
-    const spinner = container.firstChild;
+    const spinner = container.firstChild as HTMLDivElement;
 
     expect(spinner).toBeInstanceOf(HTMLSpanElement);
     expect(spinner.className).toEqual('imgLoader__spinner');
@@ -87,7 +87,7 @@ describe('ImgLoader', () => {
       jest.runAllTimers();
     });
 
-    const img = container.firstChild;
+    const img = container.firstChild as HTMLImageElement;
 
     expect(img.className).toEqual('imgLoader');
     expect(img).toBeInstanceOf(HTMLImageElement);
