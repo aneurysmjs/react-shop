@@ -3,20 +3,20 @@ import { act } from 'react-dom/test-utils';
 
 import { fireEvent } from '@testing-library/react';
 
-import renderWithRedux from '~/shared/utils/testing/renderWithRedux';
+import renderWithRedux, { RenderWithRedux } from '~/shared/utils/testing/renderWithRedux';
 
 import UserMenu from './UserMenu';
 
 describe('UserMenu', () => {
   it('should toggle <Sidebar /> when clicking icon', async () => {
-    let testRenderer = {};
+    let testRenderer = {} as RenderWithRedux;
 
     await act(async () => {
       testRenderer = renderWithRedux(<UserMenu />);
     });
 
     const { queryByRole, queryByTestId } = testRenderer;
-    const button = queryByRole('button');
+    const button = queryByRole('button') as HTMLButtonElement;
     const sidebar = queryByTestId('sidebar');
 
     expect(sidebar).toBe(null);
@@ -38,15 +38,16 @@ describe('UserMenu', () => {
     expect(sidebarClosed).toBe(null);
   });
 
+  // eslint-disable-next-line prettier/prettier
   it('should display cart\'s quantity', async () => {
-    let testRenderer = {};
+    let testRenderer = {} as RenderWithRedux;
 
     await act(async () => {
       testRenderer = renderWithRedux(<UserMenu />);
     });
 
     const { queryByRole } = testRenderer;
-    const button = queryByRole('button');
+    const button = queryByRole('button') as HTMLButtonElement;
 
     expect(button.textContent).toBe('(0)');
   });
