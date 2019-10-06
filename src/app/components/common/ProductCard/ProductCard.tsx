@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import ImgLoader from '~/components/common/ImgLoader';
 
@@ -13,7 +13,7 @@ type PropsType = {
   width: string;
 };
 
-function ProductCart({ product, hasOverlay, width }: PropsType): React.ReactElement {
+function ProductCart({ product, hasOverlay, width }: PropsType): ReactElement {
   return (
     <figure
       className={hasOverlay ? 'product-card--overlay' : 'product-card'}
