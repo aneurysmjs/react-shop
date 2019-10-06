@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { Fragment, useEffect, useRef, ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 
 import Icon from '~/components/base/Icon';
@@ -12,7 +12,7 @@ type PropsType = {
   side?: string;
   onClose?: () => void;
   title?: string;
-  children: Node;
+  children: ReactElement | Array<ReactElement>;
 };
 
 const Sidebar = ({
@@ -21,7 +21,7 @@ const Sidebar = ({
   onClose = (): void => {},
   title = 'sidebar',
   children,
-}: PropsType): null | React.ReactElement => {
+}: PropsType): null | ReactElement => {
   const asideRef = useRef<HTMLElement>(null);
 
   const toggleSidebar = (): void => {

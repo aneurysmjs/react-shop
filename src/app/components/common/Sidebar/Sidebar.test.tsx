@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { act } from 'react-dom/test-utils';
-import {
-  render,
-  cleanup,
-  fireEvent,
-  
-} from '@testing-library/react';
+import { render, cleanup, fireEvent, RenderResult } from '@testing-library/react';
 
 import Sidebar from './Sidebar';
 
-const Content = () => (<div>some content</div>);
+const Content = (): ReactElement => <div>some content</div>;
 
 // automatically unmount and cleanup DOM after the test is finished.
 afterEach(cleanup);
@@ -27,17 +22,17 @@ describe('Sidebar', () => {
 
   it('should render sidebar\'s content and animate it by default from "right" after 100ms', async () => {
     jest.useFakeTimers();
-    let component = {};
+    let testRenderer = {} as RenderResult;
 
     await act(async () => {
-      component = render(
+      testRenderer = render(
         <Sidebar isOpen>
           <Content />
         </Sidebar>,
       );
     });
 
-    const { getByTestId } = component;
+    const { getByTestId } = testRenderer;
     const overlay = getByTestId('overlay');
     const sidebar = getByTestId('sidebar');
     const content = getByTestId('content');
@@ -49,25 +44,24 @@ describe('Sidebar', () => {
       jest.runAllTimers();
     });
     expect(sidebar.className).toEqual('sidebar sidebar--right sidebar--open-right');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     expect(content.firstChild.innerHTML).toEqual('some content');
   });
 
   it('should render sidebar\'s content and animate it from "left" after 100ms', async () => {
     jest.useFakeTimers();
-    let component = {};
+    let testRenderer = {} as RenderResult;
 
     await act(async () => {
-      component = render(
-        <Sidebar
-          isOpen
-          side="left"
-        >
+      testRenderer = render(
+        <Sidebar isOpen side="left">
           <Content />
         </Sidebar>,
       );
     });
 
-    const { getByTestId } = component;
+    const { getByTestId } = testRenderer;
     const overlay = getByTestId('overlay');
     const sidebar = getByTestId('sidebar');
     const content = getByTestId('content');
@@ -79,6 +73,8 @@ describe('Sidebar', () => {
       jest.runAllTimers();
     });
     expect(sidebar.className).toEqual('sidebar sidebar--left sidebar--open-left');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     expect(content.firstChild.innerHTML).toEqual('some content');
   });
 
@@ -90,23 +86,19 @@ describe('Sidebar', () => {
       open = !open;
     });
 
-    let component = {};
+    let testRenderer = {} as RenderResult;
 
     await act(async () => {
-      component = render(
-        <Sidebar
-          onClose={handleOnClose}
-          isOpen={open}
-          side="left"
-        >
+      testRenderer = render(
+        <Sidebar onClose={handleOnClose} isOpen={open} side="left">
           <Content />
         </Sidebar>,
       );
     });
 
-    const { queryByTestId, rerender } = component;
+    const { queryByTestId, rerender } = testRenderer;
 
-    const closeIcon = queryByTestId('close');
+    const closeIcon = queryByTestId('close') as NonNullable<HTMLElement>;
     const openedSidebar = queryByTestId('sidebar');
 
     expect(openedSidebar).not.toEqual(null);
@@ -120,11 +112,7 @@ describe('Sidebar', () => {
     expect(handleOnClose.mock.calls.length).toBe(1);
     // re-render "closed" sidebar (open = false)
     rerender(
-      <Sidebar
-        onClose={handleOnClose}
-        isOpen={open}
-        side="left"
-      >
+      <Sidebar onClose={handleOnClose} isOpen={open} side="left">
         <Content />
       </Sidebar>,
     );
