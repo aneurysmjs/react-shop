@@ -50,6 +50,7 @@
     "@babel/runtime": "7.6.2",
     "@loadable/babel-plugin": "5.10.3",
     "@loadable/webpack-plugin": "5.7.1",
+    "@testing-library/react": "9.3.0",
     "@types/axios": "0.14.0",
     "@types/cors": "2.8.6",
     "@types/express": "4.17.1",
@@ -140,7 +141,6 @@
   "dependencies": {
     "@loadable/component": "5.10.3",
     "@loadable/server": "5.10.3",
-    "@testing-library/react": "9.2.0",
     "axios": "0.19.0",
     "bootstrap": "4.3.1",
     "font-awesome": "4.7.0",
