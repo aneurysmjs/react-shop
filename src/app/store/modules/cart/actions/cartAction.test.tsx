@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import cartAction from './cartAction';
 
 describe('cartAction action', () => {
