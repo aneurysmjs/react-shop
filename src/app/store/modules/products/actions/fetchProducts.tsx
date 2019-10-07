@@ -5,9 +5,9 @@ import api from '~/api';
 import { ASYNC_ACTION_TYPE } from '~/constants';
 import * as types from '~/store/ActionTypes';
 
-import { makeActionCreator } from '~/store/helpers/makeActionCreator';
+import makeActionCreator from '~/store/helpers/makeActionCreator';
 
-import { ProductsType, ProductActionType } from '~/shared/types/ProductsType';
+import { ProductsType, ProductActionType } from '~store/modules/products/types';
 
 import { getProducts } from '~/store/modules/products/selectors';
 
