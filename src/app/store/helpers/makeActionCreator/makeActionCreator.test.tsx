@@ -4,6 +4,8 @@ describe('makeActionCreator', () => {
   const GET_INFO = 'GET_INFO';
   const payload = { user: { name: 'Jero' } };
 
+  type Payload = typeof payload;
+
   it('should return an action creator', () => {
     const actionCreator = makeActionCreator(GET_INFO);
     expect(typeof actionCreator).toBe('function');
@@ -11,13 +13,13 @@ describe('makeActionCreator', () => {
 
   it('should return an action when calling the action creator', () => {
     const actionCreator = makeActionCreator(GET_INFO);
-    const action = actionCreator(payload);
+    const action = actionCreator<Payload>(payload);
     expect(action).toEqual(expect.objectContaining({ type: GET_INFO }));
   });
 
   it('should contain action\'s data under "payload" property', () => {
     const actionCreator = makeActionCreator(GET_INFO);
-    const action = actionCreator(payload);
+    const action = actionCreator<Payload>(payload);
     const expectedData = { type: GET_INFO, payload };
     expect(action).toHaveProperty('payload');
     expect(action).toEqual(expectedData);
