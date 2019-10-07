@@ -1,15 +1,13 @@
-/* eslint-disable */
-
 export type Response<D> = {
   response: {
-    data: D
-  }
+    data: D;
+  };
 };
 
-export type ResponseError = { message: string; } | null
+export type ResponseError = { message: string } | null;
 
 export type ActionType<P, M = {}> = {
-  type: string,
-  payload: P,
-  meta?: M,
+  type: string;
+  payload: P;
+  meta?: M;
 };
