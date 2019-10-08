@@ -1,11 +1,10 @@
 /* eslint-disable consistent-return */
+import { AnyAction } from 'redux';
 import { ApiMiddlewareType, ApiMetaType } from '~/shared/types/MiddlewareTypes';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => next => action => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  let meta: ApiMetaType = {};
+  let meta = {} as ApiMetaType;
 
   if (action.meta) {
     meta = { ...action.meta };
@@ -43,10 +42,9 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => next => act
     type: requestType,
   });
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  (async () => {
+  return (async (): Promise<AnyAction> => {
     try {
-      const response: Response = await callAPI();
+      const response = await callAPI();
       return dispatch({
         payload: { response },
         type: successType,

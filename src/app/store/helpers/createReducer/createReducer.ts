@@ -1,18 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore, @typescript-eslint/no-unused-vars */
-import { Reducer } from 'redux';
+import { AnyAction, Reducer } from 'redux';
 
-type HandlersType<S, A> = {
-  // @ts-ignore
+type HandlersType<S, A extends AnyAction> = {
   [key: string]: Reducer<S, A>;
 };
 
 const has = Object.prototype.hasOwnProperty;
 
-function createReducer<S, A>(initialState: S, handlers: HandlersType<S, A>) {
+function createReducer<S, A extends AnyAction>(initialState: S, handlers: HandlersType<S, A>) {
   return function reducer(state = initialState, action: A): S {
-    // @ts-ignore
     if (has.call(handlers, action.type)) {
-      // @ts-ignore
       return handlers[action.type](state, action);
     }
     return state;

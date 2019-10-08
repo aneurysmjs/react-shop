@@ -1,12 +1,10 @@
-import { ProductsType, ProductActionType } from '~/shared/types/ProductsType';
-
-import { createReducer } from '~/store/helpers/createReducer';
-
 import {
   GET_PRODUCTS_FAILURE,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-} from '~/store/ActionTypes';
+  ProductsType,
+  ProductActionType,
+} from '~/store/modules/products/types';
 
 const initialState = {
   error: null,
@@ -14,33 +12,42 @@ const initialState = {
   products: [],
 };
 
-export default createReducer<ProductsType, ProductActionType>(initialState, {
-  [GET_PRODUCTS_REQUEST](state) {
-    return {
-      ...state,
-      isLoading: true,
-    };
-  },
-  [GET_PRODUCTS_SUCCESS](state, action) {
-    const {
-      payload: {
-        response: { data },
-      },
-    } = action;
-    return {
-      ...state,
-      isLoading: false,
-      products: [...data],
-    };
-  },
-  [GET_PRODUCTS_FAILURE](state, action) {
-    const {
-      payload: { error },
-    } = action;
-    return {
-      ...state,
-      isLoading: false,
-      error,
-    };
-  },
-});
+function productsReducer(
+  state: ProductsType = initialState,
+  action: ProductActionType,
+): ProductsType {
+  switch (action.type) {
+    case GET_PRODUCTS_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case GET_PRODUCTS_SUCCESS: {
+      const {
+        payload: {
+          response: { data },
+        },
+      } = action;
+      return {
+        ...state,
+        isLoading: false,
+        products: [...data],
+      };
+    }
+    case GET_PRODUCTS_FAILURE: {
+      const {
+        payload: { error },
+      } = action;
+      return {
+        ...state,
+        isLoading: false,
+        error,
+      };
+    }
+    default:
+      return state;
+  }
+}
+
+export default productsReducer;

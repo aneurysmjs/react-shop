@@ -1,5 +1,8 @@
 import { ActionType, Response, ResponseError } from '~/shared/types/CommonType';
-import { ApiMetaType } from '~/shared/types/MiddlewareTypes';
+
+export const GET_PRODUCTS_REQUEST = 'GET_PRODUCTS_REQUEST';
+export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';
+export const GET_PRODUCTS_FAILURE = 'GET_PRODUCTS_FAILURE';
 
 export type ProductType = {
   _id: string;
@@ -20,4 +23,4 @@ export type ProductsType = {
 
 type ProductPayloadType = Response<Array<ProductType> & ResponseError>;
 
-export type ProductActionType = ActionType<ProductPayloadType, ApiMetaType>;
+export type ProductActionType = ActionType<ProductPayloadType>;

@@ -1,10 +1,10 @@
 import products from './products';
 
 import {
-  GET_PRODUCTS_FAILURE,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-} from '~/store/ActionTypes';
+  GET_PRODUCTS_FAILURE,
+} from '~/store/modules/products/types';
 
 const productsData = [
   {
