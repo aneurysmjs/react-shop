@@ -1,10 +1,10 @@
 import { Middleware } from 'redux';
+import { State } from '~/shared/types/State';
 
-export type ApiMetaType = {
+export type ApiMetaType<T = Response> = {
   types: Array<string>;
-  callAPI: () => Promise<Response>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  shouldCallAPI: (s: any) => boolean;
+  callAPI(): Promise<T>;
+  shouldCallAPI: (s: State) => boolean;
 };
 
 export type ApiMiddlewareType = Middleware;
