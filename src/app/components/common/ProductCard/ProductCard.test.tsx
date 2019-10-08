@@ -3,7 +3,7 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 
 import ProductCard from './ProductCard';
-import { ProductType } from '~/shared/types/ProductsType';
+import { ProductType } from '~/store/modules/products/types';
 
 afterEach(cleanup);
 

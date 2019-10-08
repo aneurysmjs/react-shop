@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import ImgLoader from '~/components/common/ImgLoader';
 
-import { ProductType } from '~/shared/types/ProductsType';
+import { ProductType } from '~/store/modules/products/types';
 
 import './ProductCard.scss';
 
