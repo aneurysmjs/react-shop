@@ -1,4 +1,4 @@
-import  cart from './cart';
+import cart from './cart';
 
 describe('cart reducer', () => {
   const expectedState = {
