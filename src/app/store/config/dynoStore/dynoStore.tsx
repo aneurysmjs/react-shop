@@ -1,8 +1,4 @@
-/* eslint-disable implicit-arrow-linebreak */
-import {
-  createStore as createReduxStore,
-  combineReducers,
-} from 'redux';
+import { createStore as createReduxStore, combineReducers, Reducer } from 'redux';
 
 import reduceReducers from './reduceReducers';
 
@@ -18,12 +14,16 @@ const injectReducers = (_reducerMap): void => {
   });
 };
 
-const createRootReducer = () => (
-  combineReducers(Object.keys(reducerMap).reduce((result, key) => ({
-    ...result,
-    [key]: reduceReducers(reducerMap[key]),
-  }), {}))
-);
+const createRootReducer = (): Reducer =>
+  combineReducers(
+    Object.keys(reducerMap).reduce(
+      (result, key) => ({
+        ...result,
+        [key]: reduceReducers(reducerMap[key]),
+      }),
+      {},
+    ),
+  );
 
 const createStore = (...args) => {
   store = createReduxStore(createRootReducer(), ...args);
@@ -42,15 +42,16 @@ export const dynoStore = {
   reloadStore,
 };
 
-export const withReloadStore = (importPromise: *): Promise<any> => (
-  importPromise
-    .then((module) => {
+type WithReloadStoreType = <P>(dynamicImport: Promise<P>) => Promise<P>;
+
+export const withReloadStore: WithReloadStoreType = dynamicImport =>
+  dynamicImport
+    .then(module => {
       dynoStore.reloadStore();
       return module;
-    },
-    (error) => {
-      throw error;
     })
-);
+    .catch((error: Error) => {
+      throw error;
+    });
 
 export default dynoStore;
