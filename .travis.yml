@@ -15,5 +15,4 @@ scripts:
   - yarn test
   - yarn run build
 branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
+  only: master
