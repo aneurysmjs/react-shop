@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import Routing from '~/components/routing';
 
 import './assets/scss/styles.scss';
 
-const App = (): React.ReactElement => <Routing />;
+const App = (): ReactElement => <Routing />;
 
 export default App;

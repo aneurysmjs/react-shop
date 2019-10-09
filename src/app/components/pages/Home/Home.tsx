@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from '~/components/base/Spinner';
@@ -8,13 +8,13 @@ import ProductCard from '~/components/common/ProductCard';
 import { fetchProducts } from '~/store/modules/products/actions';
 import { getProducts } from '~/store/modules/products/selectors';
 
-import { ProductsType } from '~/store/modules/products/types';
+import { ProductsStateType } from '~/store/modules/products/types';
 
 import './Home.scss';
 
-const Home = (): React.ReactElement => {
+const Home = (): ReactElement => {
   const dispatch = useDispatch();
-  const { isLoading, products, error }: ProductsType = useSelector(getProducts);
+  const { isLoading, products, error }: ProductsStateType = useSelector(getProducts);
 
   useEffect(() => {
     dispatch(fetchProducts(`/products`));

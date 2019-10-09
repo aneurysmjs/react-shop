@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Route } from 'react-router-dom';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -11,7 +11,7 @@ import Home from '~/components/pages/Home';
 
 // const Loading = () => (<div>...</div>);
 
-const Routing = (): React.ReactElement => (
+const Routing = (): ReactElement => (
   <main>
     <Layout>
       <Route exact path="/" component={Home} />

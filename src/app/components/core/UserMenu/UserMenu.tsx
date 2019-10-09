@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import Icon from '~/components/base/Icon';
 import useLazy from '~/hooks/useLazy';
@@ -8,7 +8,7 @@ import { getCart } from '~/store/modules/cart/selectors';
 
 import './UserMenu.scss';
 
-const UserMenu = (): React.ReactElement => {
+const UserMenu = (): ReactElement => {
   const [open, setOpen] = useState(false);
   const cart: CartType = useSelector(getCart);
 

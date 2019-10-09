@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { act } from 'react-dom/test-utils';
 import { render, RenderResult } from '@testing-library/react';
 
 import LazyComponent from './LazyComponent';
 
-const Example = (): React.ReactElement => <div>Some Component</div>;
+const Example = (): ReactElement => <div>Some Component</div>;
 
 describe('LazyComponent', () => {
   // eslint-disable-next-line prettier/prettier
@@ -14,7 +14,7 @@ describe('LazyComponent', () => {
     await act(async () => {
       testRenderer = render(
         <LazyComponent
-          getModule={(): Promise<{ default: () => React.ReactElement }> =>
+          getModule={(): Promise<{ default: () => ReactElement }> =>
             Promise.resolve({ default: Example })
           }
         />,
