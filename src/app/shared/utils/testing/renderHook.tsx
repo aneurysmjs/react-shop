@@ -1,6 +1,7 @@
 // this is taken from
 // @link https://raw.githubusercontent.com/testing-library/react-hooks-testing-library/master/src/index.js
-
+/* eslint-disable */
+// @ts-nocheck
 import React, { Suspense } from 'react';
 import { act, create } from 'react-test-renderer';
 
