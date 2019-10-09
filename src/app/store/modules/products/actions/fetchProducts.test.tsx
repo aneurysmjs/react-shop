@@ -65,9 +65,9 @@ describe('fetchProducts', () => {
     expect(action.meta.callAPI).toHaveBeenCalledTimes(1);
     expect(action.meta.shouldCallAPI).toHaveBeenCalledTimes(1);
     const expectedActions = [
-      { type: 'GET_PRODUCTS_REQUEST', payload: {} },
+      { type: 'PRODUCTS/GET_PRODUCTS_REQUEST', payload: {} },
       {
-        type: 'GET_PRODUCTS_SUCCESS',
+        type: 'PRODUCTS/GET_PRODUCTS_SUCCESS',
         payload: { response },
       },
     ];
@@ -103,9 +103,9 @@ describe('fetchProducts', () => {
     expect(action.meta.callAPI).toHaveBeenCalledTimes(1);
     expect(action.meta.shouldCallAPI).toHaveBeenCalledTimes(1);
     const expectedActions = [
-      { type: 'GET_PRODUCTS_REQUEST', payload: {} },
+      { type: 'PRODUCTS/GET_PRODUCTS_REQUEST', payload: {} },
       {
-        type: 'GET_PRODUCTS_FAILURE',
+        type: 'PRODUCTS/GET_PRODUCTS_FAILURE',
         payload: {
           error: {
             message: 'Request failed with status code 404',
