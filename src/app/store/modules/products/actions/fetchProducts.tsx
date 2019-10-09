@@ -6,11 +6,8 @@ import makeActionCreator from '~/store/helpers/makeActionCreator';
 import { ApiMetaType } from '~/shared/types/MiddlewareTypes';
 
 import {
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  GET_PRODUCTS_FAILURE,
-  ProductType,
-  // ProductsType,
+  ProductsActionTypes,
+  ProductPayloadType,
   ProductActionType,
 } from '~/store/modules/products/types';
 
@@ -19,8 +16,12 @@ import { getProducts } from '~/store/modules/products/selectors';
 const actionCreator = makeActionCreator(ASYNC_ACTION_TYPE);
 
 export default function fetchProducts(query = ''): ProductActionType {
-  const meta: ApiMetaType<Array<ProductType>> = {
-    types: [GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE],
+  const productMeta: ApiMetaType = {
+    types: [
+      ProductsActionTypes.GetProductsRequest,
+      ProductsActionTypes.GetProductsSuccess,
+      ProductsActionTypes.GetProductsFailure,
+    ],
     callAPI: () => api.get(query),
     shouldCallAPI: state => {
       const products = getProducts(state);
@@ -30,5 +31,5 @@ export default function fetchProducts(query = ''): ProductActionType {
     },
   };
 
-  return actionCreator<{}, typeof meta>({}, meta);
+  return actionCreator<ProductPayloadType, ApiMetaType>({} as ProductPayloadType, productMeta);
 }

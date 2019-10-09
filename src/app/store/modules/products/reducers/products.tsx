@@ -1,8 +1,6 @@
 import {
-  GET_PRODUCTS_FAILURE,
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  ProductsType,
+  ProductsActionTypes,
+  ProductsStateType,
   ProductActionType,
 } from '~/store/modules/products/types';
 
@@ -13,17 +11,17 @@ const initialState = {
 };
 
 function productsReducer(
-  state: ProductsType = initialState,
+  state: ProductsStateType = initialState,
   action: ProductActionType,
-): ProductsType {
+): ProductsStateType {
   switch (action.type) {
-    case GET_PRODUCTS_REQUEST: {
+    case ProductsActionTypes.GetProductsRequest: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case GET_PRODUCTS_SUCCESS: {
+    case ProductsActionTypes.GetProductsSuccess: {
       const {
         payload: {
           response: { data },
@@ -35,7 +33,7 @@ function productsReducer(
         products: [...data],
       };
     }
-    case GET_PRODUCTS_FAILURE: {
+    case ProductsActionTypes.GetProductsFailure: {
       const {
         payload: { error },
       } = action;
