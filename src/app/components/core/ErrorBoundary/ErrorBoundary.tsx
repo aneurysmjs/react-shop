@@ -53,11 +53,17 @@ class ErrorBoundary extends Component<PropsType, StateType> {
   }
 }
 
-export function withErrorBoundary<P>(
-  SomeComponent: ComponentType<P>,
-  FallbackComponent: ComponentType,
-  onError: (error: Error) => void,
-): ComponentType<P> {
+export type WithErrorBoundaryPropsType = {
+  SomeComponent: ComponentType;
+  FallbackComponent: ComponentType;
+  onError: (error: Error) => void;
+};
+
+export function withErrorBoundary<P>({
+  SomeComponent,
+  FallbackComponent,
+  onError,
+}: WithErrorBoundaryPropsType): ComponentType<P> {
   const Wrapped = (props: P): JSX.Element => (
     <ErrorBoundary FallbackComponent={FallbackComponent} onError={onError}>
       <SomeComponent {...props} />
