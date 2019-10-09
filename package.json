@@ -21,7 +21,7 @@
     "build:ssr": "cross-env NODE_ENV=production node scripts/build.js --with-ssr",
     "build:with-stats": "cross-env NODE_ENV=production webpack --config config/webpack-config/client/client.prod.js --json > build/client/static/bundle-stats.json",
     "commit": "git-cz",
-    "lint": "eslint ./src",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
     "plop": "plop",
     "start": "cross-env NODE_ENV=development node scripts/start.js",
     "start:ssr": "cross-env NODE_ENV=development RENDER_TYPE=ssr node scripts/start.js --with-ssr",
