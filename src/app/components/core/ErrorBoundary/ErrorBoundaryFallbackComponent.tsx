@@ -1,36 +1,29 @@
-/* eslint-disable */
+import React, { ReactElement } from 'react';
 
-import React from 'react';
-
-type Props = {
-  componentStack: string,
-  error: Error,
+type PropsType = {
+  componentStack: string;
+  error: Error;
 };
 
-const toTitle = (
-  error: Error,
-  componentStack: string,
-): string => (`${error.toString()}\n\nThis is located at:${componentStack}`);
+const toTitle = (error: Error, componentStack: string): string =>
+  `${error.toString()}\n\nThis is located at:${componentStack}`;
 
 const style = {
-  alignItems: 'center',
-  boxSizing: 'border-box',
+  'align-ttems': 'center',
+  'box-sizing': 'border-box',
   color: '#FFF',
   cursor: 'help',
   display: 'flex',
-  flexDirection: 'column',
+  'flex-direction': 'column',
   height: '100%',
   maxHeight: '100vh',
   maxWidth: '100vw',
-  textAlign: 'center',
+  'text-align': 'center',
   width: '100%',
 };
 
-const ErrorBoundaryFallbackComponent = ({ componentStack, error }: Props) => (
-  <div
-    style={style}
-    title={toTitle(error, componentStack)}
-  >
+const ErrorBoundaryFallbackComponent = ({ componentStack, error }: PropsType): ReactElement => (
+  <div style={style} title={toTitle(error, componentStack)}>
     <pre>{componentStack}</pre>
   </div>
 );
