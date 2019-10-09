@@ -1,10 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import products from './products';
 
-import {
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  GET_PRODUCTS_FAILURE,
-} from '~/store/modules/products/types';
+import { ProductsActionTypes } from '~/store/modules/products/types';
 
 const productsData = [
   {
@@ -25,31 +22,35 @@ const state = {
 
 describe('products reducer', () => {
   it('should return the initial state', () => {
+    // @ts-ignore - only for testing purposes
     expect(products(undefined, {})).toEqual(state);
   });
 
   it('should display loading indicator', () => {
     const successAction = {
-      type: GET_PRODUCTS_REQUEST,
+      type: ProductsActionTypes.GetProductsRequest,
       isLoading: true,
     };
+    // @ts-ignore - only for testing purposes
     expect(products({}, successAction)).toEqual({ isLoading: true });
   });
 
   it('should return products', () => {
     const successAction = {
-      type: GET_PRODUCTS_SUCCESS,
+      type: ProductsActionTypes.GetProductsSuccess,
       payload: { response },
       error: null,
     };
+    // @ts-ignore - only for testing purposes
     expect(products([], successAction)).toEqual({ isLoading: false, products: productsData });
   });
 
   it('should return error', () => {
     const errorAction = {
-      type: GET_PRODUCTS_FAILURE,
+      type: ProductsActionTypes.GetProductsFailure,
       payload: { error },
     };
+    // @ts-ignore - only for testing purposes
     expect(products([], errorAction)).toEqual({ isLoading: false, error });
   });
 });
