@@ -1,57 +1,54 @@
-import { createStore as createReduxStore, combineReducers, Reducer } from 'redux';
+import { ComponentType } from 'react';
+import {
+  createStore as createReduxStore,
+  combineReducers,
+  Reducer,
+  Store,
+  StoreEnhancer,
+} from 'redux';
 
-import reduceReducers from './reduceReducers';
+import { ReducerMap, StoreShape, INIT_DYNO_STATE } from '~/shared/types';
 
-let store = {};
-const reducerMap = {};
-
-const injectReducers = (_reducerMap): void => {
-  Object.entries(_reducerMap).forEach(([name, reducer]) => {
-    if (!reducerMap[name]) {
-      reducerMap[name] = [];
-    }
-    reducerMap[name].push(reducer);
-  });
+let store = {} as Store;
+let reducerMap: ReducerMap = {
+  [INIT_DYNO_STATE]: () => ({}),
 };
 
-const createRootReducer = (): Reducer =>
-  combineReducers(
-    Object.keys(reducerMap).reduce(
-      (result, key) => ({
-        ...result,
-        [key]: reduceReducers(reducerMap[key]),
-      }),
-      {},
-    ),
-  );
+const createRootReducer = (): Reducer => combineReducers(reducerMap);
 
-const createStore = (...args) => {
-  store = createReduxStore(createRootReducer(), ...args);
+export const createStore = (enhancer: StoreEnhancer): Store<StoreShape> => {
+  store = createReduxStore(createRootReducer(), enhancer);
   return store;
 };
 
-const reloadStore = (): void => {
+export const reloadStore = (): void => {
   store.replaceReducer(createRootReducer());
-  // store.dispatch({ type: '@@replace-reducer' });
+  store.dispatch({ type: '@@DYNO_STORE/RELOAD' });
 };
 
-export const dynoStore = {
-  injectReducers,
-  createRootReducer,
+export const injectReducers = (newReducers: ReducerMap): void => {
+  reducerMap = { ...reducerMap, ...newReducers };
+  reloadStore();
+};
+
+export async function withStoreModule<P>(
+  componentImport: Promise<{ default: ComponentType }>,
+  reducerImport: Promise<P>,
+): Promise<{ default: ComponentType }> {
+  try {
+    const module = await componentImport;
+    const reducer = await reducerImport;
+    injectReducers(reducer);
+    return module;
+  } catch (error) {
+    store.dispatch({ type: '@@DYNO_STORE/ERROR', payload: error });
+    throw error;
+  }
+}
+
+export default {
   createStore,
   reloadStore,
+  injectReducers,
+  withStoreModule,
 };
-
-type WithReloadStoreType = <P>(dynamicImport: Promise<P>) => Promise<P>;
-
-export const withReloadStore: WithReloadStoreType = dynamicImport =>
-  dynamicImport
-    .then(module => {
-      dynoStore.reloadStore();
-      return module;
-    })
-    .catch((error: Error) => {
-      throw error;
-    });
-
-export default dynoStore;
