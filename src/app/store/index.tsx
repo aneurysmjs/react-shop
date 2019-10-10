@@ -4,9 +4,9 @@ const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   if (module.hot) {
-    module.hot.accept('store/reducers', () =>
+    module.hot.accept('~/store/config/dynoStore', () =>
       // eslint-disable-next-line implicit-arrow-linebreak, global-require
-      store.replaceReducer(require('~/store/reducers').default),
+      require('~/store/config/dynoStore').default.reloadStore(),
     );
   }
 }
