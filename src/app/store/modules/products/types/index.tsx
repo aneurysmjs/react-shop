@@ -22,10 +22,10 @@ export type ProductsType = Array<ProductType>;
 
 export type ProductsStateType = {
   isLoading: boolean;
-  products: Array<ProductType>;
+  products: ProductsType;
   error?: Error | null;
 };
 
-export type ProductPayloadType = Response<Array<ProductType>> & { error: Error };
+export type ProductPayloadType = Response<ProductsType> & { error: Error };
 
 export type ProductActionType = ActionType<ProductPayloadType>;
