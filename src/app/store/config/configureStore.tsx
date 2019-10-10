@@ -1,9 +1,6 @@
-import { createStore } from 'redux';
+import { createStore } from '~/store/config/dynoStore';
 
 // import throttle from 'lodash.throttle';
-
-// import all reducers
-import reducer from '~/store/reducers';
 
 import enhancer from '~/store/config/enhancer';
 
@@ -14,11 +11,7 @@ import enhancer from '~/store/config/enhancer';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function configureStore() {
-  const store = createStore(
-    reducer,
-    // persistedState,
-    enhancer, // third parameter is called an 'enhancer'
-  );
+  const store = createStore(enhancer);
   /* // Save the state any time the store state changes
   store.subscribe(throttle(() => {
     // Rather than pass the whole state object,
