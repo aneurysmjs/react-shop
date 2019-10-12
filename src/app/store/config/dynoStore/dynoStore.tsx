@@ -16,7 +16,7 @@ let reducerMap: ReducerMap = {
 
 const createRootReducer = (): Reducer => combineReducers(reducerMap);
 
-export const createStore = (enhancer: StoreEnhancer): Store<StoreShape> => {
+export const createStore = (enhancer?: StoreEnhancer): Store<StoreShape> => {
   store = createReduxStore(createRootReducer(), enhancer);
   return store;
 };
@@ -36,12 +36,11 @@ export async function withStoreModule<P>(
   reducerImport: Promise<P>,
 ): Promise<{ default: ComponentType }> {
   try {
-    const module = await componentImport;
-    const reducer = await reducerImport;
+    const [module, reducer] = await Promise.all([componentImport, reducerImport]);
     injectReducers(reducer);
     return module;
   } catch (error) {
-    store.dispatch({ type: '@@DYNO_STORE/ERROR', payload: error });
+    store.dispatch({ type: '@@DYNO_STORE/ERROR', payload: error.message });
     throw error;
   }
 }
