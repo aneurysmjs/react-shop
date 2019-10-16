@@ -1,4 +1,4 @@
-import { CartType, CartActionType } from '~/shared/types/CartType';
+import { CartType, CartActionType } from '~/store/modules/cart/types';
 
 import { CART_DATA } from '~/store/ActionTypes';
 
