@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore, import/no-named-as-default-member */
 import React, { ReactElement } from 'react';
-import { createStore as createReduxStore } from 'redux';
+import { renderHook, act, RenderHookResult } from '@testing-library/react-hooks';
+import { createStore as createReduxStore, AnyAction } from 'redux';
 import alienStore, {
   createStore,
   reloadStore,
   injectReducers,
   withStoreModule,
+  useAlienModule,
 } from './alienStore';
 
 describe('Dyno Store', () => {
@@ -14,6 +16,7 @@ describe('Dyno Store', () => {
     expect(alienStore).toHaveProperty('reloadStore');
     expect(alienStore).toHaveProperty('injectReducers');
     expect(alienStore).toHaveProperty('withStoreModule');
+    expect(alienStore).toHaveProperty('useAlienModule');
   });
 
   it('should create and return a Redux store', () => {
@@ -79,6 +82,34 @@ describe('Dyno Store', () => {
         type: '@@ALIEN_STORE/ERROR',
         payload: errorMessage,
       });
+    });
+  });
+
+  describe('test "useAlienModule"', () => {
+    const alienModuleMock = {
+      actions: {
+        dummyAction: (): AnyAction => ({
+          type: 'DUMMY_ACTION',
+          payload: {
+            name: 'Джеро',
+          },
+        }),
+      },
+    };
+
+    type AlienModuleType = Promise<{ default: typeof alienModuleMock }>;
+
+    const importAlienModule = (): AlienModuleType => Promise.resolve({ default: alienModuleMock });
+    it('should render "null" at first', async () => {
+      const store = createStore();
+      const mockDispatch = jest.spyOn(store, 'dispatch');
+      let hookRenderer = {} as RenderHookResult<{}, AlienModuleType>;
+      await act(async () => {
+        hookRenderer = renderHook(() => useAlienModule(importAlienModule));
+      });
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
+      expect(hookRenderer.result.current).toEqual({ default: alienModuleMock });
     });
   });
 });

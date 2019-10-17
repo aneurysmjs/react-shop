@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import { ComponentType, useEffect, useState } from 'react';
 import {
   createStore as createReduxStore,
   combineReducers,
@@ -47,9 +47,31 @@ export async function withStoreModule<P>(
   }
 }
 
+type UseAlienModuleImportType<P> = () => Promise<{ default: P } | P>;
+
+export function useAlienModule<P>(moduleStore: UseAlienModuleImportType<P>): P | null {
+  const [alienModule, setAlienModule] = useState<P | null>(null);
+
+  useEffect(() => {
+    (async (): Promise<void> => {
+      try {
+        const module = await moduleStore();
+        injectReducers(module.reducers);
+        setAlienModule(module);
+      } catch (err) {
+        throw new Error(`useDyno error: ${err}`);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return alienModule;
+}
+
 export default {
   createStore,
   reloadStore,
   injectReducers,
   withStoreModule,
+  useAlienModule,
 };
