@@ -1,14 +1,19 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore, import/no-named-as-default-member */
 import React, { ReactElement } from 'react';
 import { createStore as createReduxStore } from 'redux';
-import dynoStore, { createStore, reloadStore, injectReducers, withStoreModule } from './alienStore';
+import alienStore, {
+  createStore,
+  reloadStore,
+  injectReducers,
+  withStoreModule,
+} from './alienStore';
 
 describe('Dyno Store', () => {
   it('should have main methods', () => {
-    expect(dynoStore).toHaveProperty('createStore');
-    expect(dynoStore).toHaveProperty('reloadStore');
-    expect(dynoStore).toHaveProperty('injectReducers');
-    expect(dynoStore).toHaveProperty('withStoreModule');
+    expect(alienStore).toHaveProperty('createStore');
+    expect(alienStore).toHaveProperty('reloadStore');
+    expect(alienStore).toHaveProperty('injectReducers');
+    expect(alienStore).toHaveProperty('withStoreModule');
   });
 
   it('should create and return a Redux store', () => {
@@ -22,7 +27,7 @@ describe('Dyno Store', () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
     reloadStore();
     expect(mockDispatch).toHaveBeenCalledTimes(1);
-    expect(mockDispatch).toHaveBeenCalledWith({ type: '@@DYNO_STORE/RELOAD' });
+    expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
   });
 
   it('should add reducer and reload the store', () => {
@@ -31,7 +36,7 @@ describe('Dyno Store', () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
     injectReducers(reducer);
     expect(mockDispatch).toHaveBeenCalledTimes(1);
-    expect(mockDispatch).toHaveBeenCalledWith({ type: '@@DYNO_STORE/RELOAD' });
+    expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
   });
 
   describe('test "withStoreModule"', () => {
@@ -44,7 +49,7 @@ describe('Dyno Store', () => {
       const module = await withStoreModule(component, reducer);
 
       expect(mockDispatch).toHaveBeenCalledTimes(1);
-      expect(mockDispatch).toHaveBeenCalledWith({ type: '@@DYNO_STORE/RELOAD' });
+      expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
       expect(module).toEqual({ default: Example });
     });
 
@@ -54,7 +59,7 @@ describe('Dyno Store', () => {
       const mockDispatch = jest.spyOn(store, 'dispatch');
       const errorMessage =
         // eslint-disable-next-line quotes
-        "Cannot find module './some/wrong/component/path' from 'dynoStore.test.tsx'";
+        "Cannot find module './some/wrong/component/path' from 'alienStore.test.tsx'";
 
       /* eslint-disable import/no-unresolved */
       try {
@@ -71,7 +76,7 @@ describe('Dyno Store', () => {
 
       expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({
-        type: '@@DYNO_STORE/ERROR',
+        type: '@@ALIEN_STORE/ERROR',
         payload: errorMessage,
       });
     });
