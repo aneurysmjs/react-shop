@@ -1,4 +1,4 @@
-import { createStore } from '~/store/config/dynoStore';
+import { createStore } from '~/store/config/alienStore';
 
 // import throttle from 'lodash.throttle';
 
