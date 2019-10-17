@@ -2,7 +2,7 @@ import React, { ReactElement, ComponentType } from 'react';
 import { Route } from 'react-router-dom';
 
 import loadable from '@loadable/component'; // eslint-disable-line @typescript-eslint/no-unused-vars
-import { withStoreModule } from '~/store/config/dynoStore';
+import { withStoreModule } from '~/store/config/alienStore';
 
 import Layout from '~/components/core/Layout';
 
