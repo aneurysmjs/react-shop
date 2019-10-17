@@ -23,7 +23,9 @@ export const createStore = (enhancer?: StoreEnhancer): Store<StoreShape> => {
 
 export const reloadStore = (): void => {
   store.replaceReducer(createRootReducer());
-  store.dispatch({ type: '@@ALIEN_STORE/RELOAD' });
+  if (process.env.NODE_ENV !== 'production') {
+    store.dispatch({ type: '@@ALIEN_STORE/RELOAD' });
+  }
 };
 
 export const injectReducers = (newReducers: ReducerMap): void => {
