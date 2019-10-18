@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore, import/no-named-as-default-member */
 import React, { ReactElement } from 'react';
-import { renderHook, act, RenderHookResult } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import { createStore as createReduxStore, AnyAction } from 'redux';
 import alienStore, {
   createStore,
@@ -85,6 +85,9 @@ describe('Dyno Store', () => {
     });
   });
 
+  /**
+   * @link https://stackoverflow.com/questions/56085458/testing-custom-hook-with-react-hooks-testing-library-throws-an-error
+   */
   describe('test "useAlienModule"', () => {
     const alienModuleMock = {
       actions: {
@@ -99,17 +102,22 @@ describe('Dyno Store', () => {
 
     type AlienModuleType = Promise<{ default: typeof alienModuleMock }>;
 
-    const importAlienModule = (): AlienModuleType => Promise.resolve({ default: alienModuleMock });
-    it('should render "null" at first', async () => {
+    it('should render "null" at first and then resolve the module', async () => {
       const store = createStore();
       const mockDispatch = jest.spyOn(store, 'dispatch');
-      let hookRenderer = {} as RenderHookResult<{}, AlienModuleType>;
-      await act(async () => {
-        hookRenderer = renderHook(() => useAlienModule(importAlienModule));
-      });
+      const importAlienModule = (): AlienModuleType =>
+        Promise.resolve({ default: alienModuleMock });
+      const { result, waitForNextUpdate } = renderHook(() => useAlienModule(importAlienModule));
+
+      expect(mockDispatch).toHaveBeenCalledTimes(0);
+      expect(result.current).toEqual(null);
+
+      // THIS is the key to resolve the Promise
+      await waitForNextUpdate();
+
       expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
-      expect(hookRenderer.result.current).toEqual({ default: alienModuleMock });
+      expect(result.current).toEqual({ default: alienModuleMock });
     });
   });
 });
