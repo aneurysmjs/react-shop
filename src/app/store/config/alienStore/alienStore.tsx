@@ -49,6 +49,13 @@ export async function withStoreModule<P>(
 
 type UseAlienModuleImportType<P> = () => Promise<{ default: P } | P>;
 
+function errorHandler<P>(errorOrObj: P): P {
+  if (errorOrObj && errorOrObj.constructor.name === 'Error') {
+    throw new Error(`useAlienModule ${errorOrObj}`);
+  }
+  return errorOrObj;
+}
+
 export function useAlienModule<P>(moduleStore: UseAlienModuleImportType<P>): P | null {
   const [alienModule, setAlienModule] = useState<P | null>(null);
 
@@ -59,13 +66,15 @@ export function useAlienModule<P>(moduleStore: UseAlienModuleImportType<P>): P |
         injectReducers(module.reducers);
         setAlienModule(module);
       } catch (err) {
-        throw new Error(`useDyno error: ${err}`);
+        // throw new Error(`useDyno error: ${err}`);
+        // throw Error(`useDyno error: ${err}`);
+        setAlienModule(err);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [moduleStore]);
 
-  return alienModule;
+  return errorHandler(alienModule);
 }
 
 export default {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore, import/no-named-as-default-member */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React, { ReactElement } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { createStore as createReduxStore, AnyAction } from 'redux';
@@ -118,6 +118,27 @@ describe('Dyno Store', () => {
       expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
       expect(result.current).toEqual({ default: alienModuleMock });
+    });
+
+    it('should throw', async () => {
+      const store = createStore();
+      const mockDispatch = jest.spyOn(store, 'dispatch');
+      // @ts-ignore
+      const importAlienModule = (): AlienModuleType => import('./some/not-existent-file.js'); // eslint-disable-line import/no-unresolved
+
+      const { result, waitForNextUpdate } = renderHook(() => useAlienModule(importAlienModule));
+
+      expect(mockDispatch).toHaveBeenCalledTimes(0);
+
+      await waitForNextUpdate();
+
+      expect(() => {
+        expect(result.current).not.toBe(undefined);
+      }).toThrow(
+        Error(
+          `useAlienModule Error: Cannot find module './some/not-existent-file.js' from 'alienStore.test.tsx'`,
+        ),
+      );
     });
   });
 });
