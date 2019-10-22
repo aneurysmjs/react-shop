@@ -10,6 +10,8 @@ import alienStore, {
   useAlienModule,
 } from './alienStore';
 
+const WRONG_COMPONENT_PATH = './some/wrong/component/path';
+
 describe('Dyno Store', () => {
   it('should have main methods', () => {
     expect(alienStore).toHaveProperty('createStore');
@@ -62,13 +64,13 @@ describe('Dyno Store', () => {
       const mockDispatch = jest.spyOn(store, 'dispatch');
       const errorMessage =
         // eslint-disable-next-line quotes
-        "Cannot find module './some/wrong/component/path' from 'alienStore.test.tsx'";
+        `Cannot find module '${WRONG_COMPONENT_PATH}' from 'alienStore.test.tsx'`;
 
       /* eslint-disable import/no-unresolved */
       try {
         await withStoreModule(
           // @ts-ignore
-          import('./some/wrong/component/path'),
+          import(WRONG_COMPONENT_PATH),
           // @ts-ignore
           import('./some/wrong/reducer/path'),
         );
@@ -124,7 +126,7 @@ describe('Dyno Store', () => {
       const store = createStore();
       const mockDispatch = jest.spyOn(store, 'dispatch');
       // @ts-ignore
-      const importAlienModule = (): AlienModuleType => import('./some/not-existent-file.js'); // eslint-disable-line import/no-unresolved
+      const importAlienModule = (): AlienModuleType => import(WRONG_COMPONENT_PATH); // eslint-disable-line import/no-unresolved
 
       const { result, waitForNextUpdate } = renderHook(() => useAlienModule(importAlienModule));
 
@@ -136,7 +138,7 @@ describe('Dyno Store', () => {
         expect(result.current).not.toBe(undefined);
       }).toThrow(
         Error(
-          `useAlienModule Error: Cannot find module './some/not-existent-file.js' from 'alienStore.test.tsx'`,
+          `useAlienModule Error: Cannot find module '${WRONG_COMPONENT_PATH}' from 'alienStore.test.tsx'`,
         ),
       );
     });
