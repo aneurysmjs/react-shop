@@ -10,13 +10,23 @@ import {
 import { ReducerMap, StoreShape, INIT_DYNO_STATE } from '~/shared/types';
 
 let store = {} as Store;
-let reducerMap: ReducerMap = {
-  [INIT_DYNO_STATE]: () => ({}),
+
+const alienReducer = {
+  [INIT_DYNO_STATE]: (): {} => ({}),
 };
 
-const createRootReducer = (): Reducer => combineReducers(reducerMap);
+let reducerMap: ReducerMap = {};
 
-export const createStore = (enhancer?: StoreEnhancer): Store<StoreShape> => {
+const createRootReducer = (): Reducer => {
+  return combineReducers(reducerMap);
+};
+
+export const createStore = (
+  initialReducers = alienReducer,
+  enhancer?: StoreEnhancer,
+): Store<StoreShape> => {
+  reducerMap = { ...initialReducers };
+
   store = createReduxStore(createRootReducer(), enhancer);
   return store;
 };
@@ -29,7 +39,15 @@ export const reloadStore = (): void => {
 };
 
 export const injectReducers = (newReducers: ReducerMap): void => {
+  const key = Object.keys(newReducers).shift();
+
+  // if the reducer already exist, just skip
+  if (key && reducerMap[key]) {
+    return;
+  }
+
   reducerMap = { ...reducerMap, ...newReducers };
+
   reloadStore();
 };
 
@@ -66,8 +84,8 @@ export function useAlienModule<P>(moduleStore: UseAlienModuleImportType<P>): P |
         injectReducers(module.reducers);
         setAlienModule(module);
       } catch (err) {
-        // throw new Error(`useDyno error: ${err}`);
-        // throw Error(`useDyno error: ${err}`);
+        // throw new Error(`useAlienModule error: ${err}`);
+        // throw Error(`useAlienModule error: ${err}`);
         setAlienModule(err);
       }
     })();
