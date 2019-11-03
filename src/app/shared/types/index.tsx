@@ -6,10 +6,10 @@ export type valueof<T> = T[keyof T];
 
 export const PRODUCTS_NAMESPACE_KEY = 'PRODUCTS_NAMESPACE';
 
-export const INIT_DYNO_STATE = 'INIT_DYNO_STATE';
+export const INIT_REDUCER = 'INIT_REDUCER';
 
 export type FullStoreShape = {
-  [INIT_DYNO_STATE]: {};
+  [INIT_REDUCER]: {};
   [PRODUCTS_NAMESPACE_KEY]: ProductsStateType;
 };
 
