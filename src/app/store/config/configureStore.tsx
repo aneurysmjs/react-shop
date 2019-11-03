@@ -11,7 +11,7 @@ import enhancer from '~/store/config/enhancer';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function configureStore() {
-  const store = createStore(enhancer);
+  const store = createStore(undefined, enhancer);
   /* // Save the state any time the store state changes
   store.subscribe(throttle(() => {
     // Rather than pass the whole state object,
