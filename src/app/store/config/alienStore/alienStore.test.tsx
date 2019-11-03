@@ -23,33 +23,44 @@ describe('Dyno Store', () => {
 
   it('should create and return a Redux store', () => {
     const reduxStore = createReduxStore(() => ({}));
-    const store = createStore();
+    const store = createStore(undefined);
     expect(JSON.stringify(store, null)).toEqual(JSON.stringify(reduxStore, null));
   });
 
   it('should trigger store\'s "dispatch" when reloading the store', () => {
-    const store = createStore();
+    const store = createStore(undefined);
     const mockDispatch = jest.spyOn(store, 'dispatch');
     reloadStore();
     expect(mockDispatch).toHaveBeenCalledTimes(1);
     expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
   });
 
-  it('should add reducer and reload the store', () => {
-    const store = createStore();
-    const reducer = { INIT_DYNO_STATE: (): {} => ({}) };
-    const mockDispatch = jest.spyOn(store, 'dispatch');
-    injectReducers(reducer);
-    expect(mockDispatch).toHaveBeenCalledTimes(1);
-    expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
+  describe('injectReducers', () => {
+    it('should add reducer and reload the store', () => {
+      const store = createStore(undefined);
+      const reducer = { OTHER_REDUCER: (): {} => ({}) };
+      const mockDispatch = jest.spyOn(store, 'dispatch');
+      injectReducers(reducer);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
+    });
+
+    it('should not add an already existing reducer', () => {
+      const store = createStore(undefined);
+      const reducer = { INIT_REDUCER: (): {} => ({}) };
+      const mockDispatch = jest.spyOn(store, 'dispatch');
+      injectReducers(reducer);
+      expect(mockDispatch).toHaveBeenCalledTimes(0);
+      expect(mockDispatch).not.toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
+    });
   });
 
   describe('test "withStoreModule"', () => {
     it('should add reducer and reload the store', async () => {
       const Example = (): ReactElement => <div>some component</div>;
       const component = Promise.resolve({ default: Example });
-      const reducer = Promise.resolve({ default: { INIT_DYNO_STATE: (): {} => ({}) } });
-      const store = createStore();
+      const reducer = Promise.resolve({ default: { INIT_REDUCER: (): {} => ({}) } });
+      const store = createStore(undefined);
       const mockDispatch = jest.spyOn(store, 'dispatch');
       const module = await withStoreModule(component, reducer);
 
@@ -60,7 +71,7 @@ describe('Dyno Store', () => {
 
     it('should throw if there is an error', async () => {
       expect.assertions(3);
-      const store = createStore();
+      const store = createStore(undefined);
       const mockDispatch = jest.spyOn(store, 'dispatch');
       const errorMessage =
         // eslint-disable-next-line quotes
@@ -105,7 +116,7 @@ describe('Dyno Store', () => {
     type AlienModuleType = Promise<{ default: typeof alienModuleMock }>;
 
     it('should render "null" at first and then resolve the module', async () => {
-      const store = createStore();
+      const store = createStore(undefined);
       const mockDispatch = jest.spyOn(store, 'dispatch');
       const importAlienModule = (): AlienModuleType =>
         Promise.resolve({ default: alienModuleMock });
@@ -123,7 +134,7 @@ describe('Dyno Store', () => {
     });
 
     it('should throw', async () => {
-      const store = createStore();
+      const store = createStore(undefined);
       const mockDispatch = jest.spyOn(store, 'dispatch');
       // @ts-ignore
       const importAlienModule = (): AlienModuleType => import(WRONG_COMPONENT_PATH); // eslint-disable-line import/no-unresolved

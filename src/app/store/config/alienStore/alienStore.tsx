@@ -7,12 +7,14 @@ import {
   StoreEnhancer,
 } from 'redux';
 
-import { ReducerMap, StoreShape, INIT_DYNO_STATE } from '~/shared/types';
+import { ReducerMap, StoreShape } from '~/shared/types';
+
+const INIT_REDUCER = (): {} => ({});
 
 let store = {} as Store;
 
 const alienReducer = {
-  [INIT_DYNO_STATE]: (): {} => ({}),
+  INIT_REDUCER,
 };
 
 let reducerMap: ReducerMap = {};
@@ -81,7 +83,8 @@ export function useAlienModule<P>(moduleStore: UseAlienModuleImportType<P>): P |
     (async (): Promise<void> => {
       try {
         const module = await moduleStore();
-        injectReducers(module.reducers);
+        const reducerToInject = module.reducers ? module.reducers : module;
+        injectReducers(reducerToInject);
         setAlienModule(module);
       } catch (err) {
         // throw new Error(`useAlienModule error: ${err}`);
