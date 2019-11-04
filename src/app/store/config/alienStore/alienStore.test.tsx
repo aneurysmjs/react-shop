@@ -4,21 +4,23 @@ import { renderHook } from '@testing-library/react-hooks';
 import { AnyAction } from 'redux';
 import alienStore, {
   createStore,
-  reloadStore,
+  getReducerMap,
   injectReducers,
-  withStoreModule,
+  reloadStore,
   useAlienModule,
+  withStoreModule,
 } from './alienStore';
 
 const WRONG_COMPONENT_PATH = './some/wrong/component/path';
 
-describe('Dyno Store', () => {
+describe('alienStore', () => {
   it('should have main methods', () => {
     expect(alienStore).toHaveProperty('createStore');
-    expect(alienStore).toHaveProperty('reloadStore');
+    expect(alienStore).toHaveProperty('getReducerMap');
     expect(alienStore).toHaveProperty('injectReducers');
-    expect(alienStore).toHaveProperty('withStoreModule');
+    expect(alienStore).toHaveProperty('reloadStore');
     expect(alienStore).toHaveProperty('useAlienModule');
+    expect(alienStore).toHaveProperty('withStoreModule');
   });
 
   describe('create store', () => {
@@ -52,6 +54,41 @@ describe('Dyno Store', () => {
     });
   });
 
+  describe('getReducerMap', () => {
+    it('should return the current reducers which is just the default', () => {
+      const initialReducer = {
+        defaultState: (): string => 'default state value',
+      };
+      createStore(undefined);
+      const currentReducers = getReducerMap();
+      /**
+       * @desc since Object equality fails when object contains a function
+       *
+       * this spec fails:
+       * it("can't compare functions", () => {
+       *   expect(() => {}).toEqual(() => {});
+       * });
+       *
+       * Because functions are compared via reference equality
+       * it('does reference equality', ()  => {
+       *   const fn = function() {};
+       *   expect(fn).toEqual(fn);
+       * });
+       *
+       */
+      // so just compare by their keys at least
+      expect(Object.keys(currentReducers)).toEqual(Object.keys(initialReducer));
+    });
+    it('should return the current reducers also when they are given', () => {
+      const initialReducers = {
+        reducer1: (): string => 'reducer1 value',
+        reducer2: (): string => 'reducer1 value',
+      };
+      createStore(initialReducers);
+      const currentReducers = getReducerMap();
+      expect(Object.keys(currentReducers)).toEqual(Object.keys(initialReducers));
+    });
+  });
   describe('injectReducers', () => {
     it('should add reducer and reload the store', () => {
       const store = createStore(undefined);

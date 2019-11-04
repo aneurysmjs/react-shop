@@ -15,7 +15,7 @@ const alienReducer = {
   defaultState: (): string => 'default state value',
 };
 
-let reducerMap: ReducerMap = {};
+let reducerMap = {};
 
 const createRootReducer = (): Reducer => {
   return combineReducers(reducerMap);
@@ -30,6 +30,8 @@ export const createStore = (
   store = createReduxStore(createRootReducer(), enhancer);
   return store;
 };
+
+export const getReducerMap = (): typeof reducerMap => reducerMap;
 
 export const reloadStore = (): void => {
   store.replaceReducer(createRootReducer());
@@ -100,8 +102,9 @@ export function useAlienModule<P>(moduleStore: UseAlienModuleImportType<P>): P |
 
 export default {
   createStore,
-  reloadStore,
+  getReducerMap,
   injectReducers,
-  withStoreModule,
+  reloadStore,
   useAlienModule,
+  withStoreModule,
 };
