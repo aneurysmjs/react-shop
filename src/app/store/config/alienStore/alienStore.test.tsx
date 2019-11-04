@@ -7,6 +7,7 @@ import alienStore, {
   getReducerMap,
   injectReducers,
   reloadStore,
+  removeReducers,
   useAlienModule,
   withStoreModule,
 } from './alienStore';
@@ -19,6 +20,7 @@ describe('alienStore', () => {
     expect(alienStore).toHaveProperty('getReducerMap');
     expect(alienStore).toHaveProperty('injectReducers');
     expect(alienStore).toHaveProperty('reloadStore');
+    expect(alienStore).toHaveProperty('removeReducers');
     expect(alienStore).toHaveProperty('useAlienModule');
     expect(alienStore).toHaveProperty('withStoreModule');
   });
@@ -82,13 +84,14 @@ describe('alienStore', () => {
     it('should return the current reducers also when they are given', () => {
       const initialReducers = {
         reducer1: (): string => 'reducer1 value',
-        reducer2: (): string => 'reducer1 value',
+        reducer2: (): string => 'reducer2 value',
       };
       createStore(initialReducers);
       const currentReducers = getReducerMap();
       expect(Object.keys(currentReducers)).toEqual(Object.keys(initialReducers));
     });
   });
+
   describe('injectReducers', () => {
     it('should add reducer and reload the store', () => {
       const store = createStore(undefined);
@@ -109,7 +112,66 @@ describe('alienStore', () => {
     });
   });
 
-  describe('test "withStoreModule"', () => {
+  describe('removeReducers', () => {
+    it('should remove reducers byt given key and reload the store', () => {
+      const initialReducers = {
+        reducer1: (): string => 'reducer1 value',
+        reducer2: (): string => 'reducer2 value',
+        reducer3: (): string => 'reducer3 value',
+        reducer4: (): string => 'reducer4 value',
+      };
+      const store = createStore(initialReducers);
+      const mockDispatch = jest.spyOn(store, 'dispatch');
+
+      const currentReducers = getReducerMap();
+
+      expect(Object.keys(currentReducers)).toHaveLength(4);
+
+      removeReducers('reducer1');
+      const current3Reducers = getReducerMap();
+      expect(Object.keys(current3Reducers)).toHaveLength(3);
+
+      removeReducers('reducer2');
+      const current2Reducers = getReducerMap();
+      expect(Object.keys(current2Reducers)).toHaveLength(2);
+
+      removeReducers('reducer3');
+      const current1Reducers = getReducerMap();
+      expect(Object.keys(current1Reducers)).toHaveLength(1);
+
+      expect(mockDispatch).toHaveBeenCalledTimes(3);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
+    });
+
+    it('should not remove a reducer if it does not exist', () => {
+      const initialReducers = {
+        reducer1: (): string => 'reducer1 value',
+        reducer2: (): string => 'reducer2 value',
+      };
+      const store = createStore(initialReducers);
+      const mockDispatch = jest.spyOn(store, 'dispatch');
+
+      const currentReducers = getReducerMap();
+
+      expect(Object.keys(currentReducers)).toHaveLength(2);
+
+      removeReducers('reducerWithNotValidName');
+      const reducerMap = getReducerMap();
+      expect(Object.keys(reducerMap)).toHaveLength(2);
+      expect(Object.keys(reducerMap)).toEqual(Object.keys(currentReducers));
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+
+    it('should throw if all reducers has been deleted', () => {
+      createStore(undefined);
+
+      expect(() => {
+        removeReducers('defaultState');
+      }).toThrowError('alienStore: the reducerMap cannot be empty, otherwise Redux will complaint');
+    });
+  });
+
+  describe('withStoreModule', () => {
     it('should add reducer and reload the store', async () => {
       const Example = (): ReactElement => <div>some component</div>;
       const component = Promise.resolve({ default: Example });
@@ -155,7 +217,7 @@ describe('alienStore', () => {
   /**
    * @link https://stackoverflow.com/questions/56085458/testing-custom-hook-with-react-hooks-testing-library-throws-an-error
    */
-  describe('test "useAlienModule"', () => {
+  describe('useAlienModule', () => {
     const alienModuleMock = {
       reducers: {
         dummy: (state: { name: string }, action: AnyAction): typeof state => {

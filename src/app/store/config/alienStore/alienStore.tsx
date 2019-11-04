@@ -50,7 +50,20 @@ export const injectReducers = (newReducers: ReducerMap): void => {
 
   reducerMap = { ...reducerMap, ...newReducers };
 
-  // console.log('reducerMap', reducerMap);
+  reloadStore();
+};
+
+export const removeReducers = (key: string): void => {
+  // if the reducer doens't exist, just skip
+  if (key && !reducerMap[key]) {
+    return;
+  }
+
+  delete reducerMap[key];
+
+  if (Object.keys(reducerMap).length === 0) {
+    throw new Error('alienStore: the reducerMap cannot be empty, otherwise Redux will complaint');
+  }
 
   reloadStore();
 };
@@ -89,8 +102,6 @@ export function useAlienModule<P>(moduleStore: UseAlienModuleImportType<P>): P |
         injectReducers(reducerToInject);
         setAlienModule(module);
       } catch (err) {
-        // throw new Error(`useAlienModule error: ${err}`);
-        // throw Error(`useAlienModule error: ${err}`);
         setAlienModule(err);
       }
     })();
@@ -105,6 +116,7 @@ export default {
   getReducerMap,
   injectReducers,
   reloadStore,
+  removeReducers,
   useAlienModule,
   withStoreModule,
 };
