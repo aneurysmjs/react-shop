@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React, { ReactElement } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import { createStore as createReduxStore, AnyAction } from 'redux';
+import { AnyAction } from 'redux';
 import alienStore, {
   createStore,
   reloadStore,
@@ -21,18 +21,35 @@ describe('Dyno Store', () => {
     expect(alienStore).toHaveProperty('useAlienModule');
   });
 
-  it('should create and return a Redux store', () => {
-    const reduxStore = createReduxStore(() => ({}));
-    const store = createStore(undefined);
-    expect(JSON.stringify(store, null)).toEqual(JSON.stringify(reduxStore, null));
-  });
+  describe('create store', () => {
+    it('should create store with an default reducer', () => {
+      const store = createStore(undefined);
+      expect(store.getState()).toEqual({ defaultState: 'default state value' });
+    });
 
-  it('should trigger store\'s "dispatch" when reloading the store', () => {
-    const store = createStore(undefined);
-    const mockDispatch = jest.spyOn(store, 'dispatch');
-    reloadStore();
-    expect(mockDispatch).toHaveBeenCalledTimes(1);
-    expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
+    it('should create store with an initial reducer', () => {
+      const initialReducer = {
+        init: (s = 'default state', action: AnyAction): string => {
+          if (action.type === 'INIT') {
+            return 'init value';
+          }
+          return s;
+        },
+      };
+      const store = createStore(initialReducer);
+      store.dispatch({
+        type: 'INIT',
+      });
+      expect(store.getState()).toEqual({ init: 'init value' });
+    });
+
+    it('should trigger store\'s "dispatch" when reloading the store', () => {
+      const store = createStore(undefined);
+      const mockDispatch = jest.spyOn(store, 'dispatch');
+      reloadStore();
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
+    });
   });
 
   describe('injectReducers', () => {
@@ -47,7 +64,7 @@ describe('Dyno Store', () => {
 
     it('should not add an already existing reducer', () => {
       const store = createStore(undefined);
-      const reducer = { INIT_REDUCER: (): {} => ({}) };
+      const reducer = { defaultState: (): string => 'default state value' };
       const mockDispatch = jest.spyOn(store, 'dispatch');
       injectReducers(reducer);
       expect(mockDispatch).toHaveBeenCalledTimes(0);
@@ -103,6 +120,18 @@ describe('Dyno Store', () => {
    */
   describe('test "useAlienModule"', () => {
     const alienModuleMock = {
+      reducers: {
+        dummy: (state: { name: string }, action: AnyAction): typeof state => {
+          switch (action.type) {
+            case 'DUMMY_ACTION':
+              return {
+                name: action.name,
+              };
+            default:
+              return state;
+          }
+        },
+      },
       actions: {
         dummyAction: (): AnyAction => ({
           type: 'DUMMY_ACTION',

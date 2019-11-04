@@ -9,12 +9,10 @@ import {
 
 import { ReducerMap, StoreShape } from '~/shared/types';
 
-const INIT_REDUCER = (): {} => ({});
-
 let store = {} as Store;
 
 const alienReducer = {
-  INIT_REDUCER,
+  defaultState: (): string => 'default state value',
 };
 
 let reducerMap: ReducerMap = {};
@@ -49,6 +47,8 @@ export const injectReducers = (newReducers: ReducerMap): void => {
   }
 
   reducerMap = { ...reducerMap, ...newReducers };
+
+  // console.log('reducerMap', reducerMap);
 
   reloadStore();
 };
