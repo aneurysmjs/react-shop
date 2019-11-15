@@ -1,15 +1,15 @@
 import { createStore as createReduxStore, Store, Reducer } from 'redux';
 
-import manager from './manager';
+import manager, { AlienManager } from './manager';
 
-interface AlienStore extends Store {
-  injectReducers: (key: string, reducer: Reducer) => Reducer | void;
+export interface AlienStore extends Store {
+  alienManager: AlienManager;
 }
 
 function alien<R = Reducer, S = undefined>(initialReducer?: R, preloadedState?: S): AlienStore {
-  const { rootReducer, injectReducers } = manager(initialReducer);
-  const store: AlienStore = createReduxStore(rootReducer, preloadedState);
-  store.injectReducers = injectReducers;
+  const alienManager = manager(initialReducer);
+  const store: AlienStore = createReduxStore(alienManager.rootReducer, preloadedState);
+  store.alienManager = alienManager;
   return store;
 }
 

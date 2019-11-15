@@ -12,14 +12,14 @@ type FullStoreShape<T> = {
 
 type ReducerMapper<U> = Partial<{ [K in keyof Partial<U>]: Reducer<U[K]> }>;
 
-interface Manager<R> {
+export interface AlienManager<R = any> {
   getReducerMap: () => ReducerMapper<FullStoreShape<R>>;
   injectReducers: (key: string, reducer: Reducer) => Reducer | void;
   removeReducers: (key: string) => void;
   rootReducer: Reducer;
 }
 
-export default function manager<State>(initialReducers?: State): Manager<State> {
+export default function manager<State>(initialReducers?: State): AlienManager<State> {
   type StoreShape = FullStoreShape<State>;
 
   type ReducerMap = ReducerMapper<StoreShape>;
