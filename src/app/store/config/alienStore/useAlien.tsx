@@ -10,9 +10,7 @@ type ModuleChunk<T> = {
   };
 };
 
-type UseAlienImportType<P> = () => Promise<{
-  default: ModuleChunk<P>;
-}>;
+type UseAlienImportType<P> = () => Promise<ModuleChunk<P>>;
 
 function errorHandler<T>(errorOrObj: T): T {
   if (errorOrObj && errorOrObj.constructor.name === 'Error') {
@@ -32,14 +30,14 @@ function useAlien<T>(moduleStore: UseAlienImportType<T>): ModuleChunk<T> | null 
     (async (): Promise<void> => {
       try {
         const module = await moduleStore();
-        const { reducers } = module.default;
+        const { reducers } = module;
         const key = Object.keys(reducers).shift();
         if (key) {
           injectReducers(key, reducers[key]);
           store.dispatch({ type: '@@ALIEN_STORE/RELOAD' });
           store.replaceReducer(rootReducer);
         }
-        setAlienModule(module.default);
+        setAlienModule(module);
       } catch (err) {
         setAlienModule(err);
       }

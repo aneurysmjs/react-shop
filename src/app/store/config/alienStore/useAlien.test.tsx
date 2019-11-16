@@ -49,12 +49,12 @@ describe('useAlien', () => {
     },
   };
 
-  type AlienModuleType = Promise<{ default: typeof alienModuleMock }>;
+  type AlienModuleType = Promise<typeof alienModuleMock>;
 
   it('should render "null" at first and then resolve the module', async () => {
     // const store = alien(undefined);
     const mockDispatch = jest.spyOn(store, 'dispatch');
-    const importAlienModule = (): AlienModuleType => Promise.resolve({ default: alienModuleMock });
+    const importAlienModule = (): AlienModuleType => Promise.resolve(alienModuleMock);
     const { result, waitForNextUpdate } = renderHook(() => useAlien(importAlienModule), {
       wrapper,
     });
