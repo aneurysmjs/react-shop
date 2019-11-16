@@ -1,4 +1,4 @@
-import { createStore } from '~/store/config/alienStore';
+import { alien } from '~/store/config/alienStore';
 
 // import throttle from 'lodash.throttle';
 
@@ -11,7 +11,7 @@ import enhancer from '~/store/config/enhancer';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function configureStore() {
-  const store = createStore(undefined, enhancer);
+  const store = alien(undefined, enhancer);
   /* // Save the state any time the store state changes
   store.subscribe(throttle(() => {
     // Rather than pass the whole state object,
