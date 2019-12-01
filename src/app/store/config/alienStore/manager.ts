@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-import { combineReducers, Reducer, AnyAction } from 'redux';
+import { combineReducers, Reducer, AnyAction, Dispatch } from 'redux';
 
 // get the return value if T is a function
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,12 +12,15 @@ type FullStoreShape<T> = {
 
 type ReducerMapper<U> = Partial<{ [K in keyof Partial<U>]: Reducer<U[K]> }>;
 
-export interface AlienManager<R = any> {
+export interface AlienManager<R = {}> {
   getReducerMap: () => ReducerMapper<FullStoreShape<R>>;
   injectReducers: (key: string, reducer: Reducer) => Reducer | void;
   removeReducers: (key: string) => void;
   rootReducer: Reducer;
+  setDispatch: (storeDispatch: Dispatch<AnyAction>) => void;
 }
+
+type AlienDispatch = Dispatch<AnyAction> | null;
 
 export default function manager<State>(initialReducers?: State): AlienManager<State> {
   type StoreShape = FullStoreShape<State>;
@@ -26,11 +29,17 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
 
   const fallback = (): {} => ({});
 
+  let dispatch: AlienDispatch = null;
+
   const reducers: ReducerMap = initialReducers ? { ...initialReducers } : {};
   // @ts-ignore "combineReducers" doesn't have that overload match
   let combinedReducer = initialReducers ? combineReducers(reducers) : fallback;
 
   let keysToRemove: Array<string> = [];
+
+  function setDispatch(storeDispatch: Dispatch<AnyAction>): void {
+    dispatch = storeDispatch;
+  }
 
   function getReducerMap(): ReducerMap {
     return reducers;
@@ -44,6 +53,9 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
     reducers[key] = reducer;
     // @ts-ignore "combineReducers" doesn't have that overload match
     combinedReducer = combineReducers(reducers);
+    if (dispatch) {
+      dispatch({ type: '@@ALIEN_STORE/RELOAD' });
+    }
   }
 
   function removeReducers(key: string): void {
@@ -79,5 +91,6 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
     injectReducers,
     removeReducers,
     rootReducer,
+    setDispatch,
   };
 }

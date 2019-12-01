@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux';
+import { createStore, AnyAction } from 'redux';
 
 import manager from './manager';
 
@@ -10,12 +10,6 @@ type AlienState = {
   cart: CartType;
 };
 
-const preloadedState: AlienState = {
-  cart: {
-    quantity: 30,
-  },
-};
-
 describe('manager', () => {
   it('should return an alienManager', () => {
     const alienManager = manager();
@@ -23,6 +17,7 @@ describe('manager', () => {
     expect(alienManager).toHaveProperty('injectReducers');
     expect(alienManager).toHaveProperty('removeReducers');
     expect(alienManager).toHaveProperty('rootReducer');
+    expect(alienManager).toHaveProperty('setDispatch');
   });
 
   describe('getReducerMap', () => {
@@ -86,6 +81,17 @@ describe('manager', () => {
         reducer1,
         reducer2,
       });
+    });
+  });
+
+  describe('setDispatch', () => {
+    it('should set a Redux dispatcher for internal use', () => {
+      const store = createStore(() => {});
+      const alienManager = manager();
+      const setDispatchSpy = jest.spyOn(alienManager, 'setDispatch');
+
+      alienManager.setDispatch(store.dispatch);
+      expect(setDispatchSpy).toHaveBeenCalledWith(store.dispatch);
     });
   });
 });
