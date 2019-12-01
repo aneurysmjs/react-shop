@@ -18,6 +18,7 @@ beforeEach(() => {
 type WrapperProps = {
   children: ReactNode;
 };
+
 const wrapper = ({ children }: WrapperProps): ReactElement => (
   <Provider store={store}>{children}</Provider>
 );
@@ -52,14 +53,11 @@ describe('useAlien', () => {
   type AlienModuleType = Promise<typeof alienModuleMock>;
 
   it('should render "null" at first and then resolve the module', async () => {
-    // const store = alien(undefined);
-    const mockDispatch = jest.spyOn(store, 'dispatch');
     const importAlienModule = (): AlienModuleType => Promise.resolve(alienModuleMock);
     const { result, waitForNextUpdate } = renderHook(() => useAlien(importAlienModule), {
       wrapper,
     });
 
-    expect(mockDispatch).toHaveBeenCalledTimes(0);
     expect(store.getState()).toEqual({});
     expect(result.current).toEqual(null);
 
@@ -72,8 +70,6 @@ describe('useAlien', () => {
       },
     });
 
-    expect(mockDispatch).toHaveBeenCalledTimes(1);
-    expect(mockDispatch).toHaveBeenCalledWith({ type: '@@ALIEN_STORE/RELOAD' });
     expect(result.current).toEqual(alienModuleMock);
   });
 

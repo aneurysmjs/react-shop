@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Reducer } from 'redux';
+import { Reducer, AnyAction } from 'redux';
 import { useStore } from 'react-redux';
 
 import { AlienStore } from './alien';
 
-type ModuleChunk<T> = {
+type AlienModule<T> = {
   reducers: {
     [K: string]: Reducer<T>;
   };
 };
 
-type UseAlienImportType<P> = () => Promise<ModuleChunk<P>>;
+interface ImportAlienModule<P> {
+  (): Promise<AlienModule<P>>;
+}
 
 function errorHandler<T>(errorOrObj: T): T {
   if (errorOrObj && errorOrObj.constructor.name === 'Error') {
@@ -19,12 +21,12 @@ function errorHandler<T>(errorOrObj: T): T {
   return errorOrObj;
 }
 
-function useAlien<T>(moduleStore: UseAlienImportType<T>): ModuleChunk<T> | null {
+function useAlien<T>(moduleStore: ImportAlienModule<T>): AlienModule<T> | null {
   const store = useStore() as AlienStore;
   const {
     alienManager: { injectReducers, rootReducer },
   } = store;
-  const [alienModule, setAlienModule] = useState<ModuleChunk<T> | null>(null);
+  const [alienModule, setAlienModule] = useState<AlienModule<T> | null>(null);
 
   useEffect(() => {
     (async (): Promise<void> => {
@@ -34,7 +36,6 @@ function useAlien<T>(moduleStore: UseAlienImportType<T>): ModuleChunk<T> | null 
         const key = Object.keys(reducers).shift();
         if (key) {
           injectReducers(key, reducers[key]);
-          store.dispatch({ type: '@@ALIEN_STORE/RELOAD' });
           store.replaceReducer(rootReducer);
         }
         setAlienModule(module);
