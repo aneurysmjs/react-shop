@@ -9,6 +9,7 @@ export interface AlienStore extends Store {
 function alien<R = Reducer, S = undefined>(initialReducer?: R, preloadedState?: S): AlienStore {
   const alienManager = manager(initialReducer);
   const store: AlienStore = createReduxStore(alienManager.rootReducer, preloadedState);
+  alienManager.setDispatch(store.dispatch);
   store.alienManager = alienManager;
   return store;
 }
