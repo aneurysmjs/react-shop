@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode, ComponentType } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { AnyAction, Store } from 'redux';
 import { Provider } from 'react-redux';
@@ -16,10 +16,11 @@ beforeEach(() => {
 });
 
 type WrapperProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
-const wrapper = ({ children }: WrapperProps): ReactElement => (
+// eslint-disable-next-line react/prop-types
+const wrapper: ComponentType<WrapperProps> = ({ children }) => (
   <Provider store={store}>{children}</Provider>
 );
 
