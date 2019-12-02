@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Reducer } from 'redux';
+import { Reducer, AnyAction, ActionCreator } from 'redux';
 import { useStore } from 'react-redux';
 
 import { AlienStore } from './alien';
 
-type AlienModule<T> = {
+interface ReduxModule<T> {
   reducers: {
     [K: string]: Reducer<T>;
   };
-};
+  actions: {
+    [K: string]: ActionCreator<AnyAction>;
+  };
+}
+
+interface AlienModule<T> {
+  actions: {
+    [K: string]: ActionCreator<AnyAction>;
+  };
+}
 
 interface ImportAlienModule<P> {
-  getReducers: () => Promise<AlienModule<P>>;
+  getReducers: () => Promise<ReduxModule<P>>;
 }
 
 function errorHandler<T>(errorOrObj: T): T {
@@ -35,14 +44,14 @@ function useAlien<T>(moduleStore: ImportAlienModule<T>): AlienModule<T> | null {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const module = await moduleStore.getReducers();
-        const { reducers } = module;
+        const reduxModule = await moduleStore.getReducers();
+        const { reducers, actions } = reduxModule;
         const key = Object.keys(reducers).shift();
         if (key) {
           injectReducers(key, reducers[key]);
           store.replaceReducer(rootReducer);
         }
-        setAlienModule(module);
+        setAlienModule({ actions });
       } catch (err) {
         setAlienModule(err);
       }

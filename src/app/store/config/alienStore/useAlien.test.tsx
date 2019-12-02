@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React, { ReactNode, ComponentType } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { AnyAction, Store } from 'redux';
@@ -73,13 +74,23 @@ describe('useAlien', () => {
       },
     });
 
-    expect(result.current).toEqual(alienModuleMock);
+    expect(result.current).toHaveProperty('actions');
+    // @ts-ignore - 'actions' is always part of the result
+    expect(result.current.actions).toStrictEqual(alienModuleMock.actions);
   });
 
   it('should throw', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
     const importAlienModule = {
       getReducers: (): AlienModuleType => import(WRONG_COMPONENT_PATH),
+      actions: {
+        dummyAction: (): AnyAction => ({
+          type: 'DUMMY_ACTION',
+          payload: {
+            name: 'Джеро',
+          },
+        }),
+      },
     };
 
     const { result, waitForNextUpdate } = renderHook(() => useAlien(importAlienModule), {
