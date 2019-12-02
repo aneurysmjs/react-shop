@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Reducer, AnyAction } from 'redux';
+import { Reducer } from 'redux';
 import { useStore } from 'react-redux';
 
 import { AlienStore } from './alien';
@@ -15,8 +15,12 @@ interface ImportAlienModule<P> {
 }
 
 function errorHandler<T>(errorOrObj: T): T {
-  if (errorOrObj && errorOrObj.constructor.name === 'Error') {
-    throw new Error(`useAlienModule ${errorOrObj}`);
+  if (errorOrObj) {
+    // rejection from `import()` for some reason is not and instance of Error
+    // that's why the "Object.getPrototypeOf(errorOrObj).name"
+    if (errorOrObj instanceof Error || Object.getPrototypeOf(errorOrObj).name === 'Error') {
+      throw new Error(`useAlienModule ${errorOrObj}`);
+    }
   }
   return errorOrObj;
 }
