@@ -11,7 +11,7 @@ type AlienModule<T> = {
 };
 
 interface ImportAlienModule<P> {
-  (): Promise<AlienModule<P>>;
+  getReducers: () => Promise<AlienModule<P>>;
 }
 
 function errorHandler<T>(errorOrObj: T): T {
@@ -35,7 +35,7 @@ function useAlien<T>(moduleStore: ImportAlienModule<T>): AlienModule<T> | null {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const module = await moduleStore();
+        const module = await moduleStore.getReducers();
         const { reducers } = module;
         const key = Object.keys(reducers).shift();
         if (key) {

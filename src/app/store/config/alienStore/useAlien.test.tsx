@@ -54,7 +54,9 @@ describe('useAlien', () => {
   type AlienModuleType = Promise<typeof alienModuleMock>;
 
   it('should render "null" at first and then resolve the module', async () => {
-    const importAlienModule = (): AlienModuleType => Promise.resolve(alienModuleMock);
+    const importAlienModule = {
+      getReducers: (): AlienModuleType => Promise.resolve(alienModuleMock),
+    };
     const { result, waitForNextUpdate } = renderHook(() => useAlien(importAlienModule), {
       wrapper,
     });
@@ -76,7 +78,9 @@ describe('useAlien', () => {
 
   it('should throw', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
-    const importAlienModule = (): AlienModuleType => import(WRONG_COMPONENT_PATH); // eslint-disable-line import/no-unresolved
+    const importAlienModule = {
+      getReducers: (): AlienModuleType => import(WRONG_COMPONENT_PATH),
+    };
 
     const { result, waitForNextUpdate } = renderHook(() => useAlien(importAlienModule), {
       wrapper,
