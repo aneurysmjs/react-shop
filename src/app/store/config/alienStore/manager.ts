@@ -31,9 +31,9 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
 
   let dispatch: AlienDispatch = null;
 
-  const reducers: ReducerMap = initialReducers ? { ...initialReducers } : {};
+  const reducerMap: ReducerMap = initialReducers ? { ...initialReducers } : {};
   // @ts-ignore "combineReducers" doesn't have that overload match
-  let combinedReducer = initialReducers ? combineReducers(reducers) : fallback;
+  let combinedReducer = initialReducers ? combineReducers(reducerMap) : fallback;
 
   let keysToRemove: Array<string> = [];
 
@@ -42,32 +42,32 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
   }
 
   function getReducerMap(): ReducerMap {
-    return reducers;
+    return reducerMap;
   }
 
   function injectReducers(key: string, reducer: Reducer): Reducer | void {
-    if (!key || reducers[key]) {
+    if (!key || reducerMap[key]) {
       return;
     }
 
-    reducers[key] = reducer;
+    reducerMap[key] = reducer;
     // @ts-ignore "combineReducers" doesn't have that overload match
-    combinedReducer = combineReducers(reducers);
+    combinedReducer = combineReducers(reducerMap);
     if (dispatch) {
       dispatch({ type: '@@ALIEN_STORE/RELOAD' });
     }
   }
 
   function removeReducers(key: string): void {
-    if (!key || !reducers[key]) {
+    if (!key || !reducerMap[key]) {
       return;
     }
 
-    delete reducers[key];
+    delete reducerMap[key];
 
     keysToRemove.push(key);
     // @ts-ignore "combineReducers" doesn't have that overload match
-    combinedReducer = combineReducers(reducers);
+    combinedReducer = combineReducers(reducerMap);
   }
 
   // this is what we give to create the Redux store
