@@ -13,14 +13,15 @@ interface ReduxModule<T> {
   };
 }
 
-interface AlienModule<T> {
+interface AlienResult {
   actions: {
     [K: string]: ActionCreator<AnyAction>;
   };
 }
 
-interface ImportAlienModule<P> {
-  getReducers: () => Promise<ReduxModule<P>>;
+interface AlienModule<P> {
+  getModule: () => Promise<ReduxModule<P>>;
+  initialActions?: Array<string>;
 }
 
 function errorHandler<T>(errorOrObj: T): T {
@@ -34,32 +35,32 @@ function errorHandler<T>(errorOrObj: T): T {
   return errorOrObj;
 }
 
-function useAlien<T>(moduleStore: ImportAlienModule<T>): AlienModule<T> | null {
+function useAlien<T>(alienModule: AlienModule<T>): AlienResult | null {
   const store = useStore() as AlienStore;
   const {
     alienManager: { injectReducers, rootReducer },
   } = store;
-  const [alienModule, setAlienModule] = useState<AlienModule<T> | null>(null);
+  const [alien, setAlien] = useState<AlienResult | null>(null);
 
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const reduxModule = await moduleStore.getReducers();
-        const { reducers, actions } = reduxModule;
+        const { reducers, actions } = await alienModule.getModule();
         const key = Object.keys(reducers).shift();
+
         if (key) {
           injectReducers(key, reducers[key]);
           store.replaceReducer(rootReducer);
         }
-        setAlienModule({ actions });
+        setAlien({ actions });
       } catch (err) {
-        setAlienModule(err);
+        setAlien(err);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [moduleStore]);
+  }, [alienModule]);
 
-  return errorHandler(alienModule);
+  return errorHandler(alien);
 }
 
 export default useAlien;

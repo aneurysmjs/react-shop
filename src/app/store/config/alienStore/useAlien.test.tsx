@@ -29,7 +29,7 @@ const wrapper: ComponentType<WrapperProps> = ({ children }) => (
  * @link https://stackoverflow.com/questions/56085458/testing-custom-hook-with-react-hooks-testing-library-throws-an-error
  */
 describe('useAlien', () => {
-  const alienModuleMock = {
+  const reduxModule = {
     reducers: {
       dummy: (state: { name: string } = { name: 'stupid' }, action: AnyAction): typeof state => {
         switch (action.type) {
@@ -52,13 +52,13 @@ describe('useAlien', () => {
     },
   };
 
-  type AlienModuleType = Promise<typeof alienModuleMock>;
+  type ReduxModuleType = Promise<typeof reduxModule>;
 
   it('should render "null" at first and then resolve the module', async () => {
-    const importAlienModule = {
-      getReducers: (): AlienModuleType => Promise.resolve(alienModuleMock),
+    const alienModule = {
+      getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
     };
-    const { result, waitForNextUpdate } = renderHook(() => useAlien(importAlienModule), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
       wrapper,
     });
 
@@ -76,24 +76,16 @@ describe('useAlien', () => {
 
     expect(result.current).toHaveProperty('actions');
     // @ts-ignore - 'actions' is always part of the result
-    expect(result.current.actions).toStrictEqual(alienModuleMock.actions);
+    expect(result.current.actions).toStrictEqual(reduxModule.actions);
   });
 
   it('should throw', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
-    const importAlienModule = {
-      getReducers: (): AlienModuleType => import(WRONG_COMPONENT_PATH),
-      actions: {
-        dummyAction: (): AnyAction => ({
-          type: 'DUMMY_ACTION',
-          payload: {
-            name: 'Джеро',
-          },
-        }),
-      },
+    const alienModule = {
+      getModule: (): ReduxModuleType => import(WRONG_COMPONENT_PATH),
     };
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien(importAlienModule), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
       wrapper,
     });
 
