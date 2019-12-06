@@ -4,7 +4,7 @@ import { useStore } from 'react-redux';
 
 import { AlienStore } from './alien';
 
-interface ReduxModule<T> {
+interface ReduxModule<T = {}> {
   reducers: {
     [K: string]: Reducer<T>;
   };
@@ -13,14 +13,10 @@ interface ReduxModule<T> {
   };
 }
 
-interface AlienResult {
-  actions: {
-    [K: string]: ActionCreator<AnyAction>;
-  };
-}
+type AlienResult = Omit<ReduxModule, 'reducers'>;
 
-interface AlienModule<P> {
-  getModule: () => Promise<ReduxModule<P>>;
+interface AlienModule<T> {
+  getModule: () => Promise<ReduxModule<T>>;
   initialActions?: Array<string>;
 }
 
@@ -58,7 +54,7 @@ function useAlien<T>(alienModule: AlienModule<T>): AlienResult | null {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [alienModule]);
+  }, []);
 
   return errorHandler(alien);
 }
