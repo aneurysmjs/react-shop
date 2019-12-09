@@ -1,9 +1,12 @@
-import React, { ComponentType, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 
-import useAlien from './useAlien';
+import useAlien, { ReduxModule, AlienResult } from './useAlien';
 
-function withAlien<T>(Component: ComponentType, getModule): ComponentType | null {
-  const alienResult = useAlien<ReturnType<getModule>>({
+function withAlien<T>(
+  Component: ReactElement<{ actions: AlienResult['actions'] }>,
+  getModule: () => Promise<ReduxModule>,
+): ReactElement | null {
+  const alienResult = useAlien({
     getModule,
   });
 

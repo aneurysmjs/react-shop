@@ -4,7 +4,7 @@ import { useStore } from 'react-redux';
 
 import { AlienStore } from './alien';
 
-interface ReduxModule<T = {}> {
+export interface ReduxModule<T = {}> {
   reducers: {
     [K: string]: Reducer<T>;
   };
@@ -13,7 +13,7 @@ interface ReduxModule<T = {}> {
   };
 }
 
-type AlienResult = Omit<ReduxModule, 'reducers'>;
+export type AlienResult = Omit<ReduxModule, 'reducers'>;
 
 interface AlienModule<T> {
   getModule: () => Promise<ReduxModule<T>>;
