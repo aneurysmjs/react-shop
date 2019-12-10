@@ -2,8 +2,12 @@ import React, { ReactElement } from 'react';
 
 import useAlien, { ReduxModule, AlienResult } from './useAlien';
 
-function withAlien<T>(
-  Component: ReactElement<{ actions: AlienResult['actions'] }>,
+interface WithAlienProps {
+  actions: AlienResult['actions'];
+}
+
+function withAlien<T extends WithAlienProps>(
+  Component: () => ReactElement<T>,
   getModule: () => Promise<ReduxModule>,
 ): ReactElement | null {
   const alienResult = useAlien({
