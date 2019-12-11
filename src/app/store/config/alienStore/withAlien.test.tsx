@@ -54,7 +54,7 @@ describe('test "withAlien"', () => {
       wrapper,
     });
 
-    expect(result.current).toBe(null);
+    expect(result.current.props).toStrictEqual({});
 
     await waitForNextUpdate();
 

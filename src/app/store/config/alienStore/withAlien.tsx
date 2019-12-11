@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ComponentType } from 'react';
 
 import useAlien, { ReduxModule, AlienResult } from './useAlien';
 
@@ -6,15 +6,18 @@ interface WithAlienProps {
   actions: AlienResult['actions'];
 }
 
-function withAlien<T extends WithAlienProps>(
-  Component: () => ReactElement<T>,
+function withAlien<P extends object>(
+  Component: ComponentType<P>,
   getModule: () => Promise<ReduxModule>,
-): ReactElement | null {
+): ReactElement<P & WithAlienProps> | null {
+  // it complains just beacause the function doesn't start with Capital case
+  // so it thinks it not a React component
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const alienResult = useAlien({
     getModule,
   });
 
-  return alienResult ? <Component actions={alienResult.actions} /> : null;
+  return <Component {...((alienResult && alienResult) as P)} />;
 }
 
 export default withAlien;
