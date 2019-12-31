@@ -1,12 +1,13 @@
-import React, { ReactElement, ComponentType } from 'react';
+import React, { ReactElement, ComponentType, ReactNode } from 'react';
 
 import useAlien, { ReduxModule, AlienResult } from './useAlien';
 
 interface WithAlienProps {
+  children?: ReactNode;
   actions: AlienResult['actions'];
 }
 
-function withAlien<P extends object>(
+function WithAlien<P extends object>(
   Component: ComponentType<P>,
   getModule: () => Promise<ReduxModule>,
 ): ReactElement<P & WithAlienProps> | null {
@@ -17,7 +18,13 @@ function withAlien<P extends object>(
     getModule,
   });
 
-  return <Component {...((alienResult && alienResult) as P)} />;
+  if (alienResult) {
+    return <Component {...(alienResult as P)} />;
+  }
+
+  return null;
+  // return <Component {...((alienResult && alienResult) as P)} />;
+  // return typeof props.children === 'function' ? props.children() : props.children;
 }
 
-export default withAlien;
+export default WithAlien;

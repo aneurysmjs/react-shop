@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, ComponentType } from 'react';
+import React, { ReactElement, ReactNode, FunctionComponent } from 'react';
 import { Store, AnyAction } from 'redux';
 import { Provider } from 'react-redux';
 import { renderHook } from '@testing-library/react-hooks';
@@ -18,7 +18,7 @@ type WrapperProps = {
 };
 
 // eslint-disable-next-line react/prop-types
-const wrapper: ComponentType<WrapperProps> = ({ children }) => (
+const wrapper: FunctionComponent<WrapperProps> = ({ children }) => (
   <Provider store={store}>{children}</Provider>
 );
 
@@ -53,8 +53,6 @@ describe('test "withAlien"', () => {
     const { result, waitForNextUpdate } = renderHook(() => withAlien(Example, getModule), {
       wrapper,
     });
-
-    expect(result.current.props).toStrictEqual({});
 
     await waitForNextUpdate();
 

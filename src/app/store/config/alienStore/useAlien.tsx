@@ -11,6 +11,9 @@ export interface ReduxModule<T = {}> {
   actions: {
     [K: string]: ActionCreator<AnyAction>;
   };
+  selectors?: {
+    [K: string]: <S>(state: S) => T;
+  };
 }
 
 export type AlienResult = Omit<ReduxModule, 'reducers'>;
@@ -41,14 +44,14 @@ function useAlien<T>(alienModule: AlienModule<T>): AlienResult | null {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const { reducers, actions } = await alienModule.getModule();
+        const { reducers, actions, selectors } = await alienModule.getModule();
         const key = Object.keys(reducers).shift();
 
         if (key) {
           injectReducers(key, reducers[key]);
           store.replaceReducer(rootReducer);
         }
-        setAlien({ actions });
+        setAlien({ actions, selectors });
       } catch (err) {
         setAlien(err);
       }

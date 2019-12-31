@@ -2,46 +2,30 @@
 import React, { useEffect, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useAlien } from '~/store/config/alienStore';
+import { AlienResult } from '~/store/config/alienStore/useAlien';
 
-// import Spinner from '~/components/base/Spinner';
-// import ProductCard from '~/components/common/ProductCard';
-// 
-// import { fetchProducts } from '~/store/modules/products/actions';
-// import { getProducts } from '~/store/modules/products/selectors';
-// 
-// import { ProductsStateType } from '~/store/modules/products/types';
+import Spinner from '~/components/base/Spinner';
+import ProductCard from '~/components/common/ProductCard';
+
+import { ProductsStateType } from '~/store/modules/products/types';
 
 import './Home.scss';
 
-const Home = (): ReactElement => {
+type PropsType = AlienResult;
+
+const Home = (props: PropsType): ReactElement => {
   const dispatch = useDispatch();
-  // const { isLoading, products, error }: ProductsStateType = useSelector(getProducts);
+  const { isLoading, products, error }: ProductsStateType = useSelector(props.selectors.getProducts);
 
-  // useEffect(() => {
-  //   dispatch(fetchProducts(`/products`));
-  // }, [dispatch]);
-  const result = useAlien({
-    getModule: () => import('~/store/modules/products'),
-  });
-
-  // const selector = result ? result.selectors.getProducts : (): {} => ({});
-  
-  // const { isLoading, products, error } = useSelector(selector);
-  
   useEffect(() => {
-    if (result) {
-      dispatch(result.actions.fetchProducts(`/products`));
-    }
-  }, [dispatch, result]);
-  
-  console.log('result', result);
+    dispatch(props.actions.fetchProducts(`/products`));
+  }, [dispatch, props.actions]);
 
   return (
     <div className="home">
       <h2 className="home__title">Shop</h2>
       <div className="row">
-        {/* {error ? <span className="home__loader">{error.message}</span> : null}
+        {error ? <span className="home__loader">{error.message}</span> : null}
         {isLoading ? (
           <span className="home__loader">
             <Spinner />
@@ -58,7 +42,7 @@ const Home = (): ReactElement => {
               <ProductCard width="100%" product={product} />
             </div>
           ))
-          : null} */}
+          : null}
       </div>
     </div>
   );
