@@ -13,7 +13,7 @@ const Routing = (): ReactElement => (
       <Route
         exact
         path="/"
-        component={() => withAlien(Home, () => import('~/store/modules/products'))}
+        component={() => withAlien(Home, () => import('~/store/modules/products/products.module'))}
       />
     </Layout>
   </main>
