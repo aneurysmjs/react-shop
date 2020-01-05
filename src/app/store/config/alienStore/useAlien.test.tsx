@@ -1,31 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-import React, { ReactNode, ComponentType } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { Store } from 'redux';
-import { Provider } from 'react-redux';
 
 import alien from './alien';
 
 import useAlien from './useAlien';
 
 import { reduxModule } from './helpers/modules';
+import { withProvider, WrapperType } from './helpers/withProvider';
 
 const WRONG_COMPONENT_PATH = './some/wrong/component/path';
 
 let store = {} as Store;
 
+let wrapper: WrapperType;
+
 beforeEach(() => {
   store = alien();
+  wrapper = withProvider(store);
 });
-
-type WrapperProps = {
-  children?: ReactNode;
-};
-
-// eslint-disable-next-line react/prop-types
-const wrapper: ComponentType<WrapperProps> = ({ children }) => (
-  <Provider store={store}>{children}</Provider>
-);
 
 /**
  * @link https://stackoverflow.com/questions/56085458/testing-custom-hook-with-react-hooks-testing-library-throws-an-error
@@ -37,6 +30,7 @@ describe('useAlien', () => {
     const alienModule = {
       getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
     };
+
     const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
       wrapper,
     });
@@ -49,7 +43,7 @@ describe('useAlien', () => {
 
     expect(store.getState()).toEqual({
       dummy: {
-        name: 'some random name',
+        name: 'some default name',
       },
     });
 
