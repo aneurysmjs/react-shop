@@ -1,12 +1,14 @@
 import { AnyAction } from 'redux';
 
+interface DummyState {
+  name: string;
+}
+
+const defaultState = { name: 'some default name' };
 // eslint-disable-next-line import/prefer-default-export
 export const reduxModule = {
   reducers: {
-    dummy: (
-      state: { name: string } = { name: 'some random name' },
-      action: AnyAction,
-    ): typeof state => {
+    dummy: (state: DummyState = defaultState, action: AnyAction): typeof state => {
       switch (action.type) {
         case 'DUMMY_ACTION':
           return {
