@@ -1,50 +1,24 @@
-import React, { ReactElement, ReactNode, FunctionComponent } from 'react';
-import { Store, AnyAction } from 'redux';
-import { Provider } from 'react-redux';
+import React, { ReactElement } from 'react';
+import { Store } from 'redux';
 import { renderHook } from '@testing-library/react-hooks';
 
 import alien from './alien';
 
 import withAlien from './withAlien';
 
+import { reduxModule } from './helpers/modules';
+import { withProvider, WrapperType } from './helpers/withProvider';
+
 let store = {} as Store;
+
+let wrapper: WrapperType;
 
 beforeEach(() => {
   store = alien();
+  wrapper = withProvider(store);
 });
 
-type WrapperProps = {
-  children?: ReactNode;
-};
-
-// eslint-disable-next-line react/prop-types
-const wrapper: FunctionComponent<WrapperProps> = ({ children }) => (
-  <Provider store={store}>{children}</Provider>
-);
-
 describe('test "withAlien"', () => {
-  const reduxModule = {
-    reducers: {
-      dummy: (state: { name: string } = { name: 'stupid' }, action: AnyAction): typeof state => {
-        switch (action.type) {
-          case 'DUMMY_ACTION':
-            return {
-              name: action.name,
-            };
-          default:
-            return state;
-        }
-      },
-    },
-    actions: {
-      dummyAction: (): AnyAction => ({
-        type: 'DUMMY_ACTION',
-        payload: {
-          name: 'Джеро',
-        },
-      }),
-    },
-  };
   it('should resolve and alien module and add actions to the Component', async () => {
     const Example = (): ReactElement => <div>some component</div>;
 
@@ -56,6 +30,7 @@ describe('test "withAlien"', () => {
 
     await waitForNextUpdate();
 
+    expect(result.current.props.reducers).toBe(undefined);
     expect(result.current.props.actions).toStrictEqual(reduxModule.actions);
   });
 });
