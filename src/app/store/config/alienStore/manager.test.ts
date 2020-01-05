@@ -1,20 +1,8 @@
-import { createStore, AnyAction } from 'redux';
+import { createStore } from 'redux';
 
 import manager from './manager';
 
-const reducer1 = (s = 'reducer1 state', action: AnyAction): string => {
-  if (action.type === 'ACTION_1') {
-    return 'reducer1 value';
-  }
-  return s;
-};
-
-const reducer2 = (s = 'reducer2 state', action: AnyAction): string => {
-  if (action.type === 'ACTION_2') {
-    return 'reducer2 value';
-  }
-  return s;
-};
+import { initialReducer, reducer1, reducer2 } from './helpers/reducers';
 
 describe('manager', () => {
   it('should return an alienManager', () => {
@@ -35,14 +23,6 @@ describe('manager', () => {
     });
 
     it('should return an initilized reducer', () => {
-      const initialReducer = {
-        initialState: (s = 'default state', action: AnyAction): string => {
-          if (action.type === 'INIT') {
-            return 'init value';
-          }
-          return s;
-        },
-      };
       const { getReducerMap } = manager(initialReducer);
       const reducerMap = getReducerMap();
 
@@ -77,16 +57,16 @@ describe('manager', () => {
   });
 
   describe('removeReducers', () => {
-    const initialReducer = {
+    const someInitialReducer = {
       state1: reducer1,
       state2: reducer2,
     };
 
     it('should remove a reducer based on its key', () => {
-      const { getReducerMap, removeReducers } = manager(initialReducer);
+      const { getReducerMap, removeReducers } = manager(someInitialReducer);
       const reducerMap = getReducerMap();
 
-      expect(reducerMap).toStrictEqual(initialReducer);
+      expect(reducerMap).toStrictEqual(someInitialReducer);
 
       removeReducers('state1');
 
@@ -98,14 +78,14 @@ describe('manager', () => {
     });
 
     it('should not remove a reducer if the key does not exist on the reducerMap', () => {
-      const { getReducerMap, removeReducers } = manager(initialReducer);
+      const { getReducerMap, removeReducers } = manager(someInitialReducer);
       const reducerMap = getReducerMap();
 
-      expect(reducerMap).toStrictEqual(initialReducer);
+      expect(reducerMap).toStrictEqual(someInitialReducer);
 
       removeReducers('notExistingKey');
 
-      expect(reducerMap).toStrictEqual(initialReducer);
+      expect(reducerMap).toStrictEqual(someInitialReducer);
     });
   });
 
