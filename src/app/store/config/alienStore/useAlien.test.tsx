@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React, { ReactNode, ComponentType } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import { AnyAction, Store } from 'redux';
+import { Store } from 'redux';
 import { Provider } from 'react-redux';
 
 import alien from './alien';
 
 import useAlien from './useAlien';
+
+import { reduxModule } from './helpers/modules';
 
 const WRONG_COMPONENT_PATH = './some/wrong/component/path';
 
@@ -29,29 +31,6 @@ const wrapper: ComponentType<WrapperProps> = ({ children }) => (
  * @link https://stackoverflow.com/questions/56085458/testing-custom-hook-with-react-hooks-testing-library-throws-an-error
  */
 describe('useAlien', () => {
-  const reduxModule = {
-    reducers: {
-      dummy: (state: { name: string } = { name: 'stupid' }, action: AnyAction): typeof state => {
-        switch (action.type) {
-          case 'DUMMY_ACTION':
-            return {
-              name: action.name,
-            };
-          default:
-            return state;
-        }
-      },
-    },
-    actions: {
-      dummyAction: (): AnyAction => ({
-        type: 'DUMMY_ACTION',
-        payload: {
-          name: 'Джеро',
-        },
-      }),
-    },
-  };
-
   type ReduxModuleType = Promise<typeof reduxModule>;
 
   it('should render "null" at first and then resolve the module', async () => {
@@ -70,7 +49,7 @@ describe('useAlien', () => {
 
     expect(store.getState()).toEqual({
       dummy: {
-        name: 'stupid',
+        name: 'some random name',
       },
     });
 
