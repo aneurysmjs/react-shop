@@ -59,6 +59,7 @@
       {
         "scss": "always"
       }
-    ]
+    ],
+    "@typescript-eslint/no-empty-function": "off"
   }
 }
