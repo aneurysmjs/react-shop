@@ -53,6 +53,12 @@
       {
         "devDependencies": true
       }
+    ],
+    "import/extensions": [
+      2,
+      {
+        "scss": "always"
+      }
     ]
   }
 }
