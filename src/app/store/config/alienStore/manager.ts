@@ -1,16 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-import { combineReducers, Reducer, AnyAction, Dispatch } from 'redux';
+import { AnyAction, combineReducers, Dispatch, Reducer } from 'redux';
 
-// get the return value if T is a function
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Unpack<T> = T extends (...args: any[]) => infer R ? R : any;
-
-// mapped the types of the reducers to produce state's shape type
-type FullStoreShape<T> = {
-  [K in keyof T]?: T[K] extends Function ? Unpack<T[K]> : never;
-};
-
-type ReducerMapper<U> = Partial<{ [K in keyof Partial<U>]: Reducer<U[K]> }>;
+import { FullStoreShape, ReducerMapper } from './types/alienStore';
 
 export interface AlienManager<R = {}> {
   getReducerMap: () => ReducerMapper<FullStoreShape<R>>;
