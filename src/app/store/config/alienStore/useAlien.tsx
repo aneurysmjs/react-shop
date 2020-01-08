@@ -5,6 +5,7 @@ import { useStore } from 'react-redux';
 import { AlienStore } from './alien';
 
 export interface ReduxModule<T = {}> {
+  id: string;
   reducers: {
     [K: string]: Reducer<T>;
   };
@@ -16,7 +17,7 @@ export interface ReduxModule<T = {}> {
   };
 }
 
-export type AlienResult = Omit<ReduxModule, 'reducers'>;
+export type AlienResult = Omit<ReduxModule, 'reducers' | 'id'>;
 
 interface AlienModule<T> {
   getModule: () => Promise<ReduxModule<T>>;
@@ -44,7 +45,13 @@ function useAlien<T>(alienModule: AlienModule<T>): AlienResult | null {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const { reducers, actions, selectors } = await alienModule.getModule();
+        const reduxModule = await alienModule.getModule();
+
+        if (!reduxModule.id) {
+          throw new Error('Redux Module has no id');
+        }
+
+        const { reducers, actions, selectors } = reduxModule;
         const key = Object.keys(reducers).shift();
 
         if (key) {

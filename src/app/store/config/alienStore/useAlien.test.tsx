@@ -52,7 +52,7 @@ describe('useAlien', () => {
     expect(result.current.actions).toStrictEqual(reduxModule.actions);
   });
 
-  it('should throw', async () => {
+  it('should throw when wron import path', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
     const alienModule = {
       getModule: (): ReduxModuleType => import(WRONG_COMPONENT_PATH),
@@ -73,5 +73,25 @@ describe('useAlien', () => {
         `useAlienModule Error: Cannot find module '${WRONG_COMPONENT_PATH}' from 'useAlien.test.tsx'`,
       ),
     );
+  });
+
+  it('should throw when redux module has not "id"', async () => {
+    const brokenReduxModule = { ...reduxModule };
+    // just remove the id for testing purposes
+    delete brokenReduxModule.id;
+
+    const alienModule = {
+      getModule: (): ReduxModuleType => Promise.resolve(brokenReduxModule),
+    };
+
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
+      wrapper,
+    });
+
+    await waitForNextUpdate();
+
+    expect(() => {
+      expect(result.current).not.toBe(undefined);
+    }).toThrow(Error('useAlienModule Error: Redux Module has no id'));
   });
 });
