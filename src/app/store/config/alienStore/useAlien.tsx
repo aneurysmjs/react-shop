@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Reducer, AnyAction, ActionCreator } from 'redux';
 import { useStore } from 'react-redux';
+import { isEmpty, isNil } from 'ramda';
 
 import { AlienStore } from './alien';
 
@@ -45,19 +46,22 @@ function useAlien<T>(alienModule: AlienModule<T>): AlienResult | null {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const reduxModule = await alienModule.getModule();
+        const { id, reducers, actions, selectors } = await alienModule.getModule();
 
-        if (!reduxModule.id) {
+        if (isNil(id)) {
           throw new Error('Redux Module has no id');
         }
 
-        const { reducers, actions, selectors } = reduxModule;
-        const key = Object.keys(reducers).shift();
-
-        if (key) {
-          injectReducers(key, reducers[key]);
-          store.replaceReducer(rootReducer);
+        if (isNil(reducers) || isEmpty(reducers)) {
+          throw new Error('Redux Module has no reducers');
         }
+        // is safe here to iterate reducers's keys for reducer injection
+        Object.keys(reducers).forEach(key => {
+          injectReducers(key, reducers[key]);
+        });
+
+        store.replaceReducer(rootReducer);
+
         setAlien({ actions, selectors });
       } catch (err) {
         setAlien(err);

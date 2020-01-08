@@ -6,7 +6,7 @@ import alien from './alien';
 
 import useAlien from './useAlien';
 
-import { reduxModule } from './helpers/modules';
+import { reduxModule, reduxModuleNoReducers } from './helpers/modules';
 import { withProvider, WrapperType } from './helpers/withProvider';
 
 const WRONG_COMPONENT_PATH = './some/wrong/component/path';
@@ -42,9 +42,7 @@ describe('useAlien', () => {
     await waitForNextUpdate();
 
     expect(store.getState()).toEqual({
-      dummy: {
-        name: 'some default name',
-      },
+      state1: 'reducer1 default state',
     });
 
     expect(result.current).toHaveProperty('actions');
@@ -52,7 +50,7 @@ describe('useAlien', () => {
     expect(result.current.actions).toStrictEqual(reduxModule.actions);
   });
 
-  it('should throw when wron import path', async () => {
+  it('should throw when wrong import path', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
     const alienModule = {
       getModule: (): ReduxModuleType => import(WRONG_COMPONENT_PATH),
@@ -75,7 +73,7 @@ describe('useAlien', () => {
     );
   });
 
-  it('should throw when redux module has not "id"', async () => {
+  it('should throw when redux module has no "id"', async () => {
     const brokenReduxModule = { ...reduxModule };
     // just remove the id for testing purposes
     delete brokenReduxModule.id;
@@ -93,5 +91,23 @@ describe('useAlien', () => {
     expect(() => {
       expect(result.current).not.toBe(undefined);
     }).toThrow(Error('useAlienModule Error: Redux Module has no id'));
+  });
+
+  it('should throw when redux module has no reducers', async () => {
+    type ReduxModuleNoReducersType = Promise<typeof reduxModuleNoReducers>;
+
+    const alienModule = {
+      getModule: (): ReduxModuleNoReducersType => Promise.resolve(reduxModuleNoReducers),
+    };
+
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
+      wrapper,
+    });
+
+    await waitForNextUpdate();
+
+    expect(() => {
+      expect(result.current).not.toBe(undefined);
+    }).toThrow(Error('useAlienModule Error: Redux Module has no reducers'));
   });
 });

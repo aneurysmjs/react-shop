@@ -9,14 +9,14 @@ export const initialReducer = {
   },
 };
 
-export const reducer1 = (s = 'reducer1 state', action: AnyAction): string => {
+export const reducer1 = (s = 'reducer1 default state', action: AnyAction): string => {
   if (action.type === 'ACTION_1') {
     return 'reducer1 value';
   }
   return s;
 };
 
-export const reducer2 = (s = 'reducer2 state', action: AnyAction): string => {
+export const reducer2 = (s = 'reducer2 default state', action: AnyAction): string => {
   if (action.type === 'ACTION_2') {
     return 'reducer2 value';
   }
