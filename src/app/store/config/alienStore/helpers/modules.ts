@@ -3,7 +3,6 @@ import { AnyAction } from 'redux';
 import { reducer1 } from './reducers';
 
 export const reduxModule = {
-  id: 'test-module',
   reducers: {
     state1: reducer1,
   },
@@ -18,7 +17,6 @@ export const reduxModule = {
 };
 
 export const reduxModuleNoReducers = {
-  id: 'redux-module-no-reducers',
   reducers: {},
   actions: {
     dummyAction: (): AnyAction => ({

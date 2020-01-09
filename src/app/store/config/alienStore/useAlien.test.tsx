@@ -28,6 +28,7 @@ describe('useAlien', () => {
 
   it('should render "null" at first and then resolve the module', async () => {
     const alienModule = {
+      id: 'some-alien-module',
       getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
     };
 
@@ -52,6 +53,7 @@ describe('useAlien', () => {
 
   it('should call cb when unmounting', async () => {
     const alienModule = {
+      id: 'some-alien-module',
       getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
     };
 
@@ -80,9 +82,28 @@ describe('useAlien', () => {
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
+  it('should throw when alien module has no "id"', async () => {
+    const alienModule = {
+      getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
+    };
+
+    // @ts-ignore - "id" doesn't exist for testing purposes
+    const { result } = renderHook(() => useAlien(alienModule), {
+      wrapper,
+    });
+
+    // here there's no need to resolve the promise cuz it doesn't even get to be called
+    // await waitForNextUpdate();
+
+    expect(() => {
+      expect(result.current).not.toBe(undefined);
+    }).toThrow(Error('useAlienModule Error: Alien Module has no id'));
+  });
+
   it('should throw when wrong import path', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
     const alienModule = {
+      id: 'some-alien-module',
       getModule: (): ReduxModuleType => import(WRONG_COMPONENT_PATH),
     };
 
@@ -103,30 +124,11 @@ describe('useAlien', () => {
     );
   });
 
-  it('should throw when redux module has no "id"', async () => {
-    const brokenReduxModule = { ...reduxModule };
-    // just remove the id for testing purposes
-    delete brokenReduxModule.id;
-
-    const alienModule = {
-      getModule: (): ReduxModuleType => Promise.resolve(brokenReduxModule),
-    };
-
-    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
-      wrapper,
-    });
-
-    await waitForNextUpdate();
-
-    expect(() => {
-      expect(result.current).not.toBe(undefined);
-    }).toThrow(Error('useAlienModule Error: Redux Module has no id'));
-  });
-
   it('should throw when redux module has no reducers', async () => {
     type ReduxModuleNoReducersType = Promise<typeof reduxModuleNoReducers>;
 
     const alienModule = {
+      id: 'some-alien-module',
       getModule: (): ReduxModuleNoReducersType => Promise.resolve(reduxModuleNoReducers),
     };
 

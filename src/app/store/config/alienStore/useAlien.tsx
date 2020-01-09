@@ -3,11 +3,9 @@ import { Reducer, AnyAction, ActionCreator } from 'redux';
 import { useStore } from 'react-redux';
 import { isEmpty, isNil } from 'ramda';
 
-import countBy from 'ramda/es/countBy';
 import { AlienStore } from './alien';
 
 export interface ReduxModule<T = {}> {
-  id: string;
   reducers: {
     [K: string]: Reducer<T>;
   };
@@ -19,9 +17,10 @@ export interface ReduxModule<T = {}> {
   };
 }
 
-export type AlienResult = Omit<ReduxModule, 'reducers' | 'id'>;
+export type AlienResult = Omit<ReduxModule, 'reducers'>;
 
 interface AlienModule<T> {
+  id: string;
   getModule: () => Promise<ReduxModule<T>>;
   initialActions?: Array<string>;
 }
@@ -48,11 +47,11 @@ function useAlien<T>(alienModule: AlienModule<T>, cb: () => void = () => {}): Al
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const { id, reducers, actions, selectors } = await alienModule.getModule();
-
-        if (isNil(id)) {
-          throw new Error('Redux Module has no id');
+        if (isNil(alienModule.id)) {
+          throw new Error('Alien Module has no id');
         }
+
+        const { reducers, actions, selectors } = await alienModule.getModule();
 
         if (isNil(reducers) || isEmpty(reducers)) {
           throw new Error('Redux Module has no reducers');
