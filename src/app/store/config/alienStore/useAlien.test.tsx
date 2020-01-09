@@ -50,6 +50,36 @@ describe('useAlien', () => {
     expect(result.current.actions).toStrictEqual(reduxModule.actions);
   });
 
+  it('should call cb when unmounting', async () => {
+    const alienModule = {
+      getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
+    };
+
+    const cb = jest.fn();
+
+    const { result, waitForNextUpdate, unmount } = renderHook(() => useAlien(alienModule, cb), {
+      wrapper,
+    });
+
+    expect(store.getState()).toEqual({});
+    expect(result.current).toEqual(null);
+
+    // THIS is the key to resolve the Promise
+    await waitForNextUpdate();
+
+    expect(store.getState()).toEqual({
+      state1: 'reducer1 default state',
+    });
+
+    expect(result.current).toHaveProperty('actions');
+    // @ts-ignore - 'actions' is always part of the result
+    expect(result.current.actions).toStrictEqual(reduxModule.actions);
+
+    unmount();
+
+    expect(cb).toHaveBeenCalledTimes(1);
+  });
+
   it('should throw when wrong import path', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
     const alienModule = {

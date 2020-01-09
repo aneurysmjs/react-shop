@@ -3,6 +3,7 @@ import { Reducer, AnyAction, ActionCreator } from 'redux';
 import { useStore } from 'react-redux';
 import { isEmpty, isNil } from 'ramda';
 
+import countBy from 'ramda/es/countBy';
 import { AlienStore } from './alien';
 
 export interface ReduxModule<T = {}> {
@@ -36,7 +37,8 @@ function errorHandler<T>(errorOrObj: T): T {
   return errorOrObj;
 }
 
-function useAlien<T>(alienModule: AlienModule<T>): AlienResult | null {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function useAlien<T>(alienModule: AlienModule<T>, cb: () => void = () => {}): AlienResult | null {
   const store = useStore() as AlienStore;
   const {
     alienManager: { injectReducers, rootReducer },
@@ -67,6 +69,8 @@ function useAlien<T>(alienModule: AlienModule<T>): AlienResult | null {
         setAlien(err);
       }
     })();
+
+    return (): void => cb();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
