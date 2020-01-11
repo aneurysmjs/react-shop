@@ -82,7 +82,7 @@ describe('useAlien', () => {
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
-  it('should throw when alien module has no "id"', async () => {
+  it('should throw when alien module has no "id" or when is empty string', async () => {
     const alienModule = {
       getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
     };

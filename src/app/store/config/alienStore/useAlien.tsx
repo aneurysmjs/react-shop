@@ -47,7 +47,7 @@ function useAlien<T>(alienModule: AlienModule<T>, cb: () => void = () => {}): Al
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        if (isNil(alienModule.id)) {
+        if (isNil(alienModule.id) || isEmpty(alienModule.id)) {
           throw new Error('Alien Module has no id');
         }
 
