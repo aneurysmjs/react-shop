@@ -19,7 +19,7 @@ export interface ReduxModule<T = {}> {
 
 export type AlienResult = Omit<ReduxModule, 'reducers'>;
 
-interface AlienModule<T> {
+export interface AlienModule<T = {}> {
   id: string;
   getModule: () => Promise<ReduxModule<T>>;
   initialActions?: Array<string>;

@@ -23,8 +23,11 @@ describe('test "withAlien"', () => {
     const Example = (): ReactElement => <div>some component</div>;
 
     const getModule = (): Promise<typeof reduxModule> => Promise.resolve(reduxModule);
-
-    const { result, waitForNextUpdate } = renderHook(() => withAlien(Example, getModule), {
+    const alienModule = {
+      id: 'with',
+      getModule,
+    };
+    const { result, waitForNextUpdate } = renderHook(() => withAlien(Example, alienModule), {
       wrapper,
     });
 
