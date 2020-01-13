@@ -27,7 +27,7 @@ describe('test "withAlien"', () => {
       id: 'with',
       getModule,
     };
-    const { result, waitForNextUpdate } = renderHook(() => withAlien(Example, alienModule), {
+    const { result, waitForNextUpdate } = renderHook(() => withAlien(Example, [alienModule]), {
       wrapper,
     });
 

@@ -8,7 +8,7 @@ interface WithAlienProps {
 
 function WithAlien<P extends object>(
   Component: ComponentType<P>,
-  alienModule: AlienModule,
+  alienModule: [AlienModule],
 ): ReactElement<P & WithAlienProps> | null {
   const alienResult = useAlien(alienModule);
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Reducer, AnyAction, ActionCreator } from 'redux';
 import { useStore } from 'react-redux';
-import { isEmpty, isNil } from 'ramda';
+import { isEmpty, isNil, anyPass, any } from 'ramda';
 
 import { AlienStore } from './alien';
 
@@ -13,7 +13,7 @@ export interface ReduxModule<T = {}> {
     [K: string]: ActionCreator<AnyAction>;
   };
   selectors?: {
-    [K: string]: <S>(state: S) => T;
+    [K: string]: <T>(state: T) => T;
   };
 }
 
@@ -24,6 +24,8 @@ export interface AlienModule<T = {}> {
   getModule: () => Promise<ReduxModule<T>>;
   initialActions?: Array<string>;
 }
+
+const check: <T>(obj: T) => boolean = anyPass([isNil, isEmpty]);
 
 function errorHandler<T>(errorOrObj: T): T {
   if (errorOrObj) {
@@ -36,8 +38,11 @@ function errorHandler<T>(errorOrObj: T): T {
   return errorOrObj;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function useAlien<T>(alienModule: AlienModule<T>, cb: () => void = () => {}): AlienResult | null {
+function useAlien<T>(
+  alienModules: [AlienModule<T>],
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  cb: () => void = () => {},
+): AlienResult | null {
   const store = useStore() as AlienStore;
   const {
     alienManager: { injectReducers, rootReducer },
@@ -47,23 +52,28 @@ function useAlien<T>(alienModule: AlienModule<T>, cb: () => void = () => {}): Al
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        if (isNil(alienModule.id) || isEmpty(alienModule.id)) {
+        if (any(({ id }) => check(id), alienModules)) {
           throw new Error('Alien Module has no id');
         }
+        const promises = alienModules.map(alienModule => alienModule.getModule());
 
-        const { reducers, actions, selectors } = await alienModule.getModule();
+        const resolvedModules = await Promise.all(promises);
 
-        if (isNil(reducers) || isEmpty(reducers)) {
-          throw new Error('Redux Module has no reducers');
-        }
-        // is safe here to iterate reducers's keys for reducer injection
-        Object.keys(reducers).forEach(key => {
-          injectReducers(key, reducers[key]);
+        resolvedModules.forEach(alienModule => {
+          const { reducers, actions, selectors } = alienModule;
+
+          if (check(reducers)) {
+            throw new Error('Redux Module has no reducers');
+          }
+          // is safe here to iterate reducers's keys for reducer injection
+          Object.keys(reducers).forEach(key => {
+            injectReducers(key, reducers[key]);
+          });
+
+          store.replaceReducer(rootReducer);
+
+          setAlien({ actions, selectors });
         });
-
-        store.replaceReducer(rootReducer);
-
-        setAlien({ actions, selectors });
       } catch (err) {
         setAlien(err);
       }

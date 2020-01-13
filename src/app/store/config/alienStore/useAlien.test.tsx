@@ -32,7 +32,7 @@ describe('useAlien', () => {
       getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
     };
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
       wrapper,
     });
 
@@ -59,7 +59,7 @@ describe('useAlien', () => {
 
     const cb = jest.fn();
 
-    const { result, waitForNextUpdate, unmount } = renderHook(() => useAlien(alienModule, cb), {
+    const { result, waitForNextUpdate, unmount } = renderHook(() => useAlien([alienModule], cb), {
       wrapper,
     });
 
@@ -88,7 +88,7 @@ describe('useAlien', () => {
     };
 
     // @ts-ignore - "id" doesn't exist for testing purposes
-    const { result } = renderHook(() => useAlien(alienModule), {
+    const { result } = renderHook(() => useAlien([alienModule]), {
       wrapper,
     });
 
@@ -107,7 +107,7 @@ describe('useAlien', () => {
       getModule: (): ReduxModuleType => import(WRONG_COMPONENT_PATH),
     };
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
       wrapper,
     });
 
@@ -132,7 +132,7 @@ describe('useAlien', () => {
       getModule: (): ReduxModuleNoReducersType => Promise.resolve(reduxModuleNoReducers),
     };
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien(alienModule), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
       wrapper,
     });
 
