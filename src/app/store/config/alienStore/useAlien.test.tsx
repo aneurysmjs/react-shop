@@ -6,7 +6,7 @@ import alien from './alien';
 
 import useAlien from './useAlien';
 
-import { reduxModule, reduxModuleNoReducers } from './helpers/modules';
+import { reduxModule, reduxModuleNoReducers, reduxModuleA, reduxModuleB } from './helpers/modules';
 import { withProvider, WrapperType } from './helpers/withProvider';
 
 const WRONG_COMPONENT_PATH = './some/wrong/component/path';
@@ -25,14 +25,21 @@ beforeEach(() => {
  */
 describe('useAlien', () => {
   type ReduxModuleType = Promise<typeof reduxModule>;
+  type ReduxModuleAType = Promise<typeof reduxModuleA>;
+  type ReduxModuleBType = Promise<typeof reduxModuleB>;
 
-  it('should render "null" at first and then resolve the module', async () => {
-    const alienModule = {
-      id: 'some-alien-module',
-      getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
+  it('should render "null" at first and then resolve each module', async () => {
+    const alienModuleA = {
+      id: 'alien-module-a',
+      getModule: (): ReduxModuleAType => Promise.resolve(reduxModuleA),
     };
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
+    const alienModuleB = {
+      id: 'alien-module-b',
+      getModule: (): ReduxModuleBType => Promise.resolve(reduxModuleB),
+    };
+
+    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModuleA, alienModuleB]), {
       wrapper,
     });
 
@@ -43,12 +50,16 @@ describe('useAlien', () => {
     await waitForNextUpdate();
 
     expect(store.getState()).toEqual({
-      state1: 'reducer1 default state',
+      stateA: 'reducerA default state',
+      stateB: 'reducerB default state',
     });
 
     expect(result.current).toHaveProperty('actions');
     // @ts-ignore - 'actions' is always part of the result
-    expect(result.current.actions).toStrictEqual(reduxModule.actions);
+    expect(result.current.actions).toStrictEqual({
+      ...reduxModuleA.actions,
+      ...reduxModuleB.actions,
+    });
   });
 
   it('should call cb when unmounting', async () => {

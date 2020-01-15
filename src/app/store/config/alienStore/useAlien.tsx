@@ -47,7 +47,7 @@ function useAlien<T>(
   const {
     alienManager: { injectReducers, rootReducer },
   } = store;
-  const [alien, setAlien] = useState<AlienResult | null>(null);
+  const [alien, setAlien] = useState<[AlienResult] | null>(null);
 
   useEffect(() => {
     (async (): Promise<void> => {
@@ -59,21 +59,33 @@ function useAlien<T>(
 
         const resolvedModules = await Promise.all(promises);
 
-        resolvedModules.forEach(alienModule => {
-          const { reducers, actions, selectors } = alienModule;
+        const result = resolvedModules.reduce(
+          (acc, { reducers, actions, selectors }: ReduxModule<T>) => {
+            if (check(reducers)) {
+              throw new Error('Redux Module has no reducers');
+            }
+            // is safe here to iterate reducers's keys for reducer injection
+            Object.keys(reducers).forEach(key => {
+              injectReducers(key, reducers[key]);
+            });
 
-          if (check(reducers)) {
-            throw new Error('Redux Module has no reducers');
-          }
-          // is safe here to iterate reducers's keys for reducer injection
-          Object.keys(reducers).forEach(key => {
-            injectReducers(key, reducers[key]);
-          });
+            store.replaceReducer(rootReducer);
 
-          store.replaceReducer(rootReducer);
+            return {
+              actions: { ...acc.actions, ...actions },
+              // adds the "selectors" property if any exists
+              ...(selectors && {
+                selectors: {
+                  ...acc.selectors,
+                  ...selectors,
+                },
+              }),
+            };
+          },
+          {},
+        );
 
-          setAlien({ actions, selectors });
-        });
+        setAlien(result);
       } catch (err) {
         setAlien(err);
       }
