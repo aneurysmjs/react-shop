@@ -6,7 +6,13 @@ import alien from './alien';
 
 import useAlien from './useAlien';
 
-import { reduxModule, reduxModuleNoReducers, reduxModuleA, reduxModuleB } from './helpers/modules';
+import {
+  reduxModule,
+  reduxModuleNoId,
+  reduxModuleNoReducers,
+  reduxModuleA,
+  reduxModuleB,
+} from './helpers/modules';
 import { withProvider, WrapperType } from './helpers/withProvider';
 
 const WRONG_COMPONENT_PATH = './some/wrong/component/path';
@@ -29,15 +35,9 @@ describe('useAlien', () => {
   type ReduxModuleBType = Promise<typeof reduxModuleB>;
 
   it('should render "null" at first and then resolve each module', async () => {
-    const alienModuleA = {
-      id: 'alien-module-a',
-      getModule: (): ReduxModuleAType => Promise.resolve(reduxModuleA),
-    };
+    const alienModuleA = (): ReduxModuleAType => Promise.resolve(reduxModuleA);
 
-    const alienModuleB = {
-      id: 'alien-module-b',
-      getModule: (): ReduxModuleBType => Promise.resolve(reduxModuleB),
-    };
+    const alienModuleB = (): ReduxModuleBType => Promise.resolve(reduxModuleB);
 
     const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModuleA, alienModuleB]), {
       wrapper,
@@ -63,10 +63,7 @@ describe('useAlien', () => {
   });
 
   it('should call cb when unmounting', async () => {
-    const alienModule = {
-      id: 'some-alien-module',
-      getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
-    };
+    const alienModule = (): ReduxModuleType => Promise.resolve(reduxModule);
 
     const cb = jest.fn();
 
@@ -93,30 +90,24 @@ describe('useAlien', () => {
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
-  it('should throw when alien module has no "id" or when is empty string', async () => {
-    const alienModule = {
-      getModule: (): ReduxModuleType => Promise.resolve(reduxModule),
-    };
-
+  it('should throw when a redux module has no "id" or when is empty string', async () => {
     // @ts-ignore - "id" doesn't exist for testing purposes
-    const { result } = renderHook(() => useAlien([alienModule]), {
+    const alienModule = (): ReduxModuleType => Promise.resolve(reduxModuleNoId);
+
+    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
       wrapper,
     });
 
-    // here there's no need to resolve the promise cuz it doesn't even get to be called
-    // await waitForNextUpdate();
+    await waitForNextUpdate();
 
     expect(() => {
       expect(result.current).not.toBe(undefined);
-    }).toThrow(Error('useAlienModule Error: Alien Module has no id'));
+    }).toThrow(Error('useAlienModule Error: Redux Module has no id'));
   });
 
   it('should throw when wrong import path', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
-    const alienModule = {
-      id: 'some-alien-module',
-      getModule: (): ReduxModuleType => import(WRONG_COMPONENT_PATH),
-    };
+    const alienModule = (): ReduxModuleType => import(WRONG_COMPONENT_PATH);
 
     const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
       wrapper,
@@ -138,10 +129,7 @@ describe('useAlien', () => {
   it('should throw when redux module has no reducers', async () => {
     type ReduxModuleNoReducersType = Promise<typeof reduxModuleNoReducers>;
 
-    const alienModule = {
-      id: 'some-alien-module',
-      getModule: (): ReduxModuleNoReducersType => Promise.resolve(reduxModuleNoReducers),
-    };
+    const alienModule = (): ReduxModuleNoReducersType => Promise.resolve(reduxModuleNoReducers);
 
     const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
       wrapper,

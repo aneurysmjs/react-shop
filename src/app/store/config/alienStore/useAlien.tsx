@@ -6,6 +6,7 @@ import { isEmpty, isNil, anyPass, any } from 'ramda';
 import { AlienStore } from './alien';
 
 export interface ReduxModule<T = {}> {
+  id: string;
   reducers: {
     [K: string]: Reducer<T>;
   };
@@ -20,12 +21,10 @@ export interface ReduxModule<T = {}> {
 export type AlienResult = Omit<ReduxModule, 'reducers'>;
 
 export interface AlienModule<T = {}> {
-  id: string;
-  getModule: () => Promise<ReduxModule<T>>;
   initialActions?: Array<string>;
 }
 
-const check: <T>(obj: T) => boolean = anyPass([isNil, isEmpty]);
+const check: <T>(thing: T) => boolean = anyPass([isNil, isEmpty]);
 
 function errorHandler<T>(errorOrObj: T): T {
   if (errorOrObj) {
@@ -39,7 +38,7 @@ function errorHandler<T>(errorOrObj: T): T {
 }
 
 function useAlien<T>(
-  alienModules: [AlienModule<T>],
+  reduxImports: [() => Promise<ReduxModule<T>>],
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   cb: () => void = () => {},
 ): AlienResult | null {
@@ -52,15 +51,18 @@ function useAlien<T>(
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        if (any(({ id }) => check(id), alienModules)) {
-          throw new Error('Alien Module has no id');
-        }
-        const promises = alienModules.map(alienModule => alienModule.getModule());
+        const nextReduxModule = {} as ReduxModule<T>;
 
-        const resolvedModules = await Promise.all(promises);
+        const promises = reduxImports.map(reduxImport => reduxImport());
 
-        const result = resolvedModules.reduce(
-          (acc, { reducers, actions, selectors }: ReduxModule<T>) => {
+        const reduxModules = await Promise.all(promises);
+
+        const result = reduxModules.reduce(
+          (acc, { id, reducers, actions, selectors }: ReduxModule<T>) => {
+            if (check(id)) {
+              throw new Error('Redux Module has no id');
+            }
+
             if (check(reducers)) {
               throw new Error('Redux Module has no reducers');
             }
@@ -82,7 +84,7 @@ function useAlien<T>(
               }),
             };
           },
-          {},
+          nextReduxModule,
         );
 
         setAlien(result);
