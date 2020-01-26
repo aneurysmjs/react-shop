@@ -54,11 +54,18 @@ describe('useAlien', () => {
       stateB: 'reducerB default state',
     });
 
-    expect(result.current).toHaveProperty('actions');
-    // @ts-ignore - 'actions' is always part of the result
-    expect(result.current.actions).toStrictEqual({
-      ...reduxModuleA.actions,
-      ...reduxModuleB.actions,
+    expect(result.current).toHaveProperty(reduxModuleA.id);
+    expect(result.current).toHaveProperty(reduxModuleB.id);
+
+    expect(result.current).toStrictEqual({
+      [reduxModuleA.id]: {
+        actions: { ...reduxModuleA.actions },
+        selectors: { ...reduxModuleA.selectors },
+      },
+      [reduxModuleB.id]: {
+        actions: { ...reduxModuleB.actions },
+        selectors: { ...reduxModuleB.selectors },
+      },
     });
   });
 
@@ -81,9 +88,9 @@ describe('useAlien', () => {
       state1: 'reducer1 default state',
     });
 
-    expect(result.current).toHaveProperty('actions');
+    expect(result.current).toHaveProperty(reduxModule.id);
     // @ts-ignore - 'actions' is always part of the result
-    expect(result.current.actions).toStrictEqual(reduxModule.actions);
+    expect(result.current[reduxModule.id].actions).toStrictEqual(reduxModule.actions);
 
     unmount();
 
@@ -92,9 +99,9 @@ describe('useAlien', () => {
 
   it('should throw when a redux module has no "id" or when is empty string', async () => {
     // @ts-ignore - "id" doesn't exist for testing purposes
-    const alienModule = (): ReduxModuleType => Promise.resolve(reduxModuleNoId);
+    const reduxModules = [(): ReduxModuleType => Promise.resolve(reduxModuleNoId)];
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(reduxModules), {
       wrapper,
     });
 
@@ -107,9 +114,9 @@ describe('useAlien', () => {
 
   it('should throw when wrong import path', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch');
-    const alienModule = (): ReduxModuleType => import(WRONG_COMPONENT_PATH);
+    const reduxModules = [(): ReduxModuleType => import(WRONG_COMPONENT_PATH)];
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(reduxModules), {
       wrapper,
     });
 
@@ -129,9 +136,9 @@ describe('useAlien', () => {
   it('should throw when redux module has no reducers', async () => {
     type ReduxModuleNoReducersType = Promise<typeof reduxModuleNoReducers>;
 
-    const alienModule = (): ReduxModuleNoReducersType => Promise.resolve(reduxModuleNoReducers);
+    const reduxModules = [(): ReduxModuleNoReducersType => Promise.resolve(reduxModuleNoReducers)];
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModule]), {
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(reduxModules), {
       wrapper,
     });
 

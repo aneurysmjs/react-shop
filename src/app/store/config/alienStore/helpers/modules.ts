@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 import { reducer1, reducerA, reducerB } from './reducers';
 
 export const reduxModule = {
+  id: 'redux-module-id',
   reducers: {
     state1: reducer1,
   },
@@ -16,7 +17,21 @@ export const reduxModule = {
   },
 };
 
+export const reduxModuleNoId = {
+  reducers: {
+    state1: reducer1,
+  },
+  actions: {
+    dummyAction: (): AnyAction => ({
+      type: 'DUMMY_ACTION',
+      payload: {
+        name: 'Джеро',
+      },
+    }),
+  },
+};
 export const reduxModuleNoReducers = {
+  id: 'reduxModuleNoReducers',
   reducers: {},
   actions: {
     dummyAction: (): AnyAction => ({
@@ -29,6 +44,7 @@ export const reduxModuleNoReducers = {
 };
 
 export const reduxModuleA = {
+  id: 'reduxModuleA',
   reducers: {
     stateA: reducerA,
   },
@@ -46,6 +62,7 @@ export const reduxModuleA = {
 };
 
 export const reduxModuleB = {
+  id: 'reduxModuleB',
   reducers: {
     stateB: reducerB,
   },

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Reducer, AnyAction, ActionCreator } from 'redux';
 import { useStore } from 'react-redux';
-import { isEmpty, isNil, anyPass, any } from 'ramda';
+import { isEmpty, isNil, anyPass } from 'ramda';
 
 import { AlienStore } from './alien';
 
@@ -51,41 +51,41 @@ function useAlien<T>(
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const nextReduxModule = {} as ReduxModule<T>;
-
         const promises = reduxImports.map(reduxImport => reduxImport());
 
         const reduxModules = await Promise.all(promises);
 
-        const result = reduxModules.reduce(
-          (acc, { id, reducers, actions, selectors }: ReduxModule<T>) => {
-            if (check(id)) {
-              throw new Error('Redux Module has no id');
-            }
+        const prevReduxModule = {} as ReduxModule<T>;
 
-            if (check(reducers)) {
-              throw new Error('Redux Module has no reducers');
-            }
-            // is safe here to iterate reducers's keys for reducer injection
-            Object.keys(reducers).forEach(key => {
-              injectReducers(key, reducers[key]);
-            });
+        const result = reduxModules.reduce((prev, { id, actions, reducers, selectors }) => {
+          if (check(id)) {
+            throw new Error('Redux Module has no id');
+          }
 
-            store.replaceReducer(rootReducer);
+          if (check(reducers)) {
+            throw new Error('Redux Module has no reducers');
+          }
+          // is safe here to iterate reducers's keys for reducer injection
+          Object.keys(reducers).forEach(key => {
+            injectReducers(key, reducers[key]);
+          });
 
-            return {
-              actions: { ...acc.actions, ...actions },
-              // adds the "selectors" property if any exists
+          store.replaceReducer(rootReducer);
+
+          return {
+            ...prev,
+            [id]: {
+              actions: { ...prev.actions, ...actions },
+              // append `selectors` conditionally.
               ...(selectors && {
                 selectors: {
-                  ...acc.selectors,
+                  ...prev.selectors,
                   ...selectors,
                 },
               }),
-            };
-          },
-          nextReduxModule,
-        );
+            },
+          };
+        }, prevReduxModule);
 
         setAlien(result);
       } catch (err) {
