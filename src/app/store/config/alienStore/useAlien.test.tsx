@@ -39,7 +39,9 @@ describe('useAlien', () => {
 
     const alienModuleB = (): ReduxModuleBType => Promise.resolve(reduxModuleB);
 
-    const { result, waitForNextUpdate } = renderHook(() => useAlien([alienModuleA, alienModuleB]), {
+    const reduxModules = [alienModuleA, alienModuleB];
+
+    const { result, waitForNextUpdate } = renderHook(() => useAlien(reduxModules), {
       wrapper,
     });
 
@@ -72,9 +74,10 @@ describe('useAlien', () => {
   it('should call cb when unmounting', async () => {
     const alienModule = (): ReduxModuleType => Promise.resolve(reduxModule);
 
+    const reduxModules = [alienModule];
     const cb = jest.fn();
 
-    const { result, waitForNextUpdate, unmount } = renderHook(() => useAlien([alienModule], cb), {
+    const { result, waitForNextUpdate, unmount } = renderHook(() => useAlien(reduxModules, cb), {
       wrapper,
     });
 
