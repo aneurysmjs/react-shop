@@ -34,7 +34,7 @@ describe('useAlien', () => {
   type ReduxModuleAType = Promise<typeof reduxModuleA>;
   type ReduxModuleBType = Promise<typeof reduxModuleB>;
 
-  it('should render "null" at first and then resolve each module', async () => {
+  it('should render empty array "[]" at first and then resolve each module', async () => {
     const alienModuleA = (): ReduxModuleAType => Promise.resolve(reduxModuleA);
 
     const alienModuleB = (): ReduxModuleBType => Promise.resolve(reduxModuleB);
@@ -46,7 +46,7 @@ describe('useAlien', () => {
     });
 
     expect(store.getState()).toEqual({});
-    expect(result.current).toEqual(null);
+    expect(result.current).toEqual([]);
 
     // THIS is the key to resolve the Promise
     await waitForNextUpdate();
@@ -56,19 +56,21 @@ describe('useAlien', () => {
       stateB: 'reducerB default state',
     });
 
-    expect(result.current).toHaveProperty(reduxModuleA.id);
-    expect(result.current).toHaveProperty(reduxModuleB.id);
-
-    expect(result.current).toStrictEqual({
-      [reduxModuleA.id]: {
-        actions: { ...reduxModuleA.actions },
-        selectors: { ...reduxModuleA.selectors },
-      },
-      [reduxModuleB.id]: {
-        actions: { ...reduxModuleB.actions },
-        selectors: { ...reduxModuleB.selectors },
-      },
-    });
+    expect(result.current).toHaveLength(2);
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: 'reduxModuleA',
+          actions: { ...reduxModuleA.actions },
+          selectors: { ...reduxModuleA.selectors },
+        }),
+        expect.objectContaining({
+          id: 'reduxModuleB',
+          actions: { ...reduxModuleB.actions },
+          selectors: { ...reduxModuleB.selectors },
+        }),
+      ]),
+    );
   });
 
   it('should call cb when unmounting', async () => {
@@ -82,7 +84,7 @@ describe('useAlien', () => {
     });
 
     expect(store.getState()).toEqual({});
-    expect(result.current).toEqual(null);
+    expect(result.current).toEqual([]);
 
     // THIS is the key to resolve the Promise
     await waitForNextUpdate();
@@ -91,9 +93,14 @@ describe('useAlien', () => {
       state1: 'reducer1 default state',
     });
 
-    expect(result.current).toHaveProperty(reduxModule.id);
-    // @ts-ignore - 'actions' is always part of the result
-    expect(result.current[reduxModule.id].actions).toStrictEqual(reduxModule.actions);
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: reduxModule.id,
+          actions: { ...reduxModule.actions },
+        }),
+      ]),
+    );
 
     unmount();
 

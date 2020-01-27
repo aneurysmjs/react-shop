@@ -38,15 +38,15 @@ function errorHandler<T>(errorOrObj: T): T {
 }
 
 function useAlien<T>(
-  reduxImports: [() => Promise<ReduxModule<T>>],
+  reduxImports: Array<() => Promise<ReduxModule<T>>>,
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   cb: () => void = () => {},
-): AlienResult | null {
+): Array<AlienResult> | null {
   const store = useStore() as AlienStore;
   const {
     alienManager: { injectReducers, rootReducer },
   } = store;
-  const [alien, setAlien] = useState<[AlienResult] | null>(null);
+  const [alien, setAlien] = useState<Array<AlienResult> | []>([]);
 
   useEffect(() => {
     (async (): Promise<void> => {
@@ -55,9 +55,7 @@ function useAlien<T>(
 
         const reduxModules = await Promise.all(promises);
 
-        const prevReduxModule = {} as ReduxModule<T>;
-
-        const result = reduxModules.reduce((prev, { id, actions, reducers, selectors }) => {
+        const result = reduxModules.map(({ id, reducers, ...rest }) => {
           if (check(id)) {
             throw new Error('Redux Module has no id');
           }
@@ -73,21 +71,12 @@ function useAlien<T>(
           store.replaceReducer(rootReducer);
 
           return {
-            ...prev,
-            [id]: {
-              actions: { ...prev.actions, ...actions },
-              // append `selectors` conditionally.
-              ...(selectors && {
-                selectors: {
-                  ...prev.selectors,
-                  ...selectors,
-                },
-              }),
-            },
+            id,
+            ...rest,
           };
-        }, prevReduxModule);
+        });
 
-        setAlien(result);
+        setAlien([...alien, ...result]);
       } catch (err) {
         setAlien(err);
       }
