@@ -22,18 +22,14 @@ describe('test "withAlien"', () => {
   it('should resolve and alien module and add actions to the Component', async () => {
     const Example = (): ReactElement => <div>some component</div>;
 
-    const getModule = (): Promise<typeof reduxModule> => Promise.resolve(reduxModule);
-    const alienModule = {
-      id: 'with',
-      getModule,
-    };
-    const { result, waitForNextUpdate } = renderHook(() => withAlien(Example, [alienModule]), {
+    const reduxModules = [(): Promise<typeof reduxModule> => Promise.resolve(reduxModule)];
+
+    const { result, waitForNextUpdate } = renderHook(() => withAlien(Example, reduxModules), {
       wrapper,
     });
 
     await waitForNextUpdate();
 
-    expect(result.current.props.reducers).toBe(undefined);
-    expect(result.current.props.actions).toStrictEqual(reduxModule.actions);
+    expect(result.current.props.modules).toHaveLength(1);
   });
 });

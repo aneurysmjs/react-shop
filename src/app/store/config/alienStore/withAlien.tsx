@@ -1,19 +1,20 @@
 import React, { ReactElement, ComponentType } from 'react';
 
-import useAlien, { AlienResult, AlienModule } from './useAlien';
+import useAlien, { AlienResult, ReduxModule } from './useAlien';
 
 interface WithAlienProps {
-  actions: AlienResult['actions'];
+  modules: Array<AlienResult>;
 }
 
 function WithAlien<P extends object>(
   Component: ComponentType<P>,
-  alienModule: [AlienModule],
+  reduxModules: Array<() => Promise<ReduxModule<P>>>,
 ): ReactElement<P & WithAlienProps> | null {
-  const alienResult = useAlien(alienModule);
+  const alienResult = useAlien(reduxModules);
 
   if (alienResult) {
-    return <Component {...(alienResult as P)} />;
+    // return <Component {(alienResult as P)} />;
+    return <Component modules={alienResult as P} />;
   }
 
   return null;
