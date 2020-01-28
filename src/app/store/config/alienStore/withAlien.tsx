@@ -12,9 +12,8 @@ function WithAlien<P extends object>(
 ): ReactElement<P & WithAlienProps> | null {
   const alienResult = useAlien(reduxModules);
 
-  if (alienResult) {
-    // return <Component {(alienResult as P)} />;
-    return <Component modules={alienResult as P} />;
+  if (alienResult.length > 0) {
+    return <Component {...({ modules: alienResult } as P)} />;
   }
 
   return null;
