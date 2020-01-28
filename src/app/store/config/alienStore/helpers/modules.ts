@@ -57,6 +57,7 @@ export const reduxModuleA = {
     }),
   },
   selectors: {
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     selectorA: ({ sliceA }) => sliceA,
   },
 };
@@ -75,6 +76,7 @@ export const reduxModuleB = {
     }),
   },
   selectors: {
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     selectorB: ({ sliceA }) => sliceA,
   },
 };
