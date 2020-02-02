@@ -3,7 +3,7 @@ import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
 
 import { render, RenderResult } from '@testing-library/react';
-import { State } from '~/shared/types/State';
+import { State } from '~/store/State';
 
 import reducer from '~/store/reducers';
 

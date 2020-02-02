@@ -2,7 +2,7 @@
 
 import { Middleware } from 'redux';
 
-import { State } from '~/shared/types/State';
+import { State } from '~/store/State';
 import { Actions } from '~/shared/types/Actions';
 
 /* eslint-disable no-console */

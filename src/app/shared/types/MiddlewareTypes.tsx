@@ -1,5 +1,5 @@
 import { Middleware } from 'redux';
-import { State } from '~/shared/types/State';
+import { State } from '~/store/State';
 
 export type ApiMetaType<T = Response> = {
   types: Array<string>;
