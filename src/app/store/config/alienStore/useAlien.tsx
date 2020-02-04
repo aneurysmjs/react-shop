@@ -5,20 +5,20 @@ import { isEmpty, isNil, anyPass } from 'ramda';
 
 import { AlienStore } from './alien';
 
-export interface ReduxModule<T = {}> {
+export interface ReduxModule<S = {}> {
   id: string;
   reducers: {
-    [K: string]: Reducer<T>;
+    [K: string]: Reducer<S>;
   };
   actions: {
     [K: string]: ActionCreator<AnyAction>;
   };
   selectors?: {
-    [K: string]: <T>(state: T) => T;
+    [K: string]: <S, R>(state: S) => R;
   };
 }
 
-export type AlienResult = Omit<ReduxModule, 'reducers'>;
+export type AlienResult<S> = Omit<ReduxModule<S>, 'reducers'>;
 
 export interface AlienModule<T = {}> {
   initialActions?: Array<string>;
@@ -41,12 +41,12 @@ function useAlien<T>(
   reduxImports: Array<() => Promise<ReduxModule<T>>>,
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   cb: () => void = () => {},
-): Array<AlienResult> | null {
+): Array<AlienResult<T>> {
   const store = useStore() as AlienStore;
   const {
     alienManager: { injectReducers, rootReducer },
   } = store;
-  const [alien, setAlien] = useState<Array<AlienResult> | []>([]);
+  const [alien, setAlien] = useState<Array<AlienResult<T>> | []>([]);
 
   useEffect(() => {
     (async (): Promise<void> => {
