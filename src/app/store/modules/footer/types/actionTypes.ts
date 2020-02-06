@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export { getFooter } from './getFooter';
+export const FOOTER_DATA = 'FOOTER_DATA';

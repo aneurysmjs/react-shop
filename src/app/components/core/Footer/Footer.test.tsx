@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cleanup } from '@testing-library/react';
+import { cleanup, RenderResult } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
 import renderWithRedux from '~/shared/utils/testing/renderWithRedux';
@@ -11,7 +11,7 @@ afterEach(cleanup);
 
 describe('Footer test', () => {
   it('should have only one social network', async () => {
-    let testRenderer = {};
+    let testRenderer = {} as RenderResult;
     await act(async () => {
       testRenderer = renderWithRedux(<Footer />);
     });
@@ -21,7 +21,7 @@ describe('Footer test', () => {
   });
 
   it('should copyright text properly', async () => {
-    let testRenderer = {};
+    let testRenderer = {} as RenderResult;
 
     await act(async () => {
       testRenderer = renderWithRedux(<Footer />);

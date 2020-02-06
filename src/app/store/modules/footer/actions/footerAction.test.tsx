@@ -2,6 +2,8 @@
 
 import footerAction from './footerAction';
 
+import { FOOTER_DATA } from '../types/actionTypes';
+
 describe('footer action', () => {
   it('should return the corresponding \'footer\' object', () => {
     const social = [{ id: '0', icon: 'instagram', link: 'https://instagram.com' }];
@@ -10,7 +12,7 @@ describe('footer action', () => {
       email: 'me@shop.com',
     };
     const payload = { footer: { social, contact } };
-    const expectedData = { type: 'FOOTER_DATA', payload };
+    const expectedData = { type: FOOTER_DATA, payload };
     expect(footerAction(payload)).toEqual(expectedData);
   });
 });
