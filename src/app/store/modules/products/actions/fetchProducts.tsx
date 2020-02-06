@@ -29,7 +29,6 @@ export default function fetchProducts(query: string): FetchProductAction {
     callAPI: () => api.get(query),
     shouldCallAPI: state => {
       const { products } = getProducts(state);
-
       return products.length === 0;
     },
   };

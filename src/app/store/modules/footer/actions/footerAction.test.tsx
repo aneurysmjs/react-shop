@@ -11,7 +11,7 @@ describe('footer action', () => {
       phone: '89189258147',
       email: 'me@shop.com',
     };
-    const payload = { footer: { social, contact } };
+    const payload = { social, contact };
     const expectedData = { type: FOOTER_DATA, payload };
     expect(footerAction(payload)).toEqual(expectedData);
   });
