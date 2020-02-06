@@ -1,5 +1,8 @@
-import * as types from '~/store/ActionTypes';
+import { ActionCreator } from '~/shared/types/CommonType';
 
-import makeActionCreator from '~/store/helpers/makeActionCreator';
+import { CART_DATA } from '../types/actionTypes';
+import { Cart } from '../types';
 
-export default makeActionCreator(types.CART_DATA);
+const cartAction: ActionCreator<Cart> = payload => ({ type: CART_DATA, payload });
+
+export default cartAction;

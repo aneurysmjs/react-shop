@@ -1,12 +1,13 @@
-import { CartType, CartActionType } from '~/store/modules/cart/types';
+import { Reducer } from 'redux';
+import { Cart, CartAction } from '../types';
 
-import { CART_DATA } from '~/store/ActionTypes';
+import { CART_DATA } from '../types/actionTypes';
 
 const initialState = {
   quantity: 0,
 };
 
-function cartReducer(state: CartType = initialState, action: CartActionType): CartType {
+const cartReducer: Reducer<Cart, CartAction> = (state = initialState, action): Cart => {
   switch (action.type) {
     case CART_DATA: {
       return {
@@ -16,6 +17,6 @@ function cartReducer(state: CartType = initialState, action: CartActionType): Ca
     default:
       return state;
   }
-}
+};
 
 export default cartReducer;

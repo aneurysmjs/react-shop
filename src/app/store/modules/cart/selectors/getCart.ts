@@ -1,4 +1,4 @@
 import { State } from '~/store/State';
-import { CartType } from '~/store/modules/cart/types';
+import { Cart } from '../types';
 // eslint-disable-next-line import/prefer-default-export
-export const getCart = (state: State): CartType => state.cart;
+export const getCart = ({ cart }: State): Cart => cart;

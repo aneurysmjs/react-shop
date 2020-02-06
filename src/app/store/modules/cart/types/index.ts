@@ -1,7 +1,7 @@
 import { Action } from '~/shared/types/CommonType';
 
-export type CartType = {
+export interface Cart {
   quantity: number;
-};
+}
 
-export type CartActionType = Action<CartType>;
+export type CartAction = Action<Cart>;
