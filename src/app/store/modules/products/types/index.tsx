@@ -1,13 +1,7 @@
 /* eslint-disable import/prefer-default-export */
-import { ActionType, Response } from '~/shared/types/CommonType';
+import { Action, ResponseAndError } from '~/shared/types/CommonType';
 
-export enum ProductsActionTypes {
-  GetProductsRequest = 'PRODUCTS/GET_PRODUCTS_REQUEST',
-  GetProductsSuccess = 'PRODUCTS/GET_PRODUCTS_SUCCESS',
-  GetProductsFailure = 'PRODUCTS/GET_PRODUCTS_FAILURE',
-}
-
-export type ProductType = {
+export interface Product {
   _id: string;
   name: string;
   image: string;
@@ -16,16 +10,16 @@ export type ProductType = {
   price: number;
   stock: number;
   shop: string;
-};
+}
 
-export type ProductsType = Array<ProductType>;
+export type Products = Array<Product>;
 
-export type ProductsStateType = {
+export interface ProductsState {
   isLoading: boolean;
-  products: ProductsType;
+  products: Products;
   error?: Error | null;
-};
+}
 
-export type ProductPayloadType = Response<ProductsType> & { error: Error };
+export type ProductPayload = ResponseAndError<Products>;
 
-export type ProductActionType = ActionType<ProductPayloadType>;
+export type FetchProductAction = Action<ProductPayload>;

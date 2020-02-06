@@ -7,7 +7,7 @@ import { State } from '~/store/State';
 import Spinner from '~/components/base/Spinner';
 import ProductCard from '~/components/common/ProductCard';
 
-import { ProductsStateType } from '~/store/modules/products/types';
+import { ProductsState } from '~/store/modules/products/types';
 
 import './Home.scss';
 
@@ -21,7 +21,7 @@ const Home = ({ modules }: PropsType): ReactElement => {
 
   const { actions, selectors } = productsModule;
 
-  const { isLoading, products, error } = useSelector<State, ProductsStateType>(
+  const { isLoading, products, error } = useSelector<State, ProductsState>(
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     selectors!.getProducts,
   );
