@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react-test-renderer';
 import { render, RenderResult } from '@testing-library/react';
 
 import LazyComponent from './LazyComponent';
