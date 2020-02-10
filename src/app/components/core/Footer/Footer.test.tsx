@@ -1,33 +1,29 @@
-import React from 'react';
+import { cleanup, render, RenderResult } from '@testing-library/react';
 
-import { cleanup, RenderResult } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-
-import renderWithRedux from '~/shared/utils/testing/renderWithRedux';
-
-import Footer from './Footer';
+import renderFromAlien from '~/shared/utils/testing/renderFromAlien';
+import Footer from './index';
 
 afterEach(cleanup);
 
+let testRenderer = {} as RenderResult;
+
+beforeEach(async () => {
+  const { result, wrapper } = await renderFromAlien(Footer);
+  const FooterComponent = result.current;
+
+  testRenderer = render(FooterComponent, { wrapper });
+});
+
 describe('Footer test', () => {
   it('should have only one social network', async () => {
-    let testRenderer = {} as RenderResult;
-    await act(async () => {
-      testRenderer = renderWithRedux(<Footer />);
-    });
     const { getByTestId } = testRenderer;
     const social = getByTestId('social');
     expect(social.children.length).toBe(1);
   });
 
   it('should copyright text properly', async () => {
-    let testRenderer = {} as RenderResult;
-
-    await act(async () => {
-      testRenderer = renderWithRedux(<Footer />);
-    });
     const { getByTestId } = testRenderer;
     const copyright = getByTestId('copyright');
-    expect(copyright.textContent).toBe('Copyright © 2019. All Rights Reserved');
+    expect(copyright.textContent).toBe('Copyright © 2020. All Rights Reserved');
   });
 });
