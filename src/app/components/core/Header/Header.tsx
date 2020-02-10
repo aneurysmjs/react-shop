@@ -9,4 +9,5 @@ const Header = (): ReactElement => (
     <UserMenu />
   </div>
 );
+
 export default Header;
