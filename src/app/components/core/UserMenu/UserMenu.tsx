@@ -1,16 +1,26 @@
-import React, { useState, ReactElement } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import Icon from '~/components/base/Icon';
 import useLazy from '~/hooks/useLazy';
 
-import { CartType } from '~/shared/types/CartType';
-import { getCart } from '~/store/modules/cart/selectors';
+import { State } from '~/store/State';
+import { AlienResult } from '~/store/config/alienStore/useAlien';
+import { Cart } from '~/store/modules/cart/types';
 
 import './UserMenu.scss';
 
-const UserMenu = (): ReactElement => {
+type PropsType = {
+  modules: Array<AlienResult<State>>;
+};
+
+const UserMenu: FunctionComponent<PropsType> = ({ modules }: PropsType) => {
   const [open, setOpen] = useState(false);
-  const cart: CartType = useSelector(getCart);
+  const [cartModule] = modules;
+
+  const { selectors } = cartModule;
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const cart = useSelector<State, Cart>(selectors!.getCart);
 
   const handleOpen = (): void => setOpen(!open);
 

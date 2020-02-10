@@ -1,16 +1,25 @@
-import React, { ReactElement } from 'react';
-
+import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-
-import { getFooter } from '~/store/modules/footer/selectors';
-import { FooterType } from '~/shared/types/FooterType';
 
 import Icon from '~/components/base/Icon';
 
+import { State } from '~/store/State';
+import { AlienResult } from '~/store/config/alienStore/useAlien';
+import { FooterState } from '~/store/modules/footer/types';
+
 import './Footer.scss';
 
-const Footer = (): ReactElement => {
-  const { social }: FooterType = useSelector(getFooter);
+type PropsType = {
+  modules: Array<AlienResult<State>>;
+};
+
+const Footer: FunctionComponent<PropsType> = ({ modules }: PropsType) => {
+  const [footerModule] = modules;
+
+  const { selectors } = footerModule;
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { social } = useSelector<State, FooterState>(selectors!.getFooter);
 
   return (
     <footer className="footer">
