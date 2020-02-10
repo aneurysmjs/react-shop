@@ -1,18 +1,21 @@
-import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { cleanup, render, RenderResult } from '@testing-library/react';
 
-import renderWithRedux from '~/shared/utils/testing/renderWithRedux';
+import renderFromAlien from '~/shared/utils/testing/renderFromAlien';
+import Home from './index';
 
-import Home from './Home';
+afterEach(cleanup);
+
+let testRenderer = {} as RenderResult;
+
+beforeEach(async () => {
+  const { result, wrapper } = await renderFromAlien(Home);
+  const HomeComponent = result.current;
+
+  testRenderer = render(HomeComponent, { wrapper });
+});
 
 describe.skip('Home', () => {
   it('should display products', async () => {
-    let testRenderer = {};
-
-    await act(async () => {
-      testRenderer = renderWithRedux(<Home />);
-    });
-
     const { queryAllByTestId } = testRenderer;
     const productCards = queryAllByTestId('product-card-item');
 
