@@ -18,7 +18,8 @@ export interface ReduxModule<S = {}> {
   };
 }
 
-export type AlienResult<S> = Omit<ReduxModule<S>, 'reducers'>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AlienResult<S = any> = Omit<ReduxModule<S>, 'reducers'>;
 
 export interface AlienModule<T = {}> {
   initialActions?: Array<string>;
