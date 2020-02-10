@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -23,12 +22,12 @@ function Navigation(): ReactElement {
         <ul className="navbar-nav mr-auto">
           {links.length
             ? links.map(({ path, name, id }) => (
-              <li key={id} className="nav-item">
-                <NavLink to={`/${path}`} key={id} activeClassName="active" className="nav-link">
-                  {name}
-                </NavLink>
-              </li>
-            ))
+                <li key={id} className="nav-item">
+                  <NavLink to={`/${path}`} key={id} activeClassName="active" className="nav-link">
+                    {name}
+                  </NavLink>
+                </li>
+              ))
             : null}
         </ul>
       </div>
