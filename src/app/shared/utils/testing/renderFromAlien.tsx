@@ -1,12 +1,10 @@
-import { RenderResult } from '@testing-library/react';
 import { renderHook, RenderHookResult } from '@testing-library/react-hooks';
 import { ReactElement } from 'react';
 import { act } from 'react-test-renderer';
-import { Store } from 'redux';
-
 import alien, { AlienStore } from '~/store/config/alienStore/alien';
 import { withProvider, WrapperType } from '~/store/config/alienStore/helpers/withProvider';
 import { State } from '~/store/State';
+
 
 const store = alien<State>();
 
