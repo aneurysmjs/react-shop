@@ -1,15 +1,14 @@
-import { renderHook, RenderHookResult } from '@testing-library/react-hooks';
+import { renderHook, RenderHookResult, act } from '@testing-library/react-hooks';
 import { ReactElement } from 'react';
-import { act } from 'react-test-renderer';
 import alien, { AlienStore } from '~/store/config/alienStore/alien';
 import { withProvider, WrapperType } from '~/store/config/alienStore/helpers/withProvider';
 import { State } from '~/store/State';
-
 
 const store = alien<State>();
 
 const wrapper = withProvider(store);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface RenderFromAlienResult extends RenderHookResult<any, ReactElement> {
   store: AlienStore;
   wrapper: WrapperType;
@@ -18,6 +17,7 @@ export interface RenderFromAlienResult extends RenderHookResult<any, ReactElemen
 export default async function renderWithAlien(
   Ui: () => ReactElement,
 ): Promise<RenderFromAlienResult> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let hookResult = {} as RenderHookResult<any, ReactElement>;
 
   await act(async () => {
