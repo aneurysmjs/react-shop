@@ -1,3 +1,5 @@
+import { FOOTER_DATA } from '~/store/modules/footer/types/actionTypes';
+
 import footer from './footer';
 
 describe('footer reducer', () => {
@@ -14,8 +16,7 @@ describe('footer reducer', () => {
   };
 
   it('should return initial state', () => {
-    // eslint-disable-next-line no-unused-vars
-    const initialState = footer(undefined, { type: '', payload: { social } });
+    const initialState = footer(undefined, { type: FOOTER_DATA, payload: { social } });
 
     expect(initialState).toStrictEqual(expectedState);
   });

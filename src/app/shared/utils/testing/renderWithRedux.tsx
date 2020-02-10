@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactElement, Component } from 'react';
 import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
 
 import { render, RenderResult } from '@testing-library/react';
-import { State } from '~/shared/types/State';
+import { State } from '~/store/State';
 
 import reducer from '~/store/reducers';
 
@@ -17,7 +17,7 @@ export interface RenderWithRedux extends RenderResult {
 }
 
 export default function renderWithRedux(
-  ui: React.ReactElement | React.Component,
+  ui: ReactElement | Component,
   { initialState, store = createStore(reducer, initialState) }: WithReduxConfig = {},
 ): RenderWithRedux {
   return {

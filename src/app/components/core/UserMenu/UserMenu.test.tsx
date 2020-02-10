@@ -1,22 +1,22 @@
-import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import renderFromAlien from '~/shared/utils/testing/renderFromAlien';
 
-import { fireEvent } from '@testing-library/react';
+import UserMenu from './index';
 
-import renderWithRedux, { RenderWithRedux } from '~/shared/utils/testing/renderWithRedux';
+let testRenderer = {} as RenderResult;
 
-import UserMenu from './UserMenu';
+beforeEach(async () => {
+  const { result, wrapper } = await renderFromAlien(UserMenu);
+  const UserMenuComponent = result.current;
+
+  testRenderer = render(UserMenuComponent, { wrapper });
+});
 
 describe('UserMenu', () => {
   it('should toggle <Sidebar /> when clicking icon', async () => {
-    let testRenderer = {} as RenderWithRedux;
-
-    await act(async () => {
-      testRenderer = renderWithRedux(<UserMenu />);
-    });
-
     const { queryByRole, queryByTestId } = testRenderer;
     const button = queryByRole('button') as HTMLButtonElement;
+
     const sidebar = queryByTestId('sidebar');
 
     expect(sidebar).toBe(null);
@@ -40,12 +40,6 @@ describe('UserMenu', () => {
 
   // eslint-disable-next-line prettier/prettier
   it('should display cart\'s quantity', async () => {
-    let testRenderer = {} as RenderWithRedux;
-
-    await act(async () => {
-      testRenderer = renderWithRedux(<UserMenu />);
-    });
-
     const { queryByRole } = testRenderer;
     const button = queryByRole('button') as HTMLButtonElement;
 

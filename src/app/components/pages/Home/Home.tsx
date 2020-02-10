@@ -1,24 +1,34 @@
-/* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { AlienResult } from '~/store/config/alienStore/useAlien';
+import { State } from '~/store/State';
 
 import Spinner from '~/components/base/Spinner';
 import ProductCard from '~/components/common/ProductCard';
 
-import { fetchProducts } from '~/store/modules/products/actions';
-import { getProducts } from '~/store/modules/products/selectors';
-
-import { ProductsType } from '~/store/modules/products/types';
+import { ProductsState } from '~/store/modules/products/types';
 
 import './Home.scss';
 
-const Home = (): React.ReactElement => {
+type PropsType = {
+  modules: Array<AlienResult<State>>;
+};
+
+const Home = ({ modules }: PropsType): ReactElement => {
   const dispatch = useDispatch();
-  const { isLoading, products, error }: ProductsType = useSelector(getProducts);
+  const [productsModule] = modules;
+
+  const { actions, selectors } = productsModule;
+
+  const { isLoading, products, error } = useSelector<State, ProductsState>(
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    selectors!.getProducts,
+  );
 
   useEffect(() => {
-    dispatch(fetchProducts(`/products`));
-  }, [dispatch]);
+    dispatch(actions.fetchProducts(`/products`));
+  }, [dispatch, actions]);
 
   return (
     <div className="home">
@@ -32,15 +42,15 @@ const Home = (): React.ReactElement => {
         ) : null}
         {!isLoading
           ? products.map(product => (
-            <div
-              // eslint-disable-next-line no-underscore-dangle
-              key={product._id}
-              className="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"
-              data-testid="product-card-item"
-            >
-              <ProductCard width="100%" product={product} />
-            </div>
-          ))
+              <div
+                // eslint-disable-next-line no-underscore-dangle
+                key={product._id}
+                className="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"
+                data-testid="product-card-item"
+              >
+                <ProductCard width="100%" product={product} />
+              </div>
+            ))
           : null}
       </div>
     </div>

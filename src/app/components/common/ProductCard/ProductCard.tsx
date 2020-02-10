@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react';
 
 import ImgLoader from '~/components/common/ImgLoader';
 
-import { ProductType } from '~/store/modules/products/types';
+import { Product } from '~/store/modules/products/types';
 
 import './ProductCard.scss';
 
 type PropsType = {
-  product: ProductType;
+  product: Product;
   hasOverlay: boolean;
   hasHover: boolean;
   width: string;

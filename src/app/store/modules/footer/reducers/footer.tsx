@@ -1,12 +1,12 @@
-import { FooterType, FooterActionType } from '~/shared/types/FooterType';
+import { FooterState, FooterAction } from '~/store/modules/footer/types';
 
-import { FOOTER_DATA } from '~/store/ActionTypes';
+import { FOOTER_DATA } from '~/store/modules/footer/types/actionTypes';
 
 const initialState = {
   social: [{ id: '0', icon: 'instagram', link: 'https://instagram.com' }],
 };
 
-function footerReducer(state: FooterType = initialState, action: FooterActionType): FooterType {
+function footerReducer(state: FooterState = initialState, action: FooterAction): FooterState {
   switch (action.type) {
     case FOOTER_DATA: {
       return {
