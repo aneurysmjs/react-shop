@@ -2,36 +2,34 @@ import api from '~/api';
 
 import { ASYNC_ACTION_TYPE } from '~/constants';
 
+import makeActionCreator from '~/store/helpers/makeActionCreator';
 import { ApiMetaType } from '~/shared/types/MiddlewareTypes';
-import { ActionCreator } from '~/shared/types/CommonType';
-
-import { FetchProductAction, ProductPayload } from '~/store/modules/products/types';
 
 import {
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  GET_PRODUCTS_FAILURE,
-} from '~/store/modules/products/types/actionTypes';
+  ProductsActionTypes,
+  ProductPayloadType,
+  ProductActionType,
+} from '~/store/modules/products/types';
 
 import { getProducts } from '~/store/modules/products/selectors';
 
-const fetchProductsAction: ActionCreator<ProductPayload, ApiMetaType> = (payload, meta) => {
-  return {
-    type: ASYNC_ACTION_TYPE,
-    payload,
-    meta,
-  };
-};
+const actionCreator = makeActionCreator(ASYNC_ACTION_TYPE);
 
-export default function fetchProducts(query: string): FetchProductAction {
+export default function fetchProducts(query = ''): ProductActionType {
   const productMeta: ApiMetaType = {
-    types: [GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE],
+    types: [
+      ProductsActionTypes.GetProductsRequest,
+      ProductsActionTypes.GetProductsSuccess,
+      ProductsActionTypes.GetProductsFailure,
+    ],
     callAPI: () => api.get(query),
     shouldCallAPI: state => {
-      const { products } = getProducts(state);
-      return products.length === 0;
+      const products = getProducts(state);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      return !products.length; // <- это не должно орать
     },
   };
 
-  return fetchProductsAction({} as ProductPayload, productMeta);
+  return actionCreator<ProductPayloadType, ApiMetaType>({} as ProductPayloadType, productMeta);
 }

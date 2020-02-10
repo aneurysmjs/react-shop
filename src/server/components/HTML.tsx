@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
-import { State } from '~/store/State';
+import { State } from '~/shared/types/State';
 
 type PropsT = {
   children: JSX.Element | Array<JSX.Element> | string;

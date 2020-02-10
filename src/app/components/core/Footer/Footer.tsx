@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { useSelector } from 'react-redux';
 
@@ -9,7 +9,7 @@ import Icon from '~/components/base/Icon';
 
 import './Footer.scss';
 
-const Footer = (): ReactElement => {
+const Footer = (): React.ReactElement => {
   const { social }: FooterType = useSelector(getFooter);
 
   return (

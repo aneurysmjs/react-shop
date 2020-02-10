@@ -1,0 +1,5 @@
+export const SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT';
+
+export const FOOTER_DATA = 'FOOTER_DATA';
+
+export const CART_DATA = 'CART_DATA';

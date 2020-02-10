@@ -1,8 +1,9 @@
 /* eslint-disable */
 
-import { Middleware, AnyAction } from 'redux';
+import { Middleware } from 'redux';
 
-import { State } from '~/store/State';
+import { State } from '~/shared/types/State';
+import { Actions } from '~/shared/types/Actions';
 
 /* eslint-disable no-console */
 /**
@@ -14,7 +15,7 @@ import { State } from '~/store/State';
  * @return {Function}
  */
 // eslint-disable-next-line arrow-body-style
-const logger: Middleware<State, AnyAction> = (store) => {
+const logger: Middleware<State, Actions> = (store) => {
   /**
    * Rather than take the next middleware from the store, we'll
    * make it injectable as an argument, so the function that calls

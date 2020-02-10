@@ -13,7 +13,7 @@ module.exports = {
     '<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs,ts,tsx}',
     '<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs,ts,tsx}',
   ],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   testURL: 'http://localhost',
   modulePaths: ['src'],
   moduleNameMapper: {

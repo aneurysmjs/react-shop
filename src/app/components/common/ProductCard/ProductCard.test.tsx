@@ -3,12 +3,12 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 
 import ProductCard from './ProductCard';
-import { Product } from '~/store/modules/products/types';
+import { ProductType } from '~/store/modules/products/types';
 
 afterEach(cleanup);
 
 describe('ProductCard', () => {
-  const product: Product = {
+  const product: ProductType = {
     _id: '5cc2def690118411e1311e92',
     name: 'Nike Air Jordan',
     image:

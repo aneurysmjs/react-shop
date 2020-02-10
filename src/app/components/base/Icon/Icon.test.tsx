@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
-import { act } from 'react-test-renderer';
+import { act } from 'react-dom/test-utils';
 import { render, cleanup, RenderResult } from '@testing-library/react';
 
 import Icon from './Icon';

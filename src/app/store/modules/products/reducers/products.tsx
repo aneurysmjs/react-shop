@@ -1,12 +1,8 @@
-import { Reducer } from 'redux';
-
 import {
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  GET_PRODUCTS_FAILURE,
-} from '~/store/modules/products/types/actionTypes';
-
-import { ProductsState, FetchProductAction } from '~/store/modules/products/types';
+  ProductsActionTypes,
+  ProductsStateType,
+  ProductActionType,
+} from '~/store/modules/products/types';
 
 const initialState = {
   error: null,
@@ -14,18 +10,18 @@ const initialState = {
   products: [],
 };
 
-const productsReducer: Reducer<ProductsState, FetchProductAction> = (
-  state = initialState,
-  action,
-) => {
+function productsReducer(
+  state: ProductsStateType = initialState,
+  action: ProductActionType,
+): ProductsStateType {
   switch (action.type) {
-    case GET_PRODUCTS_REQUEST: {
+    case ProductsActionTypes.GetProductsRequest: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case GET_PRODUCTS_SUCCESS: {
+    case ProductsActionTypes.GetProductsSuccess: {
       const {
         payload: {
           response: { data },
@@ -37,7 +33,7 @@ const productsReducer: Reducer<ProductsState, FetchProductAction> = (
         products: [...data],
       };
     }
-    case GET_PRODUCTS_FAILURE: {
+    case ProductsActionTypes.GetProductsFailure: {
       const {
         payload: { error },
       } = action;
@@ -50,6 +46,6 @@ const productsReducer: Reducer<ProductsState, FetchProductAction> = (
     default:
       return state;
   }
-};
+}
 
 export default productsReducer;

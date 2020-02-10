@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import products from './products';
 
-import {
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  GET_PRODUCTS_FAILURE,
-} from '~/store/modules/products/types/actionTypes';
+import { ProductsActionTypes } from '~/store/modules/products/types';
 
 const productsData = [
   {
@@ -32,7 +28,7 @@ describe('products reducer', () => {
 
   it('should display loading indicator', () => {
     const successAction = {
-      type: GET_PRODUCTS_REQUEST,
+      type: ProductsActionTypes.GetProductsRequest,
       isLoading: true,
     };
     // @ts-ignore - only for testing purposes
@@ -41,7 +37,7 @@ describe('products reducer', () => {
 
   it('should return products', () => {
     const successAction = {
-      type: GET_PRODUCTS_SUCCESS,
+      type: ProductsActionTypes.GetProductsSuccess,
       payload: { response },
       error: null,
     };
@@ -51,7 +47,7 @@ describe('products reducer', () => {
 
   it('should return error', () => {
     const errorAction = {
-      type: GET_PRODUCTS_FAILURE,
+      type: ProductsActionTypes.GetProductsFailure,
       payload: { error },
     };
     // @ts-ignore - only for testing purposes

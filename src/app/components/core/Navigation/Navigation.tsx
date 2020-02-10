@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 type Links = Array<{
@@ -10,7 +10,7 @@ type Links = Array<{
 
 const links: Links = [];
 
-function Navigation(): ReactElement {
+function Navigation(): React.ReactElement {
   return (
     <nav className="navbar navbar-expand-lg">
       <NavLink to="/" className="navbar-brand">

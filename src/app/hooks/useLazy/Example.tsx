@@ -1,5 +1,5 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-const Example = (): ReactElement => <div> Some Component </div>;
+const Example = () => <div> Some Component </div>;
 
 export default Example;

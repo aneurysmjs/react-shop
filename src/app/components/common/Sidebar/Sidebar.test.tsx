@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { act } from 'react-test-renderer';
+import { act } from 'react-dom/test-utils';
 import { render, cleanup, fireEvent, RenderResult } from '@testing-library/react';
 
 import Sidebar from './Sidebar';

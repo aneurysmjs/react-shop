@@ -1,6 +1,4 @@
-import { Action } from '~/shared/types/CommonType';
-
-import { FOOTER_DATA } from './actionTypes';
+import { ActionType } from '~/shared/types/CommonType';
 
 type FooterContact = {
   phone: string;
@@ -11,12 +9,10 @@ type FooterSocial = { id: string; icon: string; link: string };
 
 type FooterColumn = { id: string; text: string; link: string };
 
-export type FooterState = {
+export type FooterType = {
   contact?: FooterContact;
   social?: Array<FooterSocial>;
   columns?: Array<FooterColumn>;
 };
 
-export interface FooterAction extends Action<FooterState> {
-  type: typeof FOOTER_DATA;
-}
+export type FooterActionType = ActionType<FooterType>;

@@ -1,8 +1,6 @@
 import axiosMock from 'axios';
 import configureMockStore from 'redux-mock-store';
 
-import { ApiMetaType } from '~/shared/types/MiddlewareTypes';
-
 import apiMiddleware from '~/store/config/middlewares/apiMiddleware';
 
 import fetchProducts from './fetchProducts';
@@ -41,10 +39,9 @@ const error = { message: 'Request failed with status code 404' };
 
 const mockStore = configureMockStore([apiMiddleware]);
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const makeStore = (initialState = []) =>
-  mockStore(() => ({ products: { products: initialState } }));
+const makeStore = (initialState = []) => mockStore(() => ({ products: initialState }));
 
-let action = { meta: {} as ApiMetaType };
+let action = { meta: {} };
 
 beforeEach(() => {
   axiosMock.mockRestore();

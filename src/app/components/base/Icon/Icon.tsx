@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FunctionComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './Icon.scss';
 
@@ -8,14 +8,13 @@ type PropsType = {
   size: number | string;
 };
 
-const Icon: FunctionComponent<PropsType> = ({ path, size }: PropsType) => {
+const Icon = ({ path, size }: PropsType): JSX.Element => {
   const [iconPath, setIconPath] = useState('');
 
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        // eslint-disable-next-line prettier/prettier
-        const icon = await import(/* webpackChunkName: "ShopIcon" */ '~/assets/svg/' + path + '.svg'); // eslint-disable-line prefer-template
+        const icon = await import('~/assets/svg/' + path + '.svg'); // eslint-disable-line prefer-template
         setIconPath(icon.default);
         // eslint-disable-next-line no-empty
       } catch (err) {}

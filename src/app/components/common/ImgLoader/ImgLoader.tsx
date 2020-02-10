@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, ReactElement } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import Spinner from '~/components/base/Spinner';
 
@@ -11,7 +11,7 @@ type PropsType = {
   onError?: (error: string | Event) => void;
 };
 
-function ImgLoader({ src, onError }: PropsType): ReactElement {
+function ImgLoader({ src, onError }: PropsType): React.ReactElement {
   const [imgObj, setImg] = useState({ img: '', isLoading: true });
 
   const image = new Image();

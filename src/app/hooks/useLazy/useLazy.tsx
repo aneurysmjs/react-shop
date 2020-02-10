@@ -1,12 +1,12 @@
-import { useState, useEffect, ReactElement } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * @link https://stackoverflow.com/questions/52112948/whats-the-return-type-of-a-dynamic-import
  */
-type DynamicImport = () => Promise<{ default: () => ReactElement }>;
+type DynamicImport = () => Promise<{ default: () => React.ReactElement }>;
 
-const useLazy = (getModule: DynamicImport, cond = false): (() => ReactElement) | null => {
-  const [AsyncModule, setAsyncModule] = useState<(() => ReactElement) | null>(null);
+const useLazy = (getModule: DynamicImport, cond = false): (() => React.ReactElement) | null => {
+  const [AsyncModule, setAsyncModule] = useState<(() => React.ReactElement) | null>(null);
 
   useEffect(() => {
     (async (): Promise<void> => {

@@ -4,9 +4,9 @@ const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   if (module.hot) {
-    module.hot.accept('~/store/config/alienStore', () =>
+    module.hot.accept('store/reducers', () =>
       // eslint-disable-next-line implicit-arrow-linebreak, global-require
-      require('~/store/config/alienStore').default.reloadStore(),
+      store.replaceReducer(require('~/store/reducers').default),
     );
   }
 }

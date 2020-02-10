@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
-import { cleanup, render, RenderResult, act } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import { cleanup, render, RenderResult } from '@testing-library/react';
 
 import ImgLoader from './ImgLoader';
 
