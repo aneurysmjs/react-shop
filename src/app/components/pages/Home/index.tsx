@@ -8,5 +8,5 @@ type ProductsModules = Promise<typeof import('~/store/modules/products/products.
 export default (): ReactElement =>
   withAlien(HomeComponent, [
     (): ProductsModules =>
-      import(/* webpackChunkName: "ReduxModule" */ '~/store/modules/footer/footer.module'),
+      import(/* webpackChunkName: "ReduxModule" */ '~/store/modules/products/products.module'),
   ]);
