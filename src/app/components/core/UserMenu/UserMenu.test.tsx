@@ -1,40 +1,38 @@
-import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import { act, fireEvent, render, RenderResult, cleanup } from '@testing-library/react';
 import renderFromAlien from '~/shared/utils/testing/renderFromAlien';
 
 import UserMenu from './index';
 
 let testRenderer = {} as RenderResult;
 
+// automatically unmount and cleanup DOM after the test is finished.
+// afterEach(cleanup);
+
 beforeEach(async () => {
   const { result, wrapper } = await renderFromAlien(UserMenu);
   const UserMenuComponent = result.current;
 
-  testRenderer = render(UserMenuComponent, { wrapper });
+  // testRenderer = render(UserMenuComponent, { wrapper });
+  await act(async () => {
+    testRenderer = render(UserMenuComponent, { wrapper });
+  });
 });
 
 describe('UserMenu', () => {
   it('should toggle <Sidebar /> when clicking icon', async () => {
     const { queryByRole, queryByTestId } = testRenderer;
     const button = queryByRole('button') as HTMLButtonElement;
-
     const sidebar = queryByTestId('sidebar');
-
     expect(sidebar).toBe(null);
-
     await act(async () => {
       fireEvent.click(button);
     });
-
     const sidebarOpened = queryByTestId('sidebar');
-
     expect(sidebarOpened).not.toBe(null);
-
     await act(async () => {
       fireEvent.click(button);
     });
-
     const sidebarClosed = queryByTestId('sidebar');
-
     expect(sidebarClosed).toBe(null);
   });
 
