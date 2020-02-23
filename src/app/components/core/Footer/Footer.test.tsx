@@ -1,4 +1,4 @@
-import { cleanup, render, RenderResult } from '@testing-library/react';
+import { cleanup, render, RenderResult, act } from '@testing-library/react';
 
 import renderFromAlien from '~/shared/utils/testing/renderFromAlien';
 import Footer from './index';
@@ -11,7 +11,9 @@ beforeEach(async () => {
   const { result, wrapper } = await renderFromAlien(Footer);
   const FooterComponent = result.current;
 
-  testRenderer = render(FooterComponent, { wrapper });
+  await act(async () => {
+    testRenderer = render(FooterComponent, { wrapper });
+  });
 });
 
 describe('Footer test', () => {
