@@ -50,7 +50,7 @@ describe('api middleware', () => {
     });
 
     describe('handle action', () => {
-      it('should call next when is a \'normal\' action', () => {
+      it("should call next when is a 'normal' action", () => {
         const actionObj = {
           callAPI: () => {},
         };
@@ -62,7 +62,7 @@ describe('api middleware', () => {
         expect(dispatch.mock.calls[0][0]).toMatchObject(actionObj);
       });
 
-      it('should throw when \'types\' property is not correct', () => {
+      it("should throw when 'types' property is not correct", () => {
         const actionObj = {
           meta: {
             types: [],
@@ -77,7 +77,7 @@ describe('api middleware', () => {
         }).toThrowError('Expected an array of three string types.');
       });
 
-      it('should throw when there\'s no \'callAPI\' property', () => {
+      it("should throw when there's no 'callAPI' property", () => {
         const actionObj = {
           meta: {
             types: requestTypes,
@@ -91,7 +91,7 @@ describe('api middleware', () => {
         }).toThrowError('Expected callAPI to be a function.');
       });
 
-      it('should \'success\' the API call', async () => {
+      it("should 'success' the API call", async () => {
         axiosMock.get.mockReturnValue(Promise.resolve(response));
         const actionObj = {
           meta: {
@@ -110,10 +110,13 @@ describe('api middleware', () => {
         // check that was called with the right endpoint
         expect(axiosMock.get).toHaveBeenCalledWith('someApiEndpoint');
         // The first argument of the second call is a SUCCESS
-        expect(store.dispatch.mock.calls[1][0]).toMatchObject({ type: SUCCESS, payload: { response } });
+        expect(store.dispatch.mock.calls[1][0]).toMatchObject({
+          type: SUCCESS,
+          payload: { response },
+        });
       });
 
-      it('should \'fail\' the API call', async () => {
+      it("should 'fail' the API call", async () => {
         axiosMock.get.mockReturnValue(Promise.reject(error));
         const actionObj = {
           meta: {
@@ -133,7 +136,10 @@ describe('api middleware', () => {
         expect(axiosMock.get).toHaveBeenCalledWith('someBadApiEndpoint');
         // The first argument of the second call is a FAILURE
         // eslint-disable-next-line max-len
-        expect(store.dispatch.mock.calls[1][0]).toMatchObject({ type: FAILURE, payload: { error } });
+        expect(store.dispatch.mock.calls[1][0]).toMatchObject({
+          type: FAILURE,
+          payload: { error },
+        });
       });
 
       it('should NOT call the API', async () => {

@@ -5,10 +5,10 @@ import './Icon.scss';
 type PropsType = {
   path: string;
   selected?: string;
-  size: number | string;
+  size?: number | string;
 };
 
-const Icon: FunctionComponent<PropsType> = ({ path, size }: PropsType) => {
+const Icon: FunctionComponent<PropsType> = ({ path, size = 16 }: PropsType) => {
   const [iconPath, setIconPath] = useState('');
 
   useEffect(() => {
@@ -33,10 +33,6 @@ const Icon: FunctionComponent<PropsType> = ({ path, size }: PropsType) => {
       src={iconPath}
     />
   );
-};
-
-Icon.defaultProps = {
-  size: 16,
 };
 
 export default Icon;

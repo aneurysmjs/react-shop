@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { act } from 'react-test-renderer';
-import { render, cleanup, fireEvent, RenderResult } from '@testing-library/react';
+import { render, cleanup, fireEvent, RenderResult, act } from '@testing-library/react';
 
 import Sidebar from './Sidebar';
 

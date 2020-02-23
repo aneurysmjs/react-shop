@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
-import { act } from 'react-test-renderer';
-import { render, cleanup, RenderResult } from '@testing-library/react';
+import { render, cleanup, RenderResult, act } from '@testing-library/react';
 
 import Icon from './Icon';
 
@@ -27,6 +26,6 @@ describe('Icon', () => {
 
     expect(img.style.height).toEqual(defaultSize);
     expect(img.style.width).toEqual(defaultSize);
-    expect(img.src).toEqual('');
+    expect(img.src).toEqual('http://localhost/cart.svg');
   });
 });
