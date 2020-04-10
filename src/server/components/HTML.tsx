@@ -36,7 +36,7 @@ export default class HTML extends Component<PropsT> {
           {head.meta.toComponent()}
           {head.link.toComponent()}
           {head.script.toComponent()}
-          {css.map(href => (
+          {css.map((href) => (
             <link key={href} rel="stylesheet" href={href} />
           ))}
         </head>
@@ -45,7 +45,7 @@ export default class HTML extends Component<PropsT> {
             * @link https://stackoverflow.com/a/40245490/5378393
             // @ts-ignore */}
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
-          {scripts.map(src => (
+          {scripts.map((src) => (
             <script key={src} src={src} />
           ))}
         </body>

@@ -41,7 +41,7 @@ const Home = ({ modules }: PropsType): ReactElement => {
           </span>
         ) : null}
         {!isLoading
-          ? products.map(product => (
+          ? products.map((product) => (
               <div
                 // eslint-disable-next-line no-underscore-dangle
                 key={product._id}

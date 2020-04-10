@@ -28,7 +28,7 @@ const Footer: FunctionComponent<PropsType> = ({ modules }: PropsType) => {
           <div className="row">
             <div className="col">
               <div data-testid="social">
-                {social && social.map(s => <Icon key={s.id} path={`social/${s.icon}`} />)}
+                {social && social.map((s) => <Icon key={s.id} path={`social/${s.icon}`} />)}
               </div>
             </div>
           </div>

@@ -17,7 +17,7 @@ const extractor = new ChunkExtractor({ statsFile, entrypoints: ['server'] });
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-const getAssets = fn => assets => assets.map(fn); // eslint-disable-line @typescript-eslint/explicit-function-return-type
+const getAssets = (fn) => (assets) => assets.map(fn); // eslint-disable-line @typescript-eslint/explicit-function-return-type
 
 interface Req extends Request {
   store: Store;

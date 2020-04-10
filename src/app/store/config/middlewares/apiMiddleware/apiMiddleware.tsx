@@ -3,7 +3,7 @@ import { AnyAction } from 'redux';
 import { ApiMiddlewareType, ApiMetaType } from '~/shared/types/MiddlewareTypes';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => next => action => {
+const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => (next) => (action) => {
   let meta = {} as ApiMetaType;
 
   if (action.meta) {
@@ -22,7 +22,7 @@ const apiMiddleware: ApiMiddlewareType = ({ dispatch, getState }) => next => act
   if (
     !Array.isArray(types) ||
     types.length !== 3 ||
-    !types.every(type => typeof type === 'string')
+    !types.every((type) => typeof type === 'string')
   ) {
     throw new Error('Expected an array of three string types.');
   }

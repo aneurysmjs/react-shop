@@ -4,15 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 // print a nicer stack trace by splitting line breaks and making them array items
 const printStackTrace = compose(
-  map((line: string) =>
-    line.replace(
-      process
-        .cwd()
-        .split(path.sep)
-        .join('/'),
-      '.',
-    ),
-  ),
+  map((line: string) => line.replace(process.cwd().split(path.sep).join('/'), '.')),
   map((line: string) => line.split(path.sep).join('/')),
   map((line: string) => line.trim()),
   split('\n'),

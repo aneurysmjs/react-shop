@@ -52,7 +52,7 @@ function useAlien<T>(
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        const promises = reduxImports.map(reduxImport => reduxImport());
+        const promises = reduxImports.map((reduxImport) => reduxImport());
 
         const reduxModules = await Promise.all(promises);
 
@@ -65,7 +65,7 @@ function useAlien<T>(
             throw new Error('Redux Module has no reducers');
           }
           // is safe here to iterate reducers's keys for reducer injection
-          Object.keys(reducers).forEach(key => {
+          Object.keys(reducers).forEach((key) => {
             injectReducers(key, reducers[key]);
           });
 

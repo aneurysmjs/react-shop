@@ -1,4 +1,4 @@
-import { act, fireEvent, render, RenderResult, cleanup } from '@testing-library/react';
+import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import renderFromAlien from '~/shared/utils/testing/renderFromAlien';
 
 import UserMenu from './index';
