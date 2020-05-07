@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { renderHook } from '@testing-library/react-hooks';
 import { Store } from 'redux';
+import path from 'path';
 
 import alien from './alien';
 
@@ -134,11 +135,20 @@ describe('useAlien', () => {
 
     await waitForNextUpdate();
 
+    /**
+     * taken from here @link https://stackoverflow.com/a/34696465/5378393
+     */
+    const relativePath = path.relative(process.cwd(), __dirname);
+
     expect(() => {
       expect(result.current).not.toBe(undefined);
     }).toThrow(
+      /**
+       * from Jest 26.0.0 - [jest-resolve] Show relative path from root dir for module not found errors (#9963)
+       * @link https://github.com/facebook/jest/pull/9963
+       */
       Error(
-        `useAlienModule Error: Cannot find module '${WRONG_COMPONENT_PATH}' from 'useAlien.test.tsx'`,
+        `useAlienModule Error: Cannot find module '${WRONG_COMPONENT_PATH}' from '${relativePath}/useAlien.test.tsx'`,
       ),
     );
   });
