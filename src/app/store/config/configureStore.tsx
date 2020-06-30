@@ -3,14 +3,14 @@ import { alien } from '~/store/config/alienStore';
 // import throttle from 'lodash.throttle';
 
 import enhancer from '~/store/config/enhancer';
+import { AlienStore } from './alienStore/alien';
 
 // import { saveState, loadState } from './storage';
 
 // Get the state from localStorage
 // const persistedState = loadState();
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function configureStore() {
+function configureStore(): AlienStore {
   const store = alien(undefined, enhancer);
   /* // Save the state any time the store state changes
   store.subscribe(throttle(() => {
