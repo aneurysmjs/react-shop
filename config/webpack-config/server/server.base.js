@@ -15,9 +15,15 @@ module.exports = {
   },
   externals: [
     nodeExternals({
-      // we still want imported css from external files to be bundled otherwise 3rd party packages
-      // which require us to include their own css would not work properly
-      whitelist: /\.css$/,
+      /**
+       * we still want imported css from external files to be bundled otherwise 3rd party packages
+       * which require us to include their own css would not work properly
+       * 
+       * `whitelist` is now `allowlist`
+       * @see https://github.com/nestjs/nest/issues/5068
+       * it fixes: Error: [webpack-node-externals] : Option 'whitelist' is not supported. Did you mean 'allowlist'?
+       */
+      allowlist: /\.css$/,
     }),
   ],
   output: {
