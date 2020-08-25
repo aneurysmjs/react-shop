@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
 import { render, cleanup, RenderResult, act } from '@testing-library/react';
 
@@ -14,8 +13,7 @@ describe('Icon', () => {
     let testRenderer = {} as RenderResult;
     const iconPath = 'icons/cart';
     const host = 'http://localhost';
-    // @ts-ignore
-    const fullPath = `${host}/cart.svg`; // eslint-disable-line @typescript-eslint/no-unused-vars
+    const fullPath = `${host}/cart.svg`;
 
     await act(async () => {
       testRenderer = render(<Icon path={iconPath} />);
@@ -26,6 +24,6 @@ describe('Icon', () => {
 
     expect(img.style.height).toEqual(defaultSize);
     expect(img.style.width).toEqual(defaultSize);
-    expect(img.src).toEqual('http://localhost/cart.svg');
+    expect(img.src).toEqual(fullPath);
   });
 });
