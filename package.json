@@ -79,7 +79,7 @@
     "case-sensitive-paths-webpack-plugin": "2.3.0",
     "chalk": "4.1.0",
     "commitizen": "4.2.1",
-    "compression-webpack-plugin": "4.0.0",
+    "compression-webpack-plugin": "5.0.1",
     "cors": "2.8.5",
     "cross-env": "7.0.2",
     "css-hot-loader": "1.4.4",
