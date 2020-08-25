@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { AnyAction, combineReducers, Dispatch, Reducer } from 'redux';
 
 import { FullStoreShape, ReducerMapper } from './types/alienStore';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export interface AlienManager<R = {}> {
   getReducerMap: () => ReducerMapper<FullStoreShape<R>>;
   injectReducers: (key: string, reducer: Reducer) => Reducer | void;
@@ -18,11 +18,14 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
 
   type ReducerMap = ReducerMapper<StoreShape>;
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   const fallback = (): {} => ({});
 
   let dispatch: AlienDispatch = null;
 
   const reducerMap: ReducerMap = initialReducers ? { ...initialReducers } : {};
+  // TODO: fix this for proper typing and intellisense
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore "combineReducers" doesn't have that overload match
   let combinedReducer = initialReducers ? combineReducers(reducerMap) : fallback;
 
@@ -42,6 +45,8 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
     }
 
     reducerMap[key] = reducer;
+    // TODO: fix this for proper typing and intellisense
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore "combineReducers" doesn't have that overload match
     combinedReducer = combineReducers(reducerMap);
     if (dispatch) {
@@ -57,6 +62,8 @@ export default function manager<State>(initialReducers?: State): AlienManager<St
     delete reducerMap[key];
 
     keysToRemove.push(key);
+    // TODO: fix this for proper typing and intellisense
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore "combineReducers" doesn't have that overload match
     combinedReducer = combineReducers(reducerMap);
   }

@@ -5,6 +5,8 @@ import { isEmpty, isNil, anyPass } from 'ramda';
 
 import { AlienStore } from './alien';
 
+// TODO: fix this for proper typing and intellisense
+// eslint-disable-next-line @typescript-eslint/ban-types
 export interface ReduxModule<S = {}> {
   id: string;
   reducers: {
@@ -21,6 +23,8 @@ export interface ReduxModule<S = {}> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AlienResult<S = any> = Omit<ReduxModule<S>, 'reducers'>;
 
+// TODO: fix this for proper typing and intellisense
+// eslint-disable-next-line @typescript-eslint/ban-types
 export interface AlienModule<T = {}> {
   initialActions?: Array<string>;
 }

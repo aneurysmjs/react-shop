@@ -32,7 +32,8 @@ const UserMenu: FunctionComponent<PropsType> = ({ modules }: PropsType) => {
   return (
     <div className="user-menu">
       {Sidebar ? (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // TODO: fix typing for future releases
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         <Sidebar title="Cart" side="right" isOpen={open} onClose={handleOpen}>
           <p className="lead">You have nothing, let&apos;s shop!</p>
