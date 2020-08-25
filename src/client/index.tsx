@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import { createBrowserHistory } from 'history';
 import reactDOM from 'react-dom';
