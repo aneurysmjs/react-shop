@@ -21,8 +21,8 @@ declare namespace NodeJS {
 declare interface NodeModule {
   hot: {
     accept(
-      dependencies: Array<string> | string,
-      callback?: (updatedDependencies: Array<string | number>) => void,
+      dependencies?: Array<string> | string,
+      callback?: (updatedDependencies?: Array<string | number>) => void,
     ): void;
   };
 }
