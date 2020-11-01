@@ -33,7 +33,15 @@ const cssLoaderClient = {
     },
     {
       loader: require.resolve('postcss-loader'),
+      // options: {
+      //   sourceMap: generateSourceMap,
+      // },
       options: {
+        // @se https://github.com/webpack-contrib/postcss-loader#postcssoptions
+        // @see https://github.com/webpack-contrib/postcss-loader/blob/master/CHANGELOG.md#400-2020-09-07
+        postcssOptions: {
+          plugins: [require('autoprefixer'), require('precss')],
+        },
         sourceMap: generateSourceMap,
       },
     },
