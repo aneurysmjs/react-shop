@@ -111,6 +111,7 @@
     "nodemon": "2.0.4",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "plop": "2.7.4",
+    "postcss": "8.1.4",
     "postcss-assets": "5.0.0",
     "postcss-import": "13.0.0",
     "postcss-loader": "4.0.4",
