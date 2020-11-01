@@ -59,6 +59,11 @@
         "scss": "always"
       }
     ],
-    "@typescript-eslint/no-empty-function": "off"
+    "@typescript-eslint/no-empty-function": "off",
+    /**
+    * @see https://stackoverflow.com/a/64024916/5378393
+    */
+   "no-use-before-define": "off",
+   "@typescript-eslint/no-use-before-define": ["error"]
   }
 }
