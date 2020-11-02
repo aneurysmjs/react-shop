@@ -13,9 +13,12 @@ module.exports = {
   },
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
-    filename: 'bundle.js',
+    /**
+     * @see https://stackoverflow.com/a/42151143/5378393
+     */
+    filename: '[name].js',
     publicPath: paths.publicPath,
-    chunkFilename: '[name].[chunkhash:8].chunk.js',
+    chunkFilename: '[name].[fullhash].chunk.js',
   },
   module: {
     rules: clientLoaders,
@@ -23,19 +26,18 @@ module.exports = {
   resolve: { ...resolvers },
   plugins: [...plugins.shared, ...plugins.client],
 
-  // optimization: {
-  //   namedModules: true,
-  //   noEmitOnErrors: true,
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       commons: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: 'vendor',
-  //         chunks: 'all',
-  //       },
-  //     },
-  //   },
-  // },
+  optimization: {
+    emitOnErrors: false,
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   stats: {
     cached: false,
     cachedAssets: false,
