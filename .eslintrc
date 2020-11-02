@@ -39,12 +39,19 @@
     "sourceType": "module"  // Allows for the use of imports
   },
   "rules": {
+    
+    /**
+    * @see https://stackoverflow.com/a/64024916/5378393
+    */
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/explicit-function-return-type": ["error", {
       // "allowExpressions": true,
       "allowTypedFunctionExpressions": true
     }],
     "react/jsx-uses-vars": "error",
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "react/display-name": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/no-extraneous-dependencies": [
@@ -59,11 +66,7 @@
         "scss": "always"
       }
     ],
-    "@typescript-eslint/no-empty-function": "off",
-    /**
-    * @see https://stackoverflow.com/a/64024916/5378393
-    */
-   "no-use-before-define": "off",
-   "@typescript-eslint/no-use-before-define": ["error"]
+    
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }]
   }
 }
