@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const { withSSR } = require('../../scripts/utils');
 const paths = require('../paths');
@@ -34,7 +35,10 @@ const client = [
     filename: IS_DEV ? '[name].css' : '[name].[contenthash].css',
     chunkFilename: IS_DEV ? '[id].css' : '[id].[contenthash].css',
   }),
-  new ManifestPlugin({ fileName: 'manifest.json' }),
+  // new ManifestPlugin({ fileName: 'manifest.json' }),
+  new ESLintPlugin({
+    extensions: 'tsx',
+  }),
 ];
 
 if (!withSSR()) {

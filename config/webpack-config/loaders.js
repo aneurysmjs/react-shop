@@ -6,13 +6,6 @@ const generateSourceMap = process.env.OMIT_SOURCEMAP !== 'true';
 const jsRegex = /\.(js|mjs|jsx|ts|tsx)$/;
 const scssRegex = /\.(sa|sc|c)ss$/;
 
-const eslintLoader = {
-  enforce: 'pre',
-  test: /\.tsx?$/,
-  loader: 'eslint-loader',
-  exclude: /node_modules/,
-};
-
 const babelLoader = {
   test: jsRegex,
   exclude: /node_modules/,
@@ -106,13 +99,11 @@ const fileLoaderServer = {
 };
 
 const client = [
-  eslintLoader,
   {
     oneOf: [babelLoader, cssLoaderClient, urlLoaderClient, fileLoaderClient],
   },
 ];
 const server = [
-  eslintLoader,
   {
     oneOf: [babelLoader, cssLoaderServer, urlLoaderServer, fileLoaderServer],
   },
