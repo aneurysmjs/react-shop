@@ -22,26 +22,20 @@ module.exports = {
   },
   resolve: { ...resolvers },
   plugins: [...plugins.shared, ...plugins.client],
-  node: {
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty',
-  },
-  optimization: {
-    namedModules: true,
-    noEmitOnErrors: true,
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-        },
-      },
-    },
-  },
+
+  // optimization: {
+  //   namedModules: true,
+  //   noEmitOnErrors: true,
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: 'vendor',
+  //         chunks: 'all',
+  //       },
+  //     },
+  //   },
+  // },
   stats: {
     cached: false,
     cachedAssets: false,
