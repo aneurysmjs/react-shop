@@ -5,6 +5,7 @@ const { client: clientLoaders } = require('./../loaders');
 const resolvers = require('./../resolvers');
 const plugins = require('./../plugins');
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
   name: 'client',
   target: 'web',
