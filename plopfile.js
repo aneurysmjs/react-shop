@@ -15,20 +15,13 @@ module.exports = function plopFn(plop) {
         type: 'list',
         name: 'componentType',
         message: 'Choose component\'s type',
-        choices: [
-          'class',
-          'functional',
-        ]
+        choices: ['class', 'functional'],
       },
       {
         type: 'list',
         name: 'componentRole',
         message: 'Choose component\'s role',
-        choices: [
-          'base',
-          'core',
-          'shared'
-        ],
+        choices: ['base', 'core', 'shared'],
         default: 'shared',
       },
       {
@@ -64,5 +57,4 @@ module.exports = function plopFn(plop) {
       return actions;
     },
   });
-
 };
