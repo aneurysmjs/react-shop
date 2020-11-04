@@ -69,5 +69,14 @@
     ],
     
     "quotes": ["error", "single", { "allowTemplateLiterals": true }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**.test.ts", "**.test.tsx"],
+      "rules": {
+        // Allow testing runtime errors to suppress TS errors
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    }
+  ]
 }
