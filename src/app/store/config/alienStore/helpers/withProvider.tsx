@@ -11,6 +11,6 @@ export type WrapperType = ComponentType<WrapperProps>;
 type WithProviderType = (store: Store) => WrapperType;
 
 /* eslint-disable-next-line import/prefer-default-export, @typescript-eslint/explicit-function-return-type */
-export const withProvider: WithProviderType = (store) => ({ children }) => (
+export const withProvider: WithProviderType = (store) => ({ children }: WrapperProps) => (
   <Provider store={store}>{children}</Provider>
 );

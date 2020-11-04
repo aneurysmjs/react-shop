@@ -7,16 +7,16 @@ import { AlienStore } from './alien';
 
 // TODO: fix this for proper typing and intellisense
 // eslint-disable-next-line @typescript-eslint/ban-types
-export interface ReduxModule<S = {}> {
+export interface ReduxModule<R = {}> {
   id: string;
   reducers: {
-    [K: string]: Reducer<S>;
+    [K: string]: Reducer<R>;
   };
   actions: {
     [K: string]: ActionCreator<AnyAction>;
   };
   selectors?: {
-    [K: string]: <S, R>(state: S) => R;
+    [K: string]: <S, V>(state: S) => V;
   };
 }
 
@@ -25,7 +25,7 @@ export type AlienResult<S = any> = Omit<ReduxModule<S>, 'reducers'>;
 
 // TODO: fix this for proper typing and intellisense
 // eslint-disable-next-line @typescript-eslint/ban-types
-export interface AlienModule<T = {}> {
+export interface AlienModule {
   initialActions?: Array<string>;
 }
 
