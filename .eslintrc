@@ -29,6 +29,7 @@
       "version": "detect"
     },
     "import/resolver": {
+      "node": {},
       "webpack": {
         "config": "./config/webpack-config/index.js"
       }
