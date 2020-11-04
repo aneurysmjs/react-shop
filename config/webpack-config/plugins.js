@@ -35,9 +35,14 @@ const client = [
     filename: IS_DEV ? '[name].css' : '[name].[contenthash].css',
     chunkFilename: IS_DEV ? '[id].css' : '[id].[contenthash].css',
   }),
-  // new ManifestPlugin({ fileName: 'manifest.json' }),
+  /**
+   * webpack-manifest-plugin is not ready compatible with webpack 5
+   * @see https://github.com/shellscape/webpack-manifest-plugin/issues/222
+   */
+  // new ManifestPlugin(),
   new ESLintPlugin({
     extensions: 'tsx',
+    lintDirtyModulesOnly: true,
   }),
 ];
 
