@@ -10,16 +10,18 @@ const {
   findCompiler,
 } = require('./utils');
 
-const buildClient = async () => {
+(async () => {
   rimraf.sync(paths.clientBuild);
   rimraf.sync(paths.serverBuild);
 
   const [clientConfig] = webpackConfig;
   const webpackCompiler = webpack([clientConfig]);
+  /** @type {import('webpack').Compiler} */
   const clientCompiler = findCompiler(webpackCompiler)('client');
   const [clientPromise] = makeCompilerPromise([clientCompiler]);
 
   clientCompiler.watch({}, (error, stats) => {
+    console.log('!error && !stats.hasErrors()', !error && !stats.hasErrors());
     if (!error && !stats.hasErrors()) {
       // eslint-disable-next-line no-console
       console.log(stats.toString(clientConfig.stats));
@@ -37,6 +39,4 @@ const buildClient = async () => {
   } catch (error) {
     logMessage(error, 'error');
   }
-};
-
-buildClient();
+})();
