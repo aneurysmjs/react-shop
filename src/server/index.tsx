@@ -1,20 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import path from 'path';
 import chalk from 'chalk';
-// "express-manifest-helpers" has not compatible Flow version
 import manifestHelpers from 'express-manifest-helpers';
 import bodyParser from 'body-parser';
-
 import store from '~/store';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import paths from '../../config/paths'; // "paths" isn't been transpiled, so it can be ignored
 import serverRender from './middleware/serverRender';
 import errorHandler from './middleware/errorHandler';
-// "dotenv" has not compatible Flow version
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
 const app: Application = express();
@@ -23,7 +19,7 @@ const app: Application = express();
 // lines to use the express.static middleware to serve assets for production (not recommended!)
 if (process.env.NODE_ENV === 'development') {
   app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)));
-  app.use('/favicon.ico', (req: Request, res: Response): void => {
+  app.use('/favicon.ico', (_, res: Response): void => {
     res.send('');
   });
 }
@@ -32,7 +28,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, _, next: NextFunction) => {
   // "store" doesn't exists on express.Request, so we can just ignore it
   // @ts-ignore
   req.store = store;
@@ -46,8 +42,8 @@ app.use(
     manifestPath: `${manifestPath}/manifest.json`,
   }),
 );
-// @ts-ignore
-app.use(serverRender());
+
+app.use(serverRender);
 
 app.use(errorHandler);
 
