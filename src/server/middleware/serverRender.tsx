@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from 'react-router-dom';
@@ -7,7 +8,6 @@ import { ChunkExtractor } from '@loadable/server';
 import { Store } from 'redux';
 
 import App from '~/App';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import paths from '../../../config/paths';
 import Html from '../components/HTML';
@@ -15,7 +15,6 @@ import Html from '../components/HTML';
 const statsFile = `${paths.serverBuild}/loadable-stats.json`;
 const extractor = new ChunkExtractor({ statsFile, entrypoints: ['server'] });
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 const getAssets = (fn) => (assets) => assets.map(fn); // eslint-disable-line @typescript-eslint/explicit-function-return-type
 
