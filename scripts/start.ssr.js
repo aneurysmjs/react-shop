@@ -19,7 +19,7 @@ const app = express();
 const WEBPACK_PORT = process.env.WEBPACK_PORT
   || (!Number.isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) + 1 : 8501);
 
-const startSRR = async () => {
+(async () => {
   rimraf.sync(paths.clientBuild);
   rimraf.sync(paths.serverBuild);
 
@@ -29,8 +29,8 @@ const startSRR = async () => {
     ...clientConfig.entry.bundle,
   ];
 
-  clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
-  clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js';
+  clientConfig.output.hotUpdateMainFilename = 'updates/[fullhash].hot-update.json';
+  clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[fullhash].hot-update.js';
 
   const { publicPath } = clientConfig.output;
 
@@ -49,13 +49,21 @@ const startSRR = async () => {
   const [clientCompiler, serverCompiler] = COMPILER_NAMES.map(getCompiler);
   const [clientPromise, serverPromise] = makeCompilerPromise([clientCompiler, serverCompiler]);
 
-  const watchOptions = {
-    // poll: true,
-    ignored: /node_modules/,
-    stats: clientConfig.stats,
-  };
+  /**
+   * the `watchOptions` was removed, the default value of the watchOptions option is taken
+   * from the value of the watchOptions option from the configuration (webpack.config.js)
+   * 
+   * the `stats` option was removed, the default value of the stats option is taken
+   * from the value of the stats option from the configuration (webpack.config.js)
+   * 
+   * @see https://github.com/webpack/webpack-dev-middleware/blob/master/CHANGELOG.md#breaking-changes
+   */
+  // const watchOptions = {
+  //   ignored: /node_modules/,
+  //   stats: clientConfig.stats,
+  // };
 
-  app.use((req, res, next) => {
+  app.use((_, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     return next();
   });
@@ -63,8 +71,7 @@ const startSRR = async () => {
   app.use(
     webpackDevMiddleware(clientCompiler, {
       publicPath: clientConfig.output.publicPath,
-      stats: clientConfig.stats,
-      watchOptions,
+      writeToDisk: true
     }),
   );
 
@@ -121,6 +128,4 @@ const startSRR = async () => {
     logMessage('An error occured. Exiting', 'error');
     process.exit(1);
   });
-};
-
-startSRR();
+})();
