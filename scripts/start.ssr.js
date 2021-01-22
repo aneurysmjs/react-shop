@@ -58,10 +58,10 @@ const WEBPACK_PORT = process.env.WEBPACK_PORT
    * 
    * @see https://github.com/webpack/webpack-dev-middleware/blob/master/CHANGELOG.md#breaking-changes
    */
-  // const watchOptions = {
-  //   ignored: /node_modules/,
-  //   stats: clientConfig.stats,
-  // };
+  const watchOptions = {
+    ignored: /node_modules/,
+    stats: clientConfig.stats,
+  };
 
   app.use((_, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

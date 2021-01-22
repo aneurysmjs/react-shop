@@ -26,6 +26,6 @@ describe('Footer test', () => {
   it('should copyright text properly', async () => {
     const { getByTestId } = testRenderer;
     const copyright = getByTestId('copyright');
-    expect(copyright.textContent).toBe('Copyright © 2020. All Rights Reserved');
+    expect(copyright.textContent).toBe('Copyright © 2021. All Rights Reserved');
   });
 });
