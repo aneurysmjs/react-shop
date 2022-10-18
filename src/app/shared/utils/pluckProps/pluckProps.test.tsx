@@ -32,6 +32,7 @@ describe('pluckProps', () => {
   // eslint-disable-next-line prettier/prettier
   it('should return empty object if the given object doesn\'t match with properties to reflect', () => {
     const fn = pluckProps<Obj>('a', 'b');
+    // @ts-ignore
     const obj = fn({ c: 3, d: 4 });
     expect(obj).toEqual({});
   });
@@ -46,6 +47,7 @@ describe('pluckProps', () => {
   it('should throw if there\'s not object to reflect', () => {
     const fn = pluckProps<Obj>('a', 'b');
     expect(() => {
+      // @ts-ignore
       fn();
     }).toThrow();
   });

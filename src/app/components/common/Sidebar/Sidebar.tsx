@@ -31,6 +31,7 @@ const Sidebar = ({
     }
   };
 
+  // @ts-ignore
   const delay = (cb: () => void): NodeJS.Timeout => setTimeout(cb, 100);
 
   const closeSidebar = (): void => {

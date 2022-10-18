@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { FunctionComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 type Links = Array<{
@@ -9,7 +9,7 @@ type Links = Array<{
 
 const links: Links = [];
 
-function Navigation(): ReactElement {
+const Navigation: FunctionComponent = () => {
   return (
     <nav className="navbar navbar-expand-lg">
       <NavLink to="/" className="navbar-brand">
@@ -23,7 +23,7 @@ function Navigation(): ReactElement {
           {links.length
             ? links.map(({ path, name, id }) => (
                 <li key={id} className="nav-item">
-                  <NavLink to={`/${path}`} key={id} activeClassName="active" className="nav-link">
+                  <NavLink to={`/${path}`} key={id} className="nav-link">
                     {name}
                   </NavLink>
                 </li>
@@ -33,6 +33,6 @@ function Navigation(): ReactElement {
       </div>
     </nav>
   );
-}
+};
 
 export default Navigation;

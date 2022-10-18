@@ -1,9 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { FunctionComponent } from 'react';
 
-import Routing from '~/components/routing';
+// import Routing from '~/components/routing';
 
 import './assets/scss/styles.scss';
 
-const App = (): ReactElement => <Routing />;
+const App: FunctionComponent = () => <div>HeLLO</div>;
 
 export default App;

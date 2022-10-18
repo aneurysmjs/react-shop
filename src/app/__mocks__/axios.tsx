@@ -4,6 +4,7 @@
 const axiosMock = jest.genMockFromModule('axios');
 
 // this is the key to fix the axios.create() undefined error!
+// @ts-ignore
 axiosMock.create = jest.fn(() => axiosMock);
 
 export default axiosMock;

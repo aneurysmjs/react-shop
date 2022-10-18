@@ -46,6 +46,7 @@ describe('ImgLoader', () => {
     const onError = jest.fn();
 
     act(() => {
+      // @ts-ignore
       testRenderer = render(<ImgLoader onError={onError} />);
     });
 

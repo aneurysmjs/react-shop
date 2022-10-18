@@ -3,9 +3,9 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
 import chalk from 'chalk';
+// @ts-ignore
 import manifestHelpers from 'express-manifest-helpers';
 import bodyParser from 'body-parser';
-import store from '~/store';
 // @ts-ignore
 import paths from '../../config/paths'; // "paths" isn't been transpiled, so it can be ignored
 import serverRender from './middleware/serverRender';
@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use((req: Request, _, next: NextFunction) => {
   // "store" doesn't exists on express.Request, so we can just ignore it
   // @ts-ignore
-  req.store = store;
+  // req.store = store;
   return next();
 });
 

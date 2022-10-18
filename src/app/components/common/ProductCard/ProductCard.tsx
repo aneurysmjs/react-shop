@@ -1,19 +1,17 @@
-import React, { ReactElement } from 'react';
-
-import ImgLoader from '~/components/common/ImgLoader';
-
-import { Product } from '~/store/modules/products/types';
+import React, { FunctionComponent } from 'react';
 
 import './ProductCard.scss';
 
 type PropsType = {
-  product: Product;
   hasOverlay: boolean;
-  hasHover: boolean;
+  hasHover?: boolean;
   width: string;
 };
 
-function ProductCart({ product, hasOverlay, width }: PropsType): ReactElement {
+const ProductCart: FunctionComponent<PropsType> = ({
+  hasOverlay = false,
+  width = '29rem',
+}: PropsType) => {
   return (
     <figure
       className={hasOverlay ? 'product-card--overlay' : 'product-card'}
@@ -23,20 +21,14 @@ function ProductCart({ product, hasOverlay, width }: PropsType): ReactElement {
       }}
     >
       {hasOverlay ? <div data-testid="overlay" className="product-card__overlay" /> : null}
-      <ImgLoader src={product.image} />
+      {/* <ImgLoader src={product.image} /> */}
       <figcaption
         className={hasOverlay ? 'product-card__description--overlay' : 'product-card__description'}
       >
-        {product.name}
+        {/* {product.name} */}
       </figcaption>
     </figure>
   );
-}
-
-ProductCart.defaultProps = {
-  width: '29rem',
-  hasOverlay: false,
-  hasHover: false,
 };
 
 export default ProductCart;

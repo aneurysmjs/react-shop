@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
-import { State } from '~/store/State';
-
 type PropsT = {
-  children: JSX.Element | Array<JSX.Element> | string;
+  children: JSX.Element;
   css: Array<string>;
   scripts: Array<string>;
-  state?: State;
 };
 
 export default class HTML extends Component<PropsT> {

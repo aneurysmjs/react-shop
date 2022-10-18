@@ -1,40 +1,13 @@
-import React, { useEffect, ReactElement } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { AlienResult } from '~/store/config/alienStore/useAlien';
-import { State } from '~/store/State';
-
-import Spinner from '~/components/base/Spinner';
-import ProductCard from '~/components/common/ProductCard';
-
-import { ProductsState } from '~/store/modules/products/types';
+import React, { FunctionComponent } from 'react';
 
 import './Home.scss';
 
-type PropsType = {
-  modules: Array<AlienResult<State>>;
-};
-
-const Home = ({ modules }: PropsType): ReactElement => {
-  const dispatch = useDispatch();
-  const [productsModule] = modules;
-
-  const { actions, selectors } = productsModule;
-
-  const { isLoading, products, error } = useSelector<State, ProductsState>(
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    selectors!.getProducts,
-  );
-
-  useEffect(() => {
-    dispatch(actions.fetchProducts(`/products`));
-  }, [dispatch, actions]);
-
+const Home: FunctionComponent = () => {
   return (
     <div className="home">
       <h2 className="home__title">Shop</h2>
       <div className="row">
-        {error ? <span className="home__loader">{error.message}</span> : null}
+        {/* {error ? <span className="home__loader">{error.message}</span> : null}
         {isLoading ? (
           <span className="home__loader">
             <Spinner />
@@ -51,7 +24,7 @@ const Home = ({ modules }: PropsType): ReactElement => {
                 <ProductCard width="100%" product={product} />
               </div>
             ))
-          : null}
+          : null} */}
       </div>
     </div>
   );

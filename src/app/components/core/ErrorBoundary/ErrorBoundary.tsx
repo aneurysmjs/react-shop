@@ -49,6 +49,7 @@ class ErrorBoundary extends Component<PropsType, StateType> {
       return <FallbackComponent componentStack={info ? info.componentStack : ''} error={error} />;
     }
 
+    // @ts-ignore
     return children || null;
   }
 }
@@ -66,6 +67,7 @@ export function withErrorBoundary<P>({
 }: WithErrorBoundaryPropsType): ComponentType<P> {
   const Wrapped = (props: P): JSX.Element => (
     <ErrorBoundary FallbackComponent={FallbackComponent} onError={onError}>
+      {/* @ts-ignore */}
       <SomeComponent {...props} />
     </ErrorBoundary>
   );
