@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const generateSourceMap = process.env.OMIT_SOURCEMAP !== 'true';
@@ -15,9 +14,7 @@ const babelLoader = {
 const cssLoaderClient = {
   test: scssRegex,
   use: [
-    {
-      loader: require.resolve('css-hot-loader'),
-    },
+   
     {
       loader: MiniCssExtractPlugin.loader,
     },
@@ -98,11 +95,8 @@ const fileLoaderServer = {
   ],
 };
 
-const client = [
-  {
-    oneOf: [babelLoader, cssLoaderClient, urlLoaderClient, fileLoaderClient],
-  },
-];
+const client =  [babelLoader, cssLoaderClient, urlLoaderClient]
+
 const server = [
   {
     oneOf: [babelLoader, cssLoaderServer, urlLoaderServer, fileLoaderServer],
