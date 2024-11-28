@@ -1,9 +1,0 @@
-**/node_modules
-**/public
-src/frontend/config/env.js
-**/build
-**/flow-typed
-
-config/**
-scripts/**
-jest.config.js

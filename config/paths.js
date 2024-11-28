@@ -1,21 +1,15 @@
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
 const paths = {
-  appHtml: resolveApp('config/webpack-config/template.html'),
-  clientBuild: resolveApp('build/client'),
-  serverBuild: resolveApp('build/server'),
-  dotenv: resolveApp('.env'),
+  dist: resolveApp('dist'),
   src: resolveApp('src'),
-  srcClient: resolveApp('src/client'),
-  srcServer: resolveApp('src/server'),
-  srcApp: resolveApp('src/app'),
-  publicPath: '/static/',
 };
 
-paths.resolveModules = [paths.srcClient, paths.srcServer, paths.srcApp, paths.src, 'node_modules'];
+paths.resolveModules = [paths.src, 'node_modules'];
 
 module.exports = paths;

@@ -1,0 +1,19 @@
+.loader {
+  border-radius: 50%;
+  outline: 1px solid transparent;
+  animation: pulseanimation 1.2s ease-in-out infinite;
+
+  @apply w-8 h-8 bg-gray-700 dark:bg-white;
+}
+
+@keyframes pulseanimation {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
