@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, vi, beforeEach, afterEach } from 'vitest';
 
 async function runCommand(...args: string[]) {
   process.argv = ['node', 'cli.ts', ...args];
