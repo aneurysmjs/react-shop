@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import type { FC, PropsWithChildren } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
-import { routing } from '@/i18n/routing';
+import { routing, type Locale } from '@/i18n/routing';
 import Header from '@/components/core/Header';
 import ThemeProvider from '@/providers/ThemeProvider';
 import QueryProvider from '@/providers/QueryProvider';
@@ -25,13 +25,13 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  description: 'A place to know flatland tricks',
-  title: 'Flatland Matrix',
+  description: 'Cool ecommerce in Nextjs',
+  title: 'React Shop',
 };
 
 interface RootLayoutProps extends PropsWithChildren {
   params: {
-    locale: 'en' | 'es' | 'ru';
+    locale: Locale;
   };
 }
 
@@ -40,6 +40,9 @@ const RootLayout: FC<RootLayoutProps> = async ({ children, params: { locale } })
   if (!routing.locales.includes(locale)) {
     notFound();
   }
+
+  // Enable static rendering
+  setRequestLocale(locale);
 
   // Providing all messages to the client
   // side is the easiest way to get started

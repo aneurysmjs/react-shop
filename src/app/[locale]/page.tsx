@@ -1,37 +1,45 @@
 import type { FC } from 'react';
-import { useTranslations } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 
-const Home: FC = () => {
+import { useTranslations } from 'next-intl';
+import ProductList from './(products)/components/ProductsList';
+
+interface HomeProps {
+  params: {
+    locale: 'string';
+  };
+}
+
+const Home: FC<HomeProps> = ({ params }) => {
+  setRequestLocale(params.locale);
+
   const t = useTranslations('app.home');
 
   return (
-    <div
-      className={`
-        grid min-h-screen items-center justify-items-center gap-16 p-8 pb-20
-
-        font-[family-name:var(--font-geist-sans)]
-
-        sm:p-20
-      `}
-    >
-      <main
+    <section>
+      <div
         className={`
-          flex items-center
+          relative mx-auto flex max-w-3xl flex-col items-center px-6 py-8
+          text-center
 
-          sm:items-start
+          lg:px-0
+
+          sm:py-16
         `}
       >
         <h1
           className={`
-            text-center text-3xl
+            text-4xl font-bold tracking-tight
 
-            font-[family-name:var(--font-geist-mono)]
+            lg:text-6xl
           `}
         >
-          <p>{t('title')}</p>
+          New arrivals are here
         </h1>
-      </main>
-    </div>
+      </div>
+
+      <ProductList />
+    </section>
   );
 };
 
