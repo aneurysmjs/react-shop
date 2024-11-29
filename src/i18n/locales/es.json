@@ -1,0 +1,35 @@
+{
+  "app": {
+    "about": {
+      "whatIsIt": "¿ Qué es ?",
+      "aboutText": "Un proyecto que promueve buenas prácticas a la hora de construir un ecommerce."
+    },
+    "home": {
+      "title": "React Shop"
+    },
+    "signIn": {
+      "signInAccount": "Inicia sesión en tu cuenta",
+      "title": "Iniciar sesión",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "forgotPassword": "¿ Olvidó contraseña ?"
+    }
+  },
+  "components": {
+    "core": {
+      "header": {
+        "links": {
+          "dashboard": "Panel de control",
+          "about": "Acerca"
+        }
+      }
+    }
+  },
+  "common": {
+    "auth": {
+      "signIn": "Iniciar sesión",
+      "signUp": "Registrarse",
+      "signOut": "Salir"
+    }
+  }
+}

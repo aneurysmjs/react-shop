@@ -1,27 +1,30 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@*": ["./src/*"]
-    },
-    "outDir": "dist",
-    "module": "esnext",
-    "target": "ES6",
-    "types": ["node", "vitest/jsdom", "vitest/globals"],
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["DOM", "ES5", "ES6"],
-    "downlevelIteration": true,
-    "sourceMap": true,
-    "jsx": "react-jsx",
-    "moduleResolution": "node",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "strict": true
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "types": ["vitest/jsdom"],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "exclude": ["node_modules", "build"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "vitest.config.mts"],
+  "exclude": ["node_modules", "playwright-report", "test-results"]
 }

@@ -2,54 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+html {
+  @apply h-full;
+}
+
+body {
+  @apply h-full antialiased text-theme bg-theme-primary;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 @layer utilities {
+  /* ==========================================================================
+  Backgrounds
+   ========================================================================== */
+
+  .bg-theme-primary {
+    @apply bg-white dark:bg-neutral-900;
+  }
+
+  .bg-theme-secondary {
+    @apply bg-neutral-200 dark:bg-neutral-800;
+  }
+
+  /* ==========================================================================
+  Text
+   ========================================================================== */
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-link {
+    @apply text-sky-400 dark:text-blue-600;
+  }
+
   .text-theme {
-    @apply text-gray-800 dark:text-white;
+    @apply text-neutral-800 dark:text-white;
   }
 
-  .text-theme-hover {
-    @apply hover:text-teal-400 dark:hover:text-sky-400;
+  .text-primary {
+    @apply text-sky-400 dark:text-blue-600;
   }
 
-  .text-link-theme {
-    @apply text-teal-500 dark:text-sky-400;
-  }
-
-  .bg-theme {
-    @apply bg-white dark:bg-gray-900;
-  }
-
-  .text-error {
+  .text-danger {
     @apply text-red-500 dark:text-red-600;
   }
 }
 
 @layer components {
-  .input {
-    @apply text-theme
-    form-input
-    mx-2
-    rounded
-    w-full
-    lg:w-60
-    bg-white
-    dark:bg-slate-800
-    placeholder:text-gray-800
-    dark:placeholder:text-gray-300
-    focus:border-teal-400
-    dark:focus:border-sky-400
-    focus:ring-teal-400
-    dark:focus:ring-sky-400;
-  }
+  /* ==========================================================================
+  Buttons
+   ========================================================================== */
 
   .button-base {
-    @apply py-2
-    px-4
-    rounded
+    @apply flex
+    focus-visible:outline
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    font-semibold
+    justify-center
+    leading-6
+    px-3
+    py-1.5
+    rounded-md
+    shadow-sm
+    text-sm
+    text-white
+    w-full;
+  }
+
+  .button-primary {
+    @apply bg-sky-400 
+    dark:bg-blue-600
+    dark:hover:bg-blue-500
+    focus-visible:outline-blue-500
+    hover:bg-sky-300
+    
+    disabled:bg-sky-400/50
+    dark:disabled:bg-blue-600/60;
+  }
+
+  /* ==========================================================================
+  Inputs
+   ========================================================================== */
+
+  .input-base {
+    @apply block
+    border-0
+    focus:ring-2
+    focus:ring-inset
+    py-1.5
+    ring-1
+    ring-inset
+    rounded-md
+    shadow-sm
+    sm:leading-6
+    sm:text-sm
     text-theme
-    bg-teal-400
-    dark:bg-sky-400
-    hover:bg-cyan-500
-    hover:dark:bg-sky-400;
+    w-full;
+  }
+
+  .input-primary {
+    @apply bg-neutral-100 
+    dark:bg-neutral-800
+    dark:focus:bg-neutral-900
+    dark:focus:ring-blue-600
+    dark:ring-neutral-700
+    focus:bg-white 
+    focus:ring-sky-400
+    ring-neutral-200;
   }
 }

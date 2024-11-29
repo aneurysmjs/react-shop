@@ -1,30 +1,12 @@
+'use client';
+
 import type { FC, PropsWithChildren } from 'react';
-import { QueryClient } from '@tanstack/react-query';
-import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
-import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const DAY = 1000 * 60 * 60 * 24; // 24 hours
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      gcTime: DAY,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-const persister = createSyncStoragePersister({
-  storage: window.localStorage,
-});
+const queryClient = new QueryClient();
 
 const QueryProvider: FC<PropsWithChildren> = ({ children }) => {
-  return (
-    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
-      {children}
-    </PersistQueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };
 
 export default QueryProvider;

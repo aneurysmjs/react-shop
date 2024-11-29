@@ -1,0 +1,35 @@
+{
+  "app": {
+    "about": {
+      "whatIsIt": "Что это такое ?",
+      "aboutText": "Проект, который продвигает передовой опыт построения электронной коммерции."
+    },
+    "home": {
+      "title": "React Shop"
+    },
+    "signIn": {
+      "signInAccount": "Войдите в свою учетную запись",
+      "title": "Войти",
+      "email": "Почта",
+      "password": "Пароль",
+      "forgotPassword": "Забыли пароль ?"
+    }
+  },
+  "components": {
+    "core": {
+      "header": {
+        "links": {
+          "dashboard": "Панель управления",
+          "about": "О нас"
+        }
+      }
+    }
+  },
+  "common": {
+    "auth": {
+      "signIn": "войти",
+      "signUp": "зарегистрироваться",
+      "signOut": "выйти"
+    }
+  }
+}

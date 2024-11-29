@@ -1,3 +1,7 @@
+/**
+ * @see https://github.com/vercel/next.js/issues/64409
+ */
+
 import { fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
@@ -5,6 +9,7 @@ import eslint from '@eslint/js';
 import perfectionist from 'eslint-plugin-perfectionist';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginReadableTailwind from 'eslint-plugin-readable-tailwind';
+// @ts-check
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import tsEslint from 'typescript-eslint';
@@ -12,16 +17,20 @@ import tsEslint from 'typescript-eslint';
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const compat = new FlatCompat({
   allConfig: js.configs.all,
   baseDirectory: dirname,
   recommendedConfig: js.configs.recommended,
 });
 
-const pluginsToPatch = ['react', 'react-hooks'];
+const pluginsToPatch = [
+  '@next/next',
+  // Other plugins to patch, example :
+  'react',
+  'react-hooks',
+];
 
-const compatConfig = [];
+const compatConfig = [...compat.extends('next/core-web-vitals')];
 
 const patchedConfig = compatConfig.map((entry) => {
   const plugins = entry.plugins;
@@ -44,7 +53,7 @@ export default tsEslint.config(
   ...tsEslint.configs.stylisticTypeChecked,
   ...config,
   {
-    ignores: ['node_modules'],
+    ignores: ['node_modules', 'playwright-report'],
   },
   {
     languageOptions: {
@@ -60,7 +69,13 @@ export default tsEslint.config(
     },
   },
   {
-    files: ['eslint.config.mjs', 'prettier.config.mjs', 'postcss.config.js'],
+    files: [
+      'eslint.config.mjs',
+      'next.config.mjs',
+      'prettier.config.mjs',
+      'postcss.config.mjs',
+      'playwright-report/**/**',
+    ],
     ...tsEslint.configs.disableTypeChecked,
   },
   {

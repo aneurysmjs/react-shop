@@ -1,0 +1,75 @@
+name: Tests
+
+on:
+  workflow_call:
+    inputs:
+      test-type:
+        required: true
+        type: string
+    # secrets:
+    #   NEXT_PUBLIC_FIREBASE_API_KEY:
+    #     required: true
+    #   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:
+    #     required: true
+    #   NEXT_PUBLIC_FIREBASE_PROJECT_ID:
+    #     required: true
+    #   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:
+    #     required: true
+    #   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID:
+    #     required: true
+    #   NEXT_PUBLIC_FIREBASE_APP_ID:
+    #     required: true
+    #   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID:
+    #     required: true
+
+jobs:
+  tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_FIREBASE_API_KEY: ${{ vars.NEXT_PUBLIC_FIREBASE_API_KEY }}
+      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ vars.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+      NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+      NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ vars.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+      NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
+      NEXT_PUBLIC_FIREBASE_APP_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_APP_ID }}
+      NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Run tests
+        run: |
+          if [ "${{ inputs.test-type }}" == "unit" ]; then
+            pnpm run test:unit
+          else
+            pnpm exec playwright install --with-deps
+            pnpm exec playwright test
+          fi
+
+      - name: Upload Playwright Report
+        if: ${{ inputs.test-type == 'e2e' && !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
