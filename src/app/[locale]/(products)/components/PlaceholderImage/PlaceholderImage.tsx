@@ -19,7 +19,6 @@ const PlaceholderImage: FC<PlaceholderImageProps> = ({
   isSkeleton = false,
   ...props
 }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const Comp = asChild ? Slot : AspectRatio;
 
   return (

@@ -13,11 +13,12 @@ interface HomeProps {
 const Home: FC<HomeProps> = ({ params }) => {
   setRequestLocale(params.locale);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const t = useTranslations('app.home');
 
   return (
     <section>
-      <div
+      {/* <div
         className={`
           relative mx-auto flex max-w-3xl flex-col items-center px-6 py-8
           text-center
@@ -34,9 +35,9 @@ const Home: FC<HomeProps> = ({ params }) => {
             lg:text-6xl
           `}
         >
-          New arrivals are here
+          text
         </h1>
-      </div>
+      </div> */}
 
       <ProductList />
     </section>

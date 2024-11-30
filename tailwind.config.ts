@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import tailwindCssForms from '@tailwindcss/forms';
+import tailwindCssAnimate from 'tailwindcss-animate';
 
 const config: Config = {
   content: [
@@ -8,7 +9,7 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: ['class'],
-  plugins: [tailwindCssForms, require('tailwindcss-animate')],
+  plugins: [tailwindCssForms, tailwindCssAnimate],
   theme: {
     extend: {
       borderRadius: {
