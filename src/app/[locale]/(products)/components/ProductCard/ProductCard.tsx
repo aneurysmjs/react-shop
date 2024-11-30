@@ -43,7 +43,11 @@ const ProductCard: FC<ProductCardProps> = ({
   const [isUpdatePending, startUpdateTransition] = useTransition();
 
   return (
-    <Card className={cn('size-full overflow-hidden rounded-lg', className)} {...props}>
+    <Card
+      aria-label="product card"
+      className={cn('size-full overflow-hidden rounded-lg', className)}
+      {...props}
+    >
       <Link aria-label={product.title} href={`/product/${product.id}`}>
         <CardHeader className="border-b p-0">
           <AspectRatio ratio={4 / 3}>

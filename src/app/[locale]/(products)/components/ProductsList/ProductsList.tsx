@@ -15,7 +15,7 @@ const ProductList: FC<ProductListProps> = async () => {
 
   return (
     <div className="container mx-auto flex flex-wrap items-center pb-12 pt-4">
-      <nav id="store" className="top-0 z-30 w-full px-6 py-1">
+      <nav aria-label="store" className="top-0 z-30 w-full px-6 py-1">
         <div
           className={`
             container mx-auto mt-0 flex w-full flex-wrap items-center
