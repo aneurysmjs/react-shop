@@ -70,6 +70,6 @@ html {
     @apply h-full antialiased;
     font-family: Arial, Helvetica, sans-serif;
 
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground pt-16;
   }
 }
