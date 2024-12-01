@@ -6,11 +6,11 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import { routing, type Locale } from '@/i18n/routing';
-import Header from '@/components/core/Header';
 import ThemeProvider from '@/providers/ThemeProvider';
 import QueryProvider from '@/providers/QueryProvider';
 
 import '@/assets/css/styles.css';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = localFont({
   src: '../../assets/fonts/GeistVF.woff',
@@ -52,6 +52,8 @@ const RootLayout: FC<RootLayoutProps> = async ({ children, params: { locale } })
     <html lang={locale}>
       <body
         className={`
+          min-h-screen
+
           ${geistSans.variable}
           ${geistMono.variable}
         `}
@@ -63,12 +65,10 @@ const RootLayout: FC<RootLayoutProps> = async ({ children, params: { locale } })
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <QueryProvider>
-              <Header />
-              {children}
-            </QueryProvider>
+            <QueryProvider>{children}</QueryProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

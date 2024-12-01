@@ -5,7 +5,8 @@
 
 import { type FC, type HTMLAttributes, useTransition } from 'react';
 // import Image from 'next/image';
-import Link from 'next/link';
+
+import { Link } from '@/i18n/routing';
 import type { Product } from '@/app/[locale]/(products)/entities';
 import { CheckIcon, PlusIcon, EyeIcon } from '@heroicons/react/24/outline';
 // import { toast } from 'sonner';

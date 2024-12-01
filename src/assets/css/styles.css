@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply h-full;
+  /* @apply min-h-full; */
 }
 
 @layer base {
@@ -67,9 +67,9 @@ html {
     @apply border-border;
   }
   body {
-    @apply h-full antialiased;
+    @apply min-h-screen antialiased;
     font-family: Arial, Helvetica, sans-serif;
 
-    @apply bg-background text-foreground pt-16;
+    @apply bg-background text-foreground;
   }
 }
