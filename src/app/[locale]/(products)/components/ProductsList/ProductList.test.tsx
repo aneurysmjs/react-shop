@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 
 import ProductsList from './ProductsList';
 import { products } from '@/app/[locale]/(products)//services/productsMockData';
+import renderWithIntlProvider from '@/utils/testing/renderWithIntlProvider';
 
 const { mockGetProducts } = vi.hoisted(() => ({
   mockGetProducts: vi.fn(),
@@ -18,7 +19,7 @@ describe('ProductsList component', () => {
 
     const ui = await ProductsList({});
 
-    render(ui);
+    renderWithIntlProvider(ui);
 
     const productCards = screen.getAllByLabelText('product card');
 
