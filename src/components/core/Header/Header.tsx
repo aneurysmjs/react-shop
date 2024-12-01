@@ -88,7 +88,7 @@ const Header: FC = () => {
   return (
     <header
       className={`
-        fixed top-0 w-full border-b border-neutral-200
+        sticky top-0 w-full border-b border-neutral-200
 
         dark:border-neutral-700
       `}
